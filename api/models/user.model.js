@@ -24,34 +24,40 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  bank: {
+    type: String,
+    required: true
+  },
+  bankAccountNumber: {
+    type: String,
+    required: true
+  },
   bankBranch: {
     type: String,
     required: true
   },
-  nextOfKin: {
-    name: {
+  nextOfKinName: {
       type: String,
       required: true
     },
-    contact: {
+  nextOfKinContact: {
       type: String,
       required: true
     },
-    ghanaCardNumber: {
-      type: String,
-      required: true
-    }
-  },
-  witness: {
-    name: {
+  nextOfKinGhanaCardNumber: {
       type: String,
       required: true
     },
-    contact: {
+
+
+  witnessName: {
       type: String,
       required: true
-    }
-  },
+    },
+  witnessContact: {
+      type: String,
+      required: true
+    },
   role: {
     type: String,
     enum: ['admin', 'manager', 'employee'],

@@ -9,9 +9,14 @@ export const signup = async (req, res, next) => {
     telephoneNumber,
     ghanaCardNumber,
     bankBranch,
-    nextOfKin,
-    witness,
-    role
+    nextOfKinName,
+    nextOfKinContact,
+    nextOfKinGhanaCardNumber,
+    witnessName,
+    witnessContact,
+    role,
+    bank,
+    bankAccountNumber
   } = req.body;
 
   const hashedPassword = bcryptjs.hashSync(password, 10);
@@ -24,14 +29,20 @@ export const signup = async (req, res, next) => {
       telephoneNumber,
       ghanaCardNumber,
       bankBranch,
-      nextOfKin,
-      witness,
-      role
+      bank, // Include bank field
+      bankAccountNumber, // Include bankAccountNumber field
+      nextOfKinName,
+      nextOfKinContact,
+      nextOfKinGhanaCardNumber,
+      witnessName,
+      witnessContact,
+      role,
     });
 
     await newUser.save();
     res.status(201).json('User created successfully!');
   } catch (error) {
+    console.error('Error creating user:', error);
     next(error);
   }
 };
