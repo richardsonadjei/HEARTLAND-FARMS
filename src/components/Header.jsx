@@ -1,45 +1,59 @@
-
-import React, { useEffect } from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import { Link } from 'react-router-dom';
+
 export default function Header() {
-  useEffect(() => {
-    // Initialize Bootstrap components here if necessary
-    // For example, you might need to initialize tooltips, popovers, etc.
-  }, []);
+
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
-      <div className="container-fluid justify-content-end">
-        <a className="navbar-brand" href="#home">React-Bootstrap</a>
-        <div className="d-flex">
-          <form className="d-flex">
-            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-            <button className="btn btn-outline-success" type="submit">Search</button>
-          </form>
-        </div>
+      <div className="container-fluid">
+        <Link className="navbar-brand" to="/home">React-Bootstrap</Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#home">Home</a>
+              <Link className="nav-link active" aria-current="page" to="/home">Home</Link>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#link">Link</a>
-            </li>
+            
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <Link className="nav-link dropdown-toggle" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Dropdown
-              </a>
+              </Link>
               <ul className="dropdown-menu">
-                <li><a className="dropdown-item" href="#action/3.1">Action</a></li>
-                <li><a className="dropdown-item" href="#action/3.2">Another action</a></li>
-                <li><hr className="dropdown-divider"></hr></li>
-                <li><a className="dropdown-item" href="#action/3.3">Something else here</a></li>
+                <li><Link className="dropdown-item" to="/poultry">Poultry</Link></li>
+                <li><Link className="dropdown-item" to="/guinea-fowl">Guinea Fowl</Link></li>
+                <li><Link className="dropdown-item" to="/ducks">Ducks</Link></li>
+                <li><hr className="dropdown-divider" /></li>
+                <li><Link className="dropdown-item" to="/guinea-fowl">Hatchery Services</Link></li>
+                <li><Link className="dropdown-item" to="/pig-farm">PigFarm</Link></li>
+                <li><Link className="dropdown-item" to="/goats">Goats</Link></li>
+                <li><Link className="dropdown-item" to="/goats">Cattle</Link></li>
+                <li><hr className="dropdown-divider" /></li>
+                <li><Link className="dropdown-item" to="/maize-farm">Maize Farm</Link></li>
+                <li><Link className="dropdown-item" to="/cassava-farm">Cassava Farm</Link></li>
+                <li><Link className="dropdown-item" to="/beans-farm">Beans Farm</Link></li>
+                <li><Link className="dropdown-item" to="/plantain-farm">Plantain Farm</Link></li>
+                <li><hr className="dropdown-divider" /></li>
+                <li><Link className="dropdown-item" to="/create-project">Create New Project</Link></li>
               </ul>
             </li>
           </ul>
+          
+          <div className="dropdown text-end mx-auto">
+            <Link className="d-block link-body-emphasis text-decoration-none dropdown-toggle" to="#" data-bs-toggle="dropdown" aria-expanded="false">
+              User
+              <i className="bi bi-person-circle" style={{ fontSize: '32px' }}></i>
+            </Link>
+            <ul className="dropdown-menu text-small" style={{}}>
+              <li><Link className="dropdown-item" to="/sign-in">SignIn</Link></li>
+              <li><Link className="dropdown-item" to="/sign-out">SignOut</Link></li>
+              <li><Link className="dropdown-item" to="/sign-up">SignUp</Link></li>
+              <li><Link className="dropdown-item" to="/profile">Profile</Link></li>
+            </ul>
+          </div>
         </div>
       </div>
     </nav>
