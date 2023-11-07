@@ -8,6 +8,7 @@ const SignUp = () => {
     name: '',
     email: '',
     password: '',
+    userName: '', // Include userName field
     telephoneNumber: '',
     ghanaCardNumber: '',
     bankBranch: '',
@@ -63,6 +64,20 @@ const SignUp = () => {
             id="name"
             name="name"
             value={formData.name}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="userName" className="form-label">
+            Username
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="userName"
+            name="userName"
+            value={formData.userName}
             onChange={handleChange}
             required
           />

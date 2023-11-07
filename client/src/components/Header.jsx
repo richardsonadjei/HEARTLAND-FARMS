@@ -2,8 +2,10 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export default function Header() {
+  const { currentUser } = useSelector((state) => state.user);
 
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary sticky-top">
@@ -42,20 +44,30 @@ export default function Header() {
                 <li><Link className="dropdown-item" to="/beans-farm">Beans </Link></li>
                 <li><Link className="dropdown-item" to="/plantain-farm">Plantain </Link></li>
                 <li><hr className="dropdown-divider" /></li>
-                <li><Link className="dropdown-item" to="/create-project">Create New Project</Link></li>
+                {currentUser && currentUser.role !== 'employee' && currentUser.role !== 'manager' && (
+  <li><Link className="dropdown-item" to="/create-project">Create New Project</Link></li>
+)}
               </ul>
             </li>
           </ul>
+
+          
           
           <div className="dropdown text-end mx-auto">
-            <Link className="d-block link-body-emphasis text-decoration-none dropdown-toggle" to="#" data-bs-toggle="dropdown" aria-expanded="false">
-              User
-              <i className="bi bi-person-circle" style={{ fontSize: '32px' }}></i>
-            </Link>
-            <ul className="dropdown-menu text-small" style={{}}>
-              <li><Link className="dropdown-item" to="/sign-in">SignIn</Link></li>
-              <li><Link className="dropdown-item" to="/sign-out">SignOut</Link></li>
-              <li><Link className="dropdown-item" to="/sign-up">SignUp</Link></li>
+            {currentUser ? (
+              <Link className="d-block link-body-emphasis text-decoration-none dropdown-toggle" to="#" data-bs-toggle="dropdown" aria-expanded="false">
+                {currentUser.userName}
+                <i className="bi bi-person-circle" style={{ fontSize: '32px' }}></i>
+              </Link>
+            ) : (
+              <Link className="d-block link-body-emphasis text-decoration-none" to="/sign-in">
+                Sign In
+              </Link>
+            )}
+            <ul className="dropdown-menu text-small">
+              {/* Dropdown menu items */}
+              <li><Link className="dropdown-item" to="/sign-out">Sign Out</Link></li>
+              <li><Link className="dropdown-item" to="/sign-up">Sign Up</Link></li>
               <li><hr className="dropdown-divider" /></li>
               <li><Link className="dropdown-item" to="/profile">Profile</Link></li>
             </ul>

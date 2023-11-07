@@ -9,6 +9,7 @@ export const signup = async (req, res, next) => {
     name,
     email,
     password,
+    userName, // Include userName field
     telephoneNumber,
     ghanaCardNumber,
     bankBranch,
@@ -19,7 +20,7 @@ export const signup = async (req, res, next) => {
     witnessContact,
     role,
     bank,
-    bankAccountNumber
+    bankAccountNumber,
   } = req.body;
 
   const hashedPassword = bcryptjs.hashSync(password, 10);
@@ -28,6 +29,7 @@ export const signup = async (req, res, next) => {
     const newUser = new User({
       name,
       email,
+      userName, // Include userName field
       password: hashedPassword,
       telephoneNumber,
       ghanaCardNumber,
@@ -52,26 +54,41 @@ export const signup = async (req, res, next) => {
 
 
 
+
+
 export const signin = async (req, res, next) => {
-  const { email, password } = req.body;
+  const { userNameOrEmail, password } = req.body;
   try {
-    const validUser = await User.findOne({ email });
+    // Find user by userName or email
+    const validUser = await User.findOne({
+      $or: [{ userName: userNameOrEmail }, { email: userNameOrEmail }],
+    });
+
     if (!validUser) return next(errorHandler(404, 'User not found!'));
+
     const validPassword = bcryptjs.compareSync(password, validUser.password);
     if (!validPassword) return next(errorHandler(401, 'Wrong credentials!'));
+
+    // Include userName in the token payload
     const tokenPayload = {
       id: validUser._id,
+      userName: validUser.userName,
       email: validUser.email,
       role: validUser.role,
     };
+
+    // Sign the token with the updated payload
     const token = jwt.sign(tokenPayload, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+    // Set the token as a cookie and include userName in the response
     res
       .cookie('access_token', token, { httpOnly: true })
       .status(200)
-      .json({ id: validUser._id, email: validUser.email, role: validUser.role });
+      .json({ id: validUser._id, userName: validUser.userName, email: validUser.email, role: validUser.role });
   } catch (error) {
     next(error);
   }
 };
+
 
 

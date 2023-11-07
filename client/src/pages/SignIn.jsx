@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {  useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -12,7 +12,7 @@ const SignIn = () => {
   const error = useSelector((state) => state.user.error);
 
   const [formData, setFormData] = useState({
-    email: '',
+    userNameOrEmail: '', // Use a single input field for userName or email
     password: '',
   });
 
@@ -51,17 +51,17 @@ const SignIn = () => {
     <div className="container mt-5">
       <h2 className="mb-4">Sign In</h2>
       <form onSubmit={handleSubmit}>
-        {/* Email */}
+        {/* UserName or Email */}
         <div className="mb-3">
-          <label htmlFor="email" className="form-label">
-            Email
+          <label htmlFor="userNameOrEmail" className="form-label">
+            UserName or Email
           </label>
           <input
-            type="email"
+            type="text"
             className="form-control"
-            id="email"
-            name="email"
-            value={formData.email}
+            id="userNameOrEmail"
+            name="userNameOrEmail"
+            value={formData.userNameOrEmail}
             onChange={handleChange}
             required
           />
@@ -93,7 +93,7 @@ const SignIn = () => {
 
         {/* Paragraph with SignUp link */}
         <p className="mt-3">
-          Don't have an account? <a href="/signup">Sign Up</a>
+          Don't have an account? <Link to="/sign-up">Sign Up</Link>
         </p>
       </form>
     </div>
