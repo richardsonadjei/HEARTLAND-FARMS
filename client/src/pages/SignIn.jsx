@@ -1,41 +1,49 @@
 import React, { useState } from 'react';
+import {  useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 const SignIn = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.user.loading);
+  const error = useSelector((state) => state.user.error);
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value,
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const response = await fetch('/api/auth/signin', {
+      dispatch(signInStart());
+      const res = await fetch('/api/auth/signin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
-
-      if (response.ok) {
-        // User successfully signed in
-        alert('User signed in successfully!');
-        window.location.href = '/';
-      } else {
-        // Failed to sign in
-        alert('Failed to sign in. Please check your credentials and try again.');
+      const data = await res.json();
+      console.log(data);
+      if (data.success === false) {
+        dispatch(signInFailure(data.message));
+        return;
       }
+      dispatch(signInSuccess(data));
+      navigate('/');
     } catch (error) {
-      console.error('Error signing in:', error);
-      alert('Failed to sign in. Please try again later.');
+      dispatch(signInFailure(error.message));
     }
   };
 
@@ -76,9 +84,12 @@ const SignIn = () => {
         </div>
 
         {/* Submit button */}
-        <button type="submit" className="btn btn-primary">
-          Sign In
+        <button type="submit" className="btn btn-primary" disabled={loading}>
+          {loading ? 'Signing In...' : 'Sign In'}
         </button>
+
+        {/* Error message */}
+        {error && <div className="text-danger mt-3">{error}</div>}
 
         {/* Paragraph with SignUp link */}
         <p className="mt-3">
