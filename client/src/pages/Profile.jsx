@@ -1,15 +1,51 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  updateUserStart,
+  updateUserSuccess,
+  updateUserFailure,
+} from '../redux/user/userSlice';
 
 const Profile = () => {
-  const { currentUser } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const { currentUser, loading, error } = useSelector((state) => state.user);
+  const [userName, setUserName] = useState(currentUser.userName);
+  const [email, setEmail] = useState(currentUser.email);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      dispatch(updateUserStart());
+
+      const response = await fetch(`/api/user/update/${currentUser.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userName, email }),
+      });
+
+      if (response.ok) {
+        const updatedUser = await response.json();
+        dispatch(updateUserSuccess(updatedUser));
+        console.log('User profile updated:', updatedUser);
+      } else {
+        const errorData = await response.json();
+        dispatch(updateUserFailure(errorData.message));
+        console.error('Error updating user profile:', errorData);
+      }
+    } catch (error) {
+      dispatch(updateUserFailure(error.message));
+      console.error('Error updating user profile:', error);
+    }
+  };
 
   return (
     <div className="container mt-5">
       <h1 className="text-center mb-4">User Profile</h1>
       <div className="row justify-content-center">
         <div className="col-md-6">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label htmlFor="username" className="form-label">
                 Username
@@ -19,8 +55,8 @@ const Profile = () => {
                 className="form-control"
                 id="username"
                 name="username"
-                value={currentUser.userName} // Populate username from Redux store
-                
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
               />
             </div>
             <div className="mb-3">
@@ -32,8 +68,8 @@ const Profile = () => {
                 className="form-control"
                 id="email"
                 name="email"
-                value={currentUser.email} // Populate email from Redux store
-             
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="mb-3">
@@ -45,7 +81,7 @@ const Profile = () => {
                 className="form-control"
                 id="role"
                 name="role"
-                value={currentUser.role} // Populate role from Redux store
+                value={currentUser.role}
                 readOnly
               />
             </div>

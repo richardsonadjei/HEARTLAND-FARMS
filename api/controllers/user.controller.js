@@ -1,10 +1,9 @@
 import User from '../models/user.model.js';
-import bcryptjs from 'bcryptjs';
 import { errorHandler } from '../utils/error.js';
 
 export const updateProfile = async (req, res, next) => {
   const userId = req.params.id;
-  const { userName, email, password } = req.body;
+  const { userName, email } = req.body;
 
   try {
     // Authentication check
@@ -17,12 +16,6 @@ export const updateProfile = async (req, res, next) => {
     if (!user) {
       return next(errorHandler(404, 'User not found!'));
     }
-
-    // Hash the password if provided
-    if (password) {
-      user.password = bcryptjs.hashSync(password, 10);
-    }
-
     // Update userName and email fields
     user.userName = userName;
     user.email = email;
