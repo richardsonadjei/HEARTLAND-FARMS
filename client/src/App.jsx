@@ -12,6 +12,7 @@ import About from './pages/About';
 import Header from './components/Header';
 import SignOut from './pages/SignOut';
 import PrivateRoute from './components/PrivateRoute';
+import ViewAllUsers from './pages/ViewAllUsers';
 
 
 export default function App() {
@@ -26,6 +27,7 @@ export default function App() {
         <Route path='/sign-out' element={<SignOut/>} />
         <Route element={<PrivateRoute/>}>
           <Route path='/profile' element={<Profile />} />
+          <Route path='/allusers' element={<ViewAllUsers />} />
         </Route>
       </Routes>
     </BrowserRouter>

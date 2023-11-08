@@ -31,3 +31,20 @@ export const updateProfile = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getAllUsers = async (req, res, next) => {
+  try {
+    // Check if the authenticated user is an admin
+    if (req.user.role !== 'admin') {
+      return next(errorHandler(403, 'Forbidden'));
+    }
+
+    // Retrieve all users from the database
+    const users = await User.find();
+
+    // Return the list of users in the response
+    res.status(200).json(users);
+  } catch (error) {
+    next(error);
+  }
+};
