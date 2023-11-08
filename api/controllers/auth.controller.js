@@ -3,13 +3,12 @@ import jwt from 'jsonwebtoken';
 import User from '../models/user.model.js';
 import { errorHandler } from '../utils/error.js';
 
-
 export const signup = async (req, res, next) => {
   const {
     name,
     email,
     password,
-    userName, // Include userName field
+    userName,
     telephoneNumber,
     ghanaCardNumber,
     bankBranch,
@@ -29,13 +28,13 @@ export const signup = async (req, res, next) => {
     const newUser = new User({
       name,
       email,
-      userName, // Include userName field
+      userName,
       password: hashedPassword,
       telephoneNumber,
       ghanaCardNumber,
       bankBranch,
-      bank, // Include bank field
-      bankAccountNumber, // Include bankAccountNumber field
+      bank,
+      bankAccountNumber,
       nextOfKinName,
       nextOfKinContact,
       nextOfKinGhanaCardNumber,
@@ -45,12 +44,15 @@ export const signup = async (req, res, next) => {
     });
 
     await newUser.save();
-    res.status(201).json('User created successfully!');
+    // Simplified JSON response
+    res.status(201).json({ success: true, message: 'User created successfully!' });
   } catch (error) {
     console.error('Error creating user:', error);
     next(error);
   }
 };
+
+
 
 
 
