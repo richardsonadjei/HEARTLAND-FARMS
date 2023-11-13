@@ -92,5 +92,11 @@ export const signin = async (req, res, next) => {
   }
 };
 
-
-
+// auth.controller.js
+export const signout = (req, res) => {
+  // Clear the token cookie to sign the user out
+  res.clearCookie('access_token', { httpOnly: true });
+  
+  // Send a response indicating successful sign out
+  res.status(200).json({ success: true, message: 'User signed out successfully!' });
+};

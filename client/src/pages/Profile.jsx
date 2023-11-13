@@ -39,6 +39,28 @@ const Profile = () => {
       console.error('Error updating user profile:', error);
     }
   };
+  const handleSignOut = async () => {
+    try {
+      // Make a request to your server to clear the session/token
+      const response = await fetch('/api/auth/signout', {
+        method: 'POST',
+        credentials: 'include', // Include credentials for cross-origin requests
+      });
+  
+      if (response.ok) {
+        // Clear the user data from the Redux store
+        dispatch(updateUserSuccess(null));
+  
+        // Redirect the user to the sign-in page
+        window.location.href = '/sign-in';
+      } else {
+        const errorData = await response.json();
+        console.error('Error signing out:', errorData);
+      }
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
+  };
 
   return (
     <div className="container mt-5">
@@ -92,7 +114,9 @@ const Profile = () => {
           <div className="mt-3">
             <button className="btn btn-danger me-2">Delete Account</button>
           </div>
-          <button className="btn btn-secondary mt-3">Sign Out</button>
+          <button className="btn btn-secondary mt-3" onClick={handleSignOut}>
+        Sign Out
+      </button>
         </div>
       </div>
     </div>

@@ -48,3 +48,62 @@ export const getAllUsers = async (req, res, next) => {
     next(error);
   }
 };
+
+
+
+export const updateUserDetails = async (req, res, next) => {
+  const userId = req.params.id;
+  const {
+    name,
+    userName,
+    email,
+    telephoneNumber,
+    ghanaCardNumber,
+    bank,
+    bankAccountNumber,
+    bankBranch,
+    nextOfKinName,
+    nextOfKinContact,
+    nextOfKinGhanaCardNumber,
+    witnessName,
+    witnessContact,
+  } = req.body;
+
+  try {
+    // Check if the authenticated user is an admin
+    if (req.user.role !== 'admin') {
+      return next(errorHandler(403, 'Forbidden: Admin access required'));
+    }
+
+    // Check if the user exists
+    const user = await User.findById(userId);
+    if (!user) {
+      return next(errorHandler(404, 'User not found!'));
+    }
+
+    // Update user details
+    user.name = name;
+    user.userName = userName;
+    user.email = email;
+    user.telephoneNumber = telephoneNumber;
+    user.ghanaCardNumber = ghanaCardNumber;
+    user.bank = bank;
+    user.bankAccountNumber = bankAccountNumber;
+    user.bankBranch = bankBranch;
+    user.nextOfKinName = nextOfKinName;
+    user.nextOfKinContact = nextOfKinContact;
+    user.nextOfKinGhanaCardNumber = nextOfKinGhanaCardNumber;
+    user.witnessName = witnessName;
+    user.witnessContact = witnessContact;
+
+    // Save the updated user details
+    await user.save();
+
+    // Respond with the updated user (excluding sensitive information)
+    const { password, ...updatedUser } = user._doc;
+    res.status(200).json(updatedUser);
+
+  } catch (error) {
+    next(error);
+  }
+};
