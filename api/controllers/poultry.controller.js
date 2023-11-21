@@ -2,6 +2,8 @@
 import Bird from '../models/poultry.model.js'; // Adjust the path based on your file structure
 import BatchUpdate from '../models/batchUpdate.model.js'; 
 import BatchAddition from '../models/batchAddition.model.js';
+// Import the FeedCategory model
+import FeedCategory from '../models/feedCategory.model.js'; // Adjust the path as needed
 
 
 // Function to calculate age based on arrival date
@@ -322,5 +324,47 @@ export const updateCurrentAge = async (req, res) => {
   } catch (error) {
     console.error('Error updating currentAge:', error);
     res.status(500).json({ success: false, error: 'Internal Server Error' });
+  }
+};
+
+
+
+
+// Controller to create a new feed category
+export const createFeedCategory = async (req, res) => {
+  try {
+    // Extract data from the request body
+    const { name, description } = req.body;
+
+    // Check if the feed category with the given name already exists
+    const existingCategory = await FeedCategory.findOne({ name });
+    if (existingCategory) {
+      return res.status(400).json({ error: 'Feed category with this name already exists.' });
+    }
+
+    // Create a new feed category
+    const newFeedCategory = new FeedCategory({ name, description });
+
+    // Save the new feed category to the database
+    await newFeedCategory.save();
+
+    // Return a success response
+    res.status(201).json({ success: true, data: newFeedCategory });
+  } catch (error) {
+    console.error('Error creating feed category:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+export const getAllFeedCategories = async (req, res) => {
+  try {
+    // Fetch all feed categories from the database
+    const feedCategories = await FeedCategory.find();
+
+    // Return the feed categories as a JSON response
+    res.status(200).json({ success: true, data: feedCategories });
+  } catch (error) {
+    console.error('Error fetching feed categories:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 };

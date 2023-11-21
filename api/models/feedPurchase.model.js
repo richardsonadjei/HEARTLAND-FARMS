@@ -7,6 +7,10 @@ const feedPurchaseSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  feedCategory: {
+    type: String,
+    required: true,
+  },
   supplier: {
     type: String,
   },

@@ -51,6 +51,7 @@ export const createFeedPurchaseAndExpenseTransaction = async (req, res) => {
       const {
         feedName,
         supplier,
+        feedCategory,
         manufactureDate,
         expiryDate,
         weightPerBag,
@@ -76,6 +77,7 @@ export const createFeedPurchaseAndExpenseTransaction = async (req, res) => {
       const newFeedPurchase = new FeedPurchase({
         feedName,
         supplier,
+        feedCategory,
         manufactureDate,
         expiryDate,
         weightPerBag,

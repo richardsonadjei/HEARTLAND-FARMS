@@ -36,6 +36,8 @@ import AllSuppliers from './pages/AllSuppliers';
 import UpdateSupplier from './pages/UpdateSupplier';
 import ExpenseCategory from './pages/ExpenseCategory';
 import PurchaseFeed from './pages/PurchaseFeed';
+import CreateFeedCategory from './pages/CreateFeedCategory';
+import AllFeedCategories from './pages/AllFeedCategories';
 
 
 
@@ -77,6 +79,8 @@ export default function App() {
           <Route path='/update-supplier' element={<UpdateSupplier/>} />
           <Route path='/expense-category' element={<ExpenseCategory/>} />
           <Route path='/purchase-feed' element={<PurchaseFeed/>} />
+          <Route path='/create-feed-category' element={<CreateFeedCategory/>} />
+          <Route path='/all-feed-category' element={<AllFeedCategories/>} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -3,8 +3,9 @@ import { useSelector } from 'react-redux';
 import { Button, Form, FormGroup, Label, Input, Container, Row, Col } from 'reactstrap';
 
 const PurchaseFeed = () => {
-    const { currentUser } = useSelector((state) => state.user);
+  const { currentUser } = useSelector((state) => state.user);
   const [categories, setCategories] = useState([]);
+  const [feedCategories, setFeedCategories] = useState([]); // Added feedCategories state
   const [suppliers, setSuppliers] = useState([]);
   const [paymentMethod, setPaymentMethod] = useState('');
   const [formData, setFormData] = useState({
@@ -25,17 +26,24 @@ const PurchaseFeed = () => {
     transactionID: '',
     category: '',
     description: '',
+    feedCategory: '', // New: feed category field
     purchasedBy: currentUser ? currentUser.userName : '',
   });
 
   useEffect(() => {
-    // Fetch categories from /all-categories
+    // Fetch categories from /api/all-categories
     fetch('/api/all-categories')
       .then(response => response.json())
       .then(data => setCategories(data.data))
       .catch(error => console.error('Error fetching categories:', error));
 
-    // Fetch suppliers from /suppliers
+    // Fetch feed categories from /api/all-feed-categories
+    fetch('/api/all-feed-category')
+      .then(response => response.json())
+      .then(data => setFeedCategories(data.data))
+      .catch(error => console.error('Error fetching feed categories:', error));
+
+    // Fetch suppliers from /api/suppliers
     fetch('/api/suppliers')
       .then(response => response.json())
       .then(data => setSuppliers(data.data))
@@ -75,6 +83,7 @@ const PurchaseFeed = () => {
       transactionID,
       category,
       description,
+      feedCategory, // Include feedCategory
       purchasedBy,
     } = formData;
   
@@ -114,6 +123,7 @@ const PurchaseFeed = () => {
       },
       category,
       description,
+      feedCategory,
       purchasedBy,
     };
   
@@ -134,6 +144,7 @@ const PurchaseFeed = () => {
       .catch(error => console.error('Error submitting form:', error));
   };
   
+  
   return (
     <Container>
       <h2>Purchase Feed</h2>
@@ -150,6 +161,7 @@ const PurchaseFeed = () => {
         onChange={handleInputChange}
       />
     </FormGroup>
+    
   </Col>
   <Col md={6}>
     <FormGroup>
@@ -258,7 +270,7 @@ const PurchaseFeed = () => {
 </Row>
 
 {/* Bank Transaction Details */}
-{paymentMethod === 'Bank Transaction' && (
+{formData.paymentMethod === 'Bank Transaction' && (
   <Row>
     <Col md={6}>
       <FormGroup>
@@ -312,7 +324,7 @@ const PurchaseFeed = () => {
 )}
 
 {/* Momo Transaction Details */}
-{paymentMethod === 'Momo' && (
+{formData.paymentMethod=== 'Momo' && (
   <Row>
     <Col md={6}>
       <FormGroup>
@@ -386,20 +398,41 @@ const PurchaseFeed = () => {
       />
     </FormGroup>
   </Col>
+  <Row>
+  <Col md={6}>
+    <FormGroup>
+      <Label for="purchasedBy">Purchased By</Label>
+      <input
+        type="text"
+        className="form-control"
+        id="purchasedBy"
+        name="purchasedBy"
+        value={formData.purchasedBy}
+        onChange={handleInputChange}
+        readOnly
+      />
+    </FormGroup>
+  </Col>
   <Col md={6}>
   <FormGroup>
-    <Label for="purchasedBy">Purchased By</Label>
-    <input
-                      type="text"
-                      className="form-control"
-                      id="purchasedBy"
-                      name="purchasedBy"
-                      value={formData.purchasedBy}
-                      onChange={handleInputChange}
-                      readOnly
-                    />
-  </FormGroup>
-</Col>
+              <Label for="feedCategory">Feed Category</Label>
+              <Input
+                type="select"
+                name="feedCategory"
+                id="feedCategory"
+                value={formData.feedCategory}
+                onChange={handleInputChange}
+              >
+                <option value="" disabled>Select Feed Category</option>
+                {feedCategories.map(feedCategory => (
+                  <option key={feedCategory._id} value={feedCategory.name}>
+                    {feedCategory.name}
+                  </option>
+                ))}
+              </Input>
+            </FormGroup>
+  </Col>
+</Row>
 
 </Row>
 
