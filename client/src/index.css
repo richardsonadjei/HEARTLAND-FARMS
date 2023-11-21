@@ -1,6 +1,11 @@
-body{
-    background-color: rgb(241, 245, 241);
-}
+body {
+    background-color: #435585;
+    color: white; /* Blue-black background color */
+  }
+  
+  .app-container {
+    color: white; /* Text color for better readability on dark background */
+  }
 
 
 .btn-toggle::before {
@@ -31,4 +36,32 @@ body{
     margin-left: 20px;
   }
 
+  /* Add this to your CSS file or style tag in the component */
+
+.poultry-content-container {
+    background-color: #f8f9fa; /* Light gray background color */
+    padding: 20px;
+    border-radius: 10px;
+  }
   
+  .image-container {
+    border-radius: 10px;
+    overflow: hidden; /* Hide overflow for rounded corners */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    transition: transform 0.3s ease-in-out; /* Add a smooth transition effect */
+  }
+  
+  .image-container:hover {
+    transform: scale(1.05); /* Scale up the image on hover */
+  }
+  
+  /* Add this to your CSS or SCSS file */
+.custom-image-height {
+    height: 400px; /* Adjust the height to your preference */
+  }
+  
+  
+.app-item:hover .icon {
+  transform: scale(1.5); /* Increase size on hover */
+  transition: transform 0.3s ease-in-out; /* Add a smooth transition effect */
+}

@@ -65,9 +65,14 @@ const userSchema = new mongoose.Schema({
     },
   role: {
     type: String,
-    enum: ['admin', 'manager', 'employee'],
+    enum: ['admin', 'manager', 'employee',],
     default: 'employee'
   },
+  category: {
+    type: String,
+    enum: ['poultry', 'animal', 'crop', 'hatchery','all'],
+    required: true
+  }
 },
 { timestamps: true }
 );

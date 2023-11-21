@@ -39,19 +39,17 @@ const SignOut = () => {
   };
 
   return (
-    <div className="container mt-5">
-      <div className="row justify-content-center">
-        <div className="col-md-6 text-center">
-          {signOutMessage && (
-            <div className={`alert alert-${signOutMessage.type}`} role="alert">
-              {signOutMessage.text}
-            </div>
-          )}
-          <p className="fs-4">Are you sure you want to sign out?</p>
-          <button className="btn btn-danger" onClick={handleSignOut}>
-            Sign Out
-          </button>
-        </div>
+    <div className="container mt-5 d-flex align-items-center justify-content-center">
+      <div className="col-md-6 text-center">
+        {signOutMessage && (
+          <div className={`alert alert-${signOutMessage.type}`} role="alert">
+            {signOutMessage.text}
+          </div>
+        )}
+        <p className="fs-4 text-warning">Are you sure you want to sign out?</p>
+        <button className="btn btn-danger" onClick={handleSignOut}>
+          Sign Out
+        </button>
       </div>
     </div>
   );

@@ -107,13 +107,13 @@ const Profile = () => {
                 readOnly
               />
             </div>
-            <button type="submit" className="btn btn-primary">
-              Update Profile
-            </button>
+           {/* Conditionally render the "Update Profile" button for admins */}
+           {currentUser && currentUser.role === 'admin' && (
+              <button type="submit" className="btn btn-primary">
+                Update Profile
+              </button>
+            )}
           </form>
-          <div className="mt-3">
-            <button className="btn btn-danger me-2">Delete Account</button>
-          </div>
           <button className="btn btn-secondary mt-3" onClick={handleSignOut}>
         Sign Out
       </button>

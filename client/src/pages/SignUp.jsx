@@ -18,6 +18,8 @@ const SignUp = () => {
     witnessName: '',
     witnessContact: '',
     role: 'employee',
+     // Include category field
+     category: 'poultry', // Set a default value or leave it empty as needed
   });
 
   const handleChange = (e) => {
@@ -289,8 +291,30 @@ const SignUp = () => {
             <option value="employee">Employee</option>
             <option value="manager">Manager</option>
             <option value="admin">Admin</option>
+        
           </select>
         </div>
+        <div className="mb-3">
+  <label htmlFor="category" className="form-label">
+    Category
+  </label>
+  <select
+    className="form-select"
+    id="category"
+    name="category"
+    value={formData.category}
+    onChange={handleChange}
+    required
+  >
+    <option value="all">All</option>
+    <option value="poultry">Poultry</option>
+    <option value="animal">Animal</option>
+    <option value="crop">Crop</option>
+    <option value="hatchery">Hatchery</option>
+    
+    {/* Add more options based on your categories */}
+  </select>
+</div>
 
         {/* Submit button */}
         <button type="submit" className="btn btn-primary">

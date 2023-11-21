@@ -4,6 +4,12 @@ import dotenv from 'dotenv';
 import authRouter from './routes/auth.router.js';
 import profileRouter from './routes/user.router.js';
 import cookieParser from 'cookie-parser';
+import poultryRouter from './routes/poultry.router.js';
+import sectionRouter from './routes/farmSection.router.js';
+import breedRouter from './routes/breed.router.js';
+import movementRouter from './routes/movement.router.js';
+import supplierRouter from './routes/supplier.router.js';
+import expenseRouter from './routes/expense.router.js';
 
 
 
@@ -35,7 +41,13 @@ app.listen(3000, () => {
 )
 
 app.use('/api/auth', authRouter);
-app.use('/api/user', profileRouter);
+app.use('/api/user', profileRouter); 
+app.use('/api/', poultryRouter); 
+app.use('/api/', sectionRouter);  
+app.use('/api/', breedRouter); 
+app.use('/api/', movementRouter);                  
+app.use('/api/', supplierRouter);                  
+app.use('/api/', expenseRouter);                  
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
