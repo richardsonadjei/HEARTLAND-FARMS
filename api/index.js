@@ -10,6 +10,8 @@ import breedRouter from './routes/breed.router.js';
 import movementRouter from './routes/movement.router.js';
 import supplierRouter from './routes/supplier.router.js';
 import expenseRouter from './routes/expense.router.js';
+import feedRequestRouter from './routes/feedRequest.Issue.router.js';
+import feedRouter from './routes/feed.router.js';
 
 
 
@@ -48,6 +50,8 @@ app.use('/api/', breedRouter);
 app.use('/api/', movementRouter);                  
 app.use('/api/', supplierRouter);                  
 app.use('/api/', expenseRouter);                  
+app.use('/api/', feedRequestRouter);                  
+app.use('/api/', feedRouter);                  
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;

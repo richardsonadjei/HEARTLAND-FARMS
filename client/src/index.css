@@ -65,3 +65,14 @@ body {
   transform: scale(1.5); /* Increase size on hover */
   transition: transform 0.3s ease-in-out; /* Add a smooth transition effect */
 }
+
+
+.feed-link {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.feed-link:hover {
+  color: lightgray; 
+}

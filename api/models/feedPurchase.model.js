@@ -1,6 +1,9 @@
 // Import required modules
 import mongoose from 'mongoose';
 
+// Import the FeedStock model
+import FeedStock from './feedStock.model.js'
+
 // Define the FeedPurchase schema
 const feedPurchaseSchema = new mongoose.Schema({
   feedName: {
@@ -69,6 +72,12 @@ const feedPurchaseSchema = new mongoose.Schema({
   purchasedBy: {
     type: String,
     required: true,
+  },
+  
+  // Reference to the FeedStock model
+  stock: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'FeedStock',
   },
 });
 

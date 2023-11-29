@@ -2,7 +2,7 @@
 import express from 'express';
 
 
-import { createExpenseCategory, createFeedPurchaseAndExpenseTransaction, getAllCategories } from '../controllers/expense.controller.js';
+import { createExpenseCategory, createFeedName, createFeedPurchaseAndExpenseTransaction, getAllCategories, getAllFeedNames,getFeedPurchaseTransactionsByDate } from '../controllers/expense.controller.js';
 
 
 
@@ -12,8 +12,12 @@ const expenseRouter = express.Router();
 
 // Route to create a new expense category
 expenseRouter.post('/expense-categories', createExpenseCategory);
-expenseRouter.get('/all-categories', getAllCategories);
+expenseRouter.get('/all-expense-categories', getAllCategories);
 expenseRouter.post('/feed-purchase', createFeedPurchaseAndExpenseTransaction);
+expenseRouter.post('/new-feedName', createFeedName);
+expenseRouter.get('/all-feed-names', getAllFeedNames);
+expenseRouter.get('/feed-purchase-transactions', getFeedPurchaseTransactionsByDate);
+
 
 // Export the router
 export default expenseRouter;

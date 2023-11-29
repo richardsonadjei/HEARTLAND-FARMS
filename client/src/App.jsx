@@ -38,6 +38,15 @@ import ExpenseCategory from './pages/ExpenseCategory';
 import PurchaseFeed from './pages/PurchaseFeed';
 import CreateFeedCategory from './pages/CreateFeedCategory';
 import AllFeedCategories from './pages/AllFeedCategories';
+import CreateFeedNameForm from './pages/poultry/FeedName';
+import FeedTransactionReport from './pages/poultry/reports/FeedTransactionReport';
+import FinancialReports from './pages/poultry/reports/FinancialReports';
+import FeedManagement from './pages/FeedManagement';
+import RequestFeed from './pages/FeedRequest';
+import FeedRequestApproval from './pages/FeedRequestApproval';
+import ApproveFeedRequest from './pages/ApproveFeedRequest';
+import SearchFeedName from './pages/SearchFeedName';
+import ViewFeed from './pages/ViewFeed';
 
 
 
@@ -81,6 +90,16 @@ export default function App() {
           <Route path='/purchase-feed' element={<PurchaseFeed/>} />
           <Route path='/create-feed-category' element={<CreateFeedCategory/>} />
           <Route path='/all-feed-category' element={<AllFeedCategories/>} />
+          <Route path='/new-feed-name' element={<CreateFeedNameForm/>} />
+          <Route path='/feed-transactions' element={<FeedTransactionReport/>} />
+          <Route path='/financial-reports' element={<FinancialReports/>} />
+          <Route path='/feed-management' element={<FeedManagement/>} />
+          <Route path='/request-feed' element={<RequestFeed/>} />
+          <Route path='/request-feed-approvals' element={<FeedRequestApproval/>} />
+          <Route path='/approve-feed-requests' element={<ApproveFeedRequest/>} />
+          <Route path='/search-feed-name' element={<SearchFeedName/>} />
+          <Route path='/view-feed/:id' element={<ViewFeed />} />
+
         </Route>
       </Routes>
     </BrowserRouter>

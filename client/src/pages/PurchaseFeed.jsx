@@ -5,9 +5,11 @@ import { Button, Form, FormGroup, Label, Input, Container, Row, Col } from 'reac
 const PurchaseFeed = () => {
   const { currentUser } = useSelector((state) => state.user);
   const [categories, setCategories] = useState([]);
-  const [feedCategories, setFeedCategories] = useState([]); // Added feedCategories state
+  const [feedCategories, setFeedCategories] = useState([]);
   const [suppliers, setSuppliers] = useState([]);
   const [paymentMethod, setPaymentMethod] = useState('');
+  const [message, setMessage] = useState(null);
+  const [redirect, setRedirect] = useState(false);
   const [formData, setFormData] = useState({
     feedName: '',
     supplier: '',
@@ -26,18 +28,27 @@ const PurchaseFeed = () => {
     transactionID: '',
     category: '',
     description: '',
-    feedCategory: '', // New: feed category field
+    feedCategory: '',
     purchasedBy: currentUser ? currentUser.userName : '',
   });
 
+  // State to hold available feed names
+  const [availableFeedNames, setAvailableFeedNames] = useState([]);
+
   useEffect(() => {
+    // Fetch feed names from '/api/new-feedName'
+    fetch('/api/all-feed-names')
+      .then(response => response.json())
+      .then(data => setAvailableFeedNames(data.data))
+      .catch(error => console.error('Error fetching feed names:', error));
+
     // Fetch categories from /api/all-categories
-    fetch('/api/all-categories')
+    fetch('/api/all-expense-categories')
       .then(response => response.json())
       .then(data => setCategories(data.data))
       .catch(error => console.error('Error fetching categories:', error));
 
-    // Fetch feed categories from /api/all-feed-categories
+    // Fetch feed categories from /api/all-feed-category
     fetch('/api/all-feed-category')
       .then(response => response.json())
       .then(data => setFeedCategories(data.data))
@@ -62,9 +73,19 @@ const PurchaseFeed = () => {
     }));
   };
 
+  const fetchFeedNames = async () => {
+    try {
+      const response = await fetch('/api/all-feed-names');
+      const data = await response.json();
+      setAvailableFeedNames(data.data);
+    } catch (error) {
+      console.error('Error fetching feed names:', error);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-  
+
     const {
       feedName,
       supplier,
@@ -83,10 +104,10 @@ const PurchaseFeed = () => {
       transactionID,
       category,
       description,
-      feedCategory, // Include feedCategory
+      feedCategory,
       purchasedBy,
     } = formData;
-  
+
     // Check if required fields are not empty
     if (
       !feedName ||
@@ -99,7 +120,7 @@ const PurchaseFeed = () => {
       console.error('Required fields are missing');
       return;
     }
-  
+
     // Construct the request body
     const requestBody = {
       feedName,
@@ -126,8 +147,9 @@ const PurchaseFeed = () => {
       feedCategory,
       purchasedBy,
     };
-  
+
     console.log('Request Body:', requestBody);
+
     // Use the formData state to send data to the server
     fetch('/api/feed-purchase', {
       method: 'POST',
@@ -139,11 +161,23 @@ const PurchaseFeed = () => {
       .then(response => response.json())
       .then(data => {
         // Handle the response as needed
-        console.log('Form submission response:', data);
+        if (data.success) {
+          setMessage('Purchase successful!');
+          setRedirect(true);
+        } else {
+          setMessage('Error submitting form. Please try again.');
+        }
       })
       .catch(error => console.error('Error submitting form:', error));
   };
-  
+
+  useEffect(() => {
+    if (redirect) {
+      setTimeout(() => {
+        window.location.href = '/poultry-dashboard';
+      }, 3000);
+    }
+  }, [redirect]);
   
   return (
     <Container>
@@ -152,15 +186,22 @@ const PurchaseFeed = () => {
       <Row>
   <Col md={6}>
     <FormGroup>
-      <Label for="feedName">Feed Name</Label>
-      <Input
-        type="text"
-        name="feedName"
-        id="feedName"
-        value={formData.feedName}
-        onChange={handleInputChange}
-      />
-    </FormGroup>
+              <Label for="feedName">Feed Name</Label>
+              <Input
+                type="select"
+                name="feedName"
+                id="feedName"
+                value={formData.feedName}
+                onChange={handleInputChange}
+              >
+                <option value="" disabled>Select Feed Name</option>
+                {availableFeedNames.map(feedName => (
+                  <option key={feedName._id} value={feedName.name}>
+                    {feedName.name}
+                  </option>
+                ))}
+              </Input>
+            </FormGroup>
     
   </Col>
   <Col md={6}>

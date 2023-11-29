@@ -15,7 +15,7 @@ const PoultryReport = () => {
               <a className="nav-link text-light" href="#feed-management">Egg Reports</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-light" href="#medication-management">Financial Reports</a>
+              <a className="nav-link text-light" href="/financial-reports">Financial Reports</a>
             </li>
             <li className="nav-item">
               <a className="nav-link text-light" href="#egg-management">Egg Management Report</a>
@@ -113,15 +113,22 @@ const PoultryReport = () => {
                   </div>
                 </div>
               </div>
+              
               <div className="col-md-6">
                 <div className="card mb-4" id="financial-reports">
                   <div className="card-body">
                     <h3 className="card-title">Financial Reports</h3>
                     <p className="card-text">
-                      Quick Links
+                      QUICK BUTTONS
                     </p>
-                    <button className="btn btn-primary">Go to Financial Subsection</button>
-                    {/* Additional buttons or content for financial reports */}
+                    <div className="mb-2">
+                      <Link to="/feed-transactions">
+                        <button className="btn btn-primary me-2">Generate Feed Purchase Report</button>
+                      </Link>
+                      <Link to="#">
+                        <button className="btn btn-primary me-2">Later</button>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>

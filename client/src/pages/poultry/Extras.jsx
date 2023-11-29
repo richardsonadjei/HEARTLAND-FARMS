@@ -66,7 +66,7 @@ const Extras = () => {
             <div className="card-body">
               <h5 className="card-title">Create An Expense Category</h5>
               <p className="card-text">Expense Category</p>
-              <Link to="/all-suppliers" className="btn btn-primary">
+              <Link to="/expense-category" className="btn btn-primary">
                 Create Expense Category
               </Link>
             </div>
@@ -90,6 +90,17 @@ const Extras = () => {
               <p className="card-text">All Feed Category</p>
               <Link to="/all-feed-category" className="btn btn-primary">
                 View All Feed Category
+              </Link>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-4 mb-4">
+          <div className="card">
+            <div className="card-body">
+              <h5 className="card-title">Add New FeedName</h5>
+              <p className="card-text">Add New FeedName</p>
+              <Link to="/new-feed-name" className="btn btn-primary">
+              Add New FeedName
               </Link>
             </div>
           </div>

@@ -33,7 +33,7 @@ const PoultryDashboard = () => {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-light" href="#feed-management">
+              <a className="nav-link text-light" href="/feed-management">
                 Feed Management
               </a>
             </li>
