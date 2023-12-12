@@ -112,8 +112,8 @@ const AllBatches = () => {
                   <th className="border px-4 py-2">Breed</th>
                   <th className="border px-4 py-2">Current Age</th>
                   <th className="border px-4 py-2">Arrival Date</th>
-                  <th className="border px-4 py-2">Created By</th>
                   <th className="border px-4 py-2">Farm Section</th>
+                  <th className="border px-4 py-2">Created By</th>
                   <th className="border px-4 py-2">Created At</th>
                   {/* Add more table headers based on your data fields */}
                 </tr>
@@ -126,8 +126,8 @@ const AllBatches = () => {
                     <td className="border px-4 py-2">{batch.breed}</td>
                     <td className="border px-4 py-2">{batch.currentAge}</td>
                     <td className="border px-4 py-2">{new Date(batch.arrivalDate).toLocaleDateString()}</td>
-                    <td className="border px-4 py-2">{batch.createdBy}</td>
                     <td className="border px-4 py-2">{batch.farmSection}</td>
+                    <td className="border px-4 py-2">{batch.createdBy}</td>
                     <td className="border px-4 py-2">{new Date(batch.createdAt).toLocaleDateString()}</td>
                     {/* Add more table data cells based on your data fields */}
                   </tr>

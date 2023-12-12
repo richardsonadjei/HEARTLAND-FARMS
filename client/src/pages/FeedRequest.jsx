@@ -46,14 +46,14 @@ const RequestFeed = () => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  
     const data = {
       employeeName: currentUser ? currentUser.userName : '',
       feedCategory,
       feedName,
       quantityRequested,
     };
-
+  
     fetch('/api/request-feed', {
       method: 'POST',
       headers: {
@@ -65,6 +65,8 @@ const RequestFeed = () => {
       .then((result) => {
         if (result.success) {
           alert('Feed request created successfully!');
+          // Redirect to "/feed-management" after successful submission
+          window.location.href = '/feed-management';
         } else {
           alert('Error creating feed request: ' + result.message);
         }

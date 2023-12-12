@@ -35,7 +35,7 @@ const FeedManagement = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/view-stock-of-feeds" className="nav-link text-light">
+              <Link to="/view-all-feed-stock" className="nav-link text-light">
                 View Stock Of Feeds
               </Link>
             </li>
@@ -91,7 +91,7 @@ const FeedManagement = () => {
                     <p className="card-text">
                       Some description about viewing stock of feeds.
                     </p>
-                    <Link to="/view-stock-of-feeds">
+                    <Link to="/view-all-feed-stock">
                       <button className="btn btn-primary">Go to View Stock</button>
                     </Link>
                     {/* Additional buttons or content for viewing stock of feeds */}

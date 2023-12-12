@@ -16,13 +16,12 @@ const viewAllBatches = async (req, res) => {
   }
 };
 
-// Controller to search for feed based on feed name
 const searchFeedByName = async (req, res) => {
   try {
     // Extract the search term from the request query
     const searchTerm = req.query.feedName;
 
-    // Perform a case-insensitive search for feed names containing the search term
+    // Perform a case-insensitive search for feed names in the FeedStock model
     const searchResults = await FeedStock.find({
       feedName: { $regex: new RegExp(searchTerm, 'i') },
     });
@@ -35,6 +34,9 @@ const searchFeedByName = async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 };
+export default searchFeedByName;
+
+
 
 const viewFeedById = async (req, res) => {
   try {

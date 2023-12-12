@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col, Table } from 'reactstrap';
 import { useParams } from 'react-router-dom';
 
 const ViewFeed = () => {
@@ -34,24 +34,31 @@ const ViewFeed = () => {
     <Container>
       <Row>
         <Col>
-          <h2>Feed Details</h2>
-          <ul>
-            <li>
-              <strong>Feed Name:</strong> {feedDetails.feedName}
-            </li>
-            <li>
-              <strong>Manufacture Date:</strong> {convertToLocalDate(feedDetails.manufactureDate)}
-            </li>
-            <li>
-              <strong>Expiry Date:</strong> {convertToLocalDate(feedDetails.expiryDate)}
-            </li>
-            <li>
-              <strong>Feed Category:</strong> {feedDetails.feedCategory}
-            </li>
-            <li>
-              <strong>Quantity in Stock:</strong> {feedDetails.quantityInStock}
-            </li>
-          </ul>
+          <h2 className="text-center mt-4 mb-4">Feed Details</h2>
+          <Table striped bordered responsive>
+            <tbody>
+              <tr>
+                <th>Feed Name</th>
+                <td>{feedDetails.feedName}</td>
+              </tr>
+              <tr>
+                <th>Manufacture Date</th>
+                <td>{convertToLocalDate(feedDetails.manufactureDate)}</td>
+              </tr>
+              <tr>
+                <th>Expiry Date</th>
+                <td>{convertToLocalDate(feedDetails.expiryDate)}</td>
+              </tr>
+              <tr>
+                <th>Feed Category</th>
+                <td>{feedDetails.feedCategory}</td>
+              </tr>
+              <tr>
+                <th>Quantity in Stock</th>
+                <td>{feedDetails.quantityInStock}</td>
+              </tr>
+            </tbody>
+          </Table>
         </Col>
       </Row>
     </Container>

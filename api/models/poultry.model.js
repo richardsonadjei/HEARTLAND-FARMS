@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import AutoIncrementFactory from 'mongoose-sequence';
+import Medication from '../models/medication.model.js';
 
 const { Schema, model } = mongoose;
 
@@ -52,7 +53,11 @@ const birdSchema = new Schema({
   farmSection: {
     type: String,
     required: true,
-  }
+  },
+  medication: {
+    type: Schema.Types.ObjectId,
+    ref: 'Medication',
+  },
   
 }, 
 {

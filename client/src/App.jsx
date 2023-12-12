@@ -47,6 +47,10 @@ import FeedRequestApproval from './pages/FeedRequestApproval';
 import ApproveFeedRequest from './pages/ApproveFeedRequest';
 import SearchFeedName from './pages/SearchFeedName';
 import ViewFeed from './pages/ViewFeed';
+import FeedStockReport from './pages/poultry/reports/AllFeedStock';
+import AddMedication from './pages/AddMedication';
+import Medication from './pages/Medication';
+import AllVaccinesReport from './pages/poultry/reports/AllVaccinesReport';
 
 
 
@@ -99,6 +103,10 @@ export default function App() {
           <Route path='/approve-feed-requests' element={<ApproveFeedRequest/>} />
           <Route path='/search-feed-name' element={<SearchFeedName/>} />
           <Route path='/view-feed/:id' element={<ViewFeed />} />
+          <Route path='/view-all-feed-stock' element={<FeedStockReport/>} />
+          <Route path='/add-medication' element={<AddMedication/>} />
+          <Route path='/medication' element={<Medication/>} />
+          <Route path='/all-vaccines' element={<AllVaccinesReport/>} />
 
         </Route>
       </Routes>

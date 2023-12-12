@@ -12,6 +12,7 @@ import supplierRouter from './routes/supplier.router.js';
 import expenseRouter from './routes/expense.router.js';
 import feedRequestRouter from './routes/feedRequest.Issue.router.js';
 import feedRouter from './routes/feed.router.js';
+import medicationRouter from './routes/medication.router.js';
 
 
 
@@ -52,6 +53,7 @@ app.use('/api/', supplierRouter);
 app.use('/api/', expenseRouter);                  
 app.use('/api/', feedRequestRouter);                  
 app.use('/api/', feedRouter);                  
+app.use('/api/', medicationRouter);                  
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;

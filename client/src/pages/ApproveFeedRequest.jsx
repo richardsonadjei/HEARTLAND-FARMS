@@ -40,9 +40,9 @@ const ApproveFeedRequest = () => {
         setError('Please fill in all fields');
         return;
       }
-
+  
       console.log('Making API request to issue feed:', { requestId, quantityIssued });
-
+  
       // Make API request to issue feed
       const response = await fetch('api/issue-feed', {
         method: 'POST',
@@ -51,21 +51,24 @@ const ApproveFeedRequest = () => {
         },
         body: JSON.stringify({ requestId, quantityIssued }),
       });
-
+  
       console.log('API response:', response);
-
+  
       const data = await response.json();
-
+  
       if (response.ok) {
         // Handle success
-        console.log('Feed Request Approved:', data);
-        // You can add additional logic here, such as updating the UI or redirecting to another page.
+     
+        // Alert the user
+        alert('Feed request approved successfully!');
+        // Redirect to "/feed-management"
+        window.location.href = '/feed-management';
       } else {
         // Handle error
         setError(data.message || 'An error occurred while approving feed request');
       }
     } catch (error) {
-      console.error('Error approving feed request:', error);
+      
       setError('An unexpected error occurred');
     }
   };

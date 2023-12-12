@@ -6,7 +6,7 @@ import { searchFeedByName, viewAllBatches, viewFeedById } from '../controllers/f
 const feedRouter = express.Router();
 
 // Route to view all batches
-feedRouter.get('/batches', viewAllBatches);
+feedRouter.get('/all-feed-batches', viewAllBatches);
 feedRouter.get('/search-feed-name', searchFeedByName);
 feedRouter.get('/feed/:id', viewFeedById);
 
