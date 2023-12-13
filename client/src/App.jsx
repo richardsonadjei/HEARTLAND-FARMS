@@ -55,6 +55,7 @@ import AddVaccine from './pages/AddVaccine';
 import AllMedicationCategoryReport from './pages/AllMedicationCategory';
 import AddDrugs from './pages/AddDrug';
 import AllDrugs from './pages/AllDrugs';
+import RecordVaccination from './pages/RecordVaccination';
 
 
 
@@ -115,6 +116,7 @@ export default function App() {
           <Route path='/all-medication-category' element={<AllMedicationCategoryReport/>} />
           <Route path='/add-drug' element={<AddDrugs/>} />
           <Route path='/all-drug' element={<AllDrugs/>} />
+          <Route path='/record-vaccination' element={<RecordVaccination/>} />
          
 
         </Route>

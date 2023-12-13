@@ -16,6 +16,7 @@ import vaccinationRouter from './routes/vaccination.router.js';
 import medCategoryRouter from './routes/medicationCategory.router.js';
 import drugsRouter from './routes/drugs.router.js';
 import notificationsRouter from './routes/notifications.router.js';
+import birdVaccinationRouter from './routes/birdVaccinationRouter.js';
 
 
 
@@ -60,6 +61,7 @@ app.use('/api/', vaccinationRouter);
 app.use('/api/', medCategoryRouter);    
 app.use('/api/', drugsRouter);    
 app.use('/api/', notificationsRouter);    
+app.use('/api/', birdVaccinationRouter);    
 
 
 

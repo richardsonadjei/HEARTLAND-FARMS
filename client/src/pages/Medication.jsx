@@ -20,8 +20,8 @@ const Medication = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/all-vaccines" className="nav-link text-light">
-                View Vaccine Chart
+              <Link to="/record-vaccination" className="nav-link text-light">
+                Record Vaccination
               </Link>
             </li>
             <li className="nav-item">

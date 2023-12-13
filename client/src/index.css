@@ -103,3 +103,18 @@ body {
 .search-button:hover {
   background-color: #0056b3;
 }
+
+/* Add this to your CSS file or style section */
+.notification-item {
+  background-color: lightblue;
+  cursor: pointer; /* Add this to indicate the element is clickable */
+}
+
+
+
+@media (max-width: 767px) {
+  .notification-item {
+    white-space: normal; /* Allow text to wrap */
+    word-wrap: break-word; /* Break long words */
+  }
+}
