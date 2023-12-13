@@ -48,9 +48,13 @@ import ApproveFeedRequest from './pages/ApproveFeedRequest';
 import SearchFeedName from './pages/SearchFeedName';
 import ViewFeed from './pages/ViewFeed';
 import FeedStockReport from './pages/poultry/reports/AllFeedStock';
-import AddMedication from './pages/AddMedication';
 import Medication from './pages/Medication';
 import AllVaccinesReport from './pages/poultry/reports/AllVaccinesReport';
+import CreateMedicationCategory from './pages/CreateMedicationCategory';
+import AddVaccine from './pages/AddVaccine';
+import AllMedicationCategoryReport from './pages/AllMedicationCategory';
+import AddDrugs from './pages/AddDrug';
+import AllDrugs from './pages/AllDrugs';
 
 
 
@@ -104,9 +108,14 @@ export default function App() {
           <Route path='/search-feed-name' element={<SearchFeedName/>} />
           <Route path='/view-feed/:id' element={<ViewFeed />} />
           <Route path='/view-all-feed-stock' element={<FeedStockReport/>} />
-          <Route path='/add-medication' element={<AddMedication/>} />
+          <Route path='/add-vaccine' element={<AddVaccine/>} />
           <Route path='/medication' element={<Medication/>} />
           <Route path='/all-vaccines' element={<AllVaccinesReport/>} />
+          <Route path='/create-medication-category' element={<CreateMedicationCategory/>} />
+          <Route path='/all-medication-category' element={<AllMedicationCategoryReport/>} />
+          <Route path='/add-drug' element={<AddDrugs/>} />
+          <Route path='/all-drug' element={<AllDrugs/>} />
+         
 
         </Route>
       </Routes>

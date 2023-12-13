@@ -1,13 +1,27 @@
-
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
   const userCategory = currentUser ? currentUser.category : '';
+  const [notifications, setNotifications] = useState([]);
+  const [notificationCount, setNotificationCount] = useState(0);
+
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        const response = await fetch('/api/birds-due-for-vaccination'); // Replace with your API endpoint
+        const data = await response.json();
+        setNotifications(data.notifications);
+        setNotificationCount(data.notifications.length);
+      } catch (error) {
+        console.error('Error fetching notifications:', error);
+      }
+    };
+
+    fetchNotifications();
+  }, []);
 
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary sticky-top">
@@ -68,6 +82,27 @@ export default function Header() {
             </li>
           </ul>
           <div className="dropdown text-end mx-auto">
+            <Link className="d-block link-body-emphasis text-decoration-none dropdown-toggle" to="#" data-bs-toggle="dropdown" aria-expanded="false">
+            Vaccinations Alerts
+              {notificationCount > 0 && <span className="badge bg-danger">{notificationCount}</span>}
+            </Link>
+            <ul className="dropdown-menu text-small">
+            {notifications.length > 0 ? (
+          notifications.map((notification, index) => (
+            <li key={index}>
+              <Link className="dropdown-item" to={`/birds/${notification.batchNumber}`}>
+                Bird with batch number {notification.batchNumber} is due for {notification.vaccinationDue} vaccination at {notification.ageInDays} days old.
+              </Link>
+            </li>
+          ))
+              ) : (
+                <li>
+                  <span className="dropdown-item">No notifications</span>
+                </li>
+              )}
+            </ul>
+          </div>
+          <div className="dropdown text-end mx-auto">
             {currentUser ? (
               <Link className="d-block link-body-emphasis text-decoration-none dropdown-toggle" to="#" data-bs-toggle="dropdown" aria-expanded="false">
                 {currentUser.userName}
@@ -89,6 +124,7 @@ export default function Header() {
               <li><Link className="dropdown-item" to="/profile">Profile</Link></li>
             </ul>
           </div>
+          
         </div>
       </div>
     </nav>

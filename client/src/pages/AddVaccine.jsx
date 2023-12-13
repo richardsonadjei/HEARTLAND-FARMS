@@ -1,24 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Form, FormGroup, Label, Input, Container, Row, Col } from 'reactstrap';
+import Select from 'react-select';
 
-const AddMedication = () => {
+
+const AddVaccine = () => {
   const [medication, setMedication] = useState({
     name: '',
     description: '',
     ageRangeStart: '',
     ageRangeEnd: '',
   });
+  const [medicationNames, setMedicationNames] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/all-drugs');
+        if (response.ok) {
+          const data = await response.json();
+          const names = data.map((med) => ({ value: med.name, label: med.name }));
+          setMedicationNames(names);
+        } else {
+          console.error('Failed to fetch medications');
+        }
+      } catch (error) {
+        console.error(`Error: ${error.message}`);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setMedication({ ...medication, [name]: value });
   };
 
+  const handleNameChange = (selectedOption) => {
+    setMedication({ ...medication, name: selectedOption.value });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('/api/add-medication', {
+      const response = await fetch('/api/add-vaccination', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -39,7 +65,18 @@ const AddMedication = () => {
       alert('Error creating medication');
     }
   };
-
+  const customStyles = {
+    control: (provided, state) => ({
+      ...provided,
+      border: state.isFocused ? '2px solid #2684FF' : '1px solid #CED4DA',
+      boxShadow: state.isFocused ? '0 0 0 0.1rem rgba(38, 132, 255, 0.25)' : null,
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isSelected ? '#2684FF' : 'white',
+      color: state.isSelected ? 'white' : 'black',
+    }),
+  };
   return (
     <Container>
       <Row className="mt-4">
@@ -51,14 +88,12 @@ const AddMedication = () => {
                 Name
               </Label>
               <Col md={9}>
-                <Input
-                  type="text"
-                  name="name"
-                  id="name"
-                  placeholder="Medication Name"
-                  value={medication.name}
-                  onChange={handleChange}
-                  required
+                <Select
+                  options={medicationNames}
+                  isSearchable
+                  placeholder="Select Medication"
+                  onChange={handleNameChange}
+                  styles={customStyles}
                 />
               </Col>
             </FormGroup>
@@ -110,7 +145,7 @@ const AddMedication = () => {
             <FormGroup row>
               <Col md={{ size: 9, offset: 3 }}>
                 <Button type="submit" color="primary">
-                  Create Medication
+                  Add
                 </Button>
               </Col>
             </FormGroup>
@@ -121,4 +156,4 @@ const AddMedication = () => {
   );
 };
 
-export default AddMedication;
+export default AddVaccine;

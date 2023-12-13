@@ -1,33 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Medication = () => {
-  const [requestCount, setRequestCount] = useState(0);
-
-  useEffect(() => {
-    // Fetch the number of requests from the backend
-    const fetchRequestCount = async () => {
-      try {
-        const response = await fetch('/api/view-medication-requests');
-        const data = await response.json();
-        setRequestCount(data.data.length); // Assuming the data returned is an array of requests
-      } catch (error) {
-        console.error('Error fetching request count:', error);
-      }
-    };
-
-    fetchRequestCount();
-  }, []);
-
   return (
     <div className="container-fluid">
       <div className="row">
         <div className="col-md-3 bg-dark text-light">
           <h2 className="mt-3 mb-4">Medication Management Dashboard</h2>
           <ul className="nav flex-column">
+            {/* Navigation links without request count */}
             <li className="nav-item">
-              <Link to="/add-medication" className="nav-link text-light">
-                Add Medication
+              <Link to="/add-vaccine" className="nav-link text-light">
+                Add Vaccine
               </Link>
             </li>
             <li className="nav-item">
@@ -48,9 +32,21 @@ const Medication = () => {
             <li className="nav-item">
               <Link to="/delete-medication" className="nav-link text-light">
                 Delete Medication
-                {requestCount > 0 && (
-                  <span className="badge bg-warning ms-2">{requestCount}</span>
-                )}
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/all-drug" className="nav-link text-light">
+                View And Update Drugs
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/create-medication-category" className="nav-link text-light">
+                Add Medication Category
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/all-medication-category" className="nav-link text-light">
+                View All Medication Category
               </Link>
             </li>
             {/* Additional dashboard items */}
@@ -62,12 +58,12 @@ const Medication = () => {
               <div className="col-md-4">
                 <div className="card mb-4">
                   <div className="card-body">
-                    <h3 className="card-title">Add Medication</h3>
+                    <h3 className="card-title">Add Drugs/Vaccine</h3>
                     <p className="card-text">
-                      Add a new medication to the system.
+                      Add a new Vaccine to the system.
                     </p>
-                    <Link to="/add-medication">
-                      <button className="btn btn-primary mb-2 me-2">Add Medication</button>
+                    <Link to="/add-drug">
+                      <button className="btn btn-primary mb-2 me-2">Add </button>
                     </Link>
                     {/* Additional buttons or content for adding medication */}
                   </div>
@@ -76,7 +72,21 @@ const Medication = () => {
               <div className="col-md-4">
                 <div className="card mb-4">
                   <div className="card-body">
-                    <h3 className="card-title">Update Medication</h3>
+                    <h3 className="card-title">Add Vaccine To Vaccination Cycle</h3>
+                    <p className="card-text">
+                      Add 
+                    </p>
+                    <Link to="/add-vaccine">
+                      <button className="btn btn-primary mb-2 me-2">Add </button>
+                    </Link>
+                    {/* Additional buttons or content for adding medication */}
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-4">
+                <div className="card mb-4">
+                  <div className="card-body">
+                    <h3 className="card-title">Update Vaccine</h3>
                     <p className="card-text">
                       Update information for existing medications.
                     </p>
@@ -104,7 +114,7 @@ const Medication = () => {
               <div className="col-md-4">
                 <div className="card mb-4">
                   <div className="card-body">
-                    <h3 className="card-title">View Medication By Age Range</h3>
+                    <h3 className="card-title">View Vaccine By Age Range</h3>
                     <p className="card-text">
                       View medications based on age range criteria.
                     </p>

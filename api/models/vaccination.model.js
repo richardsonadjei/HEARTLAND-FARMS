@@ -1,9 +1,9 @@
-// medicationModel.js
+// vaccinationModel.js
 import mongoose from 'mongoose';
 
 const { Schema, model } = mongoose;
 
-const medicationSchema = new Schema({
+const vaccinationSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -21,6 +21,6 @@ const medicationSchema = new Schema({
   },
 });
 
-const Medication = model('Medication', medicationSchema);
+const Vaccination = model('Vaccination', vaccinationSchema);
 
-export default Medication;
+export default Vaccination;

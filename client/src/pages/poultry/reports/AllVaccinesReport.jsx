@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Table } from 'reactstrap';
+import { Container, Row, Col, Table, Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 import { IoPencilSharp, IoTrashBinSharp } from 'react-icons/io5';
 
 const AllVaccinesReport = () => {
   const [medications, setMedications] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [modal, setModal] = useState(false);
+  const [selectedMedication, setSelectedMedication] = useState({});
+  const [updatedName, setUpdatedName] = useState('');
+  const [updatedDescription, setUpdatedDescription] = useState('');
+  const [updatedStartAge, setUpdatedStartAge] = useState('');
+  const [updatedEndAge, setUpdatedEndAge] = useState('');
 
   useEffect(() => {
     const fetchMedications = async () => {
       try {
-        const response = await fetch('/api/all-vaccines');
+        const response = await fetch('/api/all-vaccinations');
         if (response.ok) {
           const data = await response.json();
           setMedications(data);
@@ -28,14 +34,64 @@ const AllVaccinesReport = () => {
     fetchMedications();
   }, []); // The empty dependency array ensures the effect runs only once on mount
 
-  const handleUpdate = (id) => {
-    // Implement the logic to handle the update based on the ID
-    console.log(`Updating medication with ID: ${id}`);
+  const toggleModal = () => setModal(!modal);
+
+  const handleUpdate = (medication) => {
+    setSelectedMedication(medication);
+    setUpdatedName(medication.name);
+    setUpdatedDescription(medication.description);
+    setUpdatedStartAge(medication.ageRangeStart);
+    setUpdatedEndAge(medication.ageRangeEnd);
+    toggleModal();
   };
 
-  const handleDelete = (id) => {
-    // Implement the logic to handle the delete based on the ID
-    console.log(`Deleting medication with ID: ${id}`);
+  const handleUpdateSubmit = async () => {
+    try {
+      const response = await fetch(`/api/vaccinations/${selectedMedication._id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: selectedMedication._id,
+          name: updatedName,
+          description: updatedDescription,
+          ageRangeStart: updatedStartAge,
+          ageRangeEnd: updatedEndAge,
+        }),
+      });
+
+      if (response.ok) {
+        toggleModal();
+        alert('Medication updated successfully!');
+        window.location.reload();
+      } else {
+        console.error('Failed to update medication');
+      }
+    } catch (error) {
+      console.error(`Error: ${error.message}`);
+    }
+  };
+
+  const handleDelete = async (medicationId) => {
+    const confirmDelete = window.confirm('Are you sure you want to delete this medication?');
+
+    if (confirmDelete) {
+      try {
+        const response = await fetch(`/api/vaccinations/${medicationId}`, {
+          method: 'DELETE',
+        });
+
+        if (response.ok) {
+          alert('Medication deleted successfully!');
+          window.location.reload();
+        } else {
+          console.error('Failed to delete medication');
+        }
+      } catch (error) {
+        console.error(`Error: ${error.message}`);
+      }
+    }
   };
 
   return (
@@ -73,7 +129,7 @@ const AllVaccinesReport = () => {
                       <IoPencilSharp
                         className="mr-2"
                         style={{ cursor: 'pointer', color: 'blue' }}
-                        onClick={() => handleUpdate(medication._id)}
+                        onClick={() => handleUpdate(medication)}
                       />
                       <IoTrashBinSharp
                         style={{ cursor: 'pointer', color: 'red' }}
@@ -87,6 +143,62 @@ const AllVaccinesReport = () => {
           </Table>
         </Col>
       </Row>
+      {/* Update Medication Modal */}
+      <Modal isOpen={modal} toggle={toggleModal}>
+        <ModalHeader toggle={toggleModal}>Edit Medication</ModalHeader>
+        <ModalBody>
+          <Form>
+            <FormGroup>
+              <Label for="name">Name</Label>
+              <Input
+                type="text"
+                name="name"
+                id="name"
+                value={updatedName}
+                onChange={(e) => setUpdatedName(e.target.value)}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="description">Description</Label>
+              <Input
+                type="textarea"
+                name="description"
+                id="description"
+                value={updatedDescription}
+                onChange={(e) => setUpdatedDescription(e.target.value)}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="ageRangeStart">Start Age</Label>
+              <Input
+                type="number"
+                name="ageRangeStart"
+                id="ageRangeStart"
+                value={updatedStartAge}
+                onChange={(e) => setUpdatedStartAge(e.target.value)}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="ageRangeEnd">End Age</Label>
+              <Input
+                type="number"
+                name="ageRangeEnd"
+                id="ageRangeEnd"
+                value={updatedEndAge}
+                onChange={(e) => setUpdatedEndAge(e.target.value)}
+              />
+            </FormGroup>
+          </Form>
+        </ModalBody>
+        <ModalFooter>
+          <Button color="primary" onClick={handleUpdateSubmit}>
+            Update
+          </Button>{' '}
+          <Button color="secondary" onClick={toggleModal}>
+            Cancel
+          </Button>
+        </ModalFooter>
+      </Modal>
     </Container>
   );
 };
