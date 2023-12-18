@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { FaBell } from 'react-icons/fa';
 
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
@@ -170,37 +171,39 @@ export default function Header() {
           </ul>
           <div className="dropdown text-end mx-auto">
           <Link
-            className="d-block link-body-emphasis text-decoration-none dropdown-toggle"
-            to="#"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Vaccinations Alerts
-            {notificationCount > 0 && <span className="badge bg-danger">{notificationCount}</span>}
-          </Link>
-          <ul className="dropdown-menu text-small">
-            {notifications.length > 0 ? (
-              notifications.map((notification, index) => (
-                <li key={index}>
-                  <span
-                    className="dropdown-item"
-                    onClick={() =>
-                      (window.location.href = `/record-vaccination?batchNumber=${notification.batchNumber}&breed=${notification.breed}&ageInDays=${notification.ageInDays}&vaccinationDue=${notification.vaccinationDue}`)
-                    }
-                  >
-                    <div className="notification-item">
-                      <strong>{notification.breed}</strong> with batch number {notification.batchNumber} is due for {notification.vaccinationDue} vaccination at {notification.ageInDays} days old.
-                    </div>
-                  </span>
+  className="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+  to="#"
+  data-bs-toggle="dropdown"
+  aria-expanded="false"
+  data-bs-tooltip="View birds due for vaccination"
+  data-bs-placement="bottom"
+>
+  <FaBell size={24} />
+  {notificationCount > 0 && <span className="badge bg-danger">{notificationCount}</span>}
+</Link>
+            <ul className="dropdown-menu text-small">
+              {notifications.length > 0 ? (
+                notifications.map((notification, index) => (
+                  <li key={index}>
+                    <span
+                      className="dropdown-item"
+                      onClick={() =>
+                        (window.location.href = `/record-vaccination?batchNumber=${notification.batchNumber}&breed=${notification.breed}&ageInDays=${notification.ageInDays}&vaccinationDue=${notification.vaccinationDue}`)
+                      }
+                    >
+                      <div className="notification-item">
+                        <strong>{notification.breed}</strong> with batch number {notification.batchNumber} is due for {notification.vaccinationDue} vaccination at {notification.ageInDays} days old.
+                      </div>
+                    </span>
+                  </li>
+                ))
+              ) : (
+                <li>
+                  <span className="dropdown-item">No notifications</span>
                 </li>
-              ))
-            ) : (
-              <li>
-                <span className="dropdown-item">No notifications</span>
-              </li>
-            )}
-          </ul>
-        </div>
+              )}
+            </ul>
+          </div>
           <div className="dropdown text-end mx-auto">
             {currentUser ? (
               <Link

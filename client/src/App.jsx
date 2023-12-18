@@ -56,6 +56,10 @@ import AllMedicationCategoryReport from './pages/AllMedicationCategory';
 import AddDrugs from './pages/AddDrug';
 import AllDrugs from './pages/AllDrugs';
 import RecordVaccination from './pages/RecordVaccination';
+import BatchVaccinationReport from './pages/BatchVaccinationReport';
+import DewormBirds from './pages/poultry/DewormBirds';
+import BatchDewormingReport from './pages/poultry/reports/BatchDewormingHistory';
+import DewormingReport from './pages/poultry/DewormingReport';
 
 
 
@@ -117,6 +121,10 @@ export default function App() {
           <Route path='/add-drug' element={<AddDrugs/>} />
           <Route path='/all-drug' element={<AllDrugs/>} />
           <Route path='/record-vaccination' element={<RecordVaccination/>} />
+          <Route path='/batch-vaccination-history' element={<BatchVaccinationReport/>} />
+          <Route path='/deworm-birds' element={<DewormBirds/>} />
+          <Route path='/batch-deworming-history' element={<BatchDewormingReport/>} />
+          <Route path='/deworming-history' element={<DewormingReport/>} />
          
 
         </Route>

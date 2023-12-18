@@ -16,8 +16,10 @@ const RecordVaccination = () => {
     vaccinatedBy: '',
   });
 
-  // State to manage success alert
+  // State to manage success and error alerts
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const [showErrorAlert, setShowErrorAlert] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   // Handle form input changes
   const handleInputChange = (e) => {
@@ -40,6 +42,7 @@ const RecordVaccination = () => {
         },
         body: JSON.stringify(formData),
       });
+
       if (response.ok) {
         // If the response is successful, show the success alert
         setShowSuccessAlert(true);
@@ -52,12 +55,18 @@ const RecordVaccination = () => {
           ageInDays: '',
           vaccinatedBy: '',
         });
+        // Navigate to "/medication"
+        window.location.href = '/medication';
       } else {
         // If the response is not successful, handle the error
-        console.error('Error creating bird vaccination record:', response.statusText);
+        const errorData = await response.json();
+        setErrorMessage(errorData.error || 'Error creating bird vaccination record');
+        setShowErrorAlert(true);
       }
     } catch (error) {
       console.error('Error creating bird vaccination record:', error);
+      setErrorMessage('Internal Server Error');
+      setShowErrorAlert(true);
     }
   };
 

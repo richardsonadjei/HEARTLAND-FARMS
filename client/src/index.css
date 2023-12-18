@@ -104,10 +104,9 @@ body {
   background-color: #0056b3;
 }
 
-/* Add this to your CSS file or style section */
-.notification-item {
-  background-color: lightblue;
-  cursor: pointer; /* Add this to indicate the element is clickable */
+/* Add this CSS to your stylesheet */
+.dropdown-item.highlighted {
+  background-color: #33C1FF; /* Choose the background color you prefer */
 }
 
 

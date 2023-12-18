@@ -6,6 +6,7 @@ import {
   getBirdVaccinationById,
   updateBirdVaccinationById,
   deleteBirdVaccinationById,
+  getBirdVaccinationsByBatchNumber,
 } from '../controllers/birdVaccination.controller.js';
 
 // Create an Express router
@@ -25,6 +26,7 @@ birdVaccinationRouter.put('/update-bird-vaccinations/:id', updateBirdVaccination
 
 // Route to delete a bird vaccination record by ID
 birdVaccinationRouter.delete('/delete-bird-vaccinations/:id', deleteBirdVaccinationById);
+birdVaccinationRouter.get('/birdVaccinations/batch/:batchNumber', getBirdVaccinationsByBatchNumber);
 
 // Export the router
 export default birdVaccinationRouter;

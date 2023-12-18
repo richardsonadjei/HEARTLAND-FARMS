@@ -7,7 +7,6 @@ const birdVaccinationSchema = new mongoose.Schema(
     batchNumber: {
       type: String,
       required: true,
-      unique: true,
     },
     breed: {
       type: String,
@@ -25,10 +24,10 @@ const birdVaccinationSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    vaccinatedBy:{
-        type: String,
+    vaccinatedBy: {
+      type: String,
       required: true,
-    }
+    },
     // Add any other properties related to bird vaccination
   },
   {
@@ -38,6 +37,15 @@ const birdVaccinationSchema = new mongoose.Schema(
 
 // Create BirdVaccination model
 const BirdVaccination = mongoose.model('BirdVaccination', birdVaccinationSchema);
+
+// Drop the index on batchNumber if it exists
+BirdVaccination.collection.dropIndex({ batchNumber: 1 }, (err, result) => {
+  if (err) {
+    console.error('Error dropping index:', err);
+  } else {
+    console.log('Index dropped successfully:', result);
+  }
+});
 
 // Export the model
 export default BirdVaccination;

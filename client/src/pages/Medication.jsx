@@ -15,11 +15,6 @@ const Medication = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/update-vaccines" className="nav-link text-light">
-                Update Medication
-              </Link>
-            </li>
-            <li className="nav-item">
               <Link to="/record-vaccination" className="nav-link text-light">
                 Record Vaccination
               </Link>
@@ -27,6 +22,11 @@ const Medication = () => {
             <li className="nav-item">
               <Link to="/view-by-age-range" className="nav-link text-light">
                 View Chart By Age Range
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/is-birds" className="nav-link text-light">
+               Health Status
               </Link>
             </li>
             <li className="nav-item">
@@ -86,12 +86,12 @@ const Medication = () => {
               <div className="col-md-4">
                 <div className="card mb-4">
                   <div className="card-body">
-                    <h3 className="card-title">Update Vaccine</h3>
+                    <h3 className="card-title">All Drugs</h3>
                     <p className="card-text">
-                      Update information for existing medications.
+                      All Drugs And Vaccines
                     </p>
-                    <Link to="/update-medication">
-                      <button className="btn btn-primary mb-2 me-2">Update Medication</button>
+                    <Link to="/all-drug">
+                      <button className="btn btn-primary mb-2 me-2">All Drugs </button>
                     </Link>
                     {/* Additional buttons or content for updating medication */}
                   </div>
@@ -128,12 +128,46 @@ const Medication = () => {
               <div className="col-md-4">
                 <div className="card mb-4">
                   <div className="card-body">
-                    <h3 className="card-title">Delete Medication</h3>
+                    <h3 className="card-title">Deworming</h3>
                     <p className="card-text">
-                      Delete medications from the system.
+                      Deworm Birds
+                    </p>
+                    <Link to="/deworm-birds">
+                      <button className="btn btn-primary me-2">Deworm</button>
+                    </Link>
+                    <Link to="/batch-deworming-history">
+                      <button className="btn btn-primary me-2">Batch History</button>
+                    </Link>
+                    {/* Additional buttons or content for viewing medication by age range */}
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-4">
+                <div className="card mb-4">
+                  <div className="card-body">
+                    <h3 className="card-title">Treatment Records</h3>
+                    <p className="card-text">
+                     View History Of Vaccinations And Deworming
+                    </p>
+                    <Link to="/batch-vaccination-history">
+                      <button className="btn btn-primary me-2">Vaccination</button>
+                    </Link>
+                    <Link to="/deworming-history">
+                      <button className="btn btn-primary me-2">Deworming</button>
+                    </Link>
+                    {/* Additional buttons or content for deleting medication */}
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-4">
+                <div className="card mb-4">
+                  <div className="card-body">
+                    <h3 className="card-title">Diagnose Birds And Isolate Birds</h3>
+                    <p className="card-text">
+                      Record the health condition and diagnosis of a bird or batch of birds and isolate
                     </p>
                     <Link to="/delete-medication">
-                      <button className="btn btn-primary">Delete Medication</button>
+                      <button className="btn btn-primary">Book Sick Birds</button>
                     </Link>
                     {/* Additional buttons or content for deleting medication */}
                   </div>

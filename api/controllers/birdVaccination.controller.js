@@ -89,3 +89,23 @@ export const deleteBirdVaccinationById = async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+
+
+// Controller to get all bird vaccinations for a particular batchNumber
+export const getBirdVaccinationsByBatchNumber = async (req, res) => {
+  try {
+    const { batchNumber } = req.params;
+
+    // Find all bird vaccinations with the specified batchNumber
+    const birdVaccinations = await BirdVaccination.find({ batchNumber });
+
+    if (birdVaccinations.length === 0) {
+      return res.status(404).json({ error: `No bird vaccinations found for batchNumber ${batchNumber}` });
+    }
+
+    res.status(200).json(birdVaccinations);
+  } catch (error) {
+    console.error('Error getting bird vaccinations by batchNumber:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
