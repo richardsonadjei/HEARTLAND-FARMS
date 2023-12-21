@@ -368,3 +368,22 @@ export const getAllFeedCategories = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
+
+
+// Controller function to view all batches of birds in a given section
+export const getBatchesBySection = async (req, res) => {
+  try {
+    // Extract section name from the request parameters
+    const { section } = req.params;
+
+    // Find all batches in the specified farm section
+    const batchesInSection = await Bird.find({ farmSection: section }).exec();
+
+    // Respond with the fetched data
+    res.status(200).json({ success: true, data: batchesInSection });
+  } catch (error) {
+    // Handle errors and send an error response
+    console.error(error);
+    res.status(500).json({ success: false, error: 'Internal Server Error' });
+  }
+};

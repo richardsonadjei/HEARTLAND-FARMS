@@ -18,6 +18,10 @@ import drugsRouter from './routes/drugs.router.js';
 import notificationsRouter from './routes/notifications.router.js';
 import birdVaccinationRouter from './routes/birdVaccinationRouter.js';
 import dewormingRouter from './routes/deworming.router.js';
+import healthConditionRouter from './routes/healthCondtion.router.js';
+import treatmentRouter from './routes/treatment.router.js';
+import eggRouter from './routes/eggs.router.js';
+import mortalityRouter from './routes/mortality.router.js';
 
 
 
@@ -64,6 +68,10 @@ app.use('/api/', drugsRouter);
 app.use('/api/', notificationsRouter);    
 app.use('/api/', birdVaccinationRouter);    
 app.use('/api/', dewormingRouter);    
+app.use('/api/', healthConditionRouter);    
+app.use('/api/', treatmentRouter);    
+app.use('/api/', eggRouter);    
+app.use('/api/', mortalityRouter);    
 
 
 

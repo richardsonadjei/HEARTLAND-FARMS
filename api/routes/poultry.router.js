@@ -1,5 +1,5 @@
 import express from 'express';
-import { createBirdBatch, getAllBirdBatches, generateAgeReport, getAllBirdBatchesNoDates, getBatchByNumber, updateBatchQuantity, getBatchUpdatesWithinPeriod, addBirdsToBatch, getAdditionsByDateRange, updateCurrentAge, createFeedCategory, getAllFeedCategories } from '../controllers/poultry.controller.js';
+import { createBirdBatch, getAllBirdBatches, generateAgeReport, getAllBirdBatchesNoDates, getBatchByNumber, updateBatchQuantity, getBatchUpdatesWithinPeriod, addBirdsToBatch, getAdditionsByDateRange, updateCurrentAge, createFeedCategory, getAllFeedCategories, getBatchesBySection } from '../controllers/poultry.controller.js';
 
 const poultryRouter = express.Router();
 
@@ -16,5 +16,6 @@ poultryRouter.get('/add-birds-history', getAdditionsByDateRange);
 poultryRouter.get('/update-current-age', updateCurrentAge);
 poultryRouter.post('/create-feed-category', createFeedCategory);
 poultryRouter.get('/all-feed-category', getAllFeedCategories);
+poultryRouter.get('/batches/:section', getBatchesBySection);
 
 export default poultryRouter;

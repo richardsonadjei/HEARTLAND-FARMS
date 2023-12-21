@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+
 const Medication = () => {
   return (
     <div className="container-fluid">
@@ -166,8 +167,22 @@ const Medication = () => {
                     <p className="card-text">
                       Record the health condition and diagnosis of a bird or batch of birds and isolate
                     </p>
-                    <Link to="/delete-medication">
+                    <Link to="/add-health-condition">
                       <button className="btn btn-primary">Book Sick Birds</button>
+                    </Link>
+                    {/* Additional buttons or content for deleting medication */}
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-4">
+                <div className="card mb-4">
+                  <div className="card-body">
+                    <h3 className="card-title">Treat Sick Birds</h3>
+                    <p className="card-text">
+                      Record Treatment Given To Sick Birds AFter Diagnosis
+                    </p>
+                    <Link to="/add-treatment">
+                      <button className="btn btn-primary">Treat</button>
                     </Link>
                     {/* Additional buttons or content for deleting medication */}
                   </div>

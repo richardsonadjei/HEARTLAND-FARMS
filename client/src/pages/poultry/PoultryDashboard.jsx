@@ -84,7 +84,7 @@ const PoultryDashboard = () => {
           <div className="container mt-5">
             <div className="row">
               <div className="col-md-6">
-                <div className="card mb-4" id="stock-tracking">
+              <div className="card mb-4" id="stock-tracking" style={{ backgroundImage: 'url("../../../public/images/section.jpg")', backgroundSize: 'cover' }}>
                   <div className="card-body">
                     <h3 className="card-title">Stock Tracking</h3>
                     <p className="card-text">Quick Links</p>
@@ -98,6 +98,9 @@ const PoultryDashboard = () => {
                       <Link to="/all-batches">
                         <button className="btn btn-primary me-2 mb-2">View All Stock</button>
                       </Link>
+                      <Link to="/farm-section-report">
+                        <button className="btn btn-primary me-2 mb-2">View Stock In Various Sections</button>
+                      </Link>
                       <Link to="#">
                         <button className="btn btn-primary me-2 mb-2" onClick={handleUpdateAgeClick}>
                           Update Age
@@ -108,38 +111,67 @@ const PoultryDashboard = () => {
                 </div>
               </div>
               <div className="col-md-6">
-                <div className="card mb-4" id="feed-management">
+              <div className="card mb-4" id="feed-management" style={{ backgroundImage: 'url("../../../public/images/poultry-feeds-250x250.webp")', backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat' }}>
                   <div className="card-body">
                     <h3 className="card-title">Feed Management</h3>
                     <p className="card-text">Some description about feed management.</p>
-                    <button className="btn btn-primary">Go to Feed Subsection</button>
+                    <Link to="/purchase-feed">
+                        <button className="btn btn-primary me-2">Purchase Feed</button>
+                    </Link>
+                    <Link to="/request-feed">
+                        <button className="btn btn-primary me-2">Request Feed</button>
+                    </Link>
                   </div>
                 </div>
               </div>
             </div>
             <div className="row">
               <div className="col-md-6">
-                <div className="card mb-4" id="medication-management">
+                <div className="card mb-4" id="medication-management" style={{ backgroundImage: 'url("../../../public/images/poultry-vaccine-3.avif")', backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat' }}>
                   <div className="card-body">
-                    <h3 className="card-title">Medication and Health Management</h3>
+                    <h3 className="card-title">Vaccination and Health Management</h3>
                     <p className="card-text">Some description about medication and health management.</p>
-                    <button className="btn btn-primary">Go to Medication Subsection</button>
+                    <Link to="/medication">
+                        <button className="btn btn-primary">Vaccination And Treatments</button>
+                      </Link>
                   </div>
                 </div>
               </div>
               <div className="col-md-6">
-                <div className="card mb-4" id="egg-management">
+                <div className="card mb-4" id="egg-management" style={{ backgroundImage: 'url("../../../public/images/eggs.jpg")', backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat' }}>
                   <div className="card-body">
                     <h3 className="card-title">Egg Management</h3>
                     <p className="card-text">Some description about egg management.</p>
-                    <button className="btn btn-primary">Go to Egg Subsection</button>
+                    <div className="d-flex flex-wrap">
+  <div className="me-2 mb-1">
+    <Link to="/add-unsorted-eggs">
+      <button className="btn btn-primary">Record Eggs Laid (Unsorted)</button>
+    </Link>
+  </div>
+  <div className="me-2 mb-1">
+    <Link to="/add-sorted-eggs">
+      <button className="btn btn-primary">Record Eggs Laid (Sorted)</button>
+    </Link>
+  </div>
+  <div className="me-2 mb-1">
+    <Link to="/daily-unsorted-eggs-report">
+      <button className="btn btn-primary">Daily Unsorted Eggs</button>
+    </Link>
+  </div>
+  <div className="me-2 mb-1">
+    <Link to="/daily-sorted-eggs-report">
+      <button className="btn btn-primary">Daily Sorted Eggs</button>
+    </Link>
+  </div>
+</div>
+
                   </div>
                 </div>
               </div>
             </div>
             <div className="row">
               <div className="col-md-6">
-                <div className="card mb-4" id="sales-distribution">
+                <div className="card mb-4" id="sales-distribution" style={{ backgroundImage: 'url("../../../public/images/sales point.webp")', backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat' }}>
                   <div className="card-body">
                     <h3 className="card-title">Sales and Distribution</h3>
                     <p className="card-text">Some description about sales and distribution.</p>
@@ -149,7 +181,7 @@ const PoultryDashboard = () => {
               </div>
               {isAdmin && (
                 <div className="col-md-6">
-                  <div className="card mb-4" id="reporting-analytics">
+                  <div className="card mb-4" id="reporting-analytics" style={{ backgroundImage: 'url("../../../public/images/reports.png")', backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat' }}>
                     <div className="card-body">
                       <h3 className="card-title">Reporting and Analytics</h3>
                       <p className="card-text">Some description about reporting and analytics.</p>
@@ -167,15 +199,21 @@ const PoultryDashboard = () => {
                   <div className="card-body">
                     <h3 className="card-title">Mortality</h3>
                     <p className="card-text">Mortality</p>
-                    <button className="btn btn-primary">
-                      Go to Reporting Subsection
-                    </button>
+                    <Link to="/record-mortality">
+                        <button className="btn btn-primary me-2 mb-2">Record Mortality</button>
+                    </Link>
+                    <Link to="/mortality-report">
+                        <button className="btn btn-primary me-2 mb-2">Mortality Report</button>
+                    </Link>
+                    <Link to="/batch-mortality-report">
+                        <button className="btn btn-primary me-2 mb-2">Batch Mortality Report</button>
+                    </Link>
                   </div>
                 </div>
               </div>
               {isAdmin && (
                 <div className="col-md-6">
-                  <div className="card mb-4" id="finance">
+                  <div className="card mb-4" id="finance" style={{ backgroundImage: 'url("../../../public/images/finance.jpg")', backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat' }}>
                     <div className="card-body">
                       <h3 className="card-title">Finance</h3>
                       <p className="card-text">Some description about finance.</p>

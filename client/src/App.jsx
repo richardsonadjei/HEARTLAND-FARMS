@@ -60,6 +60,17 @@ import BatchVaccinationReport from './pages/BatchVaccinationReport';
 import DewormBirds from './pages/poultry/DewormBirds';
 import BatchDewormingReport from './pages/poultry/reports/BatchDewormingHistory';
 import DewormingReport from './pages/poultry/DewormingReport';
+import RecordHealthCondition from './pages/poultry/RecordHealthCondition';
+import Treatment from './pages/poultry/Treatment';
+import BatchTreatmentReport from './pages/poultry/reports/BatchTreatmentReport';
+import FarmSectionReport from './pages/poultry/reports/FarmSectionReport';
+import RecordUnsortedEggs from './pages/poultry/reports/AddUnsortedEggs';
+import DailyUnsortedEggReport from './pages/poultry/reports/DailyUnsortedEggsReport';
+import AddSortedEggs from './pages/poultry/AddSortedEggs';
+import DailySortedEggReport from './pages/poultry/reports/DailySortedEggsReport';
+import RecordMortality from './pages/poultry/RecordMortality';
+import MortalityReport from './pages/poultry/reports/MortalityReport';
+import MortalityBatchReport from './pages/poultry/reports/BatchMortalityReport';
 
 
 
@@ -125,6 +136,17 @@ export default function App() {
           <Route path='/deworm-birds' element={<DewormBirds/>} />
           <Route path='/batch-deworming-history' element={<BatchDewormingReport/>} />
           <Route path='/deworming-history' element={<DewormingReport/>} />
+          <Route path='/add-health-condition' element={<RecordHealthCondition/>} />
+          <Route path='/add-treatment' element={<Treatment/>} />
+          <Route path='/batch-treatment-report' element={<BatchTreatmentReport/>} />
+          <Route path='/farm-section-report' element={<FarmSectionReport/>} />
+          <Route path='/add-unsorted-eggs' element={<RecordUnsortedEggs/>} />
+          <Route path='/add-sorted-eggs' element={<AddSortedEggs/>} />
+          <Route path='/daily-unsorted-eggs-report' element={<DailyUnsortedEggReport/>} />
+          <Route path='/daily-sorted-eggs-report' element={<DailySortedEggReport/>} />
+          <Route path='/record-mortality' element={<RecordMortality/>} />
+          <Route path='/mortality-report' element={<MortalityReport/>} />
+          <Route path='/batch-mortality-report' element={<MortalityBatchReport/>} />
          
 
         </Route>

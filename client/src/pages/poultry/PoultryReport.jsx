@@ -1,30 +1,108 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
+
+const EggManagementReport = () => {
+  const [unsortedStock, setUnsortedStock] = useState(0);
+  const [sortedStock, setSortedStock] = useState(0);
+  const [sortedSizes, setSortedSizes] = useState({});
+
+  // Function to fetch and update egg stock
+  const fetchEggStock = async () => {
+    try {
+      // Fetch current stock of unsorted eggs
+      const unsortedResponse = await fetch('/api/current-unsorted-egg-stock');
+      const unsortedData = await unsortedResponse.json();
+      setUnsortedStock(unsortedData.data.currentStock);
+
+      // Fetch current stock of sorted eggs
+      const sortedResponse = await fetch('/api/current-sorted-egg-stock');
+      const sortedData = await sortedResponse.json();
+      setSortedStock(Object.values(sortedData.data.sizes).reduce((acc, curr) => acc + curr, 0));
+      setSortedSizes(sortedData.data.sizes); // Set the sizes object
+    } catch (error) {
+      console.error('Error fetching egg stock:', error);
+    }
+  };
+
+  // Use effect to fetch and update egg stock every second
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      fetchEggStock();
+    }, 1000);
+
+    // Clear interval on component unmount
+    return () => clearInterval(intervalId);
+  }, []);
+
+  return (
+    <div className="col-md-6">
+      <div className="card mb-4 egg-management-card">
+        <div className="card-body">
+          <h3 className="card-title">Egg Stock</h3>
+          <div>
+            <div>
+              <p className="mt-3 mb-1">Current Stock:</p>
+              <p className="mb-0">Unsorted Eggs: {unsortedStock}</p>
+              <p>Sorted Eggs: {sortedStock}</p>
+            </div>
+            <div>
+              {/* Display sorted eggs based on quantity */}
+              <p>Sorted Eggs by Size:</p>
+              <ul>
+                {Object.entries(sortedSizes).map(([size, quantity]) => (
+                  <li key={size}>{`${size}: ${quantity}`}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const PoultryReport = () => {
   return (
     <div className="container-fluid">
       <div className="row">
         <div className="col-md-3 bg-dark text-light">
-          <h2 className="mt-3 mb-4">Poultry Reports </h2>
+          <h2 className="mt-3 mb-4">Poultry Reports</h2>
           <ul className="nav flex-column">
             <li className="nav-item">
-              <a className="nav-link text-light" href="/stock-reports">Stocks Reports</a>
+              <a className="nav-link text-light" href="/stock-reports">
+                Stocks Reports
+              </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-light" href="#feed-management">Egg Reports</a>
+              <a className="nav-link text-light" href="#feed-management">
+                Egg Reports
+              </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-light" href="/financial-reports">Financial Reports</a>
+              <a className="nav-link text-light" href="/financial-reports">
+                Financial Reports
+              </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-light" href="#egg-management">Egg Management Report</a>
+              <a className="nav-link text-light" href="#egg-management">
+                Egg Management Report
+              </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-light" href="#sales-distribution">Sales and Distribution Report</a>
+              <a className="nav-link text-light" href="#sales-distribution">
+                Sales and Distribution Report
+              </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-light" href="#reporting-analytics">Mortality Reports</a>
+              <a className="nav-link text-light" href="/batch-treatment-report">
+                Treatment Reports
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link text-light" href="#reporting-analytics">
+                Mortality Reports
+              </a>
             </li>
           </ul>
         </div>
@@ -32,12 +110,10 @@ const PoultryReport = () => {
           <div className="container mt-5">
             <div className="row">
               <div className="col-md-6">
-                <div className="card mb-4" id="stock-tracking">
+                <div className="card mb-4 stock-tracking-card">
                   <div className="card-body">
                     <h3 className="card-title">Stock Reports</h3>
-                    <p className="card-text">
-                      QUICK BUTTONS
-                    </p>
+                    <p className="card-text">QUICK BUTTONS</p>
                     <div className="mb-2">
                       <Link to="/receive-birds">
                         <button className="btn btn-primary me-2">Birds Received Report</button>
@@ -50,12 +126,10 @@ const PoultryReport = () => {
                 </div>
               </div>
               <div className="col-md-6">
-                <div className="card mb-4" id="feed-management">
+                <div className="card mb-4 feed-management-card">
                   <div className="card-body">
                     <h3 className="card-title">Feed Management Report</h3>
-                    <p className="card-text">
-                      Quick Links
-                    </p>
+                    <p className="card-text">Quick Links</p>
                     <button className="btn btn-primary">Go to Feed Subsection</button>
                     {/* Additional buttons or content for feed management */}
                   </div>
@@ -64,69 +138,69 @@ const PoultryReport = () => {
             </div>
             <div className="row">
               <div className="col-md-6">
-                <div className="card mb-4" id="medication-management">
+                <div className="card mb-4 medication-management-card">
                   <div className="card-body">
                     <h3 className="card-title">Medication and Health Management Report</h3>
-                    <p className="card-text">
-                      Quick Links
-                    </p>
+                    <p className="card-text">Quick Links</p>
                     <button className="btn btn-primary">Go to Medication Subsection</button>
                     {/* Additional buttons or content for medication and health management */}
                   </div>
                 </div>
               </div>
               <div className="col-md-6">
-                <div className="card mb-4" id="egg-management">
-                  <div className="card-body">
-                    <h3 className="card-title">Egg Management Report</h3>
-                    <p className="card-text">
-                      Quick Links
-                    </p>
-                    <button className="btn btn-primary">Go to Egg Subsection</button>
-                    {/* Additional buttons or content for egg management */}
-                  </div>
-                </div>
+                <EggManagementReport />
               </div>
             </div>
             <div className="row">
               <div className="col-md-6">
-                <div className="card mb-4" id="sales-distribution">
+                <div className="card mb-4 sales-distribution-card">
                   <div className="card-body">
                     <h3 className="card-title">Sales and Distribution Report</h3>
-                    <p className="card-text">
-                      Quick Links
-                    </p>
+                    <p className="card-text">Quick Links</p>
                     <button className="btn btn-primary">Go to Sales Subsection</button>
                     {/* Additional buttons or content for sales and distribution */}
                   </div>
                 </div>
               </div>
               <div className="col-md-6">
-                <div className="card mb-4" id="reporting-analytics">
+                <div className="card mb-4 mortality-report-card">
                   <div className="card-body">
                     <h3 className="card-title">Mortality Report</h3>
-                    <p className="card-text">
-                      Quick Links
-                    </p>
+                    <p className="card-text">Quick Links</p>
                     <button className="btn btn-primary">Go to Reporting Subsection</button>
                     {/* Additional buttons or content for reporting and analytics */}
                   </div>
                 </div>
               </div>
-              
+            </div>
+            <div className="row">
               <div className="col-md-6">
-                <div className="card mb-4" id="financial-reports">
+                <div className="card mb-4 financial-reports-card">
                   <div className="card-body">
                     <h3 className="card-title">Financial Reports</h3>
-                    <p className="card-text">
-                      QUICK BUTTONS
-                    </p>
+                    <p className="card-text">QUICK BUTTONS</p>
                     <div className="mb-2">
                       <Link to="/feed-transactions">
                         <button className="btn btn-primary me-2">Generate Feed Purchase Report</button>
                       </Link>
                       <Link to="#">
                         <button className="btn btn-primary me-2">Later</button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="card mb-4 health-reports-card">
+                  <div className="card-body">
+                    <h3 className="card-title">Health Reports</h3>
+                    <p className="card-text">Treatment Histories</p>
+                    <div className="mb-2">
+                      <Link to="/batch-treatment-report">
+                        <button className="btn btn-primary me-2">Batch Treatment History</button>
+                      </Link>
+                      <Link to="#">
+                        <button className="btn btn-primary me-2">Vaccination Report</button>
                       </Link>
                     </div>
                   </div>
