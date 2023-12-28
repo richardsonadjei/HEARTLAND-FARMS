@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { FaBell } from 'react-icons/fa';
 
+
+
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
   const userCategory = currentUser ? currentUser.category : '';
@@ -12,7 +14,7 @@ export default function Header() {
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        const response = await fetch('/api/birds-due-for-vaccination'); // Replace with your API endpoint
+        const response = await fetch('/api/birds-due-for-vaccination'); 
         const data = await response.json();
         setNotifications(data.notifications);
         setNotificationCount(data.notifications.length);
@@ -24,9 +26,9 @@ export default function Header() {
   }, []);
 
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary sticky-top">
+    <nav className="navbar navbar-expand-lg  sticky-top">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/home">
+        <Link className="navbar-brand text-white" to="/home">
           HeartLand Farms
         </Link>
         <button
@@ -43,144 +45,178 @@ export default function Header() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link className="nav-link active" aria-current="page" to="/">
+              <Link className="nav-link active text-white" aria-current="page" to="/">
                 Home
               </Link>
             </li>
+             {/* Mega Component: Birds */}
+        <li className="nav-item dropdown">
+          <div
+            className="nav-link dropdown-toggle text-white"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Birds
+          </div>
+          <div className="dropdown-menu mega-menu poultry-menu" aria-labelledby="birdsDropdown">
+            {(userCategory === 'poultry' || userCategory === 'all') && (
+              <>
+                {/* ... (your existing poultry links) */}
+                <hr className="dropdown-divider" />
+                {/* New Poultry Menu Items */}
+                <ul>
+                  <li>
+                    <a className="dropdown-item" href="/poultry-dashboard">
+                      Poultry
+                    </a>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="/add-birds">
+                      Add Stock
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="/view-all-stock">
+                      View All Stock
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="/view-batches">
+                      View Batches
+                    </Link>
+                  </li>
+                </ul>
+                <ul>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                     Guinea Fowl
+                    </a>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="/purchase-feed">
+                      View Stock
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="/view-all-feed">
+                     Vaccinate
+                    </Link>
+                  </li>
+                </ul>
+                <ul>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Duck
+                    </a>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="/vaccinate-birds">
+                      View Stock
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="/view-vaccination-history">
+                      Vaccination Birds
+                    </Link>
+                  </li>
+                </ul>
+                <ul>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Turkey
+                    </a>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="/vaccinate-birds">
+                      View Stock
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="/view-vaccination-history">
+                      Vaccinate Birds
+                    </Link>
+                  </li>
+                </ul>
+                <hr className="dropdown-divider" />
+              </>
+            )}
+          </div>
+        </li>
+            {/* Mega Component: Animal Farming */}
+            <li className="nav-item dropdown ">
+              <Link
+                className="nav-link dropdown-toggle text-white"
+                to="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                
+              >
+                Animal Farming
+              </Link>
+              <div className="dropdown-menu" aria-labelledby="animalFarmingDropdown">
+                {(userCategory === 'goats' || userCategory === 'sheep' || userCategory === 'cattle' || userCategory === 'all') && (
+                  <>
+                    <Link className="dropdown-item" to="/goats">
+                      Goats
+                    </Link>
+                    <Link className="dropdown-item" to="/sheep">
+                      Sheep
+                    </Link>
+                    <Link className="dropdown-item" to="/cattle">
+                      Cattle
+                    </Link>
+                    <hr className="dropdown-divider" />
+                  </>
+                )}
+              </div>
+            </li>
+            {/* Mega Component: Crop Farming */}
             <li className="nav-item dropdown">
               <Link
-                className="nav-link dropdown-toggle"
+                className="nav-link dropdown-toggle text-white"
                 to="#"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Farm Projects
+                Crop Farming
               </Link>
-              <ul className="dropdown-menu">
-                {(userCategory === 'poultry' || userCategory === 'all') && (
+              <div className="dropdown-menu" aria-labelledby="cropFarmingDropdown">
+                {(userCategory === 'cassava' || userCategory === 'maize' || userCategory === 'plantain' || userCategory === 'beans' || userCategory === 'all') && (
                   <>
-                    <li>
-                      <Link className="dropdown-item" to="/poultry">
-                        Poultry
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item" to="/guinea-fowl">
-                        Guinea Fowl
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item" to="/ducks">
-                        Ducks
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item" to="/turkey">
-                        Turkey
-                      </Link>
-                    </li>
-                    <li>
-                      <hr className="dropdown-divider" />
-                    </li>
-                  </>
-                )}
-                {(userCategory === 'hatchery' || userCategory === 'all') && (
-                  <>
-                    <li>
-                      <Link className="dropdown-item" to="/guinea-fowl">
-                        Hatchery Services
-                      </Link>
-                    </li>
-                    <li>
-                      <hr className="dropdown-divider" />
-                    </li>
-                  </>
-                )}
-                {(userCategory === 'animal' || userCategory === 'all') && (
-                  <>
-                    <li>
-                      <Link className="dropdown-item" to="/pig-farm">
-                        Pig
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item" to="/goats">
-                        Goats
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item" to="/cattle">
-                        Cattle
-                      </Link>
-                    </li>
-                    <li>
-                      <hr className="dropdown-divider" />
-                    </li>
-                    <li>
-                      <Link className="dropdown-item" to="/catfish">
-                        CatFish
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item" to="/tilapia">
-                        Tilapia
-                      </Link>
-                    </li>
-                    <li>
-                      <hr className="dropdown-divider" />
-                    </li>
-                  </>
-                )}
-                {(userCategory === 'crop' || userCategory === 'all') && (
-                  <>
-                    <li>
-                      <Link className="dropdown-item" to="/maize-farm">
-                        Maize
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item" to="/cassava-farm">
-                        Cassava
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item" to="/beans-farm">
-                        Beans
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item" to="/plantain-farm">
-                        Plantain
-                      </Link>
-                    </li>
-                    <li>
-                      <hr className="dropdown-divider" />
-                    </li>
-                  </>
-                )}
-                {currentUser && currentUser.role !== 'employee' && currentUser.role !== 'manager' && (
-                  <li>
-                    <Link className="dropdown-item" to="/create-project">
-                      Create New Project
+                    <Link className="dropdown-item" to="/cassava-farm">
+                      Cassava
                     </Link>
-                  </li>
+                    <Link className="dropdown-item" to="/maize-farm">
+                      Maize
+                    </Link>
+                    <Link className="dropdown-item" to="/plantain-farm">
+                      Plantain
+                    </Link>
+                    <Link className="dropdown-item" to="/beans-farm">
+                      Beans
+                    </Link>
+                    <hr className="dropdown-divider" />
+                  </>
                 )}
-              </ul>
+              </div>
             </li>
           </ul>
-          <div className="dropdown text-end mx-auto">
-          <Link
-  className="d-block link-body-emphasis text-decoration-none dropdown-toggle"
-  to="#"
-  data-bs-toggle="dropdown"
-  aria-expanded="false"
-  data-bs-tooltip="View birds due for vaccination"
-  data-bs-placement="bottom"
->
-  <FaBell size={24} />
-  {notificationCount > 0 && <span className="badge bg-danger">{notificationCount}</span>}
-</Link>
+          {/* Notifications Dropdown */}
+          <div className="dropdown text-end mx-auto ">
+            <Link
+              className="d-block link-body-emphasis text-decoration-none dropdown-toggle "
+              to="#"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              data-bs-tooltip="View birds due for vaccination"
+              data-bs-placement="bottom"
+            >
+              <FaBell size={24} />
+              {notificationCount > 0 && <span className="badge bg-danger">{notificationCount}</span>}
+            </Link>
             <ul className="dropdown-menu text-small">
               {notifications.length > 0 ? (
                 notifications.map((notification, index) => (
@@ -204,49 +240,50 @@ export default function Header() {
               )}
             </ul>
           </div>
-          <div className="dropdown text-end mx-auto">
-            {currentUser ? (
-              <Link
-                className="d-block link-body-emphasis text-decoration-none dropdown-toggle"
-                to="#"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                {currentUser.userName}
-                <i className="bi bi-person-circle" style={{ fontSize: '32px' }}></i>
+          {/* User Dropdown */}
+          <div className="dropdown text-end mx-auto ">
+          {currentUser ? (
+            <Link
+              className="d-block link-body-emphasis text-decoration-none dropdown-toggle text-white"
+              to="#"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              {currentUser.userName}
+              <i className="bi bi-person-circle" style={{ fontSize: '32px' }}></i>
+            </Link>
+          ) : (
+            <Link className="d-block link-body-emphasis text-decoration-none" to="/sign-in">
+              Sign In
+            </Link>
+          )}
+          <ul className="dropdown-menu text-small">
+            {/* Dropdown menu items */}
+            <li>
+              <Link className="dropdown-item" to="/sign-out">
+                Sign Out
               </Link>
-            ) : (
-              <Link className="d-block link-body-emphasis text-decoration-none" to="/sign-in">
-                Sign In
-              </Link>
+            </li>
+            <li>
+              <hr className="dropdown-divider" />
+            </li>
+            {currentUser && currentUser.role === 'admin' && (
+              <li>
+                <Link className="dropdown-item" to="/sign-up">
+                  Create A New User
+                </Link>
+              </li>
             )}
-            <ul className="dropdown-menu text-small">
-              {/* Dropdown menu items */}
-              <li>
-                <Link className="dropdown-item" to="/sign-out">
-                  Sign Out
-                </Link>
-              </li>
-              <li>
-                <hr className="dropdown-divider" />
-              </li>
-              {currentUser && currentUser.role === 'admin' && (
-                <li>
-                  <Link className="dropdown-item" to="/sign-up">
-                    Create A New User
-                  </Link>
-                </li>
-              )}
-              <li>
-                <hr className="dropdown-divider" />
-              </li>
-              <li>
-                <Link className="dropdown-item" to="/profile">
-                  Profile
-                </Link>
-              </li>
-            </ul>
-          </div>
+            <li>
+              <hr className="dropdown-divider" />
+            </li>
+            <li>
+              <Link className="dropdown-item" to="/profile">
+                Profile
+              </Link>
+            </li>
+          </ul>
+        </div>
         </div>
       </div>
     </nav>

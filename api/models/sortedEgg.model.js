@@ -12,9 +12,18 @@ const sortedEggSchema = new Schema({
     type: Date,
     required: true,
   },
-  quantity: {
-    type: Number,
+  size: {
+    type: String,
+    enum: ['small', 'medium', 'large', 'extraLarge'], // Added size categorization
     required: true,
+  },
+  crates: {
+    type: Number,
+    default: 0,
+  },
+  loose: {
+    type: Number,
+    default: 0,
   },
   category: {
     type: String,
@@ -22,16 +31,11 @@ const sortedEggSchema = new Schema({
   },
   grading: {
     type: String,
-    enum: ['good-condition','deformed', 'cracked'],
+    enum: ['good-condition', 'deformed', 'cracked'],
     default: 'good-condition',
   },
   pickedBy: {
     type: String,
-    required: true,
-  },
-  size: {
-    type: String,
-    enum: ['small', 'medium', 'large', 'extraLarge'], // Added size categorization
     required: true,
   },
 }, {

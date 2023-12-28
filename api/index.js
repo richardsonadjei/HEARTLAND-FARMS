@@ -22,6 +22,7 @@ import healthConditionRouter from './routes/healthCondtion.router.js';
 import treatmentRouter from './routes/treatment.router.js';
 import eggRouter from './routes/eggs.router.js';
 import mortalityRouter from './routes/mortality.router.js';
+import incomeRouter from './routes/income.router.js';
 
 
 
@@ -72,6 +73,7 @@ app.use('/api/', healthConditionRouter);
 app.use('/api/', treatmentRouter);    
 app.use('/api/', eggRouter);    
 app.use('/api/', mortalityRouter);    
+app.use('/api/', incomeRouter);    
 
 
 

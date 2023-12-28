@@ -55,7 +55,7 @@ const PoultryDashboard = () => {
             {isAdmin && (
               <li className="nav-item">
                 <a className="nav-link text-light" href="/poultry-report">
-                  Reporting and Analytics
+                  General Report
                 </a>
               </li>
             )}
@@ -174,8 +174,13 @@ const PoultryDashboard = () => {
                 <div className="card mb-4" id="sales-distribution" style={{ backgroundImage: 'url("../../../public/images/sales point.webp")', backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat' }}>
                   <div className="card-body">
                     <h3 className="card-title">Sales and Distribution</h3>
-                    <p className="card-text">Some description about sales and distribution.</p>
-                    <button className="btn btn-primary">Go to Sales Subsection</button>
+                    <Link to="/sell-eggs">
+                        <button className="btn btn-primary me-2 mb-2">Sell Eggs</button>
+                    </Link>
+                   
+                    <Link to="/mortality-report">
+                        <button className="btn btn-primary me-2 mb-2">Sell Birds</button>
+                    </Link>
                   </div>
                 </div>
               </div>

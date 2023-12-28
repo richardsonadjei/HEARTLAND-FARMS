@@ -71,6 +71,9 @@ import DailySortedEggReport from './pages/poultry/reports/DailySortedEggsReport'
 import RecordMortality from './pages/poultry/RecordMortality';
 import MortalityReport from './pages/poultry/reports/MortalityReport';
 import MortalityBatchReport from './pages/poultry/reports/BatchMortalityReport';
+import SellEggs from './pages/poultry/SellEggs';
+import EggIncomeReport from './pages/poultry/reports/EggIncomeReport';
+import EggSalesReport from './pages/poultry/reports/EggSalesReport';
 
 
 
@@ -147,6 +150,9 @@ export default function App() {
           <Route path='/record-mortality' element={<RecordMortality/>} />
           <Route path='/mortality-report' element={<MortalityReport/>} />
           <Route path='/batch-mortality-report' element={<MortalityBatchReport/>} />
+          <Route path='/sell-eggs' element={<SellEggs/>} />
+          <Route path='/egg-income-report' element={<EggIncomeReport/>} />
+          <Route path='/egg-sales-report' element={<EggSalesReport/>} />
          
 
         </Route>

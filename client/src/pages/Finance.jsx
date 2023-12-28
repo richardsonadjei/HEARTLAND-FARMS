@@ -31,44 +31,21 @@ useEffect(() => {
     <div className="container-fluid">
       <div className="row">
         <div className="col-md-3 bg-dark text-light">
-          <h2 className="mt-3 mb-4">Finance Dashboard</h2>
+        <Link to="/poultry-dashboard" className="text-decoration-none">
+            <h2 className="mt-3 mb-4">Finance</h2>
+          </Link>
           <ul className="nav flex-column">
             <li className="nav-item">
               <a className="nav-link text-light" href="/stock-tracking">
-               Feed Expense
+              Income
               </a>
             </li>
             <li className="nav-item">
               <a className="nav-link text-light" href="#feed-management">
-                Structure Expense
+                Expenses
               </a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link text-light" href="#medication-management">
-                Farm Equipment and Logistics
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link text-light" href="#egg-management">
-                Pay And Allowances
-              </a>
-            </li>
-           
-            {isAdmin && (
-              <li className="nav-item">
-                <a className="nav-link text-light" href="/poultry-report">
-                  Expenditure Reports
-                </a>
-              </li>
-            )}
-          
-            {isAdmin && (
-              <li className="nav-item">
-                <a className="nav-link text-light" href="/extras">
-                  Extras
-                </a>
-              </li>
-            )}
+
           </ul>
         </div>
         <div className="col-md-9">
@@ -118,70 +95,25 @@ useEffect(() => {
               <div className="col-md-6">
                 <div className="card mb-4" id="medication-management">
                   <div className="card-body">
-                    <h3 className="card-title">Medication and Health Management</h3>
+                    <h3 className="card-title">INCOME</h3>
                     <p className="card-text">
                       Some description about medication and health management.
                     </p>
-                    <button className="btn btn-primary">Go to Medication Subsection</button>
+                    <Link to="/sell-eggs">
+                        <button className="btn btn-primary me-2 mb-2">Sell Eggs</button>
+                      </Link>
+                      <Link to="/sell birds-">
+                        <button className="btn btn-primary me-2 mb-2">Sell Birds</button>
+                      </Link>
                     {/* Additional buttons or content for medication and health management */}
                   </div>
+                  
                 </div>
+                
               </div>
-              <div className="col-md-6">
-                <div className="card mb-4" id="egg-management">
-                  <div className="card-body">
-                    <h3 className="card-title">Egg Management</h3>
-                    <p className="card-text">
-                      Some description about egg management.
-                    </p>
-                    <button className="btn btn-primary">Go to Egg Subsection</button>
-                    {/* Additional buttons or content for egg management */}
-                  </div>
-                </div>
-              </div>
+              
             </div>
-            <div className="row">
-              <div className="col-md-6">
-                <div className="card mb-4" id="sales-distribution">
-                  <div className="card-body">
-                    <h3 className="card-title">Sales and Distribution</h3>
-                    <p className="card-text">
-                      Some description about sales and distribution.
-                    </p>
-                    <button className="btn btn-primary">Go to Sales Subsection</button>
-                    {/* Additional buttons or content for sales and distribution */}
-                  </div>
-                </div>
-              </div>
-              {isAdmin && (
-                <div className="col-md-6">
-                  <div className="card mb-4" id="reporting-analytics">
-                    <div className="card-body">
-                      <h3 className="card-title">Reporting and Analytics</h3>
-                      <p className="card-text">
-                        Some description about reporting and analytics.
-                      </p>
-                      <Link to="/reporting-subsection">
-                        <button className="btn btn-primary">Go to Reporting Subsection</button>
-                      </Link>
-                      {/* Additional buttons or content for reporting and analytics */}
-                    </div>
-                  </div>
-                </div>
-              )}
-              <div className="col-md-6">
-                <div className="card mb-4" id="reporting-analytics">
-                  <div className="card-body">
-                    <h3 className="card-title">Mortality</h3>
-                    <p className="card-text">
-                      Mortality
-                    </p>
-                    <button className="btn btn-primary">Go to Reporting Subsection</button>
-                    {/* Additional buttons or content for reporting and analytics */}
-                  </div>
-                </div>
-              </div>
-            </div>
+           
           </div>
         </div>
       </div>

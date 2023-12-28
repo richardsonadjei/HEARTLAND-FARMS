@@ -1,5 +1,3 @@
-// RecordUnsortedEggs.jsx
-
 import React, { useState, useEffect } from 'react';
 import { Button, Form, FormGroup, Label, Input, Container, Row, Col } from 'reactstrap';
 import Select from 'react-select';
@@ -10,7 +8,8 @@ const RecordUnsortedEggs = () => {
   const [formState, setFormState] = useState({
     farmSection: '',
     date: '',
-    quantity: '',
+    crates: 0, // Set default value to 0
+    looseEggs: 0, // Set default value to 0
     category: 'unsorted',
     grading: 'good-condition',
     pickedBy: '',
@@ -103,12 +102,22 @@ const RecordUnsortedEggs = () => {
                 />
               </Col>
               <Col>
-                <Label for="quantity" style={{ color: 'white' }}>Quantity:</Label>
+                <Label for="crates" style={{ color: 'white' }}>Crates:</Label>
                 <Input
                   type="number"
-                  id="quantity"
-                  name="quantity"
-                  value={formState.quantity}
+                  id="crates"
+                  name="crates"
+                  value={formState.crates}
+                  onChange={handleInputChange}
+                />
+              </Col>
+              <Col>
+                <Label for="looseEggs" style={{ color: 'white' }}>Loose Eggs:</Label>
+                <Input
+                  type="number"
+                  id="looseEggs"
+                  name="looseEggs"
+                  value={formState.looseEggs}
                   onChange={handleInputChange}
                 />
               </Col>

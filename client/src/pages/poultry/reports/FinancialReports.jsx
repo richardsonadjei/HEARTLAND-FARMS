@@ -5,48 +5,27 @@ const FinancialReports = () => {
   const [selectedReport, setSelectedReport] = useState(null);
 
   const reports = [
+    
     {
-      title: "Feed Purchase Report",
-      path: "/feed-transactions",
-      purpose: "This provides the report of all feeds purchased within a period",
-      // ... other details for the Inventory Status Report
-    },
-    {
-      title: "Age Report",
-      path: "/age-report",
-      purpose: "Report on birds based on age period",
+      title: "Egg Sales Report",
+      path: "/egg-sales-report",
+      purpose: "Report of Eggs Sold Within A Period",
       // ... other details for the Supplier Performance Report
     },
     {
-      title: "Bird Movement Report By Date",
-      path: "/date-movement",
-      purpose: "This tells the various procurements for a particular batch within a particular period",
-      // ... other details for the Quality Control Report
+      title: "Egg Income Report",
+      path: "/egg-income-report",
+      purpose: "This provides income generated from egg sales",
+      // ... other details for the Inventory Status Report
     },
     {
-      title: "Batch Modification History By Date",
-      path: "/update-history",
-      purpose: "This tells the various procurements for a particular batch within a particular period",
+      title: "Bird Sales Report",
+      path: "/bird-sales-report",
+      purpose: "This tells the sale of birds within a particular period",
       // ... other details for the Quality Control Report
     },
-    {
-      title: "Batch Addition History By Date",
-      path: "/add-history",
-      purpose: "This Tells The Addition Histories For A Particular Batch",
-      // ... other details for the Quality Control Report
-    },
-    {
-      title: "Broilers Report",
-      path: "/broilers-report",
-      purpose: "This gives a report of broilers availabe",
-      // ... other details for the Quality Control Report
-    },
-    {
-      title: "Layers Report",
-      path: "/layers-report",
-      purpose: "This gives a report of layers",
-      // ... other details for the Quality Control Report
-    },
+  
+   
   ];
 
   return (

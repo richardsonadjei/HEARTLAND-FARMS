@@ -8,7 +8,8 @@ const AddSortedEggs = () => {
   const [formState, setFormState] = useState({
     farmSection: '',
     date: '',
-    quantity: '',
+    crates: '',
+    loose: '',
     category: 'sorted',
     grading: 'good-condition',
     pickedBy: '',
@@ -103,12 +104,22 @@ const AddSortedEggs = () => {
                 />
               </Col>
               <Col>
-                <Label for="quantity" style={{ color: 'white' }}>Quantity:</Label>
+                <Label for="crates" style={{ color: 'white' }}>Crates:</Label>
                 <Input
                   type="number"
-                  id="quantity"
-                  name="quantity"
-                  value={formState.quantity}
+                  id="crates"
+                  name="crates"
+                  value={formState.crates}
+                  onChange={handleInputChange}
+                />
+              </Col>
+              <Col>
+                <Label for="loose" style={{ color: 'white' }}>Loose:</Label>
+                <Input
+                  type="number"
+                  id="loose"
+                  name="loose"
+                  value={formState.loose}
                   onChange={handleInputChange}
                 />
               </Col>
@@ -161,10 +172,10 @@ const AddSortedEggs = () => {
                   onChange={handleInputChange}
                 >
                   <option value="" disabled>Select size</option>
-            <option value="small">Small</option>
-            <option value="medium">Medium</option>
-            <option value="large">Large</option>
-            <option value="extra-large">Extra Large</option>
+                  <option value="small">Small</option>
+                  <option value="medium">Medium</option>
+                  <option value="large">Large</option>
+                  <option value="extra-large">Extra Large</option>
                 </Input>
               </Col>
             </FormGroup>

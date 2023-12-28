@@ -3,19 +3,23 @@ import UnsortedEggInventory from '../models/unsortedEggStock.model.js';
 import SortedEgg from '../models/sortedEgg.model.js';
 import SortedEggInventory from '../models/sortedEggStock.model.js';
 
-// Create an egg
-export const createEgg = async (req, res) => {
-  try {
-    const { farmSection, date, quantity, category, grading, pickedBy } = req.body;
 
-    // Ensure quantity is parsed as a number
-    const parsedQuantity = parseInt(quantity, 10);
+// Create an egg
+export const addUnsortedEgg = async (req, res) => {
+  try {
+    const { farmSection, date, crates, looseEggs, category, grading, pickedBy } = req.body;
+
+    // Ensure crates and looseEggs are parsed as numbers
+    const parsedCrates = parseInt(crates, 10) || 0;
+    const parsedLooseEggs = parseInt(looseEggs, 10) || 0;
+    const parsedQuantity = parsedCrates * /* Number of eggs per crate, adjust as needed */ + parsedLooseEggs;
 
     // Save the new egg
     const newEgg = new UnsortedEgg({
       farmSection,
       date,
-      quantity: parsedQuantity,
+      crates: parsedCrates,
+      looseEggs: parsedLooseEggs,
       category,
       grading,
       pickedBy,
@@ -23,15 +27,17 @@ export const createEgg = async (req, res) => {
 
     const savedEgg = await newEgg.save();
 
-    // Update UnsortedEggInventory currentStock
+    // Update UnsortedEggInventory stock
     let inventory = await UnsortedEggInventory.findOne(); // Assuming there's only one inventory record
 
     if (!inventory) {
-      // If no inventory record exists, create a new instance with initial stock as 0
-      inventory = new UnsortedEggInventory({ currentStock: 0 });
+      // If no inventory record exists, create a new instance
+      inventory = new UnsortedEggInventory();
     }
 
-    inventory.currentStock += parsedQuantity;
+    // Update the inventory
+    inventory.crates += parsedCrates;
+    inventory.loose += parsedLooseEggs;
     await inventory.save();
 
     res.status(201).json({ success: true, data: savedEgg });
@@ -81,20 +87,28 @@ export const getUnsortedEggsByPeriod = async (req, res) => {
   }
 };
 
-
 // Record sorted eggs and update inventory
 export const recordSortedEggs = async (req, res) => {
   try {
-    const { farmSection, date, quantity, category, grading, pickedBy, size } = req.body;
+    const { farmSection, date, crates, loose, category, grading, pickedBy, size } = req.body;
 
-    // Ensure quantity is parsed as a number
-    const parsedQuantity = parseInt(quantity, 10);
+    // Ensure crates and loose are parsed as numbers
+    const parsedCrates = parseInt(crates, 10) || 0;
+    const parsedLoose = parseInt(loose, 10) || 0;
+
+    // Validate if the parsed values are valid numbers
+    if (isNaN(parsedCrates) || isNaN(parsedLoose)) {
+      throw new Error('Invalid input for crates or loose.');
+    }
+
+    const parsedQuantity = parsedCrates + parsedLoose;
 
     // Save the new sorted egg
     const newSortedEgg = new SortedEgg({
       farmSection,
       date,
-      quantity: parsedQuantity,
+      crates: parsedCrates,
+      loose: parsedLoose,
       category,
       grading,
       pickedBy,
@@ -103,25 +117,18 @@ export const recordSortedEggs = async (req, res) => {
 
     const savedSortedEgg = await newSortedEgg.save();
 
-    // Update SortedEggInventory for the specified size
+    // Update SortedEggInventory stock
     let inventory = await SortedEggInventory.findOne(); // Assuming there's only one inventory record
 
     if (!inventory) {
-      // If no inventory record exists, create a new instance with initial stock as 0
-      inventory = new SortedEggInventory({
-        sizes: {
-          small: 0,
-          medium: 0,
-          large: 0,
-          extraLarge: 0,
-        },
-      });
+      // If no inventory record exists, create a new instance
+      inventory = new SortedEggInventory();
     }
 
-    // Update the inventory based on the size of the sorted egg
-    inventory.sizes[size] += parsedQuantity;
-
-    // Save the updated inventory
+    // Update the inventory for the specific size
+    inventory.sizes[size].crates += parsedCrates;
+    inventory.sizes[size].loose += parsedLoose;
+    
     await inventory.save();
 
     res.status(201).json({ success: true, data: savedSortedEgg });
@@ -129,6 +136,7 @@ export const recordSortedEggs = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
 
 
 // View all sorted eggs collected each day
@@ -147,49 +155,51 @@ export const viewDailySortedEggs = async (req, res) => {
 };
 
 
-// Fetch current stock of unsorted eggs
-export const getCurrentUnsortedEggStock = async (req, res) => {
+// Fetch current stock of unsorted eggs in crates
+export const getCurrentUnsortedEggStockInCrates = async (req, res) => {
   try {
     // Assuming there's only one inventory record for unsorted eggs
     const inventory = await UnsortedEggInventory.findOne();
 
     if (!inventory) {
-      // If no inventory record exists, respond with 0 current stock
-      return res.status(200).json({ success: true, data: { currentStock: 0 } });
+      // If no inventory record exists, respond with 0 current stock in crates
+      return res.status(200).json({ success: true, data: { currentStockInCrates: '0 crates 0 loose' } });
     }
 
-    // Respond with the current stock
-    res.status(200).json({ success: true, data: { currentStock: inventory.currentStock } });
+    // Respond with the current stock in crates
+    res.status(200).json({ success: true, data: { currentStockInCrates: inventory.currentStockInCrates } });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
 };
 
 
-// Fetch current stock of sorted eggs by sizes
-export const getCurrentSortedEggStock = async (req, res) => {
+
+// Fetch current stock of sorted eggs in crates
+export const getCurrentSortedEggStockInCrates = async (req, res) => {
   try {
     // Assuming there's only one inventory record for sorted eggs
     const inventory = await SortedEggInventory.findOne();
 
     if (!inventory) {
-      // If no inventory record exists, respond with 0 stock for each size
+      // If no inventory record exists, respond with 0 stock in crates
       return res.status(200).json({
         success: true,
         data: {
-          sizes: {
-            small: 0,
-            medium: 0,
-            large: 0,
-            extraLarge: 0,
+          sizesInCrates: {
+            small: '0 crates 0 loose',
+            medium: '0 crates 0 loose',
+            large: '0 crates 0 loose',
+            extraLarge: '0 crates 0 loose',
           },
         },
       });
     }
 
-    // Respond with the current stock by sizes
-    res.status(200).json({ success: true, data: { sizes: inventory.sizes } });
+    // Respond with the current stock in crates
+    res.status(200).json({ success: true, data: { sizesInCrates: inventory.sizesInCrates } });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+

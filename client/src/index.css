@@ -1,119 +1,162 @@
 body {
-    background-color: #435585;
-    color: white; /* Blue-black background color */
-  }
-  
-  .app-container {
-    color: white; /* Text color for better readability on dark background */
-  }
+  background-color: #435585;
+  color: white; /* Blue-black background color */
+}
+
+.app-container {
+  color: white; /* Text color for better readability on dark background */
+}
 
 
 .btn-toggle::before {
-    width: 1.25em;
-    line-height: 0;
-    content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
-    transition: transform .35s ease;
-    transform-origin: .5em 50%;
+  width: 1.25em;
+  line-height: 0;
+  content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+  transition: transform .35s ease;
+  transform-origin: .5em 50%;
 }
 
 *, ::after, ::before {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .btn-toggle:hover, .btn-toggle:focus {
-    color: rgba(var(--bs-emphasis-color-rgb), .85);
-    background-color: var(--bs-tertiary-bg);
+  color: rgba(var(--bs-emphasis-color-rgb), .85);
+  background-color: var(--bs-tertiary-bg);
 }
 
 .btn-toggle {
-    font-weight: bold;
-  }
+  font-weight: bold;
+}
 
-  .btn-toggle-nav .link-body-emphasis {
-    display: inline-flex;
-    align-items: center;
-    vertical-align: middle;
-    margin-left: 20px;
-  }
+.btn-toggle-nav .link-body-emphasis {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  margin-left: 20px;
+}
 
-  /* Add this to your CSS file or style tag in the component */
+/* Add this to your CSS file or style tag in the component */
 
 .poultry-content-container {
-    background-color: #f8f9fa; /* Light gray background color */
-    padding: 20px;
-    border-radius: 10px;
-  }
-  
-  .image-container {
-    border-radius: 10px;
-    overflow: hidden; /* Hide overflow for rounded corners */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-    transition: transform 0.3s ease-in-out; /* Add a smooth transition effect */
-  }
-  
-  .image-container:hover {
-    transform: scale(1.05); /* Scale up the image on hover */
-  }
-  
-  /* Add this to your CSS or SCSS file */
-.custom-image-height {
-    height: 400px; /* Adjust the height to your preference */
-  }
-  
-  
-.app-item:hover .icon {
-  transform: scale(1.5); /* Increase size on hover */
+  background-color: #f8f9fa; /* Light gray background color */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.image-container {
+  border-radius: 10px;
+  overflow: hidden; /* Hide overflow for rounded corners */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
   transition: transform 0.3s ease-in-out; /* Add a smooth transition effect */
+}
+
+.image-container:hover {
+  transform: scale(1.05); /* Scale up the image on hover */
+}
+
+/* Add this to your CSS or SCSS file */
+.custom-image-height {
+  height: 400px; /* Adjust the height to your preference */
+}
+
+
+.app-item:hover .icon {
+transform: scale(1.5); /* Increase size on hover */
+transition: transform 0.3s ease-in-out; /* Add a smooth transition effect */
 }
 
 
 .feed-link {
-  color: white;
-  text-decoration: none;
-  transition: color 0.3s;
+color: white;
+text-decoration: none;
+transition: color 0.3s;
 }
 
 .feed-link:hover {
-  color: lightgray; 
+color: lightgray; 
 }
 
 
 .search-feed-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+display: flex;
+flex-direction: column;
+align-items: center;
 }
 
 .search-button {
-  width: 900px; /* Adjust the width as needed */
+width: 900px; /* Adjust the width as needed */
 }
 
 
 .search-button {
-  margin-top: 10px;
-  padding: 10px 15px;
-  background-color: #007BFF;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+margin-top: 10px;
+padding: 10px 15px;
+background-color: #007BFF;
+color: white;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+transition: background-color 0.3s ease;
 }
 
 .search-button:hover {
-  background-color: #0056b3;
+background-color: #0056b3;
 }
 
 /* Add this CSS to your stylesheet */
 .dropdown-item.highlighted {
-  background-color: #33C1FF; /* Choose the background color you prefer */
+background-color: #33C1FF; /* Choose the background color you prefer */
 }
 
 
 
 @media (max-width: 767px) {
-  .notification-item {
-    white-space: normal; /* Allow text to wrap */
-    word-wrap: break-word; /* Break long words */
-  }
+.notification-item {
+  white-space: normal; /* Allow text to wrap */
+  word-wrap: break-word; /* Break long words */
 }
+}
+
+.dropdown-menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* Mega menu styles for Poultry */
+.dropdown-menu.show .poultry-menu {
+  display: flex;
+}
+
+.dropdown-menu.show .poultry-menu li:first-child a {
+  font-weight: bold;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  color: #516beb;
+}
+
+/* Mega menu styles for Animal Farming */
+.dropdown-menu.show .animal-farming-menu {
+  display: flex;
+}
+
+.dropdown-menu.show .animal-farming-menu li:first-child a {
+  font-weight: bold;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  color: #516beb;
+}
+
+/* Mega menu styles for Crop Farming */
+.dropdown-menu.show .crop-farming-menu {
+  display: flex;
+}
+
+.dropdown-menu.show .crop-farming-menu li:first-child a {
+  font-weight: bold;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  color: #516beb;
+}
+
+

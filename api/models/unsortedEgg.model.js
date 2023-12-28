@@ -12,9 +12,13 @@ const unsortedEggSchema = new Schema({
     type: Date,
     required: true,
   },
-  quantity: {
+  crates: {
     type: Number,
-    required: true,
+    default: 0,
+  },
+  looseEggs: {
+    type: Number,
+    default: 0,
   },
   category: {
     type: String,
@@ -22,16 +26,17 @@ const unsortedEggSchema = new Schema({
   },
   grading: {
     type: String,
-    enum: ['good-condition','deformed', 'cracked'],
+    enum: ['good-condition', 'deformed', 'cracked'],
     default: 'good-condition',
   },
   pickedBy: {
     type: String,
     required: true,
-  }
+  },
 }, {
-  timestamps: true // Add timestamps (createdAt, updatedAt)
+  timestamps: true, // Add timestamps (createdAt, updatedAt)
 });
+
 
 // Create the UnsortedEgg model
 const UnsortedEgg = mongoose.model('UnsortedEgg', unsortedEggSchema);

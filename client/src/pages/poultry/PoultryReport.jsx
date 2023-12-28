@@ -1,29 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-
 const EggManagementReport = () => {
-  const [unsortedStock, setUnsortedStock] = useState(0);
+  const [unsortedStockInCrates, setUnsortedStockInCrates] = useState('0 crates 0 loose');
   const [sortedStock, setSortedStock] = useState(0);
   const [sortedSizes, setSortedSizes] = useState({});
 
-  // Function to fetch and update egg stock
   const fetchEggStock = async () => {
     try {
-      // Fetch current stock of unsorted eggs
+      // Fetch current stock of unsorted eggs in crates
       const unsortedResponse = await fetch('/api/current-unsorted-egg-stock');
       const unsortedData = await unsortedResponse.json();
-      setUnsortedStock(unsortedData.data.currentStock);
-
+      setUnsortedStockInCrates(unsortedData.data.currentStockInCrates);
+  
       // Fetch current stock of sorted eggs
       const sortedResponse = await fetch('/api/current-sorted-egg-stock');
       const sortedData = await sortedResponse.json();
-      setSortedStock(Object.values(sortedData.data.sizes).reduce((acc, curr) => acc + curr, 0));
-      setSortedSizes(sortedData.data.sizes); // Set the sizes object
+  
+      // Update this part based on the structure of your API response
+      const sizesInCrates = sortedData.data.sizesInCrates;
+      const totalSortedStock = Object.values(sizesInCrates).reduce(
+        (acc, curr) => acc + Number(curr.split(' ')[0]), // Extract the number of crates
+        0
+      );
+      
+      setSortedStock(totalSortedStock);
+      setSortedSizes(sizesInCrates); // Set the sizes object
     } catch (error) {
       console.error('Error fetching egg stock:', error);
     }
   };
+  
 
   // Use effect to fetch and update egg stock every second
   useEffect(() => {
@@ -43,8 +50,8 @@ const EggManagementReport = () => {
           <div>
             <div>
               <p className="mt-3 mb-1">Current Stock:</p>
-              <p className="mb-0">Unsorted Eggs: {unsortedStock}</p>
-              <p>Sorted Eggs: {sortedStock}</p>
+              <p className="mb-0">Unsorted Eggs: {unsortedStockInCrates}</p>
+              
             </div>
             <div>
               {/* Display sorted eggs based on quantity */}

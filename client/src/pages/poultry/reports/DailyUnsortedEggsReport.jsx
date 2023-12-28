@@ -23,24 +23,38 @@ const DailyUnsortedEggReport = () => {
       // Process the data and update state
       setReportData(data.data);
 
-      // Calculate summary data (for example, total quantity)
+      // Calculate summary data (for example, total quantity and crates)
       const farmSectionTotals = {}; // Store subtotals for each farm section
-      let overallTotalQuantity = 0;
+      let overallTotalCrates = 0;
+      let overallTotalLooseEggs = 0;
 
       data.data.forEach((egg) => {
-        overallTotalQuantity += egg.quantity;
+        // Calculate total crates and loose eggs separately
+        const totalCrates = egg.crates;
+        const totalLooseEggs = egg.looseEggs;
 
         // Calculate subtotals for each farm section
         if (!farmSectionTotals[egg.farmSection]) {
-          farmSectionTotals[egg.farmSection] = egg.quantity;
+          farmSectionTotals[egg.farmSection] = { crates: totalCrates, looseEggs: totalLooseEggs };
         } else {
-          farmSectionTotals[egg.farmSection] += egg.quantity;
+          farmSectionTotals[egg.farmSection].crates += totalCrates;
+          farmSectionTotals[egg.farmSection].looseEggs += totalLooseEggs;
         }
+
+        // Calculate total crates and loose eggs
+        overallTotalCrates += totalCrates;
+        overallTotalLooseEggs += totalLooseEggs;
       });
+
+      // Convert excess loose eggs to crates
+      const excessLooseEggsToCrates = Math.floor(overallTotalLooseEggs / 30);
+      overallTotalCrates += excessLooseEggsToCrates;
+      overallTotalLooseEggs %= 30;
 
       setSummaryData({
         farmSectionTotals,
-        overallTotalQuantity,
+        overallTotalCrates,
+        overallTotalLooseEggs,
       });
     } catch (error) {
       console.error('Error fetching daily unsorted egg report:', error);
@@ -90,7 +104,8 @@ const DailyUnsortedEggReport = () => {
                   <thead style={{ background: '#007BFF', color: 'white' }}>
                     <tr>
                       <th>#</th>
-                      <th>Quantity</th>
+                      <th>Crates</th>
+                      <th>Loose Eggs</th>
                       <th>Farm Section</th>
                       <th>Grading</th>
                       <th>Picked By</th>
@@ -101,7 +116,8 @@ const DailyUnsortedEggReport = () => {
                     {reportData.map((egg, index) => (
                       <tr key={egg._id}>
                         <td>{index + 1}</td>
-                        <td>{egg.quantity}</td>
+                        <td>{egg.crates}</td>
+                        <td>{egg.looseEggs}</td>
                         <td>{egg.farmSection}</td>
                         <td>{egg.grading}</td>
                         <td>{egg.pickedBy}</td>
@@ -122,19 +138,22 @@ const DailyUnsortedEggReport = () => {
                   <thead style={{ background: '#007BFF', color: 'white' }}>
                     <tr>
                       <th>Farm Section</th>
-                      <th>Subtotal Quantity</th>
+                      <th>Total Crates</th>
+                      <th>Total Loose Eggs</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {Object.entries(summaryData.farmSectionTotals).map(([farmSection, subtotal]) => (
+                    {Object.entries(summaryData.farmSectionTotals).map(([farmSection, totals]) => (
                       <tr key={farmSection}>
                         <td>{farmSection}</td>
-                        <td>{subtotal}</td>
+                        <td>{totals.crates}</td>
+                        <td>{totals.looseEggs}</td>
                       </tr>
                     ))}
                     <tr style={{ fontWeight: 'bold' }}>
                       <td>Overall Total</td>
-                      <td>{summaryData.overallTotalQuantity}</td>
+                      <td>{summaryData.overallTotalCrates}</td>
+                      <td>{summaryData.overallTotalLooseEggs}</td>
                     </tr>
                   </tbody>
                 </table>
