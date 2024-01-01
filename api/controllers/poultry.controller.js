@@ -88,14 +88,18 @@ export const getAllBirdBatchesNoDates = async (req, res) => {
     // Query all batches from the Bird model
     const batches = await Bird.find().exec();
 
-    // Send the batches as a JSON response
-    res.status(200).json({ success: true, data: batches });
+    // Calculate the total sum of quantity for all batches
+    const totalQuantity = batches.reduce((sum, batch) => sum + batch.quantity, 0);
+
+    // Send the batches and total quantity as a JSON response
+    res.status(200).json({ success: true, data: { batches, totalQuantity } });
   } catch (error) {
     // Handle errors and send an error response
     console.error(error);
     res.status(500).json({ success: false, error: 'Internal Server Error' });
   }
 };
+
 
 // Controller function to generate a report based on the currentAge of the birds
 const generateAgeReport = async (req, res) => {

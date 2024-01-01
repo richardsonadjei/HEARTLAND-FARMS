@@ -54,6 +54,18 @@ const SellEggs = () => {
     }
   };
 
+  const customStyles = {
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isFocused ? '#d3d3d3' : 'white', // Adjust background color
+      color: state.isFocused ? 'black' : 'black', // Adjust text color
+    }),
+    control: (provided) => ({
+      ...provided,
+      backgroundColor: 'white', // Adjust control background color
+    }),
+  };
+
   return (
     <Container>
       <Row>
@@ -115,13 +127,14 @@ const SellEggs = () => {
             <Row form>
               <Col md={6}>
                 <FormGroup>
-                  <Label for="category" style={{ color: 'white' }}>Category</Label>
+                  <Label for="category" >Category</Label>
                   <Select
                     id="category"
                     name="category"
                     options={categoryOptions}
                     value={category}
                     onChange={(selectedOption) => setCategory(selectedOption)}
+                    styles={customStyles}
                   />
                 </FormGroup>
               </Col>
@@ -135,6 +148,7 @@ const SellEggs = () => {
                       options={sizeOptions}
                       value={sizeOptions.find((option) => option.value === size)}
                       onChange={(selectedOption) => setSize(selectedOption.value)}
+                      
                     />
                   </FormGroup>
                 </Col>

@@ -13,12 +13,6 @@ const FinancialReports = () => {
       // ... other details for the Supplier Performance Report
     },
     {
-      title: "Egg Income Report",
-      path: "/egg-income-report",
-      purpose: "This provides income generated from egg sales",
-      // ... other details for the Inventory Status Report
-    },
-    {
       title: "Bird Sales Report",
       path: "/bird-sales-report",
       purpose: "This tells the sale of birds within a particular period",

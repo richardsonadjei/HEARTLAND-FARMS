@@ -68,12 +68,13 @@ import RecordUnsortedEggs from './pages/poultry/reports/AddUnsortedEggs';
 import DailyUnsortedEggReport from './pages/poultry/reports/DailyUnsortedEggsReport';
 import AddSortedEggs from './pages/poultry/AddSortedEggs';
 import DailySortedEggReport from './pages/poultry/reports/DailySortedEggsReport';
-import RecordMortality from './pages/poultry/RecordMortality';
-import MortalityReport from './pages/poultry/reports/MortalityReport';
-import MortalityBatchReport from './pages/poultry/reports/BatchMortalityReport';
 import SellEggs from './pages/poultry/SellEggs';
-import EggIncomeReport from './pages/poultry/reports/EggIncomeReport';
 import EggSalesReport from './pages/poultry/reports/EggSalesReport';
+import SellBirds from './pages/poultry/SellBirds';
+import BirdSalesReport from './pages/poultry/reports/BirdSalesReport';
+import RecordBirdMortality from './pages/poultry/BirdMortality';
+import BirdMortalityReport from './pages/poultry/reports/AllBatchMortalityReport';
+import BatchBirdMortalityReport from './pages/poultry/reports/BirdBatchMortalityReport';
 
 
 
@@ -91,7 +92,6 @@ export default function App() {
         <Route element={<PrivateRoute/>}>
           <Route path='/profile' element={<Profile/>} />
           <Route path='/allusers' element={<ViewAllUsers/>} />
-          
           <Route path='/poultry' element={<Poultry />} />
           <Route path='/poultry-dashboard' element={<PoultryDashboard/>} />
           <Route path='/create-poultry' element={<CreatePoultry/>} />
@@ -147,12 +147,13 @@ export default function App() {
           <Route path='/add-sorted-eggs' element={<AddSortedEggs/>} />
           <Route path='/daily-unsorted-eggs-report' element={<DailyUnsortedEggReport/>} />
           <Route path='/daily-sorted-eggs-report' element={<DailySortedEggReport/>} />
-          <Route path='/record-mortality' element={<RecordMortality/>} />
-          <Route path='/mortality-report' element={<MortalityReport/>} />
-          <Route path='/batch-mortality-report' element={<MortalityBatchReport/>} />
           <Route path='/sell-eggs' element={<SellEggs/>} />
-          <Route path='/egg-income-report' element={<EggIncomeReport/>} />
           <Route path='/egg-sales-report' element={<EggSalesReport/>} />
+          <Route path='/sell-birds' element={<SellBirds/>} />
+          <Route path='/bird-sales-report' element={<BirdSalesReport/>} />
+          <Route path='/bird-mortality' element={<RecordBirdMortality/>} />
+          <Route path='/all-batches-mortality-report' element={<BirdMortalityReport/>} />
+          <Route path='/batch-mortality-report' element={<BatchBirdMortalityReport/>} />
          
 
         </Route>

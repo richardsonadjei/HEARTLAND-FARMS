@@ -174,8 +174,12 @@ const PoultryReport = () => {
                   <div className="card-body">
                     <h3 className="card-title">Mortality Report</h3>
                     <p className="card-text">Quick Links</p>
-                    <button className="btn btn-primary">Go to Reporting Subsection</button>
-                    {/* Additional buttons or content for reporting and analytics */}
+                    <Link to="/all-batches-mortality-report">
+                        <button className="btn btn-primary me-2">All Batches Mortality Report</button>
+                      </Link>
+                      <Link to="/batch-mortality-report">
+                        <button className="btn btn-primary me-2">Batch Mortality Report</button>
+                      </Link>
                   </div>
                 </div>
               </div>

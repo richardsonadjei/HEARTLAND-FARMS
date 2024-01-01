@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 import EggSale from '../models/eggSale.model.js';
 import SortedEggInventory from '../models/sortedEggStock.model.js';
 import UnsortedEggInventory from '../models/unsortedEggStock.model.js';
-import PoultryIncome from '../models/poultryIncome.model.js';
 import BirdSale from '../models/birdSale.model.js';
 import BatchUpdate from '../models/batchUpdate.model.js';
 import Bird from '../models/poultry.model.js';
@@ -42,14 +41,6 @@ export const makeEggSale = async (req, res) => {
       throw new Error('Invalid egg category');
     }
 
-    // Create a new instance of PoultryIncome
-    const newPoultryIncome = new PoultryIncome({
-      totalAmount: newEggSale.totalAmount,
-      salesNumber: newEggSale.salesNumber,
-    });
-
-    // Save the new poultry income
-    await newPoultryIncome.save();
 
     res.status(201).json({ success: true, data: savedEggSale });
   } catch (error) {
@@ -57,27 +48,6 @@ export const makeEggSale = async (req, res) => {
   }
 };
 
-
-
-
-export const viewPoultryIncomeSales = async (req, res) => {
-  try {
-    const { startDate, endDate } = req.query;
-
-    // Parse startDate and endDate strings into Date objects in UTC format
-    const parsedStartDate = new Date(startDate + 'T00:00:00Z'); // Assuming startDate is in YYYY-MM-DD format
-    const parsedEndDate = new Date(endDate + 'T23:59:59.999Z'); // Assuming endDate is in YYYY-MM-DD format
-
-    // Query PoultryIncome collection for sales within the specified period
-    const sales = await PoultryIncome.find({
-      createdAt: { $gte: parsedStartDate, $lte: parsedEndDate },
-    });
-
-    res.status(200).json({ success: true, data: sales });
-  } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
-  }
-};
 
 
 
@@ -101,37 +71,40 @@ export const viewEggSalesWithinPeriod = async (req, res) => {
   }
 };
 
-export const recordBirdSale = async (req, res) => {
-  let savedBirdSale;
-  let totalPoultryIncomeAmount = 0;
 
+
+export const recordBirdSale = async (req, res) => {
+
+  let savedBirdSale; // Declare the variable outside the loop scope
+  
   try {
     const { salesNumber, sales, soldBy } = req.body;
+    const birdSales = [];
 
     for (const sale of sales) {
-      const { batch, quantity, totalAmount } = sale;
-
-      // Check if totalAmount is a valid number
-      if (isNaN(totalAmount)) {
-        console.log('Invalid totalAmount:', totalAmount);
-        return res.status(400).json({ success: false, message: 'Invalid totalAmount in the sales data' });
-      }
+      const { batch, quantity, unitPricePerBird } = sale;
 
       // Check if there is sufficient quantity in the batch
       const birdInfo = await Bird.findOne({ batchNumber: batch });
+      
 
       if (!birdInfo || birdInfo.quantity < quantity) {
         return res.status(400).json({ success: false, message: 'Insufficient quantity in the batch' });
       }
-
+     
       // Record the bird sale
       const newBirdSale = new BirdSale({
         salesNumber,
         sales,
         soldBy,
+        batch,
+        quantity,
+        unitPricePerBird,
       });
 
+      // Save the bird sale
       savedBirdSale = await newBirdSale.save();
+      birdSales.push(savedBirdSale); // Collect bird sales for later use
 
       // Update the quantity in the batch
       const previousQuantity = birdInfo.quantity;
@@ -140,9 +113,6 @@ export const recordBirdSale = async (req, res) => {
       // Update the quantity in the Bird model
       await Bird.updateOne({ batchNumber: batch }, { $set: { quantity: newQuantity } });
 
-      // Accumulate the totalAmount for PoultryIncome
-      totalPoultryIncomeAmount += totalAmount;
-      
       const batchUpdate = new BatchUpdate({
         batchNumber: batch,
         previousQuantity,
@@ -152,18 +122,46 @@ export const recordBirdSale = async (req, res) => {
 
       await batchUpdate.save();
     }
-
-    // Save PoultryIncome with the accumulated totalAmount
-    const poultryIncome = new PoultryIncome({
-      category: 'bird sales',
-      totalAmount: totalPoultryIncomeAmount,
-      salesNumber: salesNumber,
-    });
-
-    await poultryIncome.save();
-
     res.status(201).json({ success: true, data: savedBirdSale });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
+
+
+
+export const viewBirdSalesWithinPeriod = async (req, res) => {
+  try {
+    const { startDate, endDate } = req.query;
+
+    // Parse startDate and endDate strings into Date objects in UTC format
+    const parsedStartDate = new Date(startDate + 'T00:00:00Z'); // Assuming startDate is in YYYY-MM-DD format
+    const parsedEndDate = new Date(endDate + 'T23:59:59.999Z'); // Assuming endDate is in YYYY-MM-DD format
+
+    // Query BirdSale collection for sales within the specified period
+    const sales = await BirdSale.find({
+      createdAt: { $gte: parsedStartDate, $lte: parsedEndDate },
+    });
+
+    // Calculate the overall total by summing up the total amounts for all sales
+    const overallTotal = sales.reduce((sum, sale) => {
+      const saleTotalAmount = sale.sales.reduce((saleSum, s) => saleSum + s.totalAmount, 0);
+      return sum + saleTotalAmount;
+    }, 0);
+
+    // Include the overall total in the response
+    const salesWithOverallTotal = sales.map((sale) => {
+      const saleTotalAmount = sale.sales.reduce((saleSum, s) => saleSum + s.totalAmount, 0);
+      return {
+        ...sale.toObject(),
+        saleTotalAmount,
+      };
+    });
+
+    res.status(200).json({ success: true, data: { sales: salesWithOverallTotal, overallTotal } });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+

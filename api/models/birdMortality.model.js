@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const MortalitySchema = new mongoose.Schema(
+const birdMortalitySchema = new mongoose.Schema(
   {
     batchNumber: {
       type: String,
@@ -8,29 +8,27 @@ const MortalitySchema = new mongoose.Schema(
     },
     date: {
       type: Date,
-      required: true,
+      default: Date.now,
     },
-    count: {
+    quantity: {
       type: Number,
       required: true,
-      min: 1,
     },
     cause: {
       type: String,
       required: true,
     },
-    notes: {
-      type: String,
-    },
     recordedBy: {
       type: String,
+      required: true,
     },
+    // Add any additional fields related to mortality information
   },
   {
     timestamps: true,
   }
 );
 
-const MortalityModel = mongoose.model('Mortality', MortalitySchema);
+const BirdMortality = mongoose.model('BirdMortality', birdMortalitySchema);
 
-export default MortalityModel;
+export default BirdMortality;

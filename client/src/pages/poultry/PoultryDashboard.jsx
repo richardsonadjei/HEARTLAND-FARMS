@@ -178,7 +178,7 @@ const PoultryDashboard = () => {
                         <button className="btn btn-primary me-2 mb-2">Sell Eggs</button>
                     </Link>
                    
-                    <Link to="/mortality-report">
+                    <Link to="/sell-birds">
                         <button className="btn btn-primary me-2 mb-2">Sell Birds</button>
                     </Link>
                   </div>
@@ -204,14 +204,8 @@ const PoultryDashboard = () => {
                   <div className="card-body">
                     <h3 className="card-title">Mortality</h3>
                     <p className="card-text">Mortality</p>
-                    <Link to="/record-mortality">
+                    <Link to="/bird-mortality">
                         <button className="btn btn-primary me-2 mb-2">Record Mortality</button>
-                    </Link>
-                    <Link to="/mortality-report">
-                        <button className="btn btn-primary me-2 mb-2">Mortality Report</button>
-                    </Link>
-                    <Link to="/batch-mortality-report">
-                        <button className="btn btn-primary me-2 mb-2">Batch Mortality Report</button>
                     </Link>
                   </div>
                 </div>

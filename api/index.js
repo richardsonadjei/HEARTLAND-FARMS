@@ -21,8 +21,8 @@ import dewormingRouter from './routes/deworming.router.js';
 import healthConditionRouter from './routes/healthCondtion.router.js';
 import treatmentRouter from './routes/treatment.router.js';
 import eggRouter from './routes/eggs.router.js';
-import mortalityRouter from './routes/mortality.router.js';
 import incomeRouter from './routes/income.router.js';
+import birdMortalityRouter from './routes/birdMortality.router.js';
 
 
 
@@ -71,9 +71,9 @@ app.use('/api/', birdVaccinationRouter);
 app.use('/api/', dewormingRouter);    
 app.use('/api/', healthConditionRouter);    
 app.use('/api/', treatmentRouter);    
-app.use('/api/', eggRouter);    
-app.use('/api/', mortalityRouter);    
+app.use('/api/', eggRouter);     
 app.use('/api/', incomeRouter);    
+app.use('/api/', birdMortalityRouter);    
 
 
 

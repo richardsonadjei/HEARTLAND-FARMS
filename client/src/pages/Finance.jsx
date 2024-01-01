@@ -65,7 +65,7 @@ useEffect(() => {
                       <Link to="/create-supplier">
                         <button className="btn btn-primary me-2 mb-2">Create A Supplier</button>
                       </Link>
-                      <Link to="/all-batches">
+                      <Link to="/all-suppliers">
                         <button className="btn btn-primary me-2 mb-2">View All Suppliers</button>
                       </Link>
                       <Link to="#">

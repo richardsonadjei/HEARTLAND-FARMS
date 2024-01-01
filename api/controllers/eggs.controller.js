@@ -163,11 +163,14 @@ export const getCurrentUnsortedEggStockInCrates = async (req, res) => {
 
     if (!inventory) {
       // If no inventory record exists, respond with 0 current stock in crates
-      return res.status(200).json({ success: true, data: { currentStockInCrates: '0 crates 0 loose' } });
+      return res.status(200).json({ success: true, data: { currentStockInCrates: { crates: 0, loose: 0 } } });
     }
 
     // Respond with the current stock in crates
-    res.status(200).json({ success: true, data: { currentStockInCrates: inventory.currentStockInCrates } });
+    res.status(200).json({
+      success: true,
+      data: { currentStockInCrates: { crates: inventory.crates, loose: inventory.loose } },
+    });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -196,10 +199,17 @@ export const getCurrentSortedEggStockInCrates = async (req, res) => {
       });
     }
 
+    // Map the inventory data to the desired response format
+    const sizesInCrates = {
+      small: `${inventory.sizes.small.crates} crates ${inventory.sizes.small.loose} loose`,
+      medium: `${inventory.sizes.medium.crates} crates ${inventory.sizes.medium.loose} loose`,
+      large: `${inventory.sizes.large.crates} crates ${inventory.sizes.large.loose} loose`,
+      extraLarge: `${inventory.sizes.extraLarge.crates} crates ${inventory.sizes.extraLarge.loose} loose`,
+    };
+
     // Respond with the current stock in crates
-    res.status(200).json({ success: true, data: { sizesInCrates: inventory.sizesInCrates } });
+    res.status(200).json({ success: true, data: { sizesInCrates } });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
 };
-
