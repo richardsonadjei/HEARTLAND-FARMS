@@ -136,9 +136,9 @@ const GuineaFowlDashboard = () => {
             </div>
             <div className="row">
               <div className="col-md-6">
-                <div className="card mb-4" id="medication-management" style={{ backgroundImage: 'url("../../../public/images/poultry-vaccine-3.avif")', backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat' }}>
+                <div className="card mb-4" id="medication-management" style={{ backgroundImage: 'url("../../../public/images/sick guineas.png")', backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat' }}>
                   <div className="card-body">
-                    <h3 className="card-title">Vaccination and Health Management</h3>
+                    <h3 className="card-title text-white">Vaccination and Health Management</h3>
                     <p className="card-text">Some description about medication and health management.</p>
                     <Link to="/medication">
                         <button className="btn btn-primary">Vaccination And Treatments</button>
@@ -180,7 +180,7 @@ const GuineaFowlDashboard = () => {
             </div>
             <div className="row">
               <div className="col-md-6">
-                <div className="card mb-4" id="sales-distribution" style={{ backgroundImage: 'url("../../../public/images/sales point.webp")', backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat' }}>
+                <div className="card mb-4" id="sales-distribution" style={{ backgroundImage: 'url("../../../public/images/sale guinea fowl.jpg")', backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat' }}>
                   <div className="card-body">
                     <h3 className="card-title">Sales and Distribution</h3>
                     <Link to="/sell-eggs">
@@ -209,7 +209,7 @@ const GuineaFowlDashboard = () => {
             </div>
             <div className="row">
               <div className="col-md-6">
-                <div className="card mb-4" id="mortality">
+                <div className="card mb-4" id="mortality" style={{ backgroundImage: 'url("../../../public/images/dead-guinea-fowl.jpg")', backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat' }}>
                   <div className="card-body">
                     <h3 className="card-title">Mortality</h3>
                     <p className="card-text">Mortality</p>

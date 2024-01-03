@@ -85,6 +85,8 @@ import MoveGuineaFowl from './pages/guineaFowl/MoveGuineaFowl';
 import RecordGuineaFowlVaccination from './pages/guineaFowl/RecordGuineaFowlVaccination';
 import GuineaFowlMedicationDashboard from './pages/guineaFowl/GuineaFowlMedicationDashboard';
 import GuineaFowlBatchVaccinationReport from './pages/guineaFowl/reports/GuineaFowlBatchVaccinationReport';
+import GuineaFowlHealthRecord from './pages/guineaFowl/BookSickGuineaFowl';
+import GuineaFowlTreatment from './pages/guineaFowl/GuineaFowlTreatment';
 
 
 
@@ -175,6 +177,8 @@ export default function App() {
           <Route path='/record-guinea-fowl-vaccination' element={<RecordGuineaFowlVaccination/>} />
           <Route path='/guinea-fowl-medication-dashboard' element={<GuineaFowlMedicationDashboard/>} />
           <Route path='/guinea-fowl-batch-vaccination-report' element={<GuineaFowlBatchVaccinationReport/>} />
+          <Route path='/book-sick-guinea-fowl' element={<GuineaFowlHealthRecord/>} />
+          <Route path='/treat-sick-guinea-fowl' element={<GuineaFowlTreatment/>} />
          
 
         </Route>

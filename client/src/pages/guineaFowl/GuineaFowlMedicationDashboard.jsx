@@ -18,36 +18,8 @@ const GuineaFowlMedicationDashboard = () => {
                 Record Vaccination
               </Link>
             </li>
-            <li className="nav-item">
-              <Link to="/view-by-age-range" className="nav-link text-light">
-                View Chart By Age Range
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/is-birds" className="nav-link text-light">
-                Health Status
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/delete-medication" className="nav-link text-light">
-                Delete Medication
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/all-drug" className="nav-link text-light">
-                View And Update Drugs
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/create-medication-category" className="nav-link text-light">
-                Add Medication Category
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/all-medication-category" className="nav-link text-light">
-                View All Medication Category
-              </Link>
-            </li>
+            
+            
           </ul>
         </div>
         <div className="col-md-9">
@@ -131,9 +103,7 @@ const GuineaFowlMedicationDashboard = () => {
                     <Link to="/guinea-fowl-batch-vaccination-report">
                       <button className="btn btn-primary me-2">Vaccination</button>
                     </Link>
-                    <Link to="/deworming-history">
-                      <button className="btn btn-primary me-2">Deworming</button>
-                    </Link>
+                    
                   </div>
                 </div>
               </div>
@@ -144,8 +114,8 @@ const GuineaFowlMedicationDashboard = () => {
                     <p className="card-text">
                       Record the health condition and diagnosis of a bird or batch of birds and isolate
                     </p>
-                    <Link to="/add-health-condition">
-                      <button className="btn btn-primary">Book Sick Birds</button>
+                    <Link to="/book-sick-guinea-fowl">
+                      <button className="btn btn-primary">Record Sick Guinea Fowls</button>
                     </Link>
                   </div>
                 </div>
@@ -153,11 +123,11 @@ const GuineaFowlMedicationDashboard = () => {
               <div className="col-md-6">
                 <div className="card mb-4">
                   <div className="card-body">
-                    <h3 className="card-title">Treat Sick Birds</h3>
+                    <h3 className="card-title">Treat Sick Guinea Fowls</h3>
                     <p className="card-text">
                       Record Treatment Given To Sick Birds After Diagnosis
                     </p>
-                    <Link to="/add-treatment">
+                    <Link to="/treat-sick-guinea-fowl">
                       <button className="btn btn-primary">Treat</button>
                     </Link>
                   </div>

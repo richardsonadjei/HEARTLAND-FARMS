@@ -1,5 +1,7 @@
 import GuineaFowlStock from '../models/guineaFowl.model.js'
 import GuineaFowlStockUpdate from '../models/guineaFowlBatchUpdateHistory.model.js';
+import GuineaFowlHealthRecords from '../models/guineaFowlHealthRecords.model.js';
+import GuineaFowlTreatment from '../models/guineaFowlTreatment.model.js';
 
 
 // Create a new Guinea Fowl entry
@@ -220,3 +222,143 @@ export {
 
 
 
+
+
+// HEALTH RECORDS CONTROLLERS
+// controllers/guineaFowlHealthRecordsController.js
+
+
+// Create a new health record
+export const createHealthRecord = async (req, res) => {
+  try {
+    const newHealthRecord = new GuineaFowlHealthRecords(req.body);
+    const savedHealthRecord = await newHealthRecord.save();
+    res.status(201).json(savedHealthRecord);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// Get all health records
+export const getAllHealthRecords = async (req, res) => {
+  try {
+    const healthRecords = await GuineaFowlHealthRecords.find();
+    res.status(200).json(healthRecords);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// Get a specific health record by ID
+export const getHealthRecordById = async (req, res) => {
+  try {
+    const healthRecord = await GuineaFowlHealthRecords.findById(req.params.id);
+    if (!healthRecord) {
+      return res.status(404).json({ error: 'Health record not found' });
+    }
+    res.status(200).json(healthRecord);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// Update a health record by ID
+export const updateHealthRecord = async (req, res) => {
+  try {
+    const updatedHealthRecord = await GuineaFowlHealthRecords.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    if (!updatedHealthRecord) {
+      return res.status(404).json({ error: 'Health record not found' });
+    }
+    res.status(200).json(updatedHealthRecord);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// Delete a health record by ID
+export const deleteHealthRecord = async (req, res) => {
+  try {
+    const deletedHealthRecord = await GuineaFowlHealthRecords.findByIdAndRemove(req.params.id);
+    if (!deletedHealthRecord) {
+      return res.status(404).json({ error: 'Health record not found' });
+    }
+    res.status(200).json(deletedHealthRecord);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+
+// TREATMENT CONTROLLERS
+
+
+// Controller to create a new GuineaFowlTreatment record
+export const createGuineaFowlTreatment = async (req, res) => {
+  try {
+    const guineaFowlTreatment = new GuineaFowlTreatment(req.body);
+    await guineaFowlTreatment.save();
+    res.status(201).json({ success: true, data: guineaFowlTreatment });
+  } catch (error) {
+    res.status(400).json({ success: false, error: error.message });
+  }
+};
+
+// Controller to get all GuineaFowlTreatment records
+export const getAllGuineaFowlTreatments = async (req, res) => {
+  try {
+    const guineaFowlTreatments = await GuineaFowlTreatment.find();
+    res.status(200).json({ success: true, data: guineaFowlTreatments });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+// Controller to get a single GuineaFowlTreatment record by ID
+export const getGuineaFowlTreatmentById = async (req, res) => {
+  try {
+    const guineaFowlTreatment = await GuineaFowlTreatment.findById(req.params.id);
+    if (!guineaFowlTreatment) {
+      res.status(404).json({ success: false, error: 'GuineaFowlTreatment not found' });
+      return;
+    }
+    res.status(200).json({ success: true, data: guineaFowlTreatment });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+// Controller to update a GuineaFowlTreatment record by ID
+export const updateGuineaFowlTreatment = async (req, res) => {
+  try {
+    const guineaFowlTreatment = await GuineaFowlTreatment.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true, runValidators: true }
+    );
+    if (!guineaFowlTreatment) {
+      res.status(404).json({ success: false, error: 'GuineaFowlTreatment not found' });
+      return;
+    }
+    res.status(200).json({ success: true, data: guineaFowlTreatment });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+// Controller to delete a GuineaFowlTreatment record by ID
+export const deleteGuineaFowlTreatment = async (req, res) => {
+  try {
+    const guineaFowlTreatment = await GuineaFowlTreatment.findByIdAndDelete(req.params.id);
+    if (!guineaFowlTreatment) {
+      res.status(404).json({ success: false, error: 'GuineaFowlTreatment not found' });
+      return;
+    }
+    res.status(200).json({ success: true, data: {} });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
