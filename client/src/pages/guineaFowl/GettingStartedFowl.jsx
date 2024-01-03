@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Poultry = () => {
+const GuineaFowl = () => {
   const [sortedEggStock, setSortedEggStock] = useState({});
   const [unsortedEggStock, setUnsortedEggStock] = useState({});
   const [birdQuantitySum, setBirdQuantitySum] = useState(0);
@@ -44,7 +44,7 @@ const Poultry = () => {
   }, []);
 
   const containerStyle = {
-    background: `url("/images/IMG_1485.jpg") no-repeat center center fixed`,
+    background: `url("../../../public/images/Guinea-fowl-bg.jpg") no-repeat center center fixed`,
     backgroundSize: 'cover',
     height: '100vh',
     display: 'flex',
@@ -100,8 +100,8 @@ const Poultry = () => {
 
   return (
     <div style={containerStyle}>
-      <h1 className="text-uppercase">Poultry Software for Heartland Farms</h1>
-      <h2>An All In One System For All Poultry Farm Management</h2>
+      <h1 className="text-uppercase">Guinea Fowl Management </h1>
+      <h2>Guinea Fowl Management And Record Keeping System</h2>
 
       <div style={cardsContainerStyle}>
         {/* Sorted Egg Stock Card */}
@@ -128,7 +128,7 @@ const Poultry = () => {
       </div>
 
       <div className="button-group mt-4">
-        <a href="/poultry-dashboard" className="btn btn-primary" style={{ fontSize: '1.5rem' }}>
+        <a href="/guinea-fowl-dashboard" className="btn btn-primary" style={{ fontSize: '1.5rem' }}>
           Get Started
         </a>
       </div>
@@ -136,4 +136,4 @@ const Poultry = () => {
   );
 };
 
-export default Poultry;
+export default GuineaFowl;

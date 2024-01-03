@@ -24,17 +24,27 @@ const [selectedBatchBreed, setSelectedBatchBreed] = useState('');
   const [farmSections, setFarmSections] = useState([]);
 
   // Function to fetch available batch numbers from the server
-  const fetchBatchNumbers = async () => {
-    try {
-      const response = await fetch('/api/all-batchesNoDates');
-      const data = await response.json();
-      // Extract batch numbers from the data
-      const availableBatchNumbers = data.data.map((batch) => batch.batchNumber);
-      setBatchNumbers(availableBatchNumbers);
-    } catch (error) {
-      console.error('Error fetching batch numbers:', error);
+// Function to fetch available batch options from the server
+const fetchBatchNumbers = async () => {
+  try {
+    const response = await fetch('/api/all-batchesNoDates');
+    if (!response.ok) {
+      throw new Error('Error fetching batch numbers');
     }
-  };
+    const data = await response.json();
+
+    // Check if the data.data.batches property exists and is an array
+    if (data && data.data && data.data.batches && Array.isArray(data.data.batches)) {
+      const batchNumbers = data.data.batches.map((batch) => batch.batchNumber);
+      setBatchNumbers(batchNumbers);
+    } else {
+      throw new Error('Invalid data structure in the response');
+    }
+  } catch (error) {
+    console.error('Error fetching batch numbers:', error.message);
+  }
+};
+
 
   // Function to fetch available farm sections from the server
  // Function to fetch available farm sections from the server

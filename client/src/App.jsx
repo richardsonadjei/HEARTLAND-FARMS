@@ -75,6 +75,17 @@ import BirdSalesReport from './pages/poultry/reports/BirdSalesReport';
 import RecordBirdMortality from './pages/poultry/BirdMortality';
 import BirdMortalityReport from './pages/poultry/reports/AllBatchMortalityReport';
 import BatchBirdMortalityReport from './pages/poultry/reports/BirdBatchMortalityReport';
+import GuineaFowl from './pages/guineaFowl/GettingStartedFowl';
+import GuineaFowlDashboard from './pages/guineaFowl/GuineaFowlDashBoard';
+import RecordGuineaFowl from './pages/guineaFowl/RecordGuineaFowl';
+import UpdateGuineaFowlStock from './pages/guineaFowl/UpdateGuineaFowlStock';
+import AllGuineaFowlReport from './pages/guineaFowl/reports/AllGuineaFowlReport';
+import GuineaFowlBatchUpdateReport from './pages/guineaFowl/reports/GuineaFowlBatchUpdateHistory';
+import MoveGuineaFowl from './pages/guineaFowl/MoveGuineaFowl';
+import RecordGuineaFowlVaccination from './pages/guineaFowl/RecordGuineaFowlVaccination';
+import GuineaFowlMedicationDashboard from './pages/guineaFowl/GuineaFowlMedicationDashboard';
+import GuineaFowlBatchVaccinationReport from './pages/guineaFowl/reports/GuineaFowlBatchVaccinationReport';
+
 
 
 
@@ -154,6 +165,16 @@ export default function App() {
           <Route path='/bird-mortality' element={<RecordBirdMortality/>} />
           <Route path='/all-batches-mortality-report' element={<BirdMortalityReport/>} />
           <Route path='/batch-mortality-report' element={<BatchBirdMortalityReport/>} />
+          <Route path='/guinea-fowl-getting-started' element={<GuineaFowl/>} />
+          <Route path='/guinea-fowl-dashboard' element={<GuineaFowlDashboard/>} />
+          <Route path='/new-guineaFowl' element={<RecordGuineaFowl/>} />
+          <Route path='/add-guineaFowl' element={<UpdateGuineaFowlStock/>} />
+          <Route path='/all-guineaFowls' element={<AllGuineaFowlReport/>} />
+          <Route path='/guineaFowls-batch-update-history' element={<GuineaFowlBatchUpdateReport/>} />
+          <Route path='/move-guinea-fowl' element={<MoveGuineaFowl/>} />
+          <Route path='/record-guinea-fowl-vaccination' element={<RecordGuineaFowlVaccination/>} />
+          <Route path='/guinea-fowl-medication-dashboard' element={<GuineaFowlMedicationDashboard/>} />
+          <Route path='/guinea-fowl-batch-vaccination-report' element={<GuineaFowlBatchVaccinationReport/>} />
          
 
         </Route>

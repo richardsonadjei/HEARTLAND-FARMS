@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { FaBell } from 'react-icons/fa';
 
-
-
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
   const userCategory = currentUser ? currentUser.category : '';
@@ -14,17 +12,34 @@ export default function Header() {
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        const response = await fetch('/api/birds-due-for-vaccination'); 
-        const data = await response.json();
-        setNotifications(data.notifications);
-        setNotificationCount(data.notifications.length);
+        // Fetch poultry notifications
+        const poultryResponse = await fetch('/api/birds-due-for-vaccination');
+        const poultryData = await poultryResponse.json();
+
+        // Fetch guinea fowl notifications
+        const guineaFowlResponse = await fetch('/api/guinea-fowls-due-for-vaccination');
+        const guineaFowlData = await guineaFowlResponse.json();
+
+        // Combine notifications from both sources
+        const combinedNotifications = [
+          ...poultryData.notifications.map(notification => ({ ...notification, category: 'poultry' })),
+          ...guineaFowlData.notifications.map(notification => ({ ...notification, category: 'guineaFowl' })),
+        ];
+
+        setNotifications(combinedNotifications);
+        setNotificationCount(combinedNotifications.length);
       } catch (error) {
         console.error('Error fetching notifications:', error);
       }
     };
+
     fetchNotifications();
   }, []);
 
+  // Helper function to filter notifications based on category
+  const filterNotificationsByCategory = (category) => {
+    return notifications.filter((notification) => notification.category === category);
+  };
   return (
     <nav className="navbar navbar-expand-lg  sticky-top">
       <div className="container-fluid">
@@ -89,7 +104,7 @@ export default function Header() {
                 </ul>
                 <ul>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <a className="dropdown-item" href="/guinea-fowl-getting-started">
                      Guinea Fowl
                     </a>
                   </li>
@@ -205,41 +220,49 @@ export default function Header() {
             </li>
           </ul>
           {/* Notifications Dropdown */}
-          <div className="dropdown text-end mx-auto ">
-            <Link
-              className="d-block link-body-emphasis text-decoration-none dropdown-toggle "
-              to="#"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-              data-bs-tooltip="View birds due for vaccination"
-              data-bs-placement="bottom"
-            >
-              <FaBell size={24} />
-              {notificationCount > 0 && <span className="badge bg-danger">{notificationCount}</span>}
-            </Link>
-            <ul className="dropdown-menu text-small">
-              {notifications.length > 0 ? (
-                notifications.map((notification, index) => (
-                  <li key={index}>
-                    <span
-                      className="dropdown-item"
-                      onClick={() =>
-                        (window.location.href = `/record-vaccination?batchNumber=${notification.batchNumber}&breed=${notification.breed}&ageInDays=${notification.ageInDays}&vaccinationDue=${notification.vaccinationDue}`)
-                      }
-                    >
-                      <div className="notification-item">
-                        <strong>{notification.breed}</strong> with batch number {notification.batchNumber} is due for {notification.vaccinationDue} vaccination at {notification.ageInDays} days old.
-                      </div>
-                    </span>
-                  </li>
-                ))
-              ) : (
-                <li>
-                  <span className="dropdown-item">No notifications</span>
-                </li>
-              )}
-            </ul>
-          </div>
+          <div className="dropdown text-end mx-auto">
+          <Link
+            className="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+            to="#"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            data-bs-tooltip="View birds due for vaccination"
+            data-bs-placement="bottom"
+          >
+            <FaBell size={24} />
+            {notificationCount > 0 && <span className="badge bg-danger">{notificationCount}</span>}
+          </Link>
+          <ul className="dropdown-menu text-small">
+            {/* Poultry Notifications */}
+            <li>
+              <span className="dropdown-item font-weight-bold" style={{ color: 'green' }}>Poultry Notifications</span>
+              {filterNotificationsByCategory('poultry').map((notification, index) => (
+                <span key={index} className="dropdown-item" onClick={() =>
+                  (window.location.href = `/record-vaccination?batchNumber=${notification.batchNumber}&breed=${notification.breed}&ageInDays=${notification.ageInDays}&vaccinationDue=${notification.vaccinationDue}`)
+                }>
+                  <strong>Guinea Fowl</strong> with batch number {notification.batchNumber} is due for {notification.vaccinationDue} vaccination at {notification.ageInDays} days old.
+                </span>
+              ))}
+            </li>
+            {/* Guinea-Fowl Notifications */}
+            <li>
+            <span className="dropdown-item font-weight-bold" style={{ color: 'blue' }}>Guinea Fowl Notifications</span>
+              {filterNotificationsByCategory('guineaFowl').map((notification, index) => (
+                <span key={index} className="dropdown-item" onClick={() =>
+                  (window.location.href = `/record-guinea-fowl-vaccination?batchNumber=${notification.batchNumber}&ageInDays=${notification.ageInDays}&vaccinationDue=${notification.vaccinationDue}`)
+                }>
+                  <strong>Guinea Fowl</strong> with batch number {notification.batchNumber} is due for {notification.vaccinationDue} vaccination at {notification.ageInDays} days old.
+                </span>
+              ))}
+            </li>
+            {/* Add more categories as needed */}
+            {notifications.length === 0 && (
+              <li>
+                <span className="dropdown-item">No notifications</span>
+              </li>
+            )}
+          </ul>
+        </div>
           {/* User Dropdown */}
           <div className="dropdown text-end mx-auto ">
           {currentUser ? (

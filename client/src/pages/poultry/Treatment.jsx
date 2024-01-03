@@ -17,14 +17,15 @@ const Treatment = () => {
     // Fetch batch numbers
     const fetchBatchNumbers = async () => {
       try {
-        const batchResponse = await fetch('/api/all-batchesNoDates');
-        if (!batchResponse.ok) {
+        const response = await fetch('/api/all-batchesNoDates');
+        if (!response.ok) {
           throw new Error('Error fetching batch numbers');
         }
-        const batchData = await batchResponse.json();
-
-        if (batchData && batchData.data && Array.isArray(batchData.data)) {
-          const formattedBatchNumbers = batchData.data.map((batch) => ({
+        const data = await response.json();
+    
+        // Check if the data.data.batches property exists and is an array
+        if (data && data.data && data.data.batches && Array.isArray(data.data.batches)) {
+          const formattedBatchNumbers = data.data.batches.map((batch) => ({
             value: batch.batchNumber,
             label: batch.batchNumber,
           }));
@@ -36,7 +37,7 @@ const Treatment = () => {
         console.error('Error fetching batch numbers:', error.message);
       }
     };
-
+    
     // Fetch medications
     const fetchMedications = async () => {
       try {

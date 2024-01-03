@@ -23,22 +23,24 @@ const BatchVaccinationReport = () => {
       }
       const responseData = await response.json();
   
-      // Ensure data is an object with a truthy 'data' property
-      if (responseData && responseData.data && Array.isArray(responseData.data)) {
-        const formattedBatchNumbers = responseData.data.map(batch => ({
+      // Check if the data.batches property exists and is an array
+      if (responseData && responseData.data && responseData.data.batches && Array.isArray(responseData.data.batches)) {
+        const formattedBatchNumbers = responseData.data.batches.map((batch) => ({
           value: batch.batchNumber,
-          label: batch.batchNumber
+          label: batch.batchNumber,
+          // Add additional properties as needed
         }));
         setAllBatchNumbers(formattedBatchNumbers);
-      
       } else {
         setAllBatchNumbers([]);
-        
       }
     } catch (error) {
       console.error('Error fetching batch numbers:', error.message);
     }
   };
+  
+  
+  
   
   
   useEffect(() => {

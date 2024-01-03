@@ -23,6 +23,10 @@ import treatmentRouter from './routes/treatment.router.js';
 import eggRouter from './routes/eggs.router.js';
 import incomeRouter from './routes/income.router.js';
 import birdMortalityRouter from './routes/birdMortality.router.js';
+import guineaFowlRouter from './routes/guineafowl.router.js';
+import guineaFowlNotificationRouter from './routes/guineaFowlNotification.router.js';
+import guineaFowlVaccinationRouter from './routes/guineaFowlVaccination.router.js';
+
 
 
 
@@ -74,6 +78,9 @@ app.use('/api/', treatmentRouter);
 app.use('/api/', eggRouter);     
 app.use('/api/', incomeRouter);    
 app.use('/api/', birdMortalityRouter);    
+app.use('/api/', guineaFowlRouter);    
+app.use('/api/', guineaFowlNotificationRouter);    
+app.use('/api/', guineaFowlVaccinationRouter);    
 
 
 

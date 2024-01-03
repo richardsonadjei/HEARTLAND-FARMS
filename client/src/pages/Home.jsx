@@ -11,7 +11,7 @@ const Home = () => {
         <div className="row">
           <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12 align-self-center">
             <h1>Digitizing agriculture.</h1>
-            <p>We craft farm management software that empowers and enriches farmers, promoting eco-friendly agriculture for a sustainable planet.</p>
+            <p>Your OneStop Software For All Your Agricultural Needs</p>
           </div>
           <div className="offset-lg-1 col-lg-5 col-md-12 col-sm-12 col-xs-12 align-self-center">
             <div className="apps">
@@ -26,6 +26,17 @@ const Home = () => {
                         </div>
                       </a>
                     </div>
+                    
+                  )}
+                  {(userCategory === 'poultry' || userCategory === 'all') && (
+                    <div className="col-lg-2 col-md-2 col-sm-2 col-2 mx-2">
+                      <a href="/guinea-fowl-getting-started" className="app-item">
+                        <div className="icon mb-3">
+                          <img className="img-fluid lazy" alt="" src="../../public/images/guinea-fowl-icon.png" />
+                        </div>
+                      </a>
+                    </div>
+                    
                   )}
                   {(userCategory === 'animal' || userCategory === 'all') && (
                     <>

@@ -24,7 +24,6 @@ const SellBirds = () => {
     // Fetch available batch options when the component mounts
     fetchBatchOptions();
   }, []);
-
   const fetchBatchOptions = async () => {
     try {
       const response = await fetch('/api/all-batchesNoDates');
@@ -32,17 +31,24 @@ const SellBirds = () => {
         throw new Error('Error fetching batch options');
       }
       const data = await response.json();
-      const options = data.data.map((batch) => ({
-        value: batch.batchNumber,
-        label: `${batch.batchNumber} - Stock: ${batch.quantity}`,
-        quantity: parseInt(batch.quantity, 10) || 0,
-      }));
-      setBatchOptions(options);
+  
+      // Check if the data.data.batches property exists and is an array
+      if (data && data.data && data.data.batches && Array.isArray(data.data.batches)) {
+        const options = data.data.batches.map((batch) => ({
+          value: batch.batchNumber,
+          label: `${batch.batchNumber} - Stock: ${batch.quantity}`,
+          quantity: parseInt(batch.quantity, 10) || 0,
+        }));
+        setBatchOptions(options);
+      } else {
+        throw new Error('Invalid data structure in the response');
+      }
     } catch (error) {
       console.error('Error fetching batch options:', error.message);
     }
   };
-
+  
+  
   const handleBatchSelectChange = (selectedOption, index) => {
     const updatedSales = [...formData.sales];
     updatedSales[index].batch = selectedOption.value;

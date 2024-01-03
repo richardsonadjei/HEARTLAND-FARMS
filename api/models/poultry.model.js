@@ -54,6 +54,11 @@ const birdSchema = new Schema({
     type: String,
     required: true,
   },
+  category: {
+    type: String,
+    default: 'poultry',
+   
+  },
  
 }, 
 {

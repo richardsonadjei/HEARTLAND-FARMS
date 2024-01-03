@@ -16,12 +16,14 @@ notificationsRouter.get('/birds-due-for-vaccination', async (req, res) => {
           batchNumber: notification.bird.batchNumber,
           vaccinationDue: notification.vaccinationDue,
           ageInDays: birdAgeInDays,
-          breed: notification.bird.breed, // Add the breed to the response
+          breed: notification.bird.breed, 
+          category: notification.bird.category,// Add the breed to the response
         };
       });
   
       res.json({
         notifications,
+        
       });
     } catch (error) {
       console.error('Error fetching birds with vaccination due:', error);
