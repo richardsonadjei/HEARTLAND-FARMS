@@ -81,12 +81,23 @@ import RecordGuineaFowl from './pages/guineaFowl/RecordGuineaFowl';
 import UpdateGuineaFowlStock from './pages/guineaFowl/UpdateGuineaFowlStock';
 import AllGuineaFowlReport from './pages/guineaFowl/reports/AllGuineaFowlReport';
 import GuineaFowlBatchUpdateReport from './pages/guineaFowl/reports/GuineaFowlBatchUpdateHistory';
-import MoveGuineaFowl from './pages/guineaFowl/MoveGuineaFowl';
 import RecordGuineaFowlVaccination from './pages/guineaFowl/RecordGuineaFowlVaccination';
 import GuineaFowlMedicationDashboard from './pages/guineaFowl/GuineaFowlMedicationDashboard';
 import GuineaFowlBatchVaccinationReport from './pages/guineaFowl/reports/GuineaFowlBatchVaccinationReport';
 import GuineaFowlHealthRecord from './pages/guineaFowl/BookSickGuineaFowl';
 import GuineaFowlTreatment from './pages/guineaFowl/GuineaFowlTreatment';
+import GuineaFowlMortality from './pages/guineaFowl/GuineaFowlMortality';
+import AddSortedGuineaFowlEggs from './pages/guineaFowl/AddSortedGuineaFowlEggs';
+import RecordUnsortedGuineFowlEggs from './pages/guineaFowl/AddUnsortedGuineaFowlEggs';
+import DailyUnsortedGuineaFowlEggReport from './pages/guineaFowl/reports/DailyUnsortedGuineaFowlEggsReport';
+import DailySortedGuineaFowlEggReport from './pages/guineaFowl/reports/DailySortedGuineaFowlReport';
+import GuineaFowlReportDashboard from './pages/guineaFowl/GuineaFowlReportsDashboard';
+import MoveGuineaFowls from './pages/guineaFowl/MoveGuineaFowl';
+import SellGuineaFowlEggs from './pages/guineaFowl/SellGuineaFowlEggs';
+import GuineaFowlEggSalesReport from './pages/guineaFowl/reports/GuineaFowlEggSalesReport';
+import GuineaFowlFinancialReports from './pages/guineaFowl/reports/GuineaFowlFinancialReports';
+import SellGuineaFowls from './pages/guineaFowl/SellGuineaFowls';
+import GuineaFowlSalesReport from './pages/guineaFowl/reports/GuineaFowlSalesReport';
 
 
 
@@ -173,12 +184,23 @@ export default function App() {
           <Route path='/add-guineaFowl' element={<UpdateGuineaFowlStock/>} />
           <Route path='/all-guineaFowls' element={<AllGuineaFowlReport/>} />
           <Route path='/guineaFowls-batch-update-history' element={<GuineaFowlBatchUpdateReport/>} />
-          <Route path='/move-guinea-fowl' element={<MoveGuineaFowl/>} />
+          <Route path='/move-guinea-fowls' element={<MoveGuineaFowls/>} />
           <Route path='/record-guinea-fowl-vaccination' element={<RecordGuineaFowlVaccination/>} />
           <Route path='/guinea-fowl-medication-dashboard' element={<GuineaFowlMedicationDashboard/>} />
           <Route path='/guinea-fowl-batch-vaccination-report' element={<GuineaFowlBatchVaccinationReport/>} />
           <Route path='/book-sick-guinea-fowl' element={<GuineaFowlHealthRecord/>} />
           <Route path='/treat-sick-guinea-fowl' element={<GuineaFowlTreatment/>} />
+          <Route path='/record-guinea-fowl-mortality' element={<GuineaFowlMortality/>} />
+          <Route path='/record-sorted-guinea-fowl-eggs' element={<AddSortedGuineaFowlEggs/>} />
+          <Route path='/record-unsorted-guinea-fowl-eggs' element={<RecordUnsortedGuineFowlEggs/>} />
+          <Route path='/view-daily-unsorted-guinea-fowl-eggs' element={<DailyUnsortedGuineaFowlEggReport/>} />
+          <Route path='/view-daily-sorted-guinea-fowl-eggs' element={<DailySortedGuineaFowlEggReport/>} />
+          <Route path='/guinea-fowl-report-dashboard' element={<GuineaFowlReportDashboard/>} />
+          <Route path='/sell-guinea-fowl-eggs' element={<SellGuineaFowlEggs/>} />
+          <Route path='/view-guinea-fowl-eggs-sales-within-a-period' element={<GuineaFowlEggSalesReport/>} />
+          <Route path='/guinea-fowl-financial-reports' element={<GuineaFowlFinancialReports/>} />
+          <Route path='/sell-guinea-fowls' element={<SellGuineaFowls/>} />
+          <Route path='/guinea-fowls-sales-report' element={<GuineaFowlSalesReport/>} />
          
 
         </Route>

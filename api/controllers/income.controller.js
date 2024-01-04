@@ -74,40 +74,46 @@ export const viewEggSalesWithinPeriod = async (req, res) => {
 
 
 export const recordBirdSale = async (req, res) => {
+  let savedBirdSale;
 
-  let savedBirdSale; // Declare the variable outside the loop scope
-  
   try {
     const { salesNumber, sales, soldBy } = req.body;
     const birdSales = [];
 
+    // Validate and process each sale
     for (const sale of sales) {
       const { batch, quantity, unitPricePerBird } = sale;
 
       // Check if there is sufficient quantity in the batch
       const birdInfo = await Bird.findOne({ batchNumber: batch });
-      
 
       if (!birdInfo || birdInfo.quantity < quantity) {
         return res.status(400).json({ success: false, message: 'Insufficient quantity in the batch' });
       }
-     
-      // Record the bird sale
-      const newBirdSale = new BirdSale({
-        salesNumber,
-        sales,
-        soldBy,
+
+      // Collect bird sales for later use
+      birdSales.push({
         batch,
         quantity,
         unitPricePerBird,
+        totalAmount: unitPricePerBird * quantity,
       });
+    }
 
-      // Save the bird sale
-      savedBirdSale = await newBirdSale.save();
-      birdSales.push(savedBirdSale); // Collect bird sales for later use
+    // Record the bird sale after processing all sales
+    const newBirdSale = new BirdSale({
+      salesNumber,
+      sales: birdSales,
+      soldBy,
+    });
 
-      // Update the quantity in the batch
-      const previousQuantity = birdInfo.quantity;
+    savedBirdSale = await newBirdSale.save();
+
+    // Update quantities and save batch updates
+    for (const sale of birdSales) {
+      const { batch, quantity } = sale;
+
+      const previousQuantity = (await Bird.findOne({ batchNumber: batch })).quantity;
       const newQuantity = previousQuantity - quantity;
 
       // Update the quantity in the Bird model
@@ -122,11 +128,13 @@ export const recordBirdSale = async (req, res) => {
 
       await batchUpdate.save();
     }
+
     res.status(201).json({ success: true, data: savedBirdSale });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
 
 
 

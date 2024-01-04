@@ -1,7 +1,7 @@
 import express from 'express';
 // Change the import statement to use a relative path
-import * as guineaFowlController from '../controllers/guineafowl.controller.js';
 
+import * as guineaFowlController from '../controllers/guineafowl.controller.js';
 
 const guineaFowlRouter = express.Router();
 
@@ -10,7 +10,6 @@ guineaFowlRouter.get('/all-guinea-fowl', guineaFowlController.getAllGuineaFowls)
 guineaFowlRouter.put('/:batchNumber/update-quantity', guineaFowlController.updateGuineaFowlQuantity);
 guineaFowlRouter.get('/batch-updates', guineaFowlController.viewBatchUpdatesWithinPeriod);
 guineaFowlRouter.get('/update-all-guinea-ages', guineaFowlController.updateGuineaFowlCurrentAge);
-guineaFowlRouter.post('/move-guinea-batch', guineaFowlController.moveGuineaFowlBatch);
 guineaFowlRouter.get('/guinea-fowls/:batchNumber', guineaFowlController.viewGuineaFowlBatchByNumber);
 
 // HEALTH RECORDS ROUTERS
@@ -45,6 +44,31 @@ guineaFowlRouter.put('/guineaFowlTreatments/:id', guineaFowlController.updateGui
 
 // Route to delete a GuineaFowlTreatment record by ID
 guineaFowlRouter.delete('/guineaFowlTreatments/:id', guineaFowlController.deleteGuineaFowlTreatment);
+
+// MORTALITY ROUTES
+guineaFowlRouter.post('/recordGuineaFowlMortality', guineaFowlController.recordGuineaFowlMortality);
+
+// EGG MANAGEMENT ROUTES
+guineaFowlRouter.post('/record-sorted-eggs', guineaFowlController.recordSortedEggs);
+guineaFowlRouter.post('/add-guinea-fowl-unsorted-egg', guineaFowlController.addGuineaFowlUnsortedEgg);
+guineaFowlRouter.get('/view-daily-unsorted-guinea-fowl-eggs', guineaFowlController.viewDailyGuneaFowlUnsortedEggs);
+guineaFowlRouter.get('/view-daily-sorted-guinea-fowl-eggs', guineaFowlController.viewDailySortedGuineaFowlEggs);
+guineaFowlRouter.get('/current-unsorted-guineaFowl-egg-stock', guineaFowlController.getCurrentUnsortedEggStockInCrates);
+guineaFowlRouter.get('/current-sorted-guineaFowl-egg-stock', guineaFowlController.getCurrentSortedGuineaFowlEggStockInCrates);
+
+
+// MOVEMENT ROUTERS
+guineaFowlRouter.post('/move-guinea-fowls', guineaFowlController.moveGuineaFowls);
+
+// EGG SALES ROUTES
+guineaFowlRouter.post('/sell-guineaFowl-eggs', guineaFowlController.sellGuineaFowlEggs);
+guineaFowlRouter.get('/view-guineaFowl-egg-sales-by-period', guineaFowlController.viewGuineaFowlEggSalesByPeriod);
+
+// BIRD SALES
+
+guineaFowlRouter.post('/sell-guineaFowls', guineaFowlController.recordGuineaFowlSale);
+guineaFowlRouter.get('/view-guineaFowl-sales-by-period', guineaFowlController.viewGuineaFowlSalesWithinPeriod);
+
 
 
 export default guineaFowlRouter;

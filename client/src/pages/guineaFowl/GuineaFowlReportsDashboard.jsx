@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const PoultryReport = () => {
+const GuineaFowlReportDashboard = () => {
   return (
     <div className="container-fluid">
       <div className="row">
         <div className="col-md-3 bg-dark text-light">
-          <h2 className="mt-3 mb-4">Poultry Reports</h2>
+          <h2 className="mt-3 mb-4">Guinea Fowl Reports</h2>
           <ul className="nav flex-column">
             <li className="nav-item">
               <Link to="/stock-reports" className="nav-link text-light">
@@ -19,7 +19,7 @@ const PoultryReport = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/financial-reports" className="nav-link text-light">
+              <Link to="/guinea-fowl-financial-reports" className="nav-link text-light">
                 Financial Reports
               </Link>
             </li>
@@ -183,4 +183,4 @@ const PoultryReport = () => {
   );
 };
 
-export default PoultryReport;
+export default GuineaFowlReportDashboard;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const FinancialReports = () => {
+const GuineaFowlFinancialReports = () => {
   const [selectedReport, setSelectedReport] = useState(null);
 
   const reports = [
@@ -13,8 +13,8 @@ const FinancialReports = () => {
       // ... other details for the Supplier Performance Report
     },
     {
-      title: "Bird Sales Report",
-      path: "/bird-sales-report",
+      title: "Guinea Fowl Sales Report",
+      path: "/guinea-fowls-sales-report",
       purpose: "This tells the sale of birds within a particular period",
       // ... other details for the Quality Control Report
     },
@@ -53,4 +53,4 @@ const FinancialReports = () => {
   );
 };
 
-export default FinancialReports;
+export default GuineaFowlFinancialReports;

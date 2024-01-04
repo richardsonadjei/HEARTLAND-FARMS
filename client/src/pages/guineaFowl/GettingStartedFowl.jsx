@@ -9,12 +9,12 @@ const GuineaFowl = () => {
     const fetchData = async () => {
       try {
         // Fetch sorted egg stock
-        const sortedEggResponse = await fetch('/api/current-sorted-egg-stock');
+        const sortedEggResponse = await fetch('/api/current-sorted-guineaFowl-egg-stock');
         const sortedEggData = await sortedEggResponse.json();
         setSortedEggStock(sortedEggData);
 
         // Fetch unsorted egg stock
-        const unsortedEggResponse = await fetch('/api/current-unsorted-egg-stock');
+        const unsortedEggResponse = await fetch('/api/current-unsorted-guineaFowl-egg-stock');
         const unsortedEggData = await unsortedEggResponse.json();
         setUnsortedEggStock(unsortedEggData);
 
@@ -73,7 +73,9 @@ const GuineaFowl = () => {
 
   const sortedEggCardStyle = {
     ...cardStyle,
-    background: 'linear-gradient(to bottom right, #87CEEB, #4682B4)', // Gradient for sorted eggs
+    background: 'linear-gradient(to bottom right, #87CEEB, #4682B4)',
+    fontSize: '1rem', 
+     // Gradient for sorted eggs
   };
 
   const unsortedEggCardStyle = {
@@ -82,7 +84,9 @@ const GuineaFowl = () => {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center', // Center the content horizontally
-    justifyContent: 'center', // Center the content vertically
+    justifyContent: 'center',
+    color: 'black', 
+    fontSize: '1.5rem', // Center the content vertically
   };
 
   const birdQuantityCardStyle = {

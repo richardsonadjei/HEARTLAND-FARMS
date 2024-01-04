@@ -60,8 +60,8 @@ const GuineaFowlDashboard = () => {
             </li>
             {isAdmin && (
               <li className="nav-item">
-                <a className="nav-link text-light" href="/poultry-report">
-                  General Report
+                <a className="nav-link text-light" href="/guinea-fowl-report-dashboard">
+                  General Reports On Guinea Fowls 
                 </a>
               </li>
             )}
@@ -92,7 +92,7 @@ const GuineaFowlDashboard = () => {
               <div className="col-md-6">
               <div className="card mb-4" id="stock-tracking" style={{ backgroundImage: 'url("../../../public/images/Guinea-fowl-bg.jpg")', backgroundSize: 'cover' }}>
                   <div className="card-body">
-                    <h3 className="card-title">Stock Tracking</h3>
+                    <h3 className="card-title text-white">Stock Tracking</h3>
                     <p className="card-text">Quick Links</p>
                     <div className="mb-4">
                       <Link to="/new-guineaFowl">
@@ -112,7 +112,7 @@ const GuineaFowlDashboard = () => {
                           Update Age
                         </button>
                       </Link>
-                      <Link to="/move-guinea-fowl">
+                      <Link to="/move-guinea-fowls">
                         <button className="btn btn-primary me-2 mb-2">Relocate Birds</button>
                       </Link>
                     </div>
@@ -153,22 +153,22 @@ const GuineaFowlDashboard = () => {
                     <p className="card-text">Some description about egg management.</p>
                     <div className="d-flex flex-wrap">
   <div className="me-2 mb-1">
-    <Link to="/add-unsorted-eggs">
+    <Link to="/record-unsorted-guinea-fowl-eggs">
       <button className="btn btn-primary">Record Eggs Laid (Unsorted)</button>
     </Link>
   </div>
   <div className="me-2 mb-1">
-    <Link to="/add-sorted-eggs">
+    <Link to="/record-sorted-guinea-fowl-eggs">
       <button className="btn btn-primary">Record Eggs Laid (Sorted)</button>
     </Link>
   </div>
   <div className="me-2 mb-1">
-    <Link to="/daily-unsorted-eggs-report">
+    <Link to="/view-daily-unsorted-guinea-fowl-eggs">
       <button className="btn btn-primary">Daily Unsorted Eggs</button>
     </Link>
   </div>
   <div className="me-2 mb-1">
-    <Link to="/daily-sorted-eggs-report">
+    <Link to="/view-daily-sorted-guinea-fowl-eggs">
       <button className="btn btn-primary">Daily Sorted Eggs</button>
     </Link>
   </div>
@@ -183,11 +183,11 @@ const GuineaFowlDashboard = () => {
                 <div className="card mb-4" id="sales-distribution" style={{ backgroundImage: 'url("../../../public/images/sale guinea fowl.jpg")', backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat' }}>
                   <div className="card-body">
                     <h3 className="card-title">Sales and Distribution</h3>
-                    <Link to="/sell-eggs">
+                    <Link to="/sell-guinea-fowl-eggs">
                         <button className="btn btn-primary me-2 mb-2">Sell Eggs</button>
                     </Link>
                    
-                    <Link to="/sell-birds">
+                    <Link to="/sell-guinea-fowls">
                         <button className="btn btn-primary me-2 mb-2">Sell Birds</button>
                     </Link>
                   </div>
@@ -213,7 +213,7 @@ const GuineaFowlDashboard = () => {
                   <div className="card-body">
                     <h3 className="card-title">Mortality</h3>
                     <p className="card-text">Mortality</p>
-                    <Link to="/bird-mortality">
+                    <Link to="/record-guinea-fowl-mortality">
                         <button className="btn btn-primary me-2 mb-2">Record Mortality</button>
                     </Link>
                   </div>

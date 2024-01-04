@@ -1,45 +1,115 @@
+// Import necessary dependencies
 import React, { useState, useEffect } from 'react';
-import { Button, Form, FormGroup, Label, Input, Container, Row, Col } from 'reactstrap';
-import Select from 'react-select';
 import { useSelector } from 'react-redux';
+import { Button, Form, FormGroup, Label, Input, Container, Row, Col } from 'reactstrap';
 
-const MoveGuineaFowl = () => {
+const MoveGuineaFowls = () => {
+  const { currentUser } = useSelector((state) => state.user);
+  // State to manage form data
   const [formData, setFormData] = useState({
     batchNumber: '',
     fromFarmSection: '',
     toFarmSection: '',
     quantity: '',
-    movementBy: '',
+    movementBy: currentUser ? currentUser.userName : '',
     movementReason: '',
+    availableQuantity: 0,
   });
 
-  const [farmSections, setFarmSections] = useState([]);
+  // State to store available batch numbers
   const [batchNumbers, setBatchNumbers] = useState([]);
-  const { currentUser } = useSelector((state) => state.user);
 
-  const fetchFarmSections = async () => {
+  // State to store available farm sections
+  const [farmSections, setFarmSections] = useState([]);
+
+  // Effect to fetch batch numbers and farm sections when the component mounts
+  useEffect(() => {
+    const fetchBatchNumbers = async () => {
+      try {
+        const response = await fetch('/api/all-guinea-fowl');
+        if (!response.ok) {
+          throw new Error('Error fetching batch numbers');
+        }
+        const data = await response.json();
+
+        // Check if the response is an array
+        if (Array.isArray(data)) {
+          const batchNumbers = data.map((batch) => batch.batchNumber);
+          setBatchNumbers(batchNumbers);
+        } else {
+          throw new Error('Invalid data structure in the response');
+        }
+      } catch (error) {
+        console.error('Error fetching batch numbers:', error.message);
+      }
+    };
+
+    const fetchFarmSections = async () => {
+      try {
+        const response = await fetch('/api/all-sections');
+        const data = await response.json();
+
+        // Extract section names from the data
+        const availableFarmSections = data.map((section) => section.sectionName);
+        setFarmSections(availableFarmSections);
+      } catch (error) {
+        console.error('Error fetching farm sections:', error);
+      }
+    };
+
+    fetchBatchNumbers();
+    fetchFarmSections();
+  }, []);
+
+  /// Function to handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      const response = await fetch('/api/all-sections');
+      const response = await fetch('/api/move-guinea-fowls', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
       const data = await response.json();
-      const availableFarmSections = data.map((section) => ({ value: section.sectionName, label: section.sectionName }));
-      setFarmSections(availableFarmSections);
+
+      // Handle success or error response from the server
+      if (data.success) {
+        alert('Batch moved successfully');
+        // Redirect to /poultry-dashboard after 2 seconds
+        setTimeout(() => {
+          window.location.href = '/guinea-fowl-dashboard';
+        }, 2000);
+      } else {
+        alert(`Error: ${data.error}`);
+      }
     } catch (error) {
-      console.error('Error fetching farm sections:', error);
+      console.error('Error:', error);
+      alert('Internal Server Error');
     }
   };
 
-  const fetchBatchDetails = async (selectedBatchNumber) => {
+  // Function to handle input changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleBatchNumberChange = async (selectedBatchNumber) => {
     try {
       const response = await fetch(`/api/guinea-fowls/${selectedBatchNumber}`);
       const data = await response.json();
 
+
       if (data.success) {
-        const selectedBatch = data.data;
+        const selectedBatch = data.guineaFowl;
+
         setFormData((prevFormData) => ({
           ...prevFormData,
           batchNumber: selectedBatch.batchNumber || '',
           fromFarmSection: selectedBatch.farmSection || '',
-          // Add a conditional check for selectedBatch.farmSection
           availableQuantity: selectedBatch.quantity || 0,
         }));
       } else {
@@ -50,218 +120,122 @@ const MoveGuineaFowl = () => {
     }
   };
 
- const handleBatchNumberChange = async (selectedBatchNumber) => {
-  try {
-    const response = await fetch(`/api/guinea-fowls/${selectedBatchNumber}`);
-    const data = await response.json();
-
-    if (data.success) {
-      const selectedBatch = data.guineaFowl; // Update here to access the guineaFowl property
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        batchNumber: selectedBatch.batchNumber || '',
-        fromFarmSection: selectedBatch.farmSection || '',
-      }));
-    } else {
-      console.error('Error fetching batch data:', data.error);
-    }
-  } catch (error) {
-    console.error('Error fetching batch data:', error);
-  }
-};
-
-  const fetchBatchNumbers = async () => {
-    try {
-      const response = await fetch('/api/all-guinea-fowl');
-      if (!response.ok) {
-        throw new Error('Error fetching batch numbers');
-      }
-      const responseData = await response.json();
-      const batchNumbers = responseData.map((batch) => ({ value: batch.batchNumber, label: `${batch.batchNumber} - Stock: ${batch.quantity}` }));
-      setBatchNumbers(batchNumbers);
-    } catch (error) {
-      console.error('Error fetching batch numbers:', error.message);
-    }
-  };
-
-  // Add the handleInputChange function
-  const handleInputChange = (name, value) => {
-    setFormData({ ...formData, [name]: value });
-  };
-
+  // Use useEffect to trigger handleInputChange after formData is updated
   useEffect(() => {
-    fetchFarmSections();
-    fetchBatchNumbers();
-  }, []);
-
-  useEffect(() => {
-    // When a batch number is selected, fetch the associated farm section
-    const fetchFarmSectionForBatch = async () => {
-      if (formData.batchNumber) {
-        try {
-          const response = await fetch(`/api/guinea-fowls/${formData.batchNumber}`);
-          const data = await response.json();
-
-          if (data.success) {
-            // Add a conditional check for data.data.farmSection
-            setFormData((prevFormData) => ({
-              ...prevFormData,
-              fromFarmSection: data.data.farmSection ? data.data.farmSection : '',
-            }));
-          } else {
-            console.error('Error fetching farm section:', data.error);
-          }
-        } catch (error) {
-          console.error('Error fetching farm section:', error);
-        }
-      }
-    };
-
-    fetchFarmSectionForBatch();
+    handleInputChange({
+      target: {
+        name: 'batchNumber',
+        value: formData.batchNumber,
+      },
+    });
   }, [formData.batchNumber]);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      if (
-        !formData.batchNumber ||
-        !formData.fromFarmSection ||
-        !formData.toFarmSection ||
-        !formData.quantity ||
-        !formData.movementReason
-      ) {
-        throw new Error('All fields are required');
-      }
-
-      const response = await fetch('/api/move-guinea-batch', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...formData,
-          quantity: parseInt(formData.quantity),
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to move batch');
-      }
-
-      alert('Batch moved successfully');
-
-      setTimeout(() => {
-        window.location.href = '/guinea-fowl-dashboard';
-      }, 3000);
-    } catch (error) {
-      alert(`Error: ${error.message}`);
-
-      setTimeout(() => {
-        window.location.reload();
-      }, 3000);
-    }
-  };
-
-  const customStyles = {
-    option: (provided, state) => ({
-      ...provided,
-      backgroundColor: state.isFocused ? '#d3d3d3' : 'white',
-      color: state.isFocused ? 'black' : 'black',
-    }),
-    control: (provided) => ({
-      ...provided,
-      backgroundColor: 'white',
-    }),
-  };
+  
+  
 
   return (
     <Container>
-      <Row className="mt-4">
-        <Col sm="12" md={{ size: 6, offset: 3 }}>
-          <h2 className="text-center mb-4">Move Guinea Fowl Batch</h2>
-          <Form onSubmit={handleSubmit} style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)', padding: '20px', borderRadius: '10px' }}>
-            <FormGroup row>
-              <Label for="batchNumber" sm={4}>
-                Batch Number:
-              </Label>
-              <Col sm={8}>
-                <Input
-                  type="select"
-                  id="batchNumber"
-                  name="batchNumber"
-                  value={formData.batchNumber}
-                  onChange={(e) => {
-                    handleInputChange('batchNumber', e.target.value);
-                    fetchBatchDetails(e.target.value);
-                  }}
-                >
-                  <option value="" disabled>
-                    Select Batch Number
+      <Row>
+        <Col sm="6" className="mx-auto mt-5">
+          <h2 className="mb-4 text-center">Move Batch Form</h2>
+          <Form onSubmit={handleSubmit}>
+            <FormGroup>
+              <Label for="batchNumber">Batch Number</Label>
+              <Input
+                type="select"
+                name="batchNumber"
+                id="batchNumber"
+                value={formData.batchNumber}
+                onChange={(e) => handleBatchNumberChange(e.target.value)}
+              >
+                <option value="" disabled>Select Batch Number</option>
+                {batchNumbers.map((batchNumber) => (
+                  <option key={batchNumber} value={batchNumber}>
+                    {batchNumber}
                   </option>
-                  {batchNumbers.map((batch) => (
-                    <option key={batch.value} value={batch.value}>
-                      {batch.label}
-                    </option>
-                  ))}
-                </Input>
-              </Col>
+                ))}
+              </Input>
             </FormGroup>
 
-            <FormGroup row>
-              <Label for="fromFarmSection" sm={4}>
-                From Farm Section:
-              </Label>
-              <Col sm={8}>
-                <Input type="text" id="fromFarmSection" name="fromFarmSection" value={formData.fromFarmSection} readOnly />
-              </Col>
+            <FormGroup>
+              <Label for="fromFarmSection">From Farm Section</Label>
+              <Input
+                type="text"
+                name="fromFarmSection"
+                id="fromFarmSection"
+                placeholder="From Farm Section"
+                value={formData.fromFarmSection}
+                onChange={handleInputChange}
+                readOnly
+              />
             </FormGroup>
 
-            <FormGroup row>
-              <Label for="toFarmSection" sm={4}>
-                To Farm Section:
-              </Label>
-              <Col sm={8}>
-                <Select
-                  id="toFarmSection"
-                  name="toFarmSection"
-                  value={formData.toFarmSection}
-                  options={farmSections}
-                  onChange={(selectedOption) => handleInputChange('toFarmSection', selectedOption.value)}
-                  isSearchable
-                  styles={customStyles}
-                />
-              </Col>
+            <FormGroup>
+              <Label for="toFarmSection">To Farm Section</Label>
+              <Input
+                type="select"
+                name="toFarmSection"
+                id="toFarmSection"
+                value={formData.toFarmSection}
+                onChange={handleInputChange}
+              >
+                <option value="" disabled>Select To Farm Section</option>
+                {farmSections.map((section) => (
+                  <option key={section} value={section}>
+                    {section}
+                  </option>
+                ))}
+              </Input>
             </FormGroup>
 
-            <FormGroup row>
-              <Label for="quantity" sm={4}>
-                Quantity:
-              </Label>
-              <Col sm={8}>
-                <Input type="number" id="quantity" name="quantity" value={formData.quantity} onChange={(e) => handleInputChange('quantity', e.target.value)} />
-              </Col>
+            <FormGroup>
+              <Label for="availableQuantity">Available Quantity</Label>
+              <Input
+                type="text"
+                name="availableQuantity"
+                id="availableQuantity"
+                value={formData.availableQuantity}
+                readOnly
+              />
             </FormGroup>
 
-            <FormGroup row>
-              <Label for="movementBy" sm={4}>
-                Movement By:
-              </Label>
-              <Col sm={8}>
-                <Input type="text" id="movementBy" name="movementBy" value={formData.movementBy || currentUser.userName} readOnly />
-              </Col>
+            <FormGroup>
+              <Label for="quantity">Quantity</Label>
+              <Input
+                type="number"
+                name="quantity"
+                id="quantity"
+                placeholder="Enter Quantity"
+                value={formData.quantity}
+                onChange={handleInputChange}
+              />
             </FormGroup>
 
-            <FormGroup row>
-              <Label for="movementReason" sm={4}>
-                Movement Reason:
-              </Label>
-              <Col sm={8}>
-                <Input type="text" id="movementReason" name="movementReason" value={formData.movementReason} onChange={(e) => handleInputChange('movementReason', e.target.value)} />
-              </Col>
+            <FormGroup>
+              <Label for="movementBy">Movement By</Label>
+              <Input
+                type="text"
+                name="movementBy"
+                id="movementBy"
+                placeholder="Enter Movement By"
+                value={formData.movementBy}
+                onChange={handleInputChange}
+                readOnly
+              />
             </FormGroup>
 
-            <Button type="submit" color="primary">
+            <FormGroup>
+              <Label for="movementReason">Movement Reason</Label>
+              <Input
+                type="text"
+                name="movementReason"
+                id="movementReason"
+                placeholder="Enter Movement Reason"
+                value={formData.movementReason}
+                onChange={handleInputChange}
+              />
+            </FormGroup>
+
+            <Button color="primary" type="submit">
               Move Batch
             </Button>
           </Form>
@@ -271,4 +245,4 @@ const MoveGuineaFowl = () => {
   );
 };
 
-export default MoveGuineaFowl;
+export default MoveGuineaFowls;

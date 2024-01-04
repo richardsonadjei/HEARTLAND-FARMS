@@ -33,7 +33,7 @@ const guineaFowlMovementSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-}, { timestamps: true }); // Adding timestamps to the schema
+});
 
 // Create and export the GuineaFowlMovement model
 const GuineaFowlMovement = mongoose.model('GuineaFowlMovement', guineaFowlMovementSchema);
