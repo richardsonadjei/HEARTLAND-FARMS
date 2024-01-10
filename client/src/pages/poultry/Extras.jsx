@@ -11,8 +11,11 @@ const Extras = () => {
             <div className="card-body">
               <h5 className="card-title">New Breed</h5>
               <p className="card-text">Create A New Of Poultry Breed</p>
-              <Link to="/create-breed" className="btn btn-primary">
-                Create A Breed
+              <Link to="/create-breed" className="btn btn-primary me-2 mt-2">
+                Create Poultry Breed
+              </Link>
+              <Link to="/add-pig-breed" className="btn btn-primary me-2 mt-2">
+                Create Pig Breed
               </Link>
             </div>
           </div>

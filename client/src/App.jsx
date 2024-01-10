@@ -98,6 +98,12 @@ import GuineaFowlEggSalesReport from './pages/guineaFowl/reports/GuineaFowlEggSa
 import GuineaFowlFinancialReports from './pages/guineaFowl/reports/GuineaFowlFinancialReports';
 import SellGuineaFowls from './pages/guineaFowl/SellGuineaFowls';
 import GuineaFowlSalesReport from './pages/guineaFowl/reports/GuineaFowlSalesReport';
+import GuineaFowlBatchMortalityReport from './pages/guineaFowl/reports/GuineaFowlBatchMortalityReport';
+import GuineaFowlSingleBatchUpdateHistory from './pages/guineaFowl/reports/SingleBatchStockUpdateReport';
+import PigFarmDashBoard from './pages/pigs/PigFarmDashBoard';
+import PigStockTracking from './pages/pigs/PigStockTracking';
+import CreatePigBreed from './pages/pigs/CreatePigBreed';
+import AddNewPig from './pages/pigs/AddNewPig';
 
 
 
@@ -201,6 +207,12 @@ export default function App() {
           <Route path='/guinea-fowl-financial-reports' element={<GuineaFowlFinancialReports/>} />
           <Route path='/sell-guinea-fowls' element={<SellGuineaFowls/>} />
           <Route path='/guinea-fowls-sales-report' element={<GuineaFowlSalesReport/>} />
+          <Route path='/guinea-fowls-batch-mortality-report' element={<GuineaFowlBatchMortalityReport/>} />
+          <Route path='/guinea-fowls-single-batch-update-report' element={<GuineaFowlSingleBatchUpdateHistory/>} />
+          <Route path='/pig-farm-dashboard' element={<PigFarmDashBoard/>} />
+          <Route path='/pig-stock-tracking' element={<PigStockTracking/>} />
+          <Route path='/add-pig-breed' element={<CreatePigBreed/>} />
+          <Route path='/add-new-pig' element={<AddNewPig/>} />
          
 
         </Route>

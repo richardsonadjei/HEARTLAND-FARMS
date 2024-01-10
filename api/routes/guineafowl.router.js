@@ -69,7 +69,11 @@ guineaFowlRouter.get('/view-guineaFowl-egg-sales-by-period', guineaFowlControlle
 guineaFowlRouter.post('/sell-guineaFowls', guineaFowlController.recordGuineaFowlSale);
 guineaFowlRouter.get('/view-guineaFowl-sales-by-period', guineaFowlController.viewGuineaFowlSalesWithinPeriod);
 
+// MORTALITY REPORT
+guineaFowlRouter.get('/guinea-fowl-batch-mortality/:batchNumber', guineaFowlController.viewGuineaFowlMortalityByBatch);
 
+// BATCH UPDATE REPORT
+guineaFowlRouter.get('/single-guinea-fowl-batch-updates/:batchNumber', guineaFowlController.viewUpdatesForBatch);
 
 export default guineaFowlRouter;
 

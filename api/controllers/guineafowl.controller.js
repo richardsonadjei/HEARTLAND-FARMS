@@ -96,6 +96,21 @@ const viewBatchUpdatesWithinPeriod = async (req, res) => {
   }
 };
 
+const viewUpdatesForBatch = async (req, res) => {
+  try {
+    const { batchNumber } = req.params;
+
+    // Query for GuineaFowlStockUpdates for the specified batchNumber
+    const batchUpdates = await GuineaFowlStockUpdate.find({ batchNumber });
+
+    res.json(batchUpdates);
+  } catch (error) {
+    console.error('Error retrieving batch updates:', error.message);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+
 
 
 
@@ -160,6 +175,7 @@ export {
   updateGuineaFowlQuantity,
   viewBatchUpdatesWithinPeriod,
   viewGuineaFowlBatchByNumber, 
+  viewUpdatesForBatch
 };
 
 
@@ -816,5 +832,30 @@ export const viewGuineaFowlSalesWithinPeriod = async (req, res) => {
     res.status(200).json({ success: true, data: { sales: salesWithOverallTotal, overallTotal } });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+
+// MORTALITY CONTROLLER
+
+// Controller function to view mortality of a particular batch
+export const viewGuineaFowlMortalityByBatch = async (req, res) => {
+  try {
+    const { batchNumber } = req.params;
+
+    // Find the Guinea Fowl mortality records by batchNumber
+    const guineaFowlMortality = await GuineaFowlMortality.find({ batchNumber });
+
+    // Check if there are mortality records for the specified batchNumber
+    if (guineaFowlMortality.length === 0) {
+      return res.status(404).json({ success: false, error: 'No mortality records found for the batch' });
+    }
+
+    // Respond with the mortality records for the batch
+    res.status(200).json({ success: true, data: guineaFowlMortality });
+  } catch (error) {
+    // Handle errors and send an error response
+    console.error(error);
+    res.status(500).json({ success: false, error: 'Internal Server Error' });
   }
 };

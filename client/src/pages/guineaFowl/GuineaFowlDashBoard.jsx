@@ -60,13 +60,6 @@ const GuineaFowlDashboard = () => {
             </li>
             {isAdmin && (
               <li className="nav-item">
-                <a className="nav-link text-light" href="/guinea-fowl-report-dashboard">
-                  General Reports On Guinea Fowls 
-                </a>
-              </li>
-            )}
-            {isAdmin && (
-              <li className="nav-item">
                 <a className="nav-link text-light" href="/finance">
                   Finance
                 </a>
@@ -93,7 +86,7 @@ const GuineaFowlDashboard = () => {
               <div className="card mb-4" id="stock-tracking" style={{ backgroundImage: 'url("../../../public/images/Guinea-fowl-bg.jpg")', backgroundSize: 'cover' }}>
                   <div className="card-body">
                     <h3 className="card-title text-white">Stock Tracking</h3>
-                    <p className="card-text">Quick Links</p>
+                    
                     <div className="mb-4">
                       <Link to="/new-guineaFowl">
                         <button className="btn btn-primary mb-2 me-2">Add New Stock</button>
@@ -105,10 +98,13 @@ const GuineaFowlDashboard = () => {
                         <button className="btn btn-primary me-2 mb-2">All Stock</button>
                       </Link>
                       <Link to="/guineaFowls-batch-update-history">
-                        <button className="btn btn-primary me-2 mb-2">Batch Update Report</button>
+                        <button className="btn btn-primary me-2 mb-2" >All Stock Update Report</button>
+                      </Link>
+                      <Link to="/guinea-fowls-single-batch-update-report">
+                        <button className="btn btn-primary me-2 mb-2">Batch Stock Update Report</button>
                       </Link>
                       <Link to="#">
-                        <button className="btn btn-primary me-2 mb-2" onClick={handleUpdateAgeClick}>
+                        <button className="btn btn-primary me-2 mb-2" onClick={handleUpdateAgeClick} style={{ backgroundColor: 'black', border: '1px solid', color:'white' }}>
                           Update Age
                         </button>
                       </Link>
@@ -141,7 +137,7 @@ const GuineaFowlDashboard = () => {
                     <h3 className="card-title text-white">Vaccination and Health Management</h3>
                     <p className="card-text">Some description about medication and health management.</p>
                     <Link to="/medication">
-                        <button className="btn btn-primary">Vaccination And Treatments</button>
+                        <button className="btn btn-primary" style={{ backgroundColor: 'green', border: '1px solid ' }}>Vaccination And Treatments</button>
                       </Link>
                   </div>
                 </div>
@@ -216,6 +212,17 @@ const GuineaFowlDashboard = () => {
                     <Link to="/record-guinea-fowl-mortality">
                         <button className="btn btn-primary me-2 mb-2">Record Mortality</button>
                     </Link>
+                    <Link to="/all-batches-mortality-report">
+  <button className="btn btn-primary me-2" style={{ backgroundColor: 'red', border: '1px solid red' }}>
+    All Batches Mortality Report
+  </button>
+</Link>
+<Link to="/guinea-fowls-batch-mortality-report">
+  <button className="btn btn-primary me-2" style={{ backgroundColor: 'red', border: '1px solid red' }}>
+    Batch Mortality Report
+  </button>
+</Link>
+
                   </div>
                 </div>
               </div>

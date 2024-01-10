@@ -41,7 +41,7 @@ const Home = () => {
                   {(userCategory === 'animal' || userCategory === 'all') && (
                     <>
                       <div className="col-lg-2 col-md-2 col-sm-2 col-2 mx-2">
-                        <a href="#" className="app-item">
+                        <a href="/pig-farm-dashboard" className="app-item">
                           <div className="icon mb-3">
                             <img className="img-fluid lazy" alt="" src="https://www.bivatec.com/assets/images/icons/apps/my_piggery_manager_new_1.png" />
                           </div>

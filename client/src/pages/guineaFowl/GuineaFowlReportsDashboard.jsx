@@ -113,7 +113,7 @@ const GuineaFowlReportDashboard = () => {
                     <Link to="/all-batches-mortality-report">
                       <button className="btn btn-primary me-2">All Batches Mortality Report</button>
                     </Link>
-                    <Link to="/batch-mortality-report">
+                    <Link to="/guinea-fowls-batch-mortality-report">
                       <button className="btn btn-primary me-2">Batch Mortality Report</button>
                     </Link>
                   </div>

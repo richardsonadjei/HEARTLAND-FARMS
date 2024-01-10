@@ -12,34 +12,38 @@ const GuineaFowl = () => {
         const sortedEggResponse = await fetch('/api/current-sorted-guineaFowl-egg-stock');
         const sortedEggData = await sortedEggResponse.json();
         setSortedEggStock(sortedEggData);
-
+  
         // Fetch unsorted egg stock
         const unsortedEggResponse = await fetch('/api/current-unsorted-guineaFowl-egg-stock');
         const unsortedEggData = await unsortedEggResponse.json();
         setUnsortedEggStock(unsortedEggData);
+  
+       // Fetch sum of bird quantities from all-guinea-fowl
+const birdQuantityResponse = await fetch('/api/all-guinea-fowl');
+const birdQuantityData = await birdQuantityResponse.json();
 
-        // Fetch sum of bird quantities
-        const birdQuantityResponse = await fetch('/api/all-batchesNoDates');
-        const birdQuantityData = await birdQuantityResponse.json();
 
-        
 
-        if (typeof birdQuantityData === 'object' && birdQuantityData.success && birdQuantityData.data) {
-          // Updated to pick the total quantity from the response
-          const sum = birdQuantityData.data.totalQuantity || 0;
-          setBirdQuantitySum(sum);
-        } else {
-          console.error('Error: Invalid response from bird quantity endpoint.');
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error.message);
-      }
-    };
+if (Array.isArray(birdQuantityData) && birdQuantityData.length > 0) {
+  // Check the structure of the array
+  const batchData = birdQuantityData[0].data || birdQuantityData;
 
+  // Sum up the quantity from each batch
+  const sum = batchData.reduce((total, batch) => total + batch.quantity, 0);
+  setBirdQuantitySum(sum);
+} else {
+  console.error('Error: Invalid response from bird quantity endpoint.');
+}
+
+  } catch (error) {
+    console.error('Error fetching data:', error.message);
+  }
+};
+  
     const interval = setInterval(() => {
       fetchData();
     }, 1000);
-
+  
     return () => clearInterval(interval);
   }, []);
 

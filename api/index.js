@@ -26,6 +26,9 @@ import birdMortalityRouter from './routes/birdMortality.router.js';
 import guineaFowlRouter from './routes/guineafowl.router.js';
 import guineaFowlNotificationRouter from './routes/guineaFowlNotification.router.js';
 import guineaFowlVaccinationRouter from './routes/guineaFowlVaccination.router.js';
+import pigFarmRouter from './routes/pigFarm.router.js';
+
+
 
 
 
@@ -80,8 +83,10 @@ app.use('/api/', incomeRouter);
 app.use('/api/', birdMortalityRouter);    
 app.use('/api/', guineaFowlRouter);    
 app.use('/api/', guineaFowlNotificationRouter);    
-app.use('/api/', guineaFowlVaccinationRouter);    
+app.use('/api/', guineaFowlVaccinationRouter);  
 
+// PIGFARM ROUTERS
+app.use('/api/', pigFarmRouter); 
 
 
 

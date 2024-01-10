@@ -160,3 +160,275 @@ background-color: #33C1FF; /* Choose the background color you prefer */
 }
 
 
+/* PigFarmDashboard.css */
+
+/* PigFarmDashboard.css */
+
+.dashboard-container {
+  background-color: #f8f9fa;
+  padding: 50px 0;
+}
+
+.header {
+  background-color: #343a40;
+  color: #fff;
+  padding: 20px 0;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  border-bottom-left-radius: 50% 20px; /* Add this line for a curved base */
+  border-bottom-right-radius: 50% 20px; /* Add this line for a curved base */
+}
+
+.features {
+  margin-top: 30px;
+}
+
+.feature {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  overflow: hidden; /* Add this line to hide overflow when animating */
+}
+
+.feature:hover {
+  transform: scale(1.05);
+  color: #000;
+}
+
+.icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #343a40;
+}
+
+/* Add this animation for the card backgrounds */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.cta {
+  margin-top: 50px;
+}
+
+.cta h2 {
+  margin-bottom: 20px;
+  color: #343a40;
+}
+
+.cta button {
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  color: #fff;
+}
+
+/* Apply the animation to the features */
+.feature:nth-child(odd) {
+  background: linear-gradient(45deg, #7ed56f, #28b485);
+  background-size: 200% 200%;
+  animation: gradientAnimation 4s infinite;
+}
+
+.feature:nth-child(even) {
+  background: linear-gradient(45deg, #ff9f43, #ff6b6b);
+  background-size: 200% 200%;
+  animation: gradientAnimation 4s infinite;
+}
+
+* Add styling for the current user */
+.current-user {
+  font-size: 1.5rem;
+  margin-top: 10px;
+  color: #28a745; /* Green color */
+  font-weight: bold;
+  animation: slideInUp 0.5s ease-out;
+}
+
+/* Keyframe animation for sliding in */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card-link {
+  text-decoration: none; /* Remove underline from the text */
+  color: inherit; /* Inherit text color from parent */
+}
+
+.feature {
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 30px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+.feature:hover {
+  transform: scale(1.05);
+}
+
+.icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #343a40;
+}
+
+
+
+/* PICK STOCK TRACKING CSS */
+
+
+.tracking-container {
+  background-color: #f8f9fa;
+  padding: 50px 0;
+}
+
+.tracking-section {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.tracking-card {
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 30px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  overflow: hidden;
+  color: #343a40; /* Added text color */
+}
+
+.tracking-card:hover {
+  transform: scale(1.05);
+}
+
+.tracking-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.tracking-card h3,
+.tracking-card p {
+  color: #fff; /* Text color for heading and paragraph */
+}
+
+.tracking-header {
+  background: linear-gradient(to right, #ff6b6b, #4e54c8);
+  padding: 30px 0;
+  color: #fff;
+  border-bottom-left-radius: 50% 20%;
+  border-bottom-right-radius: 50% 20%;
+}
+
+.tracking-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.baby-icon {
+  color: #ffb142;
+}
+
+.weight-icon {
+  color: #45aaf2;
+}
+
+.breeding-icon {
+  color: #4cd137;
+}
+
+.farrowing-icon {
+  color: #ff6b6b;
+}
+
+.weaning-icon {
+  color: #6ab04c;
+}
+
+.mortality-icon {
+  color: red;
+}
+
+/* Add this to your existing CSS styles */
+
+.tracking-icon.pig-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #e57373; /* Change color as per your preference */
+}
+
+.tracking-card:hover {
+  transform: scale(1.05);
+  background-color: #343a40; /* Change background color on hover */
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2); /* Adjust hover box-shadow */
+}
+
+.tracking-card h3,
+.tracking-card p {
+  color: #fff;
+}
+
+/* Additional styles for the new card */
+.tracking-card.pig-icon {
+  background-color: #f8bbd0; /* Change background color for the pig card */
+}
+
+/* Add more styles as needed */
+
+/* Pig Breed Category */
+.transparent-form {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+
+
+/* PigNewStock */
+.transparent-form {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Add your custom styles, animations, and transitions here */
+
+/* Blinking Text */
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.blinking-text {
+  color: red !important;
+  animation: blink 2s infinite; /* Adjust the animation duration as needed */
+}

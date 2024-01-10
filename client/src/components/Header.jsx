@@ -77,80 +77,36 @@ export default function Header() {
           <div className="dropdown-menu mega-menu poultry-menu" aria-labelledby="birdsDropdown">
             {(userCategory === 'poultry' || userCategory === 'all') && (
               <>
-                {/* ... (your existing poultry links) */}
-                <hr className="dropdown-divider" />
-                {/* New Poultry Menu Items */}
                 <ul>
                   <li>
                     <a className="dropdown-item" href="/poultry-dashboard">
                       Poultry
                     </a>
                   </li>
-                  <li>
-                    <Link className="dropdown-item" to="/add-birds">
-                      Add Stock
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/view-all-stock">
-                      View All Stock
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/view-batches">
-                      View Batches
-                    </Link>
-                  </li>
                 </ul>
+                <hr className="dropdown-divider" />
                 <ul>
                   <li>
                     <a className="dropdown-item" href="/guinea-fowl-getting-started">
                      Guinea Fowl
                     </a>
                   </li>
-                  <li>
-                    <Link className="dropdown-item" to="/purchase-feed">
-                      View Stock
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/view-all-feed">
-                     Vaccinate
-                    </Link>
-                  </li>
+                 
                 </ul>
+                <hr className="dropdown-divider" />
                 <ul>
                   <li>
                     <a className="dropdown-item" href="#">
                       Duck
                     </a>
                   </li>
-                  <li>
-                    <Link className="dropdown-item" to="/vaccinate-birds">
-                      View Stock
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/view-vaccination-history">
-                      Vaccination Birds
-                    </Link>
-                  </li>
                 </ul>
+                <hr className="dropdown-divider" />
                 <ul>
                   <li>
                     <a className="dropdown-item" href="#">
                       Turkey
                     </a>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/vaccinate-birds">
-                      View Stock
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/view-vaccination-history">
-                      Vaccinate Birds
-                    </Link>
                   </li>
                 </ul>
                 <hr className="dropdown-divider" />
@@ -173,16 +129,26 @@ export default function Header() {
               <div className="dropdown-menu" aria-labelledby="animalFarmingDropdown">
                 {(userCategory === 'goats' || userCategory === 'sheep' || userCategory === 'cattle' || userCategory === 'all') && (
                   <>
+                  <Link className="dropdown-item" to="/pig-farm-dashboard">
+                      Pig Farm
+                    </Link>
+                    <hr className="dropdown-divider" />
                     <Link className="dropdown-item" to="/goats">
                       Goats
                     </Link>
+                    <hr className="dropdown-divider" />
                     <Link className="dropdown-item" to="/sheep">
                       Sheep
                     </Link>
+                    <hr className="dropdown-divider" />
                     <Link className="dropdown-item" to="/cattle">
                       Cattle
                     </Link>
                     <hr className="dropdown-divider" />
+                    <Link className="dropdown-item" to="/cattle">
+                      Rabbit
+                    </Link>
+                    
                   </>
                 )}
               </div>
@@ -204,16 +170,27 @@ export default function Header() {
                     <Link className="dropdown-item" to="/cassava-farm">
                       Cassava
                     </Link>
+                    <hr className="dropdown-divider" />
                     <Link className="dropdown-item" to="/maize-farm">
                       Maize
                     </Link>
+                    <hr className="dropdown-divider" />
                     <Link className="dropdown-item" to="/plantain-farm">
                       Plantain
                     </Link>
+                    <hr className="dropdown-divider" />
                     <Link className="dropdown-item" to="/beans-farm">
-                      Beans
+                      Soya Beans
                     </Link>
                     <hr className="dropdown-divider" />
+                    <Link className="dropdown-item" to="/beans-farm">
+                      Vegetables
+                    </Link>
+                    <hr className="dropdown-divider" />
+                    <Link className="dropdown-item" to="/beans-farm">
+                      Cocoa
+                    </Link>
+
                   </>
                 )}
               </div>
