@@ -76,7 +76,7 @@ const PigFarmDashboard = () => {
           </Link>
         </Col>
         <Col md={4} className="feature">
-          <Link to="/generate-reports" className="card-link">
+          <Link to="/pig-farm-reports" className="card-link">
             <FaFileAlt className="icon" />
             <h3 className="card-title">Generate Reports</h3>
             <p className="card-description">Generate detailed reports for better decision-making. Analyze growth patterns and expenses.</p>

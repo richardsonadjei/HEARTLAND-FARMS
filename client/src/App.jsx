@@ -104,6 +104,9 @@ import PigFarmDashBoard from './pages/pigs/PigFarmDashBoard';
 import PigStockTracking from './pages/pigs/PigStockTracking';
 import CreatePigBreed from './pages/pigs/CreatePigBreed';
 import AddNewPig from './pages/pigs/AddNewPig';
+import PigStock from './pages/pigs/reports/PigStockReport';
+import PigFarmReportsDashBoard from './pages/pigs/reports/PigFarmReportsDashboard';
+
 
 
 
@@ -213,6 +216,11 @@ export default function App() {
           <Route path='/pig-stock-tracking' element={<PigStockTracking/>} />
           <Route path='/add-pig-breed' element={<CreatePigBreed/>} />
           <Route path='/add-new-pig' element={<AddNewPig/>} />
+          <Route path='/pig-stock-report' element={<PigStock/>} />
+          <Route path='/pig-farm-reports' element={<PigFarmReportsDashBoard/>} />
+         
+        
+          
          
 
         </Route>

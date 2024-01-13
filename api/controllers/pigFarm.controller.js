@@ -34,8 +34,25 @@ const recordNewPigStock = async (req, res) => {
   }
 };
 
+
+const getAllPigStocks = async (req, res) => {
+  try {
+    // Retrieve all pig stocks from the database
+    const pigStocks = await PigStock.find();
+
+    return res.status(200).json({ success: true, pigStocks });
+  } catch (error) {
+    console.error('Error retrieving pig stocks:', error);
+    return res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+};
+
+export { getAllPigStocks };
+
+
 export default {
   recordNewPigStock,
+  
 };
 
 // CALCULATE AGE

@@ -432,3 +432,96 @@ background-color: #33C1FF; /* Choose the background color you prefer */
   color: red !important;
   animation: blink 2s infinite; /* Adjust the animation duration as needed */
 }
+
+/* PIGFARM REPORT DASHBOARD */
+/* PigFarmReports.css */
+/* PigFarmReports.css */
+
+.report-container {
+  background: linear-gradient(135deg, #4b6cb7, #182848);
+  padding: 20px;
+  color: #fff;
+}
+
+.pigReports-header {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.custom-card {
+  margin-top: 20px;
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.custom-card:hover {
+  transform: scale(1.03);
+}
+
+.card-header {
+  padding: 15px;
+  border: none;
+  border-radius: 10px 10px 0 0;
+}
+
+.stock-header {
+  background: linear-gradient(135deg, #00b4db, #0083b0);
+}
+
+.health-header {
+  background: linear-gradient(135deg, #6a0572, #ab83a1);
+  color: #fff;
+}
+
+.financial-header {
+  background: linear-gradient(135deg, #2e3a6a, #1e2a48);
+  color: #fff;
+}
+
+.custom-list-group {
+  padding: 10px;
+}
+
+.list-item {
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  text-decoration: none; /* Remove default Link underline */
+  color: #000; /* Set the default color */
+}
+
+.list-item:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+* Add unique colors for each icon */
+.stock-header .icon {
+  color: #fff; /* Set color for the Stock icon */
+}
+
+.health-header .icon {
+  color: #fff; /* Set color for the Health icon */
+}
+
+.financial-header .icon {
+  color: #fff; /* Set color for the Financial icon */
+}
+
+
+/* PigStock.css */
+
+.pig-report-bg-image {
+  background-image: url('../public/images/AdobeStock_335138119.jpeg'); /* Replace with the path to your image */
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  padding-top: 50px; /* Adjust padding as needed */
+}

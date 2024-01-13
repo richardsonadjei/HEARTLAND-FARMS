@@ -73,12 +73,12 @@ const AddNewPig = () => {
       <Row>
         <Col md={{ size: 6, offset: 3 }}>
           <Form onSubmit={handleSubmit} className="transparent-form">
-            <h2 className="text-white mb-4">Add New Pig</h2>
+            <h2 className="text-black mb-4">Add New Pig</h2>
 
             {alert.message && <Alert color={alert.type}>{alert.message}</Alert>}
 
             <FormGroup row>
-              <Label for="identityTag" className="text-white">
+              <Label for="identityTag" className="text-black">
                 Identity Tag
               </Label>
               <Input
@@ -100,7 +100,7 @@ const AddNewPig = () => {
             </FormGroup>
 
             <FormGroup row>
-              <Label for="breed" className="text-white">
+              <Label for="breed" className="text-black">
                 Breed
               </Label>
               <Input
@@ -121,14 +121,14 @@ const AddNewPig = () => {
             </FormGroup>
 
             <FormGroup row>
-              <Label for="quantity" className="text-white">
+              <Label for="quantity" className="text-black">
                 Quantity
               </Label>
               <Input type="text" name="quantity" id="quantity" value={formData.quantity} readOnly />
             </FormGroup>
 
             <FormGroup row>
-              <Label for="arrivalDate" className="text-white">
+              <Label for="arrivalDate" className="text-black">
                 Arrival Date
               </Label>
               <Input
@@ -142,7 +142,7 @@ const AddNewPig = () => {
             </FormGroup>
 
             <FormGroup row>
-              <Label for="farmSection" className="text-white">
+              <Label for="farmSection" className="text-black">
                 Farm Section
               </Label>
               <Input
@@ -163,7 +163,7 @@ const AddNewPig = () => {
             </FormGroup>
 
             <FormGroup row>
-              <Label for="gender" className="text-white">
+              <Label for="gender" className="text-black">
                 Gender
               </Label>
               <Input

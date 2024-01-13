@@ -42,6 +42,11 @@ const PigStockTracking = () => {
       </Row>
 
       <Row className="tracking-section">
+      <Col className="tracking-card" onClick={() => handleSectionClick('farrowing')}>
+          <FaPiggyBank className="tracking-icon farrowing-icon" />
+          <h3>Crossing</h3>
+          <p>Record Crossing of Female Pig</p>
+        </Col>
         <Col className="tracking-card" onClick={() => handleSectionClick('farrowing')}>
           <FaPiggyBank className="tracking-icon farrowing-icon" />
           <h3>Farrowing</h3>

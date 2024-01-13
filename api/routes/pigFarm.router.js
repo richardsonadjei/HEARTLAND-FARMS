@@ -1,5 +1,5 @@
 import express from 'express';
-import pigStockController, { createPigBreed, getPigBreeds, updatePigCurrentAge } from '../controllers/pigFarm.controller.js';
+import pigStockController, { createPigBreed, getAllPigStocks, getPigBreeds, updatePigCurrentAge, } from '../controllers/pigFarm.controller.js';
 
 const pigFarmRouter = express.Router();
 
@@ -13,5 +13,10 @@ pigFarmRouter.post('/update-pig-current-age', updatePigCurrentAge);
 // PIG BREED ROUTERS
 pigFarmRouter.post('/add-pig-breeds', createPigBreed);
 pigFarmRouter.get('/all-pig-breeds', getPigBreeds);
+
+
+pigFarmRouter.get('/all-pigs', getAllPigStocks);
+
+
 
 export default pigFarmRouter;
