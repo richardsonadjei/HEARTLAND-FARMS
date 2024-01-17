@@ -106,6 +106,18 @@ import CreatePigBreed from './pages/pigs/CreatePigBreed';
 import AddNewPig from './pages/pigs/AddNewPig';
 import PigStock from './pages/pigs/reports/PigStockReport';
 import PigFarmReportsDashBoard from './pages/pigs/reports/PigFarmReportsDashboard';
+import PigCrossing from './pages/pigs/PigCrossing';
+import PigCrossingReport from './pages/pigs/reports/PigCrossingReport';
+import SowCrossingReport from './pages/pigs/reports/SowCrossingReport';
+import RecordPigBirth from './pages/pigs/RecordPigBirth';
+import SowBirthReport from './pages/pigs/reports/SowBirthReport';
+import EachSowBirthReport from './pages/pigs/reports/EachSowBirthReport';
+import PigMortality from './pages/pigs/PigMortality';
+import PigMortalityReport from './pages/pigs/reports/MortalityReport';
+import ManagePigEvents from './pages/pigs/ManagePigEvents';
+import AddPigDrugs from './pages/pigs/AddPigDrugs';
+import VaccinationAndTreatment from './pages/pigs/VaccinationAndTreatment';
+import PigFeedManagement from './pages/pigs/PigFeedManagement';
 
 
 
@@ -218,6 +230,18 @@ export default function App() {
           <Route path='/add-new-pig' element={<AddNewPig/>} />
           <Route path='/pig-stock-report' element={<PigStock/>} />
           <Route path='/pig-farm-reports' element={<PigFarmReportsDashBoard/>} />
+          <Route path='/pig-crossing' element={<PigCrossing/>} />
+          <Route path='/pig-crossing-report' element={<PigCrossingReport/>} />
+          <Route path='/sow-crossing-report' element={<SowCrossingReport/>} />
+          <Route path='/record-pig-birth' element={<RecordPigBirth/>} />
+          <Route path='/pig-birth-report' element={<SowBirthReport/>} />
+          <Route path='/each-pig-birth-report' element={<EachSowBirthReport/>} />
+          <Route path='/add-pig-mortality' element={<PigMortality/>} />
+          <Route path='/pig-mortality' element={<PigMortalityReport/>} />
+          <Route path='/manage-pig-events' element={<ManagePigEvents/>} />
+          <Route path='/add-pig-drugs' element={<AddPigDrugs/>} />
+          <Route path='/vaccination-health-management' element={<VaccinationAndTreatment/>} />
+          <Route path='/pig-feed-management' element={<PigFeedManagement/>} />
          
         
           

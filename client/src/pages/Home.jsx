@@ -5,6 +5,26 @@ const Home = () => {
   const { currentUser } = useSelector((state) => state.user);
   const userCategory = currentUser ? currentUser.category : '';
 
+  const appItems = [
+    { category: ['poultry', 'all'], href: '/poultry', iconSrc: 'https://www.bivatec.com/assets/images/icons/apps/my_poultry_manager_new_1.png' },
+    { category: ['poultry', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '../../public/images/guinea-fowl-icon.png' },
+    { category: ['animal', 'all'], href: '/pig-farm-dashboard', iconSrc: 'https://www.bivatec.com/assets/images/icons/apps/my_piggery_manager_new_1.png' },
+    { category: ['animal', 'all'], href: '#', iconSrc: 'https://www.bivatec.com/assets/images/icons/apps/my_goat_manager_new_1.png' },
+    { category: ['animal', 'all'], href: '#', iconSrc: 'https://www.bivatec.com/assets/images/icons/apps/my_cattle_manager_new_1.png' },
+    { category: ['animal', 'all'], href: '#', iconSrc: 'https://www.bivatec.com/assets/images/icons/apps/my_sheep_manager.png' },
+    { category: ['animal', 'all'], href: '#', iconSrc: 'https://www.bivatec.com/assets/images/icons/apps/my_fish_manager_new_1.png' },
+    { category: ['crop', 'all'], href: '#', iconSrc: 'https://www.bivatec.com/assets/images/icons/apps/my_crop_manager_new_1.png' },
+  ,
+    { category: ['crop', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '../../public/images/cassava tree.jpg' },
+    { category: ['crop', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '../../public/images/maize.png' },
+    { category: ['crop', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '../../public/images/Okro.png' },
+    { category: ['crop', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '../../public/images/Beans.png' },
+    { category: ['crop', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '../../public/images/green pepper.jpg' },
+    { category: ['crop', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '../../public/images/palm tree.jpg' },
+    { category: ['crop', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '../../public/images/plantain.jpg' },
+    // Add more app items as needed
+  ];
+
   return (
     <div className="welcome-content" style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <div className="container">
@@ -17,85 +37,17 @@ const Home = () => {
             <div className="apps">
               <div className="container-fluid">
                 <div className="row">
-                  {/* App icons */}
-                  {(userCategory === 'poultry' || userCategory === 'all') && (
-                    <div className="col-lg-2 col-md-2 col-sm-2 col-2 mx-2">
-                      <a href="/poultry" className="app-item">
-                        <div className="icon mb-3">
-                          <img className="img-fluid lazy" alt="" src="https://www.bivatec.com/assets/images/icons/apps/my_poultry_manager_new_1.png" />
+                  {appItems.map((app, index) => (
+                    <div key={index} className="col-lg-2 col-md-2 col-sm-2 col-2 mx-2">
+                      {(app.category.includes(userCategory) || app.category.includes('all')) && (
+                        <a href={app.href} className="app-item">
+                          <div className="icon mb-3" style={{ borderRadius: '10px' }}>
+                          <img className="img-fluid lazy" alt="" src={app.iconSrc} style={{ borderRadius: 'inherit' }} />
                         </div>
-                      </a>
+                        </a>
+                      )}
                     </div>
-                    
-                  )}
-                  {(userCategory === 'poultry' || userCategory === 'all') && (
-                    <div className="col-lg-2 col-md-2 col-sm-2 col-2 mx-2">
-                      <a href="/guinea-fowl-getting-started" className="app-item">
-                        <div className="icon mb-3">
-                          <img className="img-fluid lazy" alt="" src="../../public/images/guinea-fowl-icon.png" />
-                        </div>
-                      </a>
-                    </div>
-                    
-                  )}
-                  {(userCategory === 'animal' || userCategory === 'all') && (
-                    <>
-                      <div className="col-lg-2 col-md-2 col-sm-2 col-2 mx-2">
-                        <a href="/pig-farm-dashboard" className="app-item">
-                          <div className="icon mb-3">
-                            <img className="img-fluid lazy" alt="" src="https://www.bivatec.com/assets/images/icons/apps/my_piggery_manager_new_1.png" />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="col-lg-2 col-md-2 col-sm-2 col-2 mx-2">
-                        <a href="#" className="app-item">
-                          <div className="icon mb-3">
-                            <img className="img-fluid lazy" alt="" src="https://www.bivatec.com/assets/images/icons/apps/my_goat_manager_new_1.png" />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="col-lg-2 col-md-2 col-sm-2 col-2 mx-2">
-                        <a href="#" className="app-item">
-                          <div className="icon mb-3">
-                            <img className="img-fluid lazy" alt="" src="https://www.bivatec.com/assets/images/icons/apps/my_cattle_manager_new_1.png" />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="col-lg-2 col-md-2 col-sm-2 col-2 mx-2">
-                        <a href="#" className="app-item">
-                          <div className="icon mb-3">
-                            <img className="img-fluid lazy" alt="" src="https://www.bivatec.com/assets/images/icons/apps/my_sheep_manager.png" />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="col-lg-2 col-md-2 col-sm-2 col-2 mx-2">
-                        <a href="#" className="app-item">
-                          <div className="icon mb-3">
-                            <img className="img-fluid lazy" alt="" src="https://www.bivatec.com/assets/images/icons/apps/my_fish_manager_new_1.png" />
-                          </div>
-                        </a>
-                      </div>
-                    </>
-                  )}
-                  {(userCategory === 'crop' || userCategory === 'all') && (
-                    <>
-                      <div className="col-lg-2 col-md-2 col-sm-2 col-2 mx-2">
-                        <a href="#" className="app-item">
-                          <div className="icon mb-3">
-                            <img className="img-fluid lazy" alt="" src="https://www.bivatec.com/assets/images/icons/apps/my_crop_manager_new_1.png" />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="col-lg-2 col-md-2 col-sm-2 col-2 mx-2">
-                        <a href="#" className="app-item">
-                          <div className="icon mb-3">
-                            <img className="img-fluid lazy" alt="" src="https://www.bivatec.com/assets/images/icons/apps/farmers_wallet_new_1.png" />
-                          </div>
-                        </a>
-                      </div>
-                    </>
-                  )}
-                  {/* Add other app icons similarly */}
+                  ))}
                 </div>
               </div>
             </div>

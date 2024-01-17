@@ -69,10 +69,10 @@ const PigFarmDashboard = () => {
           </Link>
         </Col>
         <Col md={4} className="feature">
-          <Link to="/some-other-path" className="card-link">
+          <Link to="/manage-pig-events" className="card-link">
             <FaCalendar className="icon" />
             <h3 className="card-title">Manage Events</h3>
-            <p className="card-description">Schedule and manage important events on your farm. Track vaccinations, feedings, and births.</p>
+            <p className="card-description">Schedule and manage important events on your farm. Track vaccinations, Feedings And Sales</p>
           </Link>
         </Col>
         <Col md={4} className="feature">

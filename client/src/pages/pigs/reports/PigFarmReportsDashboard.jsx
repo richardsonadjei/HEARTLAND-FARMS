@@ -19,11 +19,20 @@ const PigFarmReportsDashboard = () => {
               <Link to="/pig-stock-report" className="list-item">
                 General Stock Report
               </Link>
-              <Link to="/stock-report-2" className="list-item">
-                Stock Report 2
+              <Link to="/pig-crossing-report" className="list-item">
+               All BatchesCrossing Report
               </Link>
-              <Link to="/stock-report-3" className="list-item">
-                Stock Report 3
+              <Link to="/sow-crossing-report" className="list-item">
+                Batch Crossing Report
+              </Link>
+              <Link to="/pig-birth-report" className="list-item">
+                All Births Report
+              </Link>
+              <Link to="/each-pig-birth-report" className="list-item">
+                Sow Birth Report
+              </Link>
+              <Link to="/pig-mortality" className="list-item">
+                Mortality Report
               </Link>
             </ListGroup>
           </Card>
@@ -35,13 +44,19 @@ const PigFarmReportsDashboard = () => {
             </Card.Header>
             <ListGroup variant="flush" className="custom-list-group">
               <Link to="/health-report-1" className="list-item">
-                Health Report 1
+                Iron Treatment Report
               </Link>
               <Link to="/health-report-2" className="list-item">
-                Health Report 2
+                All Pig Deworming Report
               </Link>
               <Link to="/health-report-3" className="list-item">
-                Health Report 3
+                Pig Deworming Report
+              </Link>
+              <Link to="/health-report-3" className="list-item">
+                Other Routine Treatment Report
+              </Link>
+              <Link to="/health-report-3" className="list-item">
+               Pig Sick Report
               </Link>
             </ListGroup>
           </Card>
@@ -53,13 +68,16 @@ const PigFarmReportsDashboard = () => {
             </Card.Header>
             <ListGroup variant="flush" className="custom-list-group">
               <Link to="/financial-report-1" className="list-item">
-                Financial Report 1
+                Feed Purchase 
               </Link>
               <Link to="/financial-report-2" className="list-item">
-                Financial Report 2
+               Medication Purchase 
               </Link>
               <Link to="/financial-report-3" className="list-item">
-                Financial Report 3
+                Pig Sales Report
+              </Link>
+              <Link to="/financial-report-3" className="list-item">
+               Other Expenses Report
               </Link>
             </ListGroup>
           </Card>

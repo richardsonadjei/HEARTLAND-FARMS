@@ -525,3 +525,55 @@ background-color: #33C1FF; /* Choose the background color you prefer */
   min-height: 100vh;
   padding-top: 50px; /* Adjust padding as needed */
 }
+
+
+
+/* PIG EVENTS CARD CSS */
+/* Add these styles to your CSS file */
+.tracking-card {
+  background-color: black;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  height: 100%;
+  transition: transform 0.3s ease-in-out;
+}
+
+.tracking-card:hover {
+  transform: scale(1.05);
+}
+
+.vaccination-card {
+  background-color: black;
+  border-color: #78a596;
+}
+
+.sick-pig-card {
+  background-color: black;
+  border-color: #e06666;
+}
+
+feeding-card {
+  background-color: black;
+  border-color: #78a596;
+}
+
+.feed-purchase-card {
+  background-color: black;
+  border-color: #a9c6b6;
+}
+
+.medication-purchase-card {
+  background-color: black;
+  border-color: #e06666;
+}
+
+.treat-pig-card {
+  background-color: black;
+  border-color: #93aeb5;
+}
+
+.sell-pigs-card {
+  background-color: black;
+  border-color: #c4c7cb;
+}
