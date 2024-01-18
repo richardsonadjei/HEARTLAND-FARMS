@@ -1,5 +1,5 @@
 import express from 'express';
-import pigStockController, { createPigBreed, createPigCrossing, createPigMedication, createPigMortality, createSowBirth, deletePigCrossingById, deletePigMedicationById, getAllPigMedications, getAllPigStocks, getAllSowStocks, getPigBreeds, getPigCrossingBySowIdentityNumber, getPigCrossingsByPeriod, getPigMedicationById, getPigMortalitiesByPeriod, getSowBirthBySowIdentityNumber, getSowBirthsByPeriod, updatePigCurrentAge, updatePigMedicationById, } from '../controllers/pigFarm.controller.js';
+import pigStockController, { createPigBreed, createPigCrossing, createPigMedication, createPigMortality, createSowBirth, deletePigCrossingById,  getAllPigMedications, getAllPigStocks, getAllSowStocks, getPigBreeds, getPigCrossingBySowIdentityNumber, getPigCrossingsByPeriod,  getPigMortalitiesByPeriod, getSowBirthBySowIdentityNumber, getSowBirthsByPeriod, updatePigCurrentAge,  } from '../controllers/pigFarm.controller.js';
 
 const pigFarmRouter = express.Router();
 
@@ -39,9 +39,7 @@ pigFarmRouter.get('/pig-mortalities-by-period', getPigMortalitiesByPeriod);
 
 pigFarmRouter.post('/add-pig-drug', createPigMedication);
 pigFarmRouter.get('/', getAllPigMedications);
-pigFarmRouter.get('/:id', getPigMedicationById);
-pigFarmRouter.put('/:id', updatePigMedicationById);
-pigFarmRouter.delete('/:id', deletePigMedicationById);
+
 
 
 export default pigFarmRouter;

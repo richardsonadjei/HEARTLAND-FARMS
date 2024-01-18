@@ -118,6 +118,16 @@ import ManagePigEvents from './pages/pigs/ManagePigEvents';
 import AddPigDrugs from './pages/pigs/AddPigDrugs';
 import VaccinationAndTreatment from './pages/pigs/VaccinationAndTreatment';
 import PigFeedManagement from './pages/pigs/PigFeedManagement';
+import MaizeGettingStarted from './pages/maize/MaizeGettngStarted';
+import MaizeFarmActivities from './pages/maize/MaizeFarmActivities';
+import RecordMaizeLandClearance from './pages/maize/MaizeLandClearance';
+import MaizeFarmReportsDashboard from './pages/maize/maizeReports/MaizeFarmReports';
+import MaizeSeasonReport from './pages/maize/maizeReports/MaizeSeasonsReport';
+import MaizeSeasonalLandPreparationReport from './pages/maize/maizeReports/MaizeSeasonalLandPreparationReport';
+import PlantMaize from './pages/maize/MaizePlantingRecord';
+import MaizeSeasonalPlantingReport from './pages/maize/maizeReports/MaizeSeasonalPlantingReports';
+import MaizeFertilizerApplication from './pages/maize/MaizeFertilizerApplication';
+
 
 
 
@@ -242,6 +252,16 @@ export default function App() {
           <Route path='/add-pig-drugs' element={<AddPigDrugs/>} />
           <Route path='/vaccination-health-management' element={<VaccinationAndTreatment/>} />
           <Route path='/pig-feed-management' element={<PigFeedManagement/>} />
+          <Route path='/maize-getting-started' element={<MaizeGettingStarted/>} />
+          <Route path='/maize-farm-activities' element={<MaizeFarmActivities/>} />
+          <Route path='/maize-land-clearance' element={<RecordMaizeLandClearance/>} />
+          <Route path='/maize-farm-report-dashboard' element={<MaizeFarmReportsDashboard/>} />
+          <Route path='/maize-seasons-report' element={<MaizeSeasonReport/>} />
+          <Route path='/maize-seasonal-LandPreparation-report' element={<MaizeSeasonalLandPreparationReport/>} />
+          <Route path='/plant-maize' element={<PlantMaize/>} />
+          <Route path='/maize-seasonal-planting-report' element={<MaizeSeasonalPlantingReport/>} />
+          <Route path='/maize-fertilizer-application' element={<MaizeFertilizerApplication/>} />
+          
          
         
           

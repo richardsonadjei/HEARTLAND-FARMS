@@ -430,56 +430,12 @@ const getAllPigMedications = async (req, res) => {
   }
 };
 
-// Controller for getting a single Pig Medication by ID
-const getPigMedicationById = async (req, res) => {
-  try {
-    const medication = await PigMedication.findById(req.params.id);
-    if (!medication) {
-      return res.status(404).json({ error: 'Pig Medication not found' });
-    }
-    res.status(200).json(medication);
-  } catch (error) {
-    console.error('Error getting Pig Medication by ID:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-};
 
-// Controller for updating a Pig Medication by ID
-const updatePigMedicationById = async (req, res) => {
-  try {
-    const updatedMedication = await PigMedication.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
-    if (!updatedMedication) {
-      return res.status(404).json({ error: 'Pig Medication not found' });
-    }
-    res.status(200).json(updatedMedication);
-  } catch (error) {
-    console.error('Error updating Pig Medication by ID:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-};
 
-// Controller for deleting a Pig Medication by ID
-const deletePigMedicationById = async (req, res) => {
-  try {
-    const deletedMedication = await PigMedication.findByIdAndRemove(req.params.id);
-    if (!deletedMedication) {
-      return res.status(404).json({ error: 'Pig Medication not found' });
-    }
-    res.status(200).json({ message: 'Pig Medication deleted successfully' });
-  } catch (error) {
-    console.error('Error deleting Pig Medication by ID:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-};
+
 
 export {
   createPigMedication,
   getAllPigMedications,
-  getPigMedicationById,
-  updatePigMedicationById,
-  deletePigMedicationById,
+  
 };

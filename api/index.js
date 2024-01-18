@@ -27,6 +27,7 @@ import guineaFowlRouter from './routes/guineafowl.router.js';
 import guineaFowlNotificationRouter from './routes/guineaFowlNotification.router.js';
 import guineaFowlVaccinationRouter from './routes/guineaFowlVaccination.router.js';
 import pigFarmRouter from './routes/pigFarm.router.js';
+import maizeRouter from './routes/maize.router.js';
 
 
 
@@ -87,6 +88,9 @@ app.use('/api/', guineaFowlVaccinationRouter);
 
 // PIGFARM ROUTERS
 app.use('/api/', pigFarmRouter); 
+
+// MAIZE ROUTERS
+app.use('/api/', maizeRouter); 
 
 
 

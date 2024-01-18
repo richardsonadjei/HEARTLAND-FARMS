@@ -16,7 +16,7 @@ const Home = () => {
     { category: ['crop', 'all'], href: '#', iconSrc: 'https://www.bivatec.com/assets/images/icons/apps/my_crop_manager_new_1.png' },
   ,
     { category: ['crop', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '../../public/images/cassava tree.jpg' },
-    { category: ['crop', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '../../public/images/maize.png' },
+    { category: ['crop', 'all'], href: '/maize-getting-started', iconSrc: '../../public/images/maize.png' },
     { category: ['crop', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '../../public/images/Okro.png' },
     { category: ['crop', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '../../public/images/Beans.png' },
     { category: ['crop', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '../../public/images/green pepper.jpg' },
