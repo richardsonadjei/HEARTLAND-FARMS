@@ -103,7 +103,7 @@ const MaizeGettingStarted = () => {
           </Link>
         </Col>
         <Col md={4} className="feature">
-          <Link to="/financial-transactions" className="card-link">
+          <Link to="/maize-financial-activities" className="card-link">
             <FaMoneyBill className="icon" />
             <h3 className="card-title">Financial Transactions</h3>
             <p className="card-description">Keep track of all financial transactions related to maize farming. Record expenses and income.</p>

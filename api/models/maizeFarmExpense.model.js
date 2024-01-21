@@ -11,7 +11,10 @@ const validCategories = [
   'Weedicide Application',
   'Harvesting',
   'Storage',
-  'Equipment Purchase'
+  'Equipment Purchase',
+  'Weedicide Purchase',
+  'Fertilizer Purchase',
+  'Other Expenses'
 ];
 
 const expenditureSchema = new mongoose.Schema({

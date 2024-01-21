@@ -127,6 +127,19 @@ import MaizeSeasonalLandPreparationReport from './pages/maize/maizeReports/Maize
 import PlantMaize from './pages/maize/MaizePlantingRecord';
 import MaizeSeasonalPlantingReport from './pages/maize/maizeReports/MaizeSeasonalPlantingReports';
 import MaizeFertilizerApplication from './pages/maize/MaizeFertilizerApplication';
+import MaizeManualWeeding from './pages/maize/MaizeManualWeeding';
+import MaizeWeedicideApplication from './pages/maize/MaizeWeedicideApplication';
+import MaizeWeedControlReport from './pages/maize/maizeReports/MaizeWeedControl';
+import MaizeHarvest from './pages/maize/MaizeHarvest';
+import MaizeHarvestReport from './pages/maize/maizeReports/MaizeHarvestReport';
+import MaizeFertilizerApplicationReport from './pages/maize/maizeReports/MaizeFertilizerApplicationReport';
+import SeasonalMaizeExpenseReport from './pages/maize/maizeReports/MaizeSeasonalExpenseReport';
+import MaizeFinancialActivities from './pages/maize/MaizeFinancialActivities';
+import SellMaize from './pages/maize/SellMaize';
+import MaizeSalesReport from './pages/maize/maizeReports/MaizeSalesReport';
+import SeasonalMaizeProfitLossReport from './pages/maize/maizeReports/SeasonalMaizeProfitLossReport';
+import PurchaseMaizeFertilizer from './pages/maize/MaizeFarmFertilizerPurchase';
+import MaizeFarmMiscellaneousExpense from './pages/maize/MaizeFarmMiscelleneousExpense';
 
 
 
@@ -261,6 +274,20 @@ export default function App() {
           <Route path='/plant-maize' element={<PlantMaize/>} />
           <Route path='/maize-seasonal-planting-report' element={<MaizeSeasonalPlantingReport/>} />
           <Route path='/maize-fertilizer-application' element={<MaizeFertilizerApplication/>} />
+          <Route path='/maize-manual-weeding' element={<MaizeManualWeeding/>} />
+          <Route path='/maize-weedicide-application' element={<MaizeWeedicideApplication/>} />
+          <Route path='/maize-weed-control-report' element={<MaizeWeedControlReport/>} />
+          <Route path='/maize-harvest' element={<MaizeHarvest/>} />
+          <Route path='/maize-harvest-report' element={<MaizeHarvestReport/>} />
+          <Route path='/maize-fertilizer-application-report' element={<MaizeFertilizerApplicationReport/>} />
+          <Route path='/maize-seasonal-expense-report' element={<SeasonalMaizeExpenseReport/>} />
+          <Route path='/maize-financial-activities' element={<MaizeFinancialActivities/>} />
+          <Route path='/sell-maize' element={<SellMaize/>} />
+          <Route path='/sell-maize' element={<SellMaize/>} />
+          <Route path='/maize-profit-loss-report' element={<SeasonalMaizeProfitLossReport/>} />
+          <Route path='/maize-farm-fertilizer-purchase' element={<PurchaseMaizeFertilizer/>} />
+          <Route path='/maize-farm-weedicide-purchase' element={<PurchaseMaizeFertilizer/>} />
+          <Route path='/maize-farm-misc-expense' element={<MaizeFarmMiscellaneousExpense/>} />
           
          
         

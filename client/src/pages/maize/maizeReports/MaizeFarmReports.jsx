@@ -22,16 +22,16 @@ const MaizeFarmReportsDashboard = () => {
               <Link to="/maize-seasonal-planting-report" className="list-item">
                 Seasonal Planting Activities
               </Link>
-              <Link to="/maize-pest-control-report" className="list-item">
+              <Link to="/maize-weed-control-report" className="list-item">
                Weed Control
               </Link>
-              <Link to="/maize-irrigation-report" className="list-item">
+              <Link to="/maize-fertilizer-application-report" className="list-item">
                 Fertilizer Application Report
               </Link>
               <Link to="/maize-pest-control-report" className="list-item">
                Pest And Disease Control Report
               </Link>
-              <Link to="/maize-fertilization-report" className="list-item">
+              <Link to="/maize-harvest-report" className="list-item">
                 Harvest Report
               </Link>
               <Link to="/maize-fertilization-report" className="list-item">
@@ -46,13 +46,13 @@ const MaizeFarmReportsDashboard = () => {
               <FaDollarSign className="icon" style={{ color: '#fff' }} /> Financial Reports
             </Card.Header>
             <ListGroup variant="flush" className="custom-list-group">
-              <Link to="/maize-feed-purchase" className="list-item">
+              <Link to="/maize-seasonal-expense-report" className="list-item">
                 Seasonal Expense Report
               </Link>
-              <Link to="/maize-equipment-purchase" className="list-item">
+              <Link to="/maize-sales-report" className="list-item">
                 Seasonal Sales Report
               </Link>
-              <Link to="/maize-sales-report" className="list-item">
+              <Link to="/maize-profit-loss-report" className="list-item">
                Seasonal Profit/Loss Report
               </Link>
               <Link to="/maize-expenses-report" className="list-item">
@@ -89,7 +89,7 @@ const MaizeFarmReportsDashboard = () => {
                 Soil Quality Report
               </Link>
               <Link to="/maize-crop-rotation-report" className="list-item">
-                Crop Rotation Report
+                Farm Assets Report
               </Link>
               <Link to="/maize-harvest-yield-report" className="list-item">
                 Harvest Yield Report

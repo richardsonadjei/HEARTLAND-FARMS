@@ -9,6 +9,7 @@ import {
   FaHammer,
   FaCropAlt,
   FaBox,
+  FaBug,
 } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
@@ -45,20 +46,26 @@ const MaizeFarmActivities = () => {
           </Link>
         </Col>
         <Col className="tracking-card">
-          <Link to="/manual-weeding" className="card-link">
+          <Link to="/maize-manual-weeding" className="card-link">
             <FaPeopleCarry className="tracking-icon weeding-icon" />
             <h3>Manual Weeding</h3>
             <p>Weed the maize fields manually.</p>
           </Link>
         </Col>
       </Row>
-
       <Row className="tracking-section">
         <Col className="tracking-card">
-          <Link to="/weedicide-application" className="card-link">
+          <Link to="/maize-weedicide-application" className="card-link">
             <FaSprayCan className="tracking-icon weedicide-icon" />
             <h3>Weedicide Application</h3>
             <p>Apply weedicide to control weed growth.</p>
+          </Link>
+        </Col>
+        <Col className="tracking-card">
+        <Link to="/pest-disease-control" className="card-link">
+            <FaBug className="tracking-icon pest-disease-icon" />
+            <h3>Pest and Disease Control</h3>
+            <p>Manage and control pests and diseases in maize crops.</p>
           </Link>
         </Col>
         <Col className="tracking-card">
@@ -69,7 +76,7 @@ const MaizeFarmActivities = () => {
           </Link>
         </Col>
         <Col className="tracking-card">
-          <Link to="/harvest" className="card-link">
+          <Link to="/maize-harvest" className="card-link">
             <FaCropAlt className="tracking-icon harvest-icon" />
             <h3>Harvest</h3>
             <p>Harvest matured maize crops.</p>
@@ -82,6 +89,8 @@ const MaizeFarmActivities = () => {
             <p>Store harvested maize properly.</p>
           </Link>
         </Col>
+       
+        
       </Row>
     </Container>
   );

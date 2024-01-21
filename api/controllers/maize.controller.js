@@ -281,3 +281,445 @@ const recordMaizeFertilizerApplicationAndExpense = async (req, res) => {
 
 export { recordMaizeFertilizerApplicationAndExpense };
 
+
+// controllers/MaizeManualWeedingController.js
+
+import MaizeManualWeeding from '../models/maizeManualWeeding.model.js';
+
+const recordMaizeManualWeedingAndExpense = async (req, res) => {
+  try {
+    const { batchNumber, date, location, spaceWeeded, amountSpent, recordedBy } = req.body;
+
+    // Record manual weeding
+    const maizeManualWeeding = new MaizeManualWeeding({
+      batchNumber,
+      date,
+      location,
+      spaceWeeded,
+      recordedBy,
+    });
+
+    const savedMaizeManualWeeding = await maizeManualWeeding.save();
+
+    // Save an expenditure transaction
+    const manualWeedingExpense = new MaizeFarmExpenditure({
+      batchNumber,
+      date,
+      category: 'Manual Weeding',
+      amountSpent,
+      recordedBy,
+    });
+
+    await manualWeedingExpense.save();
+
+    res.status(201).json({
+      message: 'Manual weeding recorded successfully',
+      maizeManualWeeding: savedMaizeManualWeeding,
+      manualWeedingExpense,
+    });
+  } catch (error) {
+    console.error('Error recording manual weeding and expense:', error.message);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+export { recordMaizeManualWeedingAndExpense };
+
+// controllers/MaizeWeedicideApplicationController.js
+
+import MaizeWeedicideApplication from '../models/maizeWeedicideApplication.model.js';
+
+const recordMaizeWeedicideApplicationAndExpense = async (req, res) => {
+  try {
+    const {
+      batchNumber,
+      date,
+      location,
+      spaceApplied,
+      weedicideName,
+      weedicideDescription,
+      applicationMethod,
+      quantityApplied,
+      amountSpent, // Include amountSpent in the user input
+      recordedBy,
+    } = req.body;
+
+    // Record weedicide application
+    const maizeWeedicideApplication = new MaizeWeedicideApplication({
+      batchNumber,
+      date,
+      location,
+      spaceApplied,
+      weedicideName,
+      weedicideDescription,
+      applicationMethod,
+      quantityApplied,
+      recordedBy,
+    });
+
+    const savedMaizeWeedicideApplication = await maizeWeedicideApplication.save();
+
+    // Save an expenditure transaction
+    const weedicideExpense = new MaizeFarmExpenditure({
+      batchNumber,
+      date,
+      category: 'Weedicide Application',
+      amountSpent,
+      recordedBy,
+    });
+
+    await weedicideExpense.save();
+
+    res.status(201).json({
+      message: 'Weedicide application recorded successfully',
+      maizeWeedicideApplication: savedMaizeWeedicideApplication,
+      weedicideExpense,
+    });
+  } catch (error) {
+    console.error('Error recording weedicide application and expense:', error.message);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+export { recordMaizeWeedicideApplicationAndExpense };
+
+
+
+
+const getAllManualWeedingsByBatch = async (req, res) => {
+  try {
+    const { batchNumber } = req.params;
+
+    // Fetch all MaizeManualWeeding records for the specified batchNumber
+    const manualWeedings = await MaizeManualWeeding.find({ batchNumber });
+
+    res.status(200).json({ manualWeedings });
+  } catch (error) {
+    console.error('Error fetching MaizeManualWeeding records:', error.message);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+export { getAllManualWeedingsByBatch };
+
+
+
+
+const getAllWeedicideApplicationsByBatch = async (req, res) => {
+  try {
+    const { batchNumber } = req.params;
+
+    // Fetch all MaizeWeedicideApplication records for the specified batchNumber
+    const weedicideApplications = await MaizeWeedicideApplication.find({ batchNumber });
+
+    res.status(200).json({ weedicideApplications });
+  } catch (error) {
+    console.error('Error fetching MaizeWeedicideApplication records:', error.message);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+export { getAllWeedicideApplicationsByBatch };
+
+
+// controllers/MaizeHarvestController.js
+import MaizeHarvest from '../models/maizeHarvest.model.js';
+
+
+const recordHarvestAndExpenditure = async (req, res) => {
+  try {
+    const {
+      batchNumber,
+      date,
+      location,
+      harvestedQuantity,
+      harvestedSpace,
+      recordedBy,
+      amountSpent,
+    } = req.body;
+
+    // Record harvesting activity
+    const harvestRecord = await MaizeHarvest.create({
+      batchNumber,
+      date,
+      location,
+      harvestedQuantity,
+      harvestedSpace,
+      recordedBy,
+    });
+
+    // Record expenditure associated with the harvesting activity
+    const expenditureRecord = await MaizeFarmExpenditure.create({
+      batchNumber,
+      date,
+      category: 'Harvesting',
+      amountSpent,
+      recordedBy,
+    });
+
+    res.status(201).json({
+      harvestRecord,
+      expenditureRecord,
+      message: 'Harvesting activity and expenditure recorded successfully',
+    });
+  } catch (error) {
+    console.error('Error recording harvest and expenditure:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+export { recordHarvestAndExpenditure };
+
+
+
+const getAllMaizeHarvestsForBatch = async (req, res) => {
+  try {
+    const { batchNumber } = req.params;
+
+    // Fetch all maize harvest records for the specified batch number
+    const maizeHarvests = await MaizeHarvest.find({ batchNumber });
+
+    res.status(200).json({
+      maizeHarvests,
+      message: 'Maize harvest records fetched successfully',
+    });
+  } catch (error) {
+    console.error('Error fetching maize harvest records:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+export { getAllMaizeHarvestsForBatch };
+
+
+
+
+
+const getAllMaizeFertilizerApplicationsForBatch = async (req, res) => {
+  try {
+    const { batchNumber } = req.params;
+
+    // Fetch all maize fertilizer applications for the specified batch number
+    const fertilizerApplications = await MaizeFertilizerApplication.find({ batchNumber });
+
+    res.status(200).json({
+      fertilizerApplications,
+      message: 'Maize fertilizer applications fetched successfully',
+    });
+  } catch (error) {
+    console.error('Error fetching maize fertilizer applications:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+export { getAllMaizeFertilizerApplicationsForBatch };
+
+
+// EXPENSES
+
+
+const getAllExpensesForMaizeBatch = async (req, res) => {
+  try {
+    const { batchNumber } = req.params;
+
+    // Fetch all expenses for the specified batch number
+    const expenses = await MaizeFarmExpenditure.find({ batchNumber });
+
+    res.status(200).json({
+      expenses,
+      message: 'Maize farm expenses fetched successfully',
+    });
+  } catch (error) {
+    console.error('Error fetching maize farm expenses:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+export { getAllExpensesForMaizeBatch };
+
+
+
+// SALES
+// controllers/maizeSaleController.js
+
+import MaizeSale from '../models/maizeSales.model.js';
+
+// Controller to record the sale of maize
+const recordMaizeSale = async (req, res) => {
+  try {
+    // Extract sale details from the request body
+    const { batchNumber, saleDate, unitPricePerCup, quantityOfCupsSold, soldBy } = req.body;
+
+    // Create a new MaizeSale document with saleAmount calculated by the getter function
+    const newMaizeSale = new MaizeSale({
+      batchNumber,
+      saleDate,
+      unitPricePerCup,
+      quantityOfCupsSold,
+      soldBy,
+      // other sale-related fields can be added here
+    });
+
+    // Save the new MaizeSale document to the database
+    await newMaizeSale.save();
+
+    // Respond with the newly created MaizeSale document
+    res.status(201).json(newMaizeSale);
+  } catch (error) {
+    console.error('Error recording maize sale:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+export { recordMaizeSale };
+
+
+// controllers/maizeSaleController.js
+
+
+
+// Controller to get all sales for a particular batch
+const getAllMaizeSalesForBatch = async (req, res) => {
+  try {
+    const { batchNumber } = req.params;
+
+    // Fetch all sales for the specified batchNumber
+    const sales = await MaizeSale.find({ batchNumber });
+
+    // Respond with the sales data
+    res.status(200).json({ sales });
+  } catch (error) {
+    console.error('Error fetching maize sales:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+export { getAllMaizeSalesForBatch };
+
+
+// controllers/MaizeFarmProfitLoss.js
+
+
+export const calculateMaizeFarmProfitLoss = async (req, res) => {
+  try {
+    const { batchNumber } = req.query;
+
+    // Find all expenditure data for the specified batchNumber from MaizeFarmExpenditure
+    const expenditureData = await MaizeFarmExpenditure.find({ batchNumber });
+
+    // Find all miscellaneous expenditure data for the specified batchNumber from MaizeFarmMiscellaneousExpenditure
+    const miscellaneousExpenditureData = await MaizeFarmMiscellaneousExpenditure.find({ batchNumber });
+
+    // Calculate total expenditure by summing up amountSpent for each record
+    const totalExpenditure = expenditureData.reduce((sum, record) => sum + record.amountSpent, 0)
+      + miscellaneousExpenditureData.reduce((sum, record) => sum + record.amountSpent, 0);
+
+    // Find all income data for the specified batchNumber
+    const incomeData = await MaizeSale.find({ batchNumber });
+
+    // Calculate total income by summing up saleAmount for each record
+    const totalIncome = incomeData.reduce((sum, record) => sum + record.saleAmount, 0);
+
+    // Calculate profit or loss
+    const profitLoss = totalIncome - totalExpenditure;
+
+    res.status(200).json({
+      expenditureData,
+      miscellaneousExpenditureData,
+      totalExpenditure,
+      incomeData,
+      totalIncome,
+      profitLoss,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+
+
+
+
+
+export const recordMaizeFertilizerPurchase = async (req, res) => {
+  try {
+    const { batchNumber, amountSpent, recordedBy } = req.body;
+
+    // Assuming you want to record the current date as the expenditure date
+    const date = new Date();
+
+    // Creating a new expenditure record
+    const fertilizerPurchase = new MaizeFarmExpenditure({
+      batchNumber,
+      date,
+      category: 'Fertilizer Purchase',
+      amountSpent,
+      recordedBy,
+    });
+
+    // Saving the record to the database
+    const savedExpenditure = await fertilizerPurchase.save();
+
+    res.status(201).json(savedExpenditure);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+// controllers/maizeFarmController.js
+
+export const recordMaizeWeedicidePurchase = async (req, res) => {
+  try {
+    const { batchNumber, amountSpent, recordedBy } = req.body;
+
+    // Assuming you want to record the current date as the expenditure date
+    const date = new Date();
+
+    // Creating a new expenditure record for Weedicide Purchase
+    const weedicidePurchase = new MaizeFarmExpenditure({
+      batchNumber,
+      date,
+      category: 'Weedicide Purchase',
+      amountSpent,
+      recordedBy,
+    });
+
+    // Saving the record to the database
+    const savedExpenditure = await weedicidePurchase.save();
+
+    res.status(201).json(savedExpenditure);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+
+// controllers/maizeFarmController.js
+
+import MaizeFarmMiscellaneousExpenditure from '../models/maizeFarmMiscelleneousExpense.model.js';
+
+export const recordMaizeMiscellaneousExpenditure = async (req, res) => {
+  try {
+    const { batchNumber, date, description, amountSpent, recordedBy } = req.body;
+
+    // Creating a new miscellaneous expenditure record
+    const miscellaneousExpenditure = new MaizeFarmMiscellaneousExpenditure({
+      batchNumber,
+      date,
+      description,
+      amountSpent,
+      recordedBy,
+    });
+
+    // Saving the record to the database
+    const savedExpenditure = await miscellaneousExpenditure.save();
+
+    res.status(201).json(savedExpenditure);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
