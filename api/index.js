@@ -28,6 +28,7 @@ import guineaFowlNotificationRouter from './routes/guineaFowlNotification.router
 import guineaFowlVaccinationRouter from './routes/guineaFowlVaccination.router.js';
 import pigFarmRouter from './routes/pigFarm.router.js';
 import maizeRouter from './routes/maize.router.js';
+import cassavaRouter from './routes/cassava.router.js';
 
 
 
@@ -91,6 +92,10 @@ app.use('/api/', pigFarmRouter);
 
 // MAIZE ROUTERS
 app.use('/api/', maizeRouter); 
+
+// CASSAVA ROUTERS
+
+app.use('/api/', cassavaRouter); 
 
 
 

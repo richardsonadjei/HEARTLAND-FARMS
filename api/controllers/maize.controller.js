@@ -222,9 +222,6 @@ export { viewMaizePlantingByBatchNumber };
 // FERTILIZER APPLICATION
 // controllers/FertilizerApplicationController.js
 
-import FertilizerApplication from '../models/maizeFertilizerApplication.model.js';
-
-
 import MaizeFertilizerApplication from '../models/maizeFertilizerApplication.model.js';
 
 const recordMaizeFertilizerApplicationAndExpense = async (req, res) => {

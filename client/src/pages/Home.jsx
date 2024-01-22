@@ -15,7 +15,7 @@ const Home = () => {
     { category: ['animal', 'all'], href: '#', iconSrc: 'https://www.bivatec.com/assets/images/icons/apps/my_fish_manager_new_1.png' },
     { category: ['crop', 'all'], href: '#', iconSrc: 'https://www.bivatec.com/assets/images/icons/apps/my_crop_manager_new_1.png' },
   ,
-    { category: ['crop', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '../../public/images/cassava tree.jpg' },
+    { category: ['crop', 'all'], href: '/cassava-getting-started', iconSrc: '../../public/images/cassava tree.jpg' },
     { category: ['crop', 'all'], href: '/maize-getting-started', iconSrc: '../../public/images/maize.png' },
     { category: ['crop', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '../../public/images/Okro.png' },
     { category: ['crop', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '../../public/images/Beans.png' },
@@ -26,7 +26,8 @@ const Home = () => {
   ];
 
   return (
-    <div className="welcome-content" style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <div className="welcome-content">
+      <div className="welcome-background"></div>
       <div className="container">
         <div className="row">
           <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12 align-self-center">
@@ -42,8 +43,8 @@ const Home = () => {
                       {(app.category.includes(userCategory) || app.category.includes('all')) && (
                         <a href={app.href} className="app-item">
                           <div className="icon mb-3" style={{ borderRadius: '10px' }}>
-                          <img className="img-fluid lazy" alt="" src={app.iconSrc} style={{ borderRadius: 'inherit' }} />
-                        </div>
+                            <img className="img-fluid lazy" alt="" src={app.iconSrc} style={{ borderRadius: 'inherit' }} />
+                          </div>
                         </a>
                       )}
                     </div>

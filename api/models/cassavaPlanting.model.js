@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const { Schema, model } = mongoose;
 
-const maizePlantingSchema = new Schema({
+const cassavaPlantingSchema = new Schema({
   batchNumber: {
     type: String,
     required: true,
@@ -19,7 +19,7 @@ const maizePlantingSchema = new Schema({
     type: String,
     required: true,
   },
-  maizeVariety: {
+  cassavaVariety: {
     type: String,
     required: true,
   },
@@ -35,18 +35,18 @@ const maizePlantingSchema = new Schema({
 });
 
 // Pre-save hook to calculate expectedMaturityDate based on date and fixed duration
-maizePlantingSchema.pre('save', async function (next) {
+cassavaPlantingSchema.pre('save', async function (next) {
   try {
     if (!this.expectedMaturityDate) {
-      // Set a fixed maturity duration range between 100 and 120 days
-      const minMaturityDays = 100;
-      const maxMaturityDays = 120;
+      const minMaturityDays = 240;
+      const maxMaturityDays = 360;
 
-      // Calculate maturity dates based on fixed range
       const startDate = new Date(this.date);
+      
+      // Calculate maturity dates based on fixed range
       const minMaturityDate = new Date(startDate);
       const maxMaturityDate = new Date(startDate);
-
+      
       minMaturityDate.setDate(startDate.getDate() + minMaturityDays);
       maxMaturityDate.setDate(startDate.getDate() + maxMaturityDays);
 
@@ -78,6 +78,7 @@ maizePlantingSchema.pre('save', async function (next) {
   }
 });
 
-const MaizePlanting = model('MaizePlanting', maizePlantingSchema);
 
-export default MaizePlanting;
+const CassavaPlanting = model('CassavaPlanting', cassavaPlantingSchema);
+
+export default CassavaPlanting;

@@ -140,6 +140,31 @@ import MaizeSalesReport from './pages/maize/maizeReports/MaizeSalesReport';
 import SeasonalMaizeProfitLossReport from './pages/maize/maizeReports/SeasonalMaizeProfitLossReport';
 import PurchaseMaizeFertilizer from './pages/maize/MaizeFarmFertilizerPurchase';
 import MaizeFarmMiscellaneousExpense from './pages/maize/MaizeFarmMiscelleneousExpense';
+import CassavaGettingStarted from './pages/cassava/CassavaGettingStarted';
+import CassavaFarmActivities from './pages/cassava/CassavaFarmActivities';
+import CassavaFarmReportsDashboard from './pages/cassava/reports/CassavaFarmReports';
+import CassavaSeasonReport from './pages/cassava/reports/CassavaSeaonsReport';
+import RecordCassavaSeasonalLandPreparation from './pages/cassava/CassavaLandPreparation';
+import PlantCassava from './pages/cassava/PlantCassava';
+import CassavaFertilizerApplication from './pages/cassava/CassavaFertilizerApplication';
+import CassavaManualWeeding from './pages/cassava/CassavaManualWeeding';
+import CassavaWeedicideApplication from './pages/cassava/CassavaWeedicideApplication';
+import CassavaHarvest from './pages/cassava/CassavaHarvest';
+import CassavaSeasonalLandPreparationReport from './pages/cassava/reports/CassavaLandPreparationReport';
+import CassavaSeasonalPlantingReport from './pages/cassava/reports/CassavaPlantingsReport';
+import CassavaWeedControlReport from './pages/cassava/reports/CassavaWeedControl';
+import CassavaFertilizerApplicationReport from './pages/cassava/reports/CassavaFertilizerApplicationReport';
+import CassavaHarvestReport from './pages/cassava/reports/CassavaHarvestReports';
+import SeasonalCassavaExpenseReport from './pages/cassava/reports/CassavaSeasonalExpenseReport';
+import CassavaFinancialActivities from './pages/cassava/CassavaFinancialActivities';
+import SellCassava from './pages/cassava/CassavaSales';
+import CassavaSalesReport from './pages/cassava/reports/CassavaSalesReport';
+import PurchaseCassavaFertilizer from './pages/cassava/CassavaFertilizerPurchase';
+import CassavaFarmWeedicidePurchase from './pages/cassava/CassavaFarmWeedicidePurchase';
+import CassavaFarmMiscellaneousExpense from './pages/cassava/CassavaFarmMiscExpense';
+import SeasonalCassavaProfitLossReport from './pages/cassava/reports/CassavaSeasonalProfitLossReport';
+
+
 
 
 
@@ -288,6 +313,32 @@ export default function App() {
           <Route path='/maize-farm-fertilizer-purchase' element={<PurchaseMaizeFertilizer/>} />
           <Route path='/maize-farm-weedicide-purchase' element={<PurchaseMaizeFertilizer/>} />
           <Route path='/maize-farm-misc-expense' element={<MaizeFarmMiscellaneousExpense/>} />
+
+
+          {/* CASSAVA ROUTES */}
+          <Route path='/cassava-getting-started' element={<CassavaGettingStarted/>} />
+          <Route path='/cassava-farm-activities' element={<CassavaFarmActivities/>} />
+          <Route path='/cassava-farm-report' element={<CassavaFarmReportsDashboard/>} />
+          <Route path='/cassava-seasons-report' element={<CassavaSeasonReport/>} />
+          <Route path='/cassava-land-preparation' element={<RecordCassavaSeasonalLandPreparation/>} />
+          <Route path='/plant-cassava' element={<PlantCassava/>} />
+          <Route path='/cassava-fertilizer-application' element={<CassavaFertilizerApplication/>} />
+          <Route path='/cassava-manual-weeding' element={<CassavaManualWeeding/>} />
+          <Route path='/cassava-weedicide-application' element={<CassavaWeedicideApplication/>} />
+          <Route path='/cassava-harvest' element={<CassavaHarvest/>} />
+          <Route path='/cassava-land-preparations-report' element={<CassavaSeasonalLandPreparationReport/>} />
+          <Route path='/cassava-plantings-report' element={<CassavaSeasonalPlantingReport/>} />
+          <Route path='/cassava-weed-control-report' element={<CassavaWeedControlReport/>} />
+          <Route path='/cassava-fertilizer-application-report' element={<CassavaFertilizerApplicationReport/>} />
+          <Route path='/cassava-harvest-report' element={<CassavaHarvestReport/>} />
+          <Route path='/cassava-seasonal-expense-report' element={<SeasonalCassavaExpenseReport/>} />
+          <Route path='/cassava-financial-activities' element={<CassavaFinancialActivities/>} />
+          <Route path='/sell-cassava' element={<SellCassava/>} />
+          <Route path='/cassava-sales-report' element={<CassavaSalesReport/>} />
+          <Route path='/cassava-fertilizer-purchase' element={<PurchaseCassavaFertilizer/>} />
+          <Route path='/cassava-weedicide-purchase' element={<CassavaFarmWeedicidePurchase/>} />
+          <Route path='/cassava-misc-expense' element={<CassavaFarmMiscellaneousExpense/>} />
+          <Route path='/cassava-profit-loss-report' element={<SeasonalCassavaProfitLossReport/>} />
           
          
         

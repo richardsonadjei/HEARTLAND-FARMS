@@ -123,41 +123,96 @@ background-color: #33C1FF; /* Choose the background color you prefer */
   padding: 0;
 }
 
-/* Mega menu styles for Poultry */
-.dropdown-menu.show .poultry-menu {
-  display: flex;
+/* Header styles */
+
+.navbar {
+  background-color: #4CAF50; /* Set your desired background color */
 }
 
-.dropdown-menu.show .poultry-menu li:first-child a {
+.navbar-brand {
+  font-size: 1.5rem;
+  color: #fff;
+  /* Add any other styles you want for the brand */
+}
+
+.navbar-nav .nav-link {
+  color: #fff;
   font-weight: bold;
-  font-size: 1.2em;
-  text-transform: uppercase;
-  color: #516beb;
+  transition: color 0.3s ease-in-out;
 }
 
-/* Mega menu styles for Animal Farming */
-.dropdown-menu.show .animal-farming-menu {
-  display: flex;
+.navbar-nav .nav-link:hover {
+  color: #ffcc00; /* Change to your desired hover color */
 }
 
-.dropdown-menu.show .animal-farming-menu li:first-child a {
-  font-weight: bold;
-  font-size: 1.2em;
-  text-transform: uppercase;
-  color: #516beb;
+/* Notifications dropdown styles */
+
+.dropdown-menu {
+  background-color: #4CAF50; /* Set your desired background color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Mega menu styles for Crop Farming */
-.dropdown-menu.show .crop-farming-menu {
-  display: flex;
+.dropdown-item {
+  color: #fff;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
-.dropdown-menu.show .crop-farming-menu li:first-child a {
-  font-weight: bold;
-  font-size: 1.2em;
-  text-transform: uppercase;
-  color: #516beb;
+.dropdown-item:hover {
+  background-color: #ffcc00; /* Change to your desired hover color */
+  color: #000; /* Change to your desired hover text color */
 }
+
+/* User dropdown styles */
+
+.dropdown-menu.text-small {
+  background-color: #4CAF50; /* Set your desired background color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu.text-small .dropdown-item {
+  color: #fff;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.dropdown-menu.text-small .dropdown-item:hover {
+  background-color: #ffcc00; /* Change to your desired hover color */
+  color: #000; /* Change to your desired hover text color */
+}
+
+/* Add more styles for animations, effects, and responsiveness as needed */
+
+/* Example animation for the navbar */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.navbar {
+  animation: fadeInDown 0.5s ease-in-out;
+}
+
+/* Example animation for the dropdown */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-menu {
+  animation: slideIn 0.3s ease-in-out;
+}
+
 
 
 /* PigFarmDashboard.css */
@@ -576,4 +631,163 @@ feeding-card {
 .sell-pigs-card {
   background-color: black;
   border-color: #c4c7cb;
+}
+
+
+
+/* HOME */
+
+
+.welcome-content {
+  position: relative;
+  overflow: hidden;
+  height: 100vh; /* Ensure the welcome content takes the full height of the viewport */
+}
+
+.welcome-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+@keyframes animatedBackground {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.welcome-background::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(-45deg, #00bcd4, #ff4081, #4caf50, #ffeb3b);
+  background-size: 400% 400%;
+  animation: animatedBackground 15s ease infinite;
+}
+
+/* Add this to your existing CSS or create a new CSS file */
+
+/* Add this to your existing CSS or create a new CSS file */
+
+.custom-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo {
+  width: 40px; /* Adjust the size of your logo */
+  height: auto;
+  margin-right: 10px; /* Adjust the spacing between the logo and text */
+  border-radius: 8px; /* Add border-radius to the logo */
+  transition: transform 0.3s ease; /* Add transition for smooth hover effect */
+  animation-duration: 1s;
+  animation-name: fadeInLeft;
+}
+
+.brand-text {
+  animation-duration: 1s;
+  animation-name: fadeInRight;
+}
+
+.custom-logo:hover .logo {
+  transform: scale(1.2); /* Enlarge the logo on hover */
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+.header-container {
+  position: relative;
+}
+
+.header-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: -1;
+}
+
+.navbar {
+  background-color: rgba(255, 255, 255, 0.8); /* Adjust the transparency here */
+}
+
+.custom-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo {
+  width: 40px; /* Adjust the size of your logo */
+  height: auto;
+  margin-right: 10px; /* Adjust the spacing between the logo and text */
+  animation-duration: 1s;
+  animation-name: fadeInLeft;
+  border-radius: 10px; /* Add border radius to the logo */
+  transition: transform 0.3s ease-in-out;
+}
+
+.brand-text {
+  animation-duration: 1s;
+  animation-name: fadeInRight;
+}
+
+.custom-logo:hover .logo {
+  transform: scale(1.2); /* Enlarge the logo on hover */
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
