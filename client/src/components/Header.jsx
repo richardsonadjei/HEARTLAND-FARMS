@@ -38,7 +38,7 @@ export default function Header() {
     <nav className="navbar navbar-expand-lg sticky-top">
       <div className="container-fluid">
       <Link className="navbar-brand text-black custom-logo" to="/">
-  <img src="../../public/images/logo-white.png" alt="Logo" className="logo" />
+  <img src="/images/logo-white.png" alt="Logo" className="logo" />
   <span className="brand-text">HeartLand Farms</span>
 </Link>
 
