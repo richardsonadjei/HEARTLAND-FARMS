@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { FaBell, FaUserCircle } from 'react-icons/fa';
+import { FaBell, FaUserCircle, FaBars } from 'react-icons/fa';
 
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
@@ -34,13 +34,27 @@ export default function Header() {
   const filterNotificationsByCategory = (category) => {
     return notifications.filter((notification) => notification.category === category);
   };
+
   return (
     <nav className="navbar navbar-expand-lg sticky-top">
       <div className="container-fluid">
-      <Link className="navbar-brand text-black custom-logo" to="/">
-  <img src="/images/logo-white.png" alt="Logo" className="logo" />
-  <span className="brand-text">HeartLand Farms</span>
-</Link>
+        <Link className="navbar-brand text-black custom-logo" to="/">
+          <img src="/images/logo-white.png" alt="Logo" className="logo" />
+          <span className="brand-text">HeartLand Farms</span>
+        </Link>
+
+        {/* Hamburger menu icon for smaller screens */}
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <FaBars />
+        </button>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
@@ -51,6 +65,7 @@ export default function Header() {
             </li>
           </ul>
 
+          {/* Notifications dropdown */}
           <div className="dropdown text-end mx-auto">
             <Link
               className="d-block link-body-emphasis text-decoration-none dropdown-toggle"
@@ -61,7 +76,7 @@ export default function Header() {
               <FaBell size={24} />
               {notificationCount > 0 && <span className="badge bg-danger">{notificationCount}</span>}
             </Link>
-            <ul className="dropdown-menu text-small">
+            <ul className="dropdown-menu text-small" style={{ maxWidth: '450px', overflowY: 'auto' }}>
               <li>
                 <span className="dropdown-item font-weight-bold" style={{ color: 'green' }}>Poultry Notifications</span>
                 {filterNotificationsByCategory('poultry').map((notification, index) => (
@@ -90,6 +105,7 @@ export default function Header() {
             </ul>
           </div>
 
+          {/* User profile dropdown */}
           <div className="dropdown text-end mx-auto">
             {currentUser ? (
               <Link
