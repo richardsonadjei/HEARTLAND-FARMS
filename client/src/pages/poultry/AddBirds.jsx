@@ -26,11 +26,19 @@ const AddBirds = () => {
         throw new Error('Error fetching batch numbers');
       }
       const data = await response.json();
-      setBatchNumbers(data.data.map((batch) => batch.batchNumber));
+  
+      // Check if the data.batches property exists and is an array
+      if (data && data.data && data.data.batches && Array.isArray(data.data.batches)) {
+        const batchNumbers = data.data.batches.map((batch) => batch.batchNumber);
+        setBatchNumbers(batchNumbers);
+      } else {
+        throw new Error('Invalid data structure in the response');
+      }
     } catch (error) {
       console.error('Error fetching batch numbers:', error.message);
     }
   };
+  
 
   const fetchExistingQuantity = async (selectedBatchNumber) => {
     try {
@@ -86,7 +94,7 @@ const AddBirds = () => {
 
     // Navigate the user to /poultry-dashboard after a short delay (2 seconds in this example)
     setTimeout(() => {
-      window.location.href = '/poultry-getting-started';
+      window.location.href = '/poultry-dashboard';
     }, 2000);
     } catch (error) {
       // Handle error (you may want to provide user feedback)
