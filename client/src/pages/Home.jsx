@@ -7,7 +7,7 @@ const Home = () => {
 
   const appItems = [
     { category: ['poultry', 'all'], href: '/poultry', iconSrc: 'https://www.bivatec.com/assets/images/icons/apps/my_poultry_manager_new_1.png' },
-    { category: ['poultry', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '../../public/images/guinea-fowl-icon.png' },
+    { category: ['poultry', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '/images/guinea-fowl-icon.png' },
     { category: ['animal', 'all'], href: '/pig-farm-dashboard', iconSrc: 'https://www.bivatec.com/assets/images/icons/apps/my_piggery_manager_new_1.png' },
     { category: ['animal', 'all'], href: '#', iconSrc: 'https://www.bivatec.com/assets/images/icons/apps/my_goat_manager_new_1.png' },
     { category: ['animal', 'all'], href: '#', iconSrc: 'https://www.bivatec.com/assets/images/icons/apps/my_cattle_manager_new_1.png' },
@@ -16,12 +16,12 @@ const Home = () => {
     { category: ['crop', 'all'], href: '#', iconSrc: 'https://www.bivatec.com/assets/images/icons/apps/my_crop_manager_new_1.png' },
   ,
   { category: ['crop', 'all'], href: '/cassava-getting-started', iconSrc: '/images/cassava tree.jpg' },
-    { category: ['crop', 'all'], href: '/maize-getting-started', iconSrc: '../../public/images/maize.png' },
+    { category: ['crop', 'all'], href: '/maize-getting-started', iconSrc: '/images/maize.png' },
     { category: ['crop', 'all'], href: '/poultry', iconSrc: '../../public/images/Okro.png' },
-    { category: ['crop', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '../../public/images/Beans.png' },
-    { category: ['crop', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '../../public/images/green pepper.jpg' },
-    { category: ['crop', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '../../public/images/palm tree.jpg' },
-    { category: ['crop', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '../../public/images/plantain.jpg' },
+    { category: ['crop', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '/images/Beans.png' },
+    { category: ['crop', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '/images/green pepper.jpg' },
+    { category: ['crop', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '/images/palm tree.jpg' },
+    { category: ['crop', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '/images/plantain.jpg' },
     // Add more app items as needed
   ];
 
