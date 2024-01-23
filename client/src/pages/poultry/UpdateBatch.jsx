@@ -21,19 +21,26 @@ const UpdateBatch = () => {
     fetchBatchNumbers();
   }, []);
 
-  // Function to fetch available batch numbers from the server
   const fetchBatchNumbers = async () => {
     try {
       const response = await fetch('/api/all-batchesNoDates');
+      if (!response.ok) {
+        throw new Error('Error fetching batch numbers');
+      }
       const data = await response.json();
-      // Extract batch numbers from the data
-      const availableBatchNumbers = data.data.map((batch) => batch.batchNumber);
-      setBatchNumbers(availableBatchNumbers);
-      
+  
+      // Check if the data.data.batches property exists and is an array
+      if (data && data.data && data.data.batches && Array.isArray(data.data.batches)) {
+        const availableBatchNumbers = data.data.batches.map((batch) => batch.batchNumber);
+        setBatchNumbers(availableBatchNumbers);
+      } else {
+        throw new Error('Invalid data structure in the response');
+      }
     } catch (error) {
-      console.error('Error fetching batch numbers:', error);
+      console.error('Error fetching batch numbers:', error.message);
     }
   };
+  
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

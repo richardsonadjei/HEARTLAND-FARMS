@@ -82,7 +82,7 @@ const AddDrugs = () => {
     <Container>
       <Row>
         <Col sm="12">
-          <h2 style={{ color: 'white' }}>Add Medication</h2>
+          <h2 style={{ color: 'white' }}>Create New Medication/Vaccine</h2>
         </Col>
       </Row>
       {success && (

@@ -128,7 +128,7 @@ const Poultry = () => {
       </div>
 
       <div className="button-group mt-4">
-        <a href="/poultry-dashboard" className="btn btn-primary" style={{ fontSize: '1.5rem' }}>
+        <a href="/poultry-getting-started" className="btn btn-primary" style={{ fontSize: '1.5rem' }}>
           Get Started
         </a>
       </div>

@@ -5,79 +5,87 @@ const DailySortedEggReport = () => {
   const [date, setDate] = useState('');
   const [reportData, setReportData] = useState([]);
   const [summaryData, setSummaryData] = useState(null);
+  const [noDataMessage, setNoDataMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
       // Fetch the report data for the specified date
       const response = await fetch(`/api/view-daily-sorted-eggs?date=${date}`);
       const data = await response.json();
-
+  
       if (!response.ok) {
         // Handle the case where fetching the data failed
         console.error('Error fetching daily sorted egg report data:', data.message);
         return;
       }
-
-      // Process the data and update state
-      setReportData(data.data);
-
-      // Calculate summary data (for example, total quantity)
-      const farmSectionTotals = {}; // Store subtotals for each farm section
-      let overallTotalCrates = 0;
-      let overallTotalLooseEggs = 0;
-
-      // Store quantity categorization based on sizes
-      const sizeQuantities = {
-        small: { crates: 0, loose: 0 },
-        medium: { crates: 0, loose: 0 },
-        large: { crates: 0, loose: 0 },
-        extraLarge: { crates: 0, loose: 0 },
-      };
-
-      data.data.forEach((egg) => {
-        // Calculate total crates and loose eggs separately
-        const totalCrates = egg.crates;
-        const totalLooseEggs = egg.loose;
-
-        // Calculate subtotals for each farm section
-        if (!farmSectionTotals[egg.farmSection]) {
-          farmSectionTotals[egg.farmSection] = { crates: totalCrates, looseEggs: totalLooseEggs };
-        } else {
-          farmSectionTotals[egg.farmSection].crates += totalCrates;
-          farmSectionTotals[egg.farmSection].looseEggs += totalLooseEggs;
-        }
-
-        // Calculate total crates and loose eggs
-        overallTotalCrates += totalCrates;
-        overallTotalLooseEggs += totalLooseEggs;
-
-        // Categorize quantity based on sizes
-        sizeQuantities[egg.size].crates += totalCrates;
-        sizeQuantities[egg.size].loose += totalLooseEggs;
-      });
-
-      // Convert excess loose eggs to crates
-      const excessLooseEggsToCrates = Math.floor(overallTotalLooseEggs / 30);
-      overallTotalCrates += excessLooseEggsToCrates;
-      overallTotalLooseEggs %= 30;
-
-      setSummaryData({
-        farmSectionTotals,
-        overallTotalCrates,
-        overallTotalLooseEggs,
-        sizeQuantities,
-      });
+  
+      if (data.data.length === 0) {
+        // Update state to display a message when there is no data
+        setNoDataMessage('No data available for the selected date.');
+        setReportData([]); // Clear existing report data
+        setSummaryData(null); // Clear existing summary data
+      } else {
+        // Clear the no data message
+        setNoDataMessage('');
+  
+        // Process the data and update state
+        setReportData(data.data);
+  
+        // Calculate summary data (for example, total quantity)
+        const farmSectionTotals = {}; // Store subtotals for each farm section
+        let overallTotalCrates = 0;
+        let overallTotalLooseEggs = 0;
+  
+        // Store quantity categorization based on sizes
+        const sizeQuantities = {
+          small: { crates: 0, loose: 0 },
+          medium: { crates: 0, loose: 0 },
+          large: { crates: 0, loose: 0 },
+          extraLarge: { crates: 0, loose: 0 },
+        };
+  
+        data.data.forEach((egg) => {
+          // Calculate total crates and loose eggs separately
+          const totalCrates = egg.crates;
+          const totalLooseEggs = egg.loose;
+  
+          // Calculate subtotals for each farm section
+          if (!farmSectionTotals[egg.farmSection]) {
+            farmSectionTotals[egg.farmSection] = { crates: totalCrates, looseEggs: totalLooseEggs };
+          } else {
+            farmSectionTotals[egg.farmSection].crates += totalCrates;
+            farmSectionTotals[egg.farmSection].looseEggs += totalLooseEggs;
+          }
+  
+          // Calculate total crates and loose eggs
+          overallTotalCrates += totalCrates;
+          overallTotalLooseEggs += totalLooseEggs;
+  
+          // Categorize quantity based on sizes
+          sizeQuantities[egg.size].crates += totalCrates;
+          sizeQuantities[egg.size].loose += totalLooseEggs;
+        });
+  
+        // Convert excess loose eggs to crates
+        const excessLooseEggsToCrates = Math.floor(overallTotalLooseEggs / 30);
+        overallTotalCrates += excessLooseEggsToCrates;
+        overallTotalLooseEggs %= 30;
+  
+        setSummaryData({
+          farmSectionTotals,
+          overallTotalCrates,
+          overallTotalLooseEggs,
+          sizeQuantities,
+        });
+      }
     } catch (error) {
       console.error('Error fetching daily sorted egg report:', error);
+      // Optionally, you can set an error message here
     }
   };
-
-  const formatDate = (dateString) => {
-    const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
-    return new Date(dateString).toLocaleDateString(undefined, options);
-  };
+  
 
   const formatTime = (timeString) => {
     const options = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
@@ -89,6 +97,13 @@ const DailySortedEggReport = () => {
       <Row>
         <Col>
           <h2 style={{ color: 'white' }}>Daily Sorted Egg Report</h2>
+          {noDataMessage && (
+        <Row>
+          <Col>
+            <p style={{ color: 'red', marginTop: '20px' }}>{noDataMessage}</p>
+          </Col>
+        </Row>
+      )}
           <Form onSubmit={handleSubmit}>
             <FormGroup>
               <Label for="date" style={{ color: 'white' }}>Select Date:</Label>

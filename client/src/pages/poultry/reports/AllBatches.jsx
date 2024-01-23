@@ -25,6 +25,16 @@ const AllBatches = () => {
     }
   };
 
+  // Function to format the date as "Monday, January 7th, 2024"
+  const formatDateString = (date) => {
+    return new Date(date).toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  };
+
   // Function to calculate breed-wise summary
   const calculateBreedSummary = () => {
     const breedSummary = {};
@@ -42,20 +52,20 @@ const AllBatches = () => {
 
   const calculateSummary = () => {
     const summary = {};
-  
+
     batches.forEach((batch) => {
       const key = `${batch.breed}_${batch.farmSection}`;
-  
+
       if (summary[key]) {
         summary[key] += batch.quantity;
       } else {
         summary[key] = batch.quantity;
       }
     });
-  
+
     return summary;
   };
-  
+
   const summary = calculateSummary();
 
   return (
@@ -103,10 +113,11 @@ const AllBatches = () => {
         <div>
           {/* Batches Table */}
           <div className="mt-4">
-          <h2 className="text-xl font-bold mb-2">General Report</h2>
+            <h2 className="text-xl font-bold mb-2">General Report</h2>
             <table className="table-auto w-full">
               <thead>
                 <tr>
+                <th className="border px-4 py-2">Created At</th>
                   <th className="border px-4 py-2">Batch Number</th>
                   <th className="border px-4 py-2">Quantity</th>
                   <th className="border px-4 py-2">Breed</th>
@@ -114,21 +125,22 @@ const AllBatches = () => {
                   <th className="border px-4 py-2">Arrival Date</th>
                   <th className="border px-4 py-2">Farm Section</th>
                   <th className="border px-4 py-2">Created By</th>
-                  <th className="border px-4 py-2">Created At</th>
+                  
                   {/* Add more table headers based on your data fields */}
                 </tr>
               </thead>
               <tbody>
                 {batches.map((batch) => (
                   <tr key={batch._id}>
+                    <td className="border px-4 py-2">{formatDateString(batch.createdAt)}</td>
                     <td className="border px-4 py-2">{batch.batchNumber}</td>
                     <td className="border px-4 py-2">{batch.quantity}</td>
                     <td className="border px-4 py-2">{batch.breed}</td>
                     <td className="border px-4 py-2">{batch.currentAge}</td>
-                    <td className="border px-4 py-2">{new Date(batch.arrivalDate).toLocaleDateString()}</td>
+                    <td className="border px-4 py-2">{formatDateString(batch.arrivalDate)}</td>
                     <td className="border px-4 py-2">{batch.farmSection}</td>
                     <td className="border px-4 py-2">{batch.createdBy}</td>
-                    <td className="border px-4 py-2">{new Date(batch.createdAt).toLocaleDateString()}</td>
+                    
                     {/* Add more table data cells based on your data fields */}
                   </tr>
                 ))}
@@ -158,29 +170,29 @@ const AllBatches = () => {
           </div>
 
           <div className="mt-4">
-  <h2 className="text-xl font-bold mb-2">Farm Section-wise Summary</h2>
-  <table className="table-auto">
-    <thead>
-      <tr>
-        <th className="border px-4 py-2">Farm Section</th>
-        <th className="border px-4 py-2">Breed</th>
-        <th className="border px-4 py-2">Total Quantity</th>
-      </tr>
-    </thead>
-    <tbody>
-      {Object.keys(summary).map((key) => {
-        const [breed, farmSection] = key.split('_');
-        return (
-          <tr key={key}>
-            <td className="border px-4 py-2">{farmSection}</td>
-            <td className="border px-4 py-2">{breed}</td>
-            <td className="border px-4 py-2">{summary[key]}</td>
-          </tr>
-        );
-      })}
-    </tbody>
-  </table>
-</div>
+            <h2 className="text-xl font-bold mb-2">Farm Section-wise Summary</h2>
+            <table className="table-auto">
+              <thead>
+                <tr>
+                  <th className="border px-4 py-2">Farm Section</th>
+                  <th className="border px-4 py-2">Breed</th>
+                  <th className="border px-4 py-2">Total Quantity</th>
+                </tr>
+              </thead>
+              <tbody>
+                {Object.keys(summary).map((key) => {
+                  const [breed, farmSection] = key.split('_');
+                  return (
+                    <tr key={key}>
+                      <td className="border px-4 py-2">{farmSection}</td>
+                      <td className="border px-4 py-2">{breed}</td>
+                      <td className="border px-4 py-2">{summary[key]}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
     </div>

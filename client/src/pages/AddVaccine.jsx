@@ -81,7 +81,7 @@ const AddVaccine = () => {
     <Container>
       <Row className="mt-4">
         <Col md={{ size: 6, offset: 3 }}>
-          <h2 className="text-white mb-4">Add Medication</h2>
+          <h2 className="text-white mb-4">Add New Vaccine To Vaccination Cycle</h2>
           <Form onSubmit={handleSubmit}>
             <FormGroup row>
               <Label for="name" className="text-white" md={3}>

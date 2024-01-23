@@ -163,6 +163,15 @@ import PurchaseCassavaFertilizer from './pages/cassava/CassavaFertilizerPurchase
 import CassavaFarmWeedicidePurchase from './pages/cassava/CassavaFarmWeedicidePurchase';
 import CassavaFarmMiscellaneousExpense from './pages/cassava/CassavaFarmMiscExpense';
 import SeasonalCassavaProfitLossReport from './pages/cassava/reports/CassavaSeasonalProfitLossReport';
+import PoultryGettingStarted from './pages/poultry/PoultryGettingStarted';
+import PoultryStockActivities from './pages/poultry/PoultryStockActivities';
+import EggManagementActivities from './pages/poultry/EggManagementActivities';
+import FeedAndHealthManagement from './pages/poultry/FeedHealthManagement';
+import PoultryHealthManagement from './pages/poultry/PoultryHealthManagement';
+import PoultryReportActivities from './pages/poultry/reports/PoultryReportsDashboard';
+import PoultryFinancialActivities from './pages/poultry/PoultryFinancialActivities';
+import PoultryExpenditureActivities from './pages/poultry/PoultryExpenditureActivities';
+import PoultryIncomeActivities from './pages/poultry/PoultryIncomeActivities';
 
 
 
@@ -186,27 +195,40 @@ export default function App() {
           <Route path='/profile' element={<Profile/>} />
           <Route path='/allusers' element={<ViewAllUsers/>} />
           <Route path='/poultry' element={<Poultry />} />
+          <Route path='/poultry-getting-started' element={<PoultryGettingStarted />} />
+          <Route path='/poultry-stock-activities' element={<PoultryStockActivities />} />
+
+
           <Route path='/poultry-dashboard' element={<PoultryDashboard/>} />
           <Route path='/create-poultry' element={<CreatePoultry/>} />
           <Route path='/farm-section' element={<CreateFarmSection/>} />
           <Route path='/stock-tracking' element={<StockTracking/>} />
           <Route path='/poultry-report' element={<PoultryReport/>} />
           <Route path='/stock-reports' element={<StockReport/>} />
-          <Route path='/all-batches' element={<AllBatches/>} />
+          <Route path='/poultry-stock-summary-report' element={<AllBatches/>} />
           <Route path='/create-breed' element={<CreateBreed/>} />
           <Route path='/extras' element={<Extras/>} />
           <Route path='/age-report' element={<AgeReport/>} />
           <Route path='/move-birds' element={<Movement/>} />
-          <Route path='/date-movement' element={<MovementByDate/>} />
+          <Route path='/poultry-relocation-report' element={<MovementByDate/>} />
           <Route path='/update-batch' element={<UpdateBatch/>} />
           <Route path='/update-history' element={<BatchUpdateHistory/>} />
           <Route path='/add-birds' element={<AddBirds/>} />
           <Route path='/add-history' element={<BirdsAdditionHistory/>} />
           <Route path='/finance' element={<Finance/>} />
+
           <Route path='/create-supplier' element={<CreateSupplier/>} />
           <Route path='/all-suppliers' element={<AllSuppliers/>} />
           <Route path='/update-supplier' element={<UpdateSupplier/>} />
           <Route path='/expense-category' element={<ExpenseCategory/>} />
+
+          <Route path='/feed-health-management' element={<FeedAndHealthManagement/>} />
+          <Route path='/poultry-health-management' element={<PoultryHealthManagement/>} />
+          <Route path='/poultry-report-dashboard' element={<PoultryReportActivities/>} />
+          <Route path='/poultry-financial-activities' element={<PoultryFinancialActivities/>} />
+          <Route path='/poultry-expenditure-activities' element={<PoultryExpenditureActivities/>} />
+          <Route path='/poultry-income-activities' element={<PoultryIncomeActivities/>} />
+
           <Route path='/purchase-feed' element={<PurchaseFeed/>} />
           <Route path='/create-feed-category' element={<CreateFeedCategory/>} />
           <Route path='/all-feed-category' element={<AllFeedCategories/>} />
@@ -220,6 +242,8 @@ export default function App() {
           <Route path='/search-feed-name' element={<SearchFeedName/>} />
           <Route path='/view-feed/:id' element={<ViewFeed />} />
           <Route path='/view-all-feed-stock' element={<FeedStockReport/>} />
+
+
           <Route path='/add-vaccine' element={<AddVaccine/>} />
           <Route path='/medication' element={<Medication/>} />
           <Route path='/all-vaccines' element={<AllVaccinesReport/>} />
@@ -233,20 +257,29 @@ export default function App() {
           <Route path='/batch-deworming-history' element={<BatchDewormingReport/>} />
           <Route path='/deworming-history' element={<DewormingReport/>} />
           <Route path='/add-health-condition' element={<RecordHealthCondition/>} />
-          <Route path='/add-treatment' element={<Treatment/>} />
+          <Route path='/treat-sick-birds' element={<Treatment/>} />
           <Route path='/batch-treatment-report' element={<BatchTreatmentReport/>} />
           <Route path='/farm-section-report' element={<FarmSectionReport/>} />
+
+
+
+          <Route path='/egg-management-activities' element={<EggManagementActivities/>} />
           <Route path='/add-unsorted-eggs' element={<RecordUnsortedEggs/>} />
           <Route path='/add-sorted-eggs' element={<AddSortedEggs/>} />
           <Route path='/daily-unsorted-eggs-report' element={<DailyUnsortedEggReport/>} />
           <Route path='/daily-sorted-eggs-report' element={<DailySortedEggReport/>} />
           <Route path='/sell-eggs' element={<SellEggs/>} />
           <Route path='/egg-sales-report' element={<EggSalesReport/>} />
+
+
           <Route path='/sell-birds' element={<SellBirds/>} />
           <Route path='/bird-sales-report' element={<BirdSalesReport/>} />
+          
           <Route path='/bird-mortality' element={<RecordBirdMortality/>} />
           <Route path='/all-batches-mortality-report' element={<BirdMortalityReport/>} />
           <Route path='/batch-mortality-report' element={<BatchBirdMortalityReport/>} />
+
+
           <Route path='/guinea-fowl-getting-started' element={<GuineaFowl/>} />
           <Route path='/guinea-fowl-dashboard' element={<GuineaFowlDashboard/>} />
           <Route path='/new-guineaFowl' element={<RecordGuineaFowl/>} />
@@ -272,6 +305,8 @@ export default function App() {
           <Route path='/guinea-fowls-sales-report' element={<GuineaFowlSalesReport/>} />
           <Route path='/guinea-fowls-batch-mortality-report' element={<GuineaFowlBatchMortalityReport/>} />
           <Route path='/guinea-fowls-single-batch-update-report' element={<GuineaFowlSingleBatchUpdateHistory/>} />
+
+          
           <Route path='/pig-farm-dashboard' element={<PigFarmDashBoard/>} />
           <Route path='/pig-stock-tracking' element={<PigStockTracking/>} />
           <Route path='/add-pig-breed' element={<CreatePigBreed/>} />
@@ -290,6 +325,8 @@ export default function App() {
           <Route path='/add-pig-drugs' element={<AddPigDrugs/>} />
           <Route path='/vaccination-health-management' element={<VaccinationAndTreatment/>} />
           <Route path='/pig-feed-management' element={<PigFeedManagement/>} />
+
+          
           <Route path='/maize-getting-started' element={<MaizeGettingStarted/>} />
           <Route path='/maize-farm-activities' element={<MaizeFarmActivities/>} />
           <Route path='/maize-land-clearance' element={<RecordMaizeLandClearance/>} />

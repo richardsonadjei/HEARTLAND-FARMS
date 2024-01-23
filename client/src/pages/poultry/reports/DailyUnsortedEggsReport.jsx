@@ -5,61 +5,74 @@ const DailyUnsortedEggReport = () => {
   const [date, setDate] = useState('');
   const [reportData, setReportData] = useState([]);
   const [summaryData, setSummaryData] = useState(null);
+  const [noDataMessage, setNoDataMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
       // Fetch the report data for the specified date
       const response = await fetch(`/api/view-daily-unsorted-eggs?date=${date}`);
       const data = await response.json();
-
+  
       if (!response.ok) {
         // Handle the case where fetching the data failed
         console.error('Error fetching daily unsorted egg report data:', data.message);
         return;
       }
-
-      // Process the data and update state
-      setReportData(data.data);
-
-      // Calculate summary data (for example, total quantity and crates)
-      const farmSectionTotals = {}; // Store subtotals for each farm section
-      let overallTotalCrates = 0;
-      let overallTotalLooseEggs = 0;
-
-      data.data.forEach((egg) => {
-        // Calculate total crates and loose eggs separately
-        const totalCrates = egg.crates;
-        const totalLooseEggs = egg.looseEggs;
-
-        // Calculate subtotals for each farm section
-        if (!farmSectionTotals[egg.farmSection]) {
-          farmSectionTotals[egg.farmSection] = { crates: totalCrates, looseEggs: totalLooseEggs };
-        } else {
-          farmSectionTotals[egg.farmSection].crates += totalCrates;
-          farmSectionTotals[egg.farmSection].looseEggs += totalLooseEggs;
-        }
-
-        // Calculate total crates and loose eggs
-        overallTotalCrates += totalCrates;
-        overallTotalLooseEggs += totalLooseEggs;
-      });
-
-      // Convert excess loose eggs to crates
-      const excessLooseEggsToCrates = Math.floor(overallTotalLooseEggs / 30);
-      overallTotalCrates += excessLooseEggsToCrates;
-      overallTotalLooseEggs %= 30;
-
-      setSummaryData({
-        farmSectionTotals,
-        overallTotalCrates,
-        overallTotalLooseEggs,
-      });
+  
+      if (data.data.length === 0) {
+        // Update state to display a message when there is no data
+        setNoDataMessage('No data available for the selected date.');
+        setReportData([]); // Clear existing report data
+        setSummaryData(null); // Clear existing summary data
+      } else {
+        // Clear the no data message
+        setNoDataMessage('');
+  
+        // Process the data and update state
+        setReportData(data.data);
+  
+        // Calculate summary data (for example, total quantity and crates)
+        const farmSectionTotals = {}; // Store subtotals for each farm section
+        let overallTotalCrates = 0;
+        let overallTotalLooseEggs = 0;
+  
+        data.data.forEach((egg) => {
+          // Calculate total crates and loose eggs separately
+          const totalCrates = egg.crates;
+          const totalLooseEggs = egg.looseEggs;
+  
+          // Calculate subtotals for each farm section
+          if (!farmSectionTotals[egg.farmSection]) {
+            farmSectionTotals[egg.farmSection] = { crates: totalCrates, looseEggs: totalLooseEggs };
+          } else {
+            farmSectionTotals[egg.farmSection].crates += totalCrates;
+            farmSectionTotals[egg.farmSection].looseEggs += totalLooseEggs;
+          }
+  
+          // Calculate total crates and loose eggs
+          overallTotalCrates += totalCrates;
+          overallTotalLooseEggs += totalLooseEggs;
+        });
+  
+        // Convert excess loose eggs to crates
+        const excessLooseEggsToCrates = Math.floor(overallTotalLooseEggs / 30);
+        overallTotalCrates += excessLooseEggsToCrates;
+        overallTotalLooseEggs %= 30;
+  
+        setSummaryData({
+          farmSectionTotals,
+          overallTotalCrates,
+          overallTotalLooseEggs,
+        });
+      }
     } catch (error) {
       console.error('Error fetching daily unsorted egg report:', error);
+      // Optionally, you can set an error message here
     }
   };
+  
 
   const formatDate = (dateString) => {
     const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
@@ -76,6 +89,14 @@ const DailyUnsortedEggReport = () => {
       <Row>
         <Col>
           <h2 style={{ color: 'white' }}>Daily Unsorted Egg Report</h2>
+          {noDataMessage && (
+        <Row>
+          <Col>
+            <p style={{ color: 'red', marginTop: '20px' }}>{noDataMessage}</p>
+          </Col>
+        </Row>
+      )}
+
           <Form onSubmit={handleSubmit}>
             <FormGroup>
               <Label for="date" style={{ color: 'white' }}>Select Date:</Label>

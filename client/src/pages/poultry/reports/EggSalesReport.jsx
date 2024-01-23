@@ -30,6 +30,7 @@ const EggSalesReport = () => {
     return (
       <thead style={{ background: '#007BFF', color: 'white' }}>
         <tr>
+        <th>#</th>
           <th>Sales Number</th>
           <th>Customer Name</th>
           <th>Phone Number</th>
@@ -47,8 +48,9 @@ const EggSalesReport = () => {
   const renderTableRows = () => {
     return (
       <tbody>
-        {salesData.map((sale) => (
+         {salesData.map((sale, index) => (
           <tr key={sale._id}>
+            <td>{index + 1}</td> 
             <td>{sale.salesNumber}</td>
             <td>{sale.customerName}</td>
             <td>{sale.phoneNumber}</td>

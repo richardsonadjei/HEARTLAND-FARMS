@@ -17,7 +17,7 @@ const Home = () => {
   ,
     { category: ['crop', 'all'], href: '/cassava-getting-started', iconSrc: '../../public/images/cassava tree.jpg' },
     { category: ['crop', 'all'], href: '/maize-getting-started', iconSrc: '../../public/images/maize.png' },
-    { category: ['crop', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '../../public/images/Okro.png' },
+    { category: ['crop', 'all'], href: '/poultry', iconSrc: '../../public/images/Okro.png' },
     { category: ['crop', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '../../public/images/Beans.png' },
     { category: ['crop', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '../../public/images/green pepper.jpg' },
     { category: ['crop', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '../../public/images/palm tree.jpg' },

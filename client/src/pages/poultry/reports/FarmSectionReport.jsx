@@ -73,6 +73,7 @@ const FarmSectionReport = () => {
               <table className="table table-bordered table-striped" style={{ boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', marginTop: '20px' }}>
                 <thead>
                   <tr>
+                    <th>#</th>
                     <th>Batch Number</th>
                     <th>Quantity</th>
                     <th>Breed</th>
@@ -82,8 +83,9 @@ const FarmSectionReport = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {reportData.map(batch => (
+                  {reportData.map((batch, index) => (
                     <tr key={batch._id}>
+                      <td>{index + 1}</td>
                       <td>{batch.batchNumber}</td>
                       <td>{batch.quantity}</td>
                       <td>{batch.breed}</td>

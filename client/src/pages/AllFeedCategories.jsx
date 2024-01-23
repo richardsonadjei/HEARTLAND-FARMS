@@ -44,7 +44,7 @@ const AllFeedCategories = () => {
       ) : (
         <p>No feed categories available.</p>
       )}
-      <Button color="primary" onClick={() => window.location.href = '/poultry-dashboard'}>
+      <Button color="primary" onClick={() => window.location.href = '/poultry-getting-started'}>
         Go back to Poultry Dashboard
       </Button>
     </Container>

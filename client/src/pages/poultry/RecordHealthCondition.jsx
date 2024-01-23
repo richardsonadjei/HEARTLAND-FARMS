@@ -90,7 +90,7 @@ useEffect(() => {
     <Container className="mt-5">
       <Row>
         <Col md={{ size: 6, offset: 3 }}>
-          <h2 className="text-white">Record Health Condition</h2>
+          <h2 className="text-white">Diagnose Birds</h2>
           <Form onSubmit={handleSubmit}>
             <Row form>
               <Col md={6}>

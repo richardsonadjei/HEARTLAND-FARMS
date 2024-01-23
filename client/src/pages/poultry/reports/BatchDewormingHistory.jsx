@@ -8,30 +8,34 @@ const BatchDewormingReport = () => {
   const [dewormings, setDewormings] = useState([]);
 
   useEffect(() => {
-    const fetchBatchNumbers = async () => {
-      try {
-        const batchResponse = await fetch('/api/all-batchesNoDates');
-        if (!batchResponse.ok) {
-          throw new Error('Error fetching batch numbers');
-        }
-        const batchData = await batchResponse.json();
-
-        if (batchData && batchData.data && Array.isArray(batchData.data)) {
-          const formattedBatchOptions = batchData.data.map((batch) => ({
-            value: batch.batchNumber,
-            label: batch.batchNumber,
-          }));
-          setBatchOptions(formattedBatchOptions);
-        } else {
-          setBatchOptions([]);
-        }
-      } catch (error) {
-        console.error('Error fetching batch numbers:', error.message);
-      }
-    };
-
+    // Fetch batch numbers when the component mounts
     fetchBatchNumbers();
   }, []);
+  
+  const fetchBatchNumbers = async () => {
+    try {
+      const batchResponse = await fetch('/api/all-batchesNoDates');
+      if (!batchResponse.ok) {
+        throw new Error('Error fetching batch numbers');
+      }
+      const batchData = await batchResponse.json();
+  
+      // Check if the data.data.batches property exists and is an array
+      if (batchData && batchData.data && batchData.data.batches && Array.isArray(batchData.data.batches)) {
+        const formattedBatchOptions = batchData.data.batches.map((batch) => ({
+          value: batch.batchNumber,
+          label: batch.batchNumber,
+        }));
+        setBatchOptions(formattedBatchOptions);
+      } else {
+        setBatchOptions([]);
+      }
+    } catch (error) {
+      console.error('Error fetching batch numbers:', error.message);
+    }
+  };
+  
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -57,14 +57,16 @@ const SellEggs = () => {
   const customStyles = {
     option: (provided, state) => ({
       ...provided,
-      backgroundColor: state.isFocused ? '#d3d3d3' : 'white', // Adjust background color
-      color: state.isFocused ? 'black' : 'black', // Adjust text color
+      backgroundColor: state.isFocused ? '#d3d3d3' : 'white',
+      color: state.isFocused ? 'black' : 'black',
     }),
     control: (provided) => ({
       ...provided,
-      backgroundColor: 'white', // Adjust control background color
+      backgroundColor: 'white',
     }),
   };
+
+ 
 
   return (
     <Container>
@@ -148,6 +150,7 @@ const SellEggs = () => {
                       options={sizeOptions}
                       value={sizeOptions.find((option) => option.value === size)}
                       onChange={(selectedOption) => setSize(selectedOption.value)}
+                      styles={customStyles}
                       
                     />
                   </FormGroup>

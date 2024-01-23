@@ -72,29 +72,39 @@ const BatchUpdateHistory = () => {
 
       {errorMessage && <p className="text-danger mt-3">{errorMessage}</p>}
 
+     
       {batchUpdates.length > 0 && (
-  <div className="mt-8">
-    <h2 className="text-xl font-bold mb-4">Update History</h2>
-    <Table striped className="table-auto">
-      <thead>
-        <tr>
-          <th className="px-4 py-2">Batch Number</th>
-          <th className="px-4 py-2">Previous Quantity</th>
-          <th className="px-4 py-2">New Quantity</th>
-          <th className="px-4 py-2">Updated By</th>
-          <th className="px-4 py-2">Update Date</th>
-        </tr>
-      </thead>
-      <tbody>
-        {JSON.parse(JSON.stringify(batchUpdates)).map((update) => (
-          <tr key={update._id}>
-            <td className="border px-4 py-2">{update.batchNumber}</td>
-            <td className="border px-4 py-2">{update.previousQuantity}</td>
-            <td className="border px-4 py-2">{update.newQuantity}</td>
-            <td className="border px-4 py-2">{update.updatedBy}</td>
-            <td className="border px-4 py-2">{new Date(update.updatedAt).toLocaleString()}</td>
-          </tr>
-        ))}
+        <div className="mt-8">
+          <h2 className="text-xl font-bold mb-4">Update History</h2>
+          <Table striped className="table-auto">
+            <thead>
+              <tr>
+              <th className="px-4 py-2">Update Date</th>
+                <th className="px-4 py-2">Batch Number</th>
+                <th className="px-4 py-2">Previous Quantity</th>
+                <th className="px-4 py-2">New Quantity</th>
+                <th className="px-4 py-2">Updated By</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              {batchUpdates.map((update) => (
+                <tr key={update._id}>
+                  <td className="border px-4 py-2">
+                    {new Date(update.updatedAt).toLocaleDateString('en-US', {
+                      weekday: 'long',
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })}
+                  </td>
+                  <td className="border px-4 py-2">{update.batchNumber}</td>
+                  <td className="border px-4 py-2">{update.previousQuantity}</td>
+                  <td className="border px-4 py-2">{update.newQuantity}</td>
+                  <td className="border px-4 py-2">{update.updatedBy}</td>
+                  
+                </tr>
+              ))}
       </tbody>
     </Table>
   </div>

@@ -101,6 +101,7 @@ const AllDrugs = () => {
           <Table responsive hover bordered className="shadow">
             <thead>
               <tr>
+              <th>#</th>
                 <th>Name</th>
                 <th>Dosage</th>
                 <th>Usage Instructions</th>
@@ -110,8 +111,9 @@ const AllDrugs = () => {
               </tr>
             </thead>
             <tbody>
-              {medications.map((medication) => (
+            {medications.map((medication, index) => (
                 <tr key={medication._id}>
+                   <td>{index + 1}</td>
                   <td>{medication.name}</td>
                   <td>{medication.dosage}</td>
                   <td>{medication.usageInstructions}</td>

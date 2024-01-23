@@ -75,21 +75,30 @@ const BirdsAdditionHistory = () => {
           <Table striped className="table-auto">
             <thead>
               <tr>
+              <th className="px-4 py-2">Added At</th>
                 <th className="px-4 py-2">Batch Number</th>
                 <th className="px-4 py-2">New Quantity</th>
                 <th className="px-4 py-2">Added Quantity</th>
                 <th className="px-4 py-2">Added By</th>
-                <th className="px-4 py-2">Added At</th>
+                
               </tr>
             </thead>
             <tbody>
-              {JSON.parse(JSON.stringify(birdAdditions)).map((addition) => (
+              {birdAdditions.map((addition) => (
                 <tr key={addition._id}>
+                   <td className="border px-4 py-2">
+                    {new Date(addition.createdAt).toLocaleDateString('en-US', {
+                      weekday: 'long',
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })}
+                  </td>
                   <td className="border px-4 py-2">{addition.batchNumber}</td>
                   <td className="border px-4 py-2">{addition.newQuantity}</td>
                   <td className="border px-4 py-2">{addition.addedQuantity}</td>
                   <td className="border px-4 py-2">{addition.addedBy}</td>
-                  <td className="border px-4 py-2">{new Date(addition.createdAt).toLocaleString()}</td>
+                 
                 </tr>
               ))}
             </tbody>
