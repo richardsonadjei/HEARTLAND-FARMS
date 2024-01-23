@@ -56,7 +56,7 @@ const RecordVaccination = () => {
           vaccinatedBy: '',
         });
         // Navigate to "/medication"
-        window.location.href = '/medication';
+        window.location.href = '/poultry-getting-started';
       } else {
         // If the response is not successful, handle the error
         const errorData = await response.json();

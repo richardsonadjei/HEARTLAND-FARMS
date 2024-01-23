@@ -65,7 +65,7 @@ const AddDrugs = () => {
 
         // Navigate to /medication after a short delay (to allow the success message to be displayed)
         setTimeout(() => {
-          navigate('/medication');
+          navigate('/');
         }, 1000);
       } else {
         const data = await response.json();

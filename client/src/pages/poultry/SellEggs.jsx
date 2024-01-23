@@ -44,7 +44,7 @@ const SellEggs = () => {
 
       if (response.ok) {
         alert('Egg sale record created successfully!');
-        window.location.href = '/poultry-dashboard';
+        window.location.href = '/poultry-getting-started';
       } else {
         alert('Error creating egg sale. Please try again.');
       }

@@ -82,7 +82,7 @@ const DewormBirds = () => {
       }
 
       alert('Medication has been created successfully!');
-      window.location.href = '/medication'; // Navigate to /medication
+      window.location.href = '/poultry-getting-started'; // Navigate to /medication
     } catch (error) {
       console.error('Error creating deworming record:', error.message);
     }

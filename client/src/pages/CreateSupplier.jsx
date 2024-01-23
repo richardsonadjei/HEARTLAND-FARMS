@@ -41,7 +41,7 @@ const CreateSupplier = () => {
        // If successful, navigate to /poultry-dashboard
        if (data.success) {
          setTimeout(() => {
-           window.location.href = '/poultry-dashboard';
+           window.location.href = '/';
          }, 2000); // Redirect after 2 seconds (adjust as needed)
        }
     } catch (error) {

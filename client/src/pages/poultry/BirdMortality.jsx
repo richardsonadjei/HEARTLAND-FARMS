@@ -72,7 +72,7 @@ const RecordBirdMortality = () => {
         setTimeout(() => {
           setSuccessMessage('');
           // Redirect to /poultry-dashboard after a successful record
-          window.location.href = '/poultry-dashboard';
+          window.location.href = '/poultry-getting-started';
         }, 3000);
       }
     } catch (error) {

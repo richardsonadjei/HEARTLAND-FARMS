@@ -124,7 +124,7 @@ const SellBirds = () => {
         setMessage(null);
   
         // Navigate the user to /poultry-dashboard
-        window.location.href = '/poultry-dashboard';
+        window.location.href = '/poultry-getting-started';
       }, 3000);
     } catch (error) {
       // Set error message

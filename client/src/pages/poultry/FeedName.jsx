@@ -29,8 +29,8 @@ const CreateFeedNameForm = () => {
         setErrorMessage(''); // Clear any previous error messages
         // Optionally, you can refresh the page after a delay
         setTimeout(() => {
-          window.location.reload();
-        }, 2000); // Refresh after 2 seconds
+          window.location.href = '/poultry-getting-started';
+        }, 3000); // Refresh after 2 seconds
       } else {
         // Handle error response
         const errorData = await response.json();

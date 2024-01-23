@@ -55,7 +55,7 @@ const AddVaccine = () => {
       if (response.ok) {
         // Medication created successfully
         alert('Medication created successfully');
-        window.location.href = '/medication'; // Navigate to /medication
+        window.location.href = '/'; // Navigate to /medication
       } else {
         const data = await response.json();
         alert(`Error: ${data.message}`);

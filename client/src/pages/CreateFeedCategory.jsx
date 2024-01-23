@@ -49,7 +49,7 @@ const CreateFeedCategory = () => {
           setSuccessMessage('Feed category created successfully!');
           // Redirect to /poultry-dashboard after a short delay
           setTimeout(() => {
-            window.location.href = '/poultry-dashboard';
+            window.location.href = '/poultry-getting-started';
           }, 2000); // 2000 milliseconds (2 seconds)
         } else {
           console.error('Error creating feed category:', data.error);

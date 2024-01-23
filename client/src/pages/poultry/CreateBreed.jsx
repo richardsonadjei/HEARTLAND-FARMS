@@ -42,7 +42,7 @@ const CreateBreed = () => {
         });
         // Redirect after 2 seconds
         setTimeout(() => {
-          window.location.href = '/poultry-dashboard';
+          window.location.href = '/poultry-getting-started';
         }, 2000);
       } else {
         const errorData = await response.json();

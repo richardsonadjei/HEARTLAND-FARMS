@@ -66,7 +66,7 @@ const RequestFeed = () => {
         if (result.success) {
           alert('Feed request created successfully!');
           // Redirect to "/feed-management" after successful submission
-          window.location.href = '/feed-management';
+          window.location.href = '/poultry-getting-started';
         } else {
           alert('Error creating feed request: ' + result.message);
         }

@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { Button, Form, FormGroup, Label, Input, Container, Row, Col } from 'reactstrap';
 
 const ExpenseCategory = () => {
-  // State to hold form data
+  // State to hold form data and success/error message
   const [formData, setFormData] = useState({
     name: '',
     description: '',
   });
+  const [message, setMessage] = useState(null);
 
   // Function to handle form submission
   const handleSubmit = async (e) => {
@@ -25,15 +26,17 @@ const ExpenseCategory = () => {
       const data = await response.json();
 
       // Display success or error message
-      console.log(data.message);
+      setMessage(data.message);
 
-      // Clear the form after submission
-      setFormData({
-        name: '',
-        description: '',
-      });
+      // If successful, redirect to '/' after 2 seconds
+      if (data.success) {
+        setTimeout(() => {
+          window.location.href = '/'; // Redirect after 2 seconds (adjust as needed)
+        }, 2000);
+      }
     } catch (error) {
       console.error('Error creating expense category:', error);
+      setMessage('Internal Server Error. Please try again later.');
     }
   };
 
@@ -80,6 +83,8 @@ const ExpenseCategory = () => {
 
         <Button type="submit">Create Category</Button>
       </Form>
+
+      {message && <p>{message}</p>}
     </Container>
   );
 };

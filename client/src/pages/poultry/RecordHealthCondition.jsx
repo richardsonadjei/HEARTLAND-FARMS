@@ -72,7 +72,7 @@ useEffect(() => {
 
       // Display success message and navigate to /move-birds
       alert('Health condition record has been created successfully!');
-      window.location.href = '/move-birds';
+      window.location.href = '/poultry-getting-started';
     } catch (error) {
       console.error('Error creating health condition record:', error.message);
     }

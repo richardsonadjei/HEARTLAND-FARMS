@@ -62,7 +62,7 @@ const ApproveFeedRequest = () => {
         // Alert the user
         alert('Feed request approved successfully!');
         // Redirect to "/feed-management"
-        window.location.href = '/feed-management';
+        window.location.href = '/poultry-getting-started';
       } else {
         // Handle error
         setError(data.message || 'An error occurred while approving feed request');

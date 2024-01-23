@@ -87,7 +87,7 @@ const UpdateBatch = () => {
         alert('Batch quantity updated successfully');
         // Redirect to /poultry-dashboard after 1 second
         setTimeout(() => {
-          window.location.href = '/poultry-dashboard';
+          window.location.href = '/poultry-getting-started';
         }, 1000);
       } else {
         // Handle error

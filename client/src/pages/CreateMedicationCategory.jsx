@@ -19,7 +19,7 @@ const CreateMedicationCategory = () => {
       if (response.ok) {
         setAlert('Medication created successfully!');
         // You can navigate to /medication here without using useHistory
-        window.location.href = '/medication';
+        window.location.href = '/poultry-getting-started';
       } else {
         const data = await response.json();
         setAlert(`Error: ${data.error}`);

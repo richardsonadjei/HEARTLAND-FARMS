@@ -104,7 +104,7 @@ const Treatment = () => {
       }
 
       alert('Bird treatment record has been created successfully!');
-      window.location.href = '/move-birds';
+      window.location.href = '/poultry-getting-started';
     } catch (error) {
       console.error('Error creating bird treatment record:', error.message);
       alert('Error creating bird treatment record. Please try again.');

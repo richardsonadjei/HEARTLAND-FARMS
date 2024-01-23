@@ -55,7 +55,7 @@ const AddSortedEggs = () => {
 
       // Show alert and navigate to /poultry-dashboard
       alert('Record created successfully!');
-      window.location.href = '/poultry-dashboard';
+      window.location.href = '/poultry-getting-started';
     } catch (error) {
       console.error('Error creating record:', error);
       // Handle other errors if needed

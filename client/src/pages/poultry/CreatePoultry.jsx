@@ -112,7 +112,7 @@ const CreatePoultry = () => {
 
       // Redirect to /poultry-dashboard after 2 seconds
       setTimeout(() => {
-        window.location.href = '/poultry-dashboard';
+        window.location.href = '/poultry-getting-started';
       }, 2000);
     } catch (error) {
       // Handle errors (e.g., show an error message)
