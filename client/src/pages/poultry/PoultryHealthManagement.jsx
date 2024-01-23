@@ -14,21 +14,21 @@ const PoultryHealthManagement = () => {
       </Row>
 
       <Row className="tracking-section">
-        <Col className="tracking-card mb-3">
+        <Col xs={12} sm={6} lg={4} className="tracking-card mb-3">
           <Link to="/add-drug" className="card-link">
             <FaMedkit className="tracking-icon drugs-icon" />
             <h3>Add New Drugs/Vaccine</h3>
             <p>Record and manage information about new drugs or vaccines for your livestock.</p>
           </Link>
         </Col>
-        <Col className="tracking-card mb-3">
+        <Col xs={12} sm={6} lg={4} className="tracking-card mb-3">
           <Link to="/add-vaccine" className="card-link">
             <FaSyringe className="tracking-icon vaccine-icon" />
             <h3>Add Vaccine To Vaccination Cycle</h3>
             <p>Include vaccines in the vaccination cycle for maintaining livestock health.</p>
           </Link>
         </Col>
-        <Col className="tracking-card mb-3">
+        <Col xs={12} sm={6} lg={4} className="tracking-card mb-3">
           <Link to="/deworm-birds" className="card-link">
             <FaBug className="tracking-icon deworm-icon" />
             <h3>Deworm Birds</h3>
@@ -37,14 +37,14 @@ const PoultryHealthManagement = () => {
         </Col>
       </Row>
       <Row className="tracking-section">
-        <Col className="tracking-card mb-3">
+        <Col xs={12} sm={6} lg={6} className="tracking-card mb-3">
           <Link to="/add-health-condition" className="card-link">
             <FaUserMd className="tracking-icon diagnose-icon" />
             <h3>Diagnose And Isolate Birds</h3>
             <p>Perform health diagnosis and isolate affected birds for proper care.</p>
           </Link>
         </Col>
-        <Col className="tracking-card mb-3">
+        <Col xs={12} sm={6} lg={6} className="tracking-card mb-3">
           <Link to="/treat-sick-birds" className="card-link">
             <FaHospital className="tracking-icon treat-icon" />
             <h3>Treat Sick Birds</h3>
