@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import path from 'path';
 import authRouter from './routes/auth.router.js';
 import profileRouter from './routes/user.router.js';
 import cookieParser from 'cookie-parser';
@@ -48,6 +49,7 @@ mongoose
     console.log(err);
   });
 
+  const __dirname = path.resolve();
 const app = express();
 
 
@@ -64,6 +66,9 @@ app.listen(3000, () => {
 
 app.use('/api/auth', authRouter);
 app.use('/api/user', profileRouter); 
+
+
+
 app.use('/api/', poultryRouter); 
 app.use('/api/', sectionRouter);  
 app.use('/api/', breedRouter); 
@@ -97,7 +102,11 @@ app.use('/api/', maizeRouter);
 
 app.use('/api/', cassavaRouter); 
 
+app.use(express.static(path.join(__dirname, '/client/dist')));
 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+})
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
