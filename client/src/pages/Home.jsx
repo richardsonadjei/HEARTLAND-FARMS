@@ -15,7 +15,7 @@ const Home = () => {
     { category: ['animal', 'all'], href: '#', iconSrc: 'https://www.bivatec.com/assets/images/icons/apps/my_fish_manager_new_1.png' },
     { category: ['crop', 'all'], href: '#', iconSrc: 'https://www.bivatec.com/assets/images/icons/apps/my_crop_manager_new_1.png' },
   ,
-    { category: ['crop', 'all'], href: '/cassava-getting-started', iconSrc: '../../public/images/cassava tree.jpg' },
+  { category: ['crop', 'all'], href: '/cassava-getting-started', iconSrc: '/images/cassava tree.jpg' },
     { category: ['crop', 'all'], href: '/maize-getting-started', iconSrc: '../../public/images/maize.png' },
     { category: ['crop', 'all'], href: '/poultry', iconSrc: '../../public/images/Okro.png' },
     { category: ['crop', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '../../public/images/Beans.png' },
