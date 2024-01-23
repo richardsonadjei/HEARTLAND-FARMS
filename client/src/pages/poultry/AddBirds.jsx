@@ -94,7 +94,7 @@ const AddBirds = () => {
 
     // Navigate the user to /poultry-dashboard after a short delay (2 seconds in this example)
     setTimeout(() => {
-      window.location.href = '/poultry-dashboard';
+      window.location.href = '/poultry-getting-started';
     }, 2000);
     } catch (error) {
       // Handle error (you may want to provide user feedback)

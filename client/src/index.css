@@ -703,7 +703,7 @@ feeding-card {
 }
 
 .custom-logo:hover .logo {
-  transform: scale(1.2); /* Enlarge the logo on hover */
+  transform: scale(2); /* Enlarge the logo on hover */
 }
 
 @keyframes fadeInLeft {
