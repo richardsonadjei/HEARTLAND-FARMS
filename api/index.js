@@ -1,7 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import path from 'path';
 import authRouter from './routes/auth.router.js';
 import profileRouter from './routes/user.router.js';
 import cookieParser from 'cookie-parser';
@@ -31,7 +30,7 @@ import pigFarmRouter from './routes/pigFarm.router.js';
 import maizeRouter from './routes/maize.router.js';
 import cassavaRouter from './routes/cassava.router.js';
 
-
+import path from 'path';
 
 
 
