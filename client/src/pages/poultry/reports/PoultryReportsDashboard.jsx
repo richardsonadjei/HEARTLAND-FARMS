@@ -11,9 +11,17 @@ const PoultryReportActivities = () => {
     overflowY: 'auto', // Enable vertical scrolling
   };
 
+  const pageStyle = {
+    backgroundImage: 'url("/images/section.jpg")',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    minHeight: '100vh',
+  };
+
+
   return (
-    <Container fluid className="report-container">
-      <h1 className="poultryReports-header">Poultry Reports</h1>
+    <Container fluid className="report-container" style={pageStyle}>
+      <h1 className="poultryReports-header text-black text-center">Poultry Reports</h1>
       <Row>
         <Col md={3}>
           <Card className="custom-card" >
@@ -73,7 +81,10 @@ const PoultryReportActivities = () => {
               <Link to="/all-drug" className="list-item">
                 All Drugs Available
               </Link>
-              <Link to="/batch-vaccination-history" className="list-item">
+              <Link to="/all-bird-vaccinations-report" className="list-item">
+                All Vaccination History Within A Period
+              </Link>
+              <Link to="/batch-vaccinations-report" className="list-item">
                 Batch Vaccination History
               </Link>
               <Link to="/batch-deworming-history" className="list-item">

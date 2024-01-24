@@ -172,6 +172,8 @@ import PoultryReportActivities from './pages/poultry/reports/PoultryReportsDashb
 import PoultryFinancialActivities from './pages/poultry/PoultryFinancialActivities';
 import PoultryExpenditureActivities from './pages/poultry/PoultryExpenditureActivities';
 import PoultryIncomeActivities from './pages/poultry/PoultryIncomeActivities';
+import AllBirdVaccinationReport from './pages/poultry/reports/AllBirdVaccinationsReport';
+import BirdBatchVaccinationReport from './pages/poultry/reports/BatchVaccinationReport';
 
 
 
@@ -260,6 +262,8 @@ export default function App() {
           <Route path='/treat-sick-birds' element={<Treatment/>} />
           <Route path='/batch-treatment-report' element={<BatchTreatmentReport/>} />
           <Route path='/farm-section-report' element={<FarmSectionReport/>} />
+          <Route path='/all-bird-vaccinations-report' element={<AllBirdVaccinationReport/>} />
+          <Route path='/batch-vaccinations-report' element={<BirdBatchVaccinationReport/>} />
 
 
 

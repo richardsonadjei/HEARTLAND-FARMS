@@ -112,7 +112,7 @@ const AllBatches = () => {
       {batches.length > 0 && (
         <div>
           {/* Batches Table */}
-          <div className="mt-4">
+          <div className="mt-4 overflow-x-auto">
             <h2 className="text-xl font-bold mb-2">General Report</h2>
             <table className="table-auto w-full">
               <thead>
@@ -149,7 +149,7 @@ const AllBatches = () => {
           </div>
 
           {/* Breed-wise Summary Table */}
-          <div className="mt-4">
+          <div className="mt-4 overflow-x-auto">
             <h2 className="text-xl font-bold mb-2">Breed-wise Summary</h2>
             <table className="table-auto">
               <thead>
@@ -169,7 +169,7 @@ const AllBatches = () => {
             </table>
           </div>
 
-          <div className="mt-4">
+          <div className="mt-4 overflow-x-auto">
             <h2 className="text-xl font-bold mb-2">Farm Section-wise Summary</h2>
             <table className="table-auto">
               <thead>

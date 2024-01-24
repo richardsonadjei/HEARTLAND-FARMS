@@ -2,11 +2,12 @@
 import express from 'express';
 import {
   createBirdVaccination,
-  getAllBirdVaccinations,
-  getBirdVaccinationById,
+
   updateBirdVaccinationById,
   deleteBirdVaccinationById,
   getBirdVaccinationsByBatchNumber,
+  getBirdVaccinationsByPeriod,
+  getBirdVaccinationByBatchNumber,
 } from '../controllers/birdVaccination.controller.js';
 
 // Create an Express router
@@ -16,10 +17,10 @@ const birdVaccinationRouter = express.Router();
 birdVaccinationRouter.post('/add-bird-vaccinations', createBirdVaccination);
 
 // Route to get all bird vaccination records
-birdVaccinationRouter.get('/bird-vaccinations', getAllBirdVaccinations);
+birdVaccinationRouter.get('/all-bird-vaccinations', getBirdVaccinationsByPeriod);
 
 // Route to get a single bird vaccination record by ID
-birdVaccinationRouter.get('/bird-vaccinations/:id', getBirdVaccinationById);
+birdVaccinationRouter.get('/bird-vaccinations/:batchNumber', getBirdVaccinationByBatchNumber);
 
 // Route to update a bird vaccination record by ID
 birdVaccinationRouter.put('/update-bird-vaccinations/:id', updateBirdVaccinationById);

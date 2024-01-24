@@ -25,7 +25,7 @@ const AgeReport = () => {
     const days = parseInt(ageParts[2], 10);
   
     const totalWeeks = (months * 30.44 + days) / 7; // Using a more accurate conversion for months to weeks
-    console.log(`Current Age: ${currentAge}, Total Weeks: ${totalWeeks}`);
+    
 
     if (totalWeeks >= 0 && totalWeeks <= 1) {
       return 'DayOld';
@@ -58,7 +58,7 @@ const AgeReport = () => {
   };
   const ageSummary = calculateAgeSummary();
   return (
-    <div className="container mt-5">
+    <div className="container mx-auto mt-5">
       <h1 className="text-3xl font-bold mb-4">Age-Based Bird Report</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
@@ -95,11 +95,12 @@ const AgeReport = () => {
         </button>
       </form>
       {reportData.length > 0 && (
-        <div className="mt-8">
-          <h2 className="text-xl font-bold mb-4">Age Summary</h2>
-          <table className="table-auto">
+        <div className="mt-8 mx-auto" >
+          <h2 className="text-xl font-bold mb-4 text-center">Age Summary</h2>
+          <table className="table-auto mx-auto">
             <thead>
               <tr>
+                <th className="px-4 py-2">Age Classification</th>
                 <th className="px-4 py-2">Age Range</th>
                 <th className="px-4 py-2">Quantity</th>
                 <th className="px-4 py-2">Breakdown</th>
@@ -108,6 +109,7 @@ const AgeReport = () => {
             <tbody>
               {Object.keys(ageSummary).map((category) => (
                 <tr key={category}>
+                  <td className="border px-4 py-2">{category}</td>
                   <td className="border px-4 py-2">{ageSummary[category].ageRange}</td>
                   <td className="border px-4 py-2">{ageSummary[category].quantity}</td>
                   <td className="border px-4 py-2">

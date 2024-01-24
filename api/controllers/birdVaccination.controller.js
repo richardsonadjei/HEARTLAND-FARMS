@@ -27,10 +27,19 @@ export const createBirdVaccination = async (req, res) => {
 };
 
 
-// Controller to get all bird vaccination records
-export const getAllBirdVaccinations = async (req, res) => {
+// Controller to get bird vaccination records within a period
+export const getBirdVaccinationsByPeriod = async (req, res) => {
   try {
-    const birdVaccinations = await BirdVaccination.find();
+    const { startDate, endDate } = req.query;
+
+    // Parse startDate and endDate strings into Date objects in UTC format
+    const parsedStartDate = new Date(startDate + 'T00:00:00Z'); // Assuming startDate is in YYYY-MM-DD format
+    const parsedEndDate = new Date(endDate + 'T23:59:59.999Z'); // Assuming endDate is in YYYY-MM-DD format
+
+    const birdVaccinations = await BirdVaccination.find({
+      vaccinationDate: { $gte: parsedStartDate, $lte: parsedEndDate },
+    });
+
     res.status(200).json(birdVaccinations);
   } catch (error) {
     console.error('Error getting bird vaccination records:', error);
@@ -38,10 +47,12 @@ export const getAllBirdVaccinations = async (req, res) => {
   }
 };
 
-// Controller to get a single bird vaccination record by ID
-export const getBirdVaccinationById = async (req, res) => {
+
+// Controller to get a single bird vaccination record by batchNumber
+export const getBirdVaccinationByBatchNumber = async (req, res) => {
   try {
-    const birdVaccination = await BirdVaccination.findById(req.params.id);
+    const { batchNumber } = req.params;
+    const birdVaccination = await BirdVaccination.findOne({ batchNumber });
 
     if (!birdVaccination) {
       return res.status(404).json({ error: 'Bird vaccination record not found' });
@@ -49,10 +60,11 @@ export const getBirdVaccinationById = async (req, res) => {
 
     res.status(200).json(birdVaccination);
   } catch (error) {
-    console.error('Error getting bird vaccination record by ID:', error);
+    console.error('Error getting bird vaccination record by batchNumber:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+
 
 // Controller to update a bird vaccination record by ID
 export const updateBirdVaccinationById = async (req, res) => {

@@ -30,8 +30,8 @@ const PoultryGettingStarted = () => {
   };
 
   return (
-    <div className="poultry-background">
-      <Container fluid className="dashboard-container">
+    <div className="poultry-background " >
+      <Container fluid className="dashboard-container" style={{ backgroundColor: 'navy' }}>
         <Row className="header">
           <Col className="text-center">
             <h1>

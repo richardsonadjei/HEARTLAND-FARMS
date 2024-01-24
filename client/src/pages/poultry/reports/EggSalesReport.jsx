@@ -31,15 +31,16 @@ const EggSalesReport = () => {
       <thead style={{ background: '#007BFF', color: 'white' }}>
         <tr>
         <th>#</th>
+        <th>Date </th>
           <th>Sales Number</th>
+          <th>Category</th>
+          <th>Unit Price Per Crate</th>
+          <th>Crates</th>
+          <th>Total Amount</th>
           <th>Customer Name</th>
           <th>Phone Number</th>
-          <th>Crates</th>
-          <th>Unit Price Per Crate</th>
-          <th>Total Amount</th>
-          <th>Category</th>
           <th>Sales Made By</th>
-          <th>Created At</th>
+         
         </tr>
       </thead>
     );
@@ -51,15 +52,16 @@ const EggSalesReport = () => {
          {salesData.map((sale, index) => (
           <tr key={sale._id}>
             <td>{index + 1}</td> 
+            <td>{formatDateTime(sale.createdAt)}</td>
             <td>{sale.salesNumber}</td>
+            <td>{sale.category}</td>
+            <td>{sale.unitPricePerCrate}</td>
+            <td>{sale.crates}</td>
+            <td>{sale.totalAmount}</td>
             <td>{sale.customerName}</td>
             <td>{sale.phoneNumber}</td>
-            <td>{sale.crates}</td>
-            <td>{sale.unitPricePerCrate}</td>
-            <td>{sale.totalAmount}</td>
-            <td>{sale.category}</td>
             <td>{sale.salesMadeBy}</td>
-            <td>{formatDateTime(sale.createdAt)}</td>
+            
           </tr>
         ))}
       </tbody>
@@ -67,13 +69,26 @@ const EggSalesReport = () => {
   };
   
   const formatDateTime = (dateTimeString) => {
-    const options = { day: '2-digit', month: '2-digit', year: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+    const options = {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric'
+    };
+  
     const formattedDate = new Date(dateTimeString).toLocaleDateString('en-GB', options);
     return formattedDate;
   };
   
-  const renderSummaryReport = () => {
+
+  
+ const renderSummaryReport = () => {
+    const totalCrates = salesData.reduce((acc, sale) => acc + sale.crates, 0);
     const totalAmount = salesData.reduce((acc, sale) => acc + sale.totalAmount, 0);
+
 
     return (
       <div>
@@ -81,13 +96,13 @@ const EggSalesReport = () => {
         <Table>
           <thead style={{ background: '#007BFF', color: 'white' }}>
             <tr>
-              <th>Total Sales Count</th>
+              <th>Total Crates Sold</th>
               <th>Total Amount</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>{salesData.length}</td>
+              <td>{totalCrates}</td>
               <td>{totalAmount}</td>
             </tr>
           </tbody>
