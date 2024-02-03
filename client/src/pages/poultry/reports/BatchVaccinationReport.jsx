@@ -63,6 +63,20 @@ const BirdBatchVaccinationReport = () => {
     }
   };
 
+  const customStyles = {
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isFocused ? '#d3d3d3' : 'white',
+      color: state.isFocused ? 'black' : 'black',
+    }),
+    control: (provided) => ({
+      ...provided,
+      backgroundColor: 'white',
+    }),
+  };
+
+ 
+
   return (
     <Container fluid>
       <Row className="mb-4">
@@ -76,13 +90,14 @@ const BirdBatchVaccinationReport = () => {
             <Row form>
               <Col md={6}>
                 <FormGroup>
-                  <Label for="batchNumber">Batch Number</Label>
+                  <Label for="batchNumber"  className="text-black">Batch Number</Label>
                   <Select
                     id="batchNumber"
                     options={batchNumbers}
                     value={selectedBatch}
                     onChange={(value) => setSelectedBatch(value)}
                     placeholder="Select Batch Number"
+                    styles={customStyles}
                   />
                 </FormGroup>
               </Col>

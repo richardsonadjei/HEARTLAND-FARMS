@@ -118,6 +118,8 @@ import ManagePigEvents from './pages/pigs/ManagePigEvents';
 import AddPigDrugs from './pages/pigs/AddPigDrugs';
 import VaccinationAndTreatment from './pages/pigs/VaccinationAndTreatment';
 import PigFeedManagement from './pages/pigs/PigFeedManagement';
+
+
 import MaizeGettingStarted from './pages/maize/MaizeGettngStarted';
 import MaizeFarmActivities from './pages/maize/MaizeFarmActivities';
 import RecordMaizeLandClearance from './pages/maize/MaizeLandClearance';
@@ -136,10 +138,11 @@ import MaizeFertilizerApplicationReport from './pages/maize/maizeReports/MaizeFe
 import SeasonalMaizeExpenseReport from './pages/maize/maizeReports/MaizeSeasonalExpenseReport';
 import MaizeFinancialActivities from './pages/maize/MaizeFinancialActivities';
 import SellMaize from './pages/maize/SellMaize';
-import MaizeSalesReport from './pages/maize/maizeReports/MaizeSalesReport';
 import SeasonalMaizeProfitLossReport from './pages/maize/maizeReports/SeasonalMaizeProfitLossReport';
 import PurchaseMaizeFertilizer from './pages/maize/MaizeFarmFertilizerPurchase';
 import MaizeFarmMiscellaneousExpense from './pages/maize/MaizeFarmMiscelleneousExpense';
+
+
 import CassavaGettingStarted from './pages/cassava/CassavaGettingStarted';
 import CassavaFarmActivities from './pages/cassava/CassavaFarmActivities';
 import CassavaFarmReportsDashboard from './pages/cassava/reports/CassavaFarmReports';
@@ -163,6 +166,8 @@ import PurchaseCassavaFertilizer from './pages/cassava/CassavaFertilizerPurchase
 import CassavaFarmWeedicidePurchase from './pages/cassava/CassavaFarmWeedicidePurchase';
 import CassavaFarmMiscellaneousExpense from './pages/cassava/CassavaFarmMiscExpense';
 import SeasonalCassavaProfitLossReport from './pages/cassava/reports/CassavaSeasonalProfitLossReport';
+
+
 import PoultryGettingStarted from './pages/poultry/PoultryGettingStarted';
 import PoultryStockActivities from './pages/poultry/PoultryStockActivities';
 import EggManagementActivities from './pages/poultry/EggManagementActivities';
@@ -174,6 +179,9 @@ import PoultryExpenditureActivities from './pages/poultry/PoultryExpenditureActi
 import PoultryIncomeActivities from './pages/poultry/PoultryIncomeActivities';
 import AllBirdVaccinationReport from './pages/poultry/reports/AllBirdVaccinationsReport';
 import BirdBatchVaccinationReport from './pages/poultry/reports/BatchVaccinationReport';
+
+
+import Settings from './components/Settings';
 
 
 
@@ -194,8 +202,14 @@ export default function App() {
         <Route path='/about' element={<About />} />
         <Route path='/sign-out' element={<SignOut/>} />
         <Route element={<PrivateRoute/>}>
+
+
+
           <Route path='/profile' element={<Profile/>} />
           <Route path='/allusers' element={<ViewAllUsers/>} />
+
+
+          <Route path='/settings' element={<Settings/>} />
           <Route path='/poultry' element={<Poultry />} />
           <Route path='/poultry-getting-started' element={<PoultryGettingStarted />} />
           <Route path='/poultry-stock-activities' element={<PoultryStockActivities />} />

@@ -791,3 +791,27 @@ feeding-card {
     transform: translateX(0);
   }
 }
+
+
+/* SETTINGS */
+/* Settings.css */
+
+.settings-container {
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+
+.sidebar {
+  height: 100vh;
+}
+
+.custom-card {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+.custom-card:hover {
+  transform: scale(1.05);
+}
+
+/* Add more custom styles as needed */

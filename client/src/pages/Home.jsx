@@ -22,6 +22,7 @@ const Home = () => {
     { category: ['crop', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '/images/green pepper.jpg' },
     { category: ['crop', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '/images/palm tree.jpg' },
     { category: ['crop', 'all'], href: '/guinea-fowl-getting-started', iconSrc: '/images/plantain.jpg' },
+    { category: ['crop', 'all'], href: '/settings', iconSrc: '../../public/images/Settings.png' },
     // Add more app items as needed
   ];
 
