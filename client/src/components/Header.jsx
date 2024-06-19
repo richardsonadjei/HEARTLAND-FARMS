@@ -10,7 +10,7 @@ export default function Header() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentDateTime(new Date());
-    }, 60000); // Update every minute
+    }, 60000); 
 
     return () => clearInterval(intervalId); // Cleanup on component unmount
   }, []);
