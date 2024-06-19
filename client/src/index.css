@@ -1,12 +1,40 @@
-body {
-  background-color: #435585;
-  color: white; /* Blue-black background color */
+/* SIGNUP CSS */
+/* SignUp.css */
+
+.custom-form {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
 }
 
-.app-container {
-  color: white; /* Text color for better readability on dark background */
+.custom-form:hover {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
+.custom-form label {
+  font-weight: bold;
+}
+
+.custom-form input,
+.custom-form select {
+  margin-bottom: 10px;
+}
+
+.custom-form button {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.custom-form button:hover {
+  background-color: #0056b3;
+  transition: background-color 0.3s ease-in-out;
+}
+
+
+
+/* HEADER */
 
 .btn-toggle::before {
   width: 1.25em;
@@ -84,26 +112,6 @@ flex-direction: column;
 align-items: center;
 }
 
-.search-button {
-width: 900px; /* Adjust the width as needed */
-}
-
-
-.search-button {
-margin-top: 10px;
-padding: 10px 15px;
-background-color: #007BFF;
-color: white;
-border: none;
-border-radius: 5px;
-cursor: pointer;
-transition: background-color 0.3s ease;
-}
-
-.search-button:hover {
-background-color: #0056b3;
-}
-
 /* Add this CSS to your stylesheet */
 .dropdown-item.highlighted {
 background-color: #33C1FF; /* Choose the background color you prefer */
@@ -126,7 +134,7 @@ background-color: #33C1FF; /* Choose the background color you prefer */
 /* Header styles */
 
 .navbar {
-  background-color: #4CAF50; /* Set your desired background color */
+  background-color: rgba(0, 0, 0, 0.5); 
 }
 
 .navbar-brand {
@@ -145,10 +153,18 @@ background-color: #33C1FF; /* Choose the background color you prefer */
   color: #ffcc00; /* Change to your desired hover color */
 }
 
+.header-middle .current-date-time {
+  color: white; /* Set text color to white */
+  font-weight: bold; /* Make text bolder */
+  font-size: 18px; /* Adjust font size if needed */
+}
+
+
+
 /* Notifications dropdown styles */
 
 .dropdown-menu {
-  background-color: #4CAF50; /* Set your desired background color */
+  background-color: rgba(0, 0, 0, 0.5); 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -213,425 +229,300 @@ background-color: #33C1FF; /* Choose the background color you prefer */
   animation: slideIn 0.3s ease-in-out;
 }
 
-
-
-/* PigFarmDashboard.css */
-
-/* PigFarmDashboard.css */
-
-.dashboard-container {
-  background-color: #f8f9fa;
-  padding: 50px 0;
+/* Logo Styles */
+.logo-container {
+display: flex;
+align-items: center;
 }
 
-.header {
-  background-color: #343a40;
-  color: #fff;
-  padding: 20px 0;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-  border-bottom-left-radius: 50% 20px; /* Add this line for a curved base */
-  border-bottom-right-radius: 50% 20px; /* Add this line for a curved base */
+.logo {
+transition: transform 0.3s ease;
 }
 
-.features {
-  margin-top: 30px;
+.logo-img {
+max-height: 40px;
+display: block;
+margin-right: 20px;
 }
 
-.feature {
-  text-align: center;
-  margin-bottom: 30px;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out;
-  overflow: hidden; /* Add this line to hide overflow when animating */
+.logo:hover {
+transform: scale(1.1);
 }
 
-.feature:hover {
-  transform: scale(1.05);
-  color: #000;
+/* HOME */
+/* Add this CSS to your stylesheet or as inline styles in the components */
+
+.welcome-content {
+display: flex;
+align-items: center;
+height: 100vh;
+position: relative;
+}
+
+.welcome-background {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: -1;
+background: linear-gradient(45deg, #ff7300, #eaecc6);
+animation: gradientAnimation 8s infinite alternate;
+}
+
+@keyframes gradientAnimation {
+0% {
+  background-position: 0% 50%;
+}
+100% {
+  background-position: 100% 50%;
+}
+}
+
+.text-center {
+text-align: center;
+}
+
+.apps {
+margin-top: 20px;
+}
+
+.app-item {
+text-decoration: none;
+color: inherit;
 }
 
 .icon {
-  font-size: 3rem;
-  margin-bottom: 20px;
-  color: #343a40;
+padding: 10px;
+background-color: #fff; /* Set background color as needed */
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Adjust additional styles based on your design preferences */
+
+
+
+/* VARIOUS CARDS GETTING STARTED */
+.dashboard-container {
+background-color: #f8f9fa;
+padding: 50px 0;
+}
+
+.header {
+background-color: #343a40;
+color: #fff;
+padding: 20px 0;
+box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+border-bottom-left-radius: 50% 20px; /* Add this line for a curved base */
+border-bottom-right-radius: 50% 20px; /* Add this line for a curved base */
+}
+
+.features {
+margin-top: 30px;
+}
+
+.feature {
+text-align: center;
+margin-bottom: 30px;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+transition: transform 0.3s ease-in-out;
+overflow: hidden; /* Add this line to hide overflow when animating */
+}
+
+.feature:hover {
+transform: scale(1.05);
+color: #000;
+}
+
+.icon {
+font-size: 3rem;
+margin-bottom: 20px;
+color: #343a40;
 }
 
 /* Add this animation for the card backgrounds */
 @keyframes gradientAnimation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+0% {
+  background-position: 0% 50%;
+}
+50% {
+  background-position: 100% 50%;
+}
+100% {
+  background-position: 0% 50%;
+}
 }
 
 .cta {
-  margin-top: 50px;
+margin-top: 50px;
 }
 
 .cta h2 {
-  margin-bottom: 20px;
-  color: #343a40;
+margin-bottom: 20px;
+color: #343a40;
 }
 
 .cta button {
-  font-size: 1.2rem;
-  padding: 10px 20px;
-  color: #fff;
+font-size: 1.2rem;
+padding: 10px 20px;
+color: #fff;
 }
 
 /* Apply the animation to the features */
 .feature:nth-child(odd) {
-  background: linear-gradient(45deg, #7ed56f, #28b485);
-  background-size: 200% 200%;
-  animation: gradientAnimation 4s infinite;
+background: linear-gradient(45deg, #7ed56f, #28b485);
+background-size: 200% 200%;
+animation: gradientAnimation 4s infinite;
 }
 
 .feature:nth-child(even) {
-  background: linear-gradient(45deg, #ff9f43, #ff6b6b);
-  background-size: 200% 200%;
-  animation: gradientAnimation 4s infinite;
+background: linear-gradient(45deg, #ff9f43, #ff6b6b);
+background-size: 200% 200%;
+animation: gradientAnimation 4s infinite;
 }
 
 * Add styling for the current user */
 .current-user {
-  font-size: 1.5rem;
-  margin-top: 10px;
-  color: #28a745; /* Green color */
-  font-weight: bold;
-  animation: slideInUp 0.5s ease-out;
+font-size: 1.5rem;
+margin-top: 10px;
+color: #28a745; /* Green color */
+font-weight: bold;
+animation: slideInUp 0.5s ease-out;
 }
 
 /* Keyframe animation for sliding in */
 @keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+to {
+  opacity: 1;
+  transform: translateY(0);
+}
 }
 
 .card-link {
-  text-decoration: none; /* Remove underline from the text */
-  color: inherit; /* Inherit text color from parent */
+text-decoration: none; /* Remove underline from the text */
+color: inherit; /* Inherit text color from parent */
 }
 
 .feature {
-  text-align: center;
-  cursor: pointer;
-  margin-bottom: 30px;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out;
-  overflow: hidden;
+text-align: center;
+cursor: pointer;
+margin-bottom: 30px;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+transition: transform 0.3s ease-in-out;
+overflow: hidden;
 }
 
 .feature:hover {
-  transform: scale(1.05);
+transform: scale(1.05);
 }
 
 .icon {
-  font-size: 3rem;
-  margin-bottom: 20px;
-  color: #343a40;
+font-size: 3rem;
+margin-bottom: 20px;
+color: #343a40;
 }
 
-
-
-/* PICK STOCK TRACKING CSS */
 
 
 .tracking-container {
-  background-color: #f8f9fa;
-  padding: 50px 0;
+background-color: #f8f9fa;
+padding: 50px 0;
 }
 
 .tracking-section {
-  margin-top: 30px;
-  display: flex;
-  justify-content: space-around;
+margin-top: 30px;
+display: flex;
+justify-content: space-around;
 }
 
 .tracking-card {
-  text-align: center;
-  cursor: pointer;
-  margin-bottom: 30px;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out;
-  overflow: hidden;
-  color: #343a40; /* Added text color */
+text-align: center;
+cursor: pointer;
+margin-bottom: 30px;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+transition: transform 0.3s ease-in-out;
+overflow: hidden;
+color: #343a40; /* Added text color */
 }
 
 .tracking-card:hover {
-  transform: scale(1.05);
+transform: scale(1.05);
 }
 
 .tracking-icon {
-  font-size: 3rem;
-  margin-bottom: 20px;
+font-size: 3rem;
+margin-bottom: 20px;
 }
 
 .tracking-card h3,
 .tracking-card p {
-  color: #fff; /* Text color for heading and paragraph */
-}
-
-.tracking-header {
-  background: linear-gradient(to right, #ff6b6b, #4e54c8);
-  padding: 30px 0;
-  color: #fff;
-  border-bottom-left-radius: 50% 20%;
-  border-bottom-right-radius: 50% 20%;
-}
-
-.tracking-icon {
-  font-size: 3rem;
-  margin-bottom: 20px;
-}
-
-.baby-icon {
-  color: #ffb142;
-}
-
-.weight-icon {
-  color: #45aaf2;
-}
-
-.breeding-icon {
-  color: #4cd137;
-}
-
-.farrowing-icon {
-  color: #ff6b6b;
-}
-
-.weaning-icon {
-  color: #6ab04c;
-}
-
-.mortality-icon {
-  color: red;
-}
-
-/* Add this to your existing CSS styles */
-
-.tracking-icon.pig-icon {
-  font-size: 3rem;
-  margin-bottom: 20px;
-  color: #e57373; /* Change color as per your preference */
-}
-
-.tracking-card:hover {
-  transform: scale(1.05);
-  background-color: #343a40; /* Change background color on hover */
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2); /* Adjust hover box-shadow */
-}
-
-.tracking-card h3,
-.tracking-card p {
-  color: #fff;
-}
-
-/* Additional styles for the new card */
-.tracking-card.pig-icon {
-  background-color: #f8bbd0; /* Change background color for the pig card */
-}
-
-/* Add more styles as needed */
-
-/* Pig Breed Category */
-.transparent-form {
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+color: #fff; /* Text color for heading and paragraph */
 }
 
 
-/* PigNewStock */
-.transparent-form {
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-}
 
-/* Add your custom styles, animations, and transitions here */
-
-/* Blinking Text */
 @keyframes blink {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+0% {
+  opacity: 1;
+}
+50% {
+  opacity: 0;
+}
+100% {
+  opacity: 1;
+}
 }
 
 .blinking-text {
-  color: red !important;
-  animation: blink 2s infinite; /* Adjust the animation duration as needed */
+color: red !important;
+animation: blink 2s infinite; /* Adjust the animation duration as needed */
 }
 
-/* PIGFARM REPORT DASHBOARD */
-/* PigFarmReports.css */
-/* PigFarmReports.css */
-
 .report-container {
-  background: linear-gradient(135deg, #4b6cb7, #182848);
-  padding: 20px;
-  color: #fff;
+background: linear-gradient(135deg, #4b6cb7, #182848);
+padding: 20px;
+color: #fff;
 }
 
 .pigReports-header {
-  font-size: 2em;
-  margin-bottom: 20px;
+font-size: 2em;
+margin-bottom: 20px;
 }
 
 .custom-card {
-  margin-top: 20px;
-  border: none;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out;
+margin-top: 20px;
+border: none;
+border-radius: 10px;
+overflow: hidden;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+transition: transform 0.3s ease-in-out;
 }
 
 .custom-card:hover {
-  transform: scale(1.03);
+transform: scale(1.03);
 }
 
 .card-header {
-  padding: 15px;
-  border: none;
-  border-radius: 10px 10px 0 0;
+padding: 15px;
+border: none;
+border-radius: 10px 10px 0 0;
 }
 
-.stock-header {
-  background: linear-gradient(135deg, #00b4db, #0083b0);
-}
-
-.health-header {
-  background: linear-gradient(135deg, #6a0572, #ab83a1);
-  color: #fff;
-}
-
-.financial-header {
-  background: linear-gradient(135deg, #2e3a6a, #1e2a48);
-  color: #fff;
-}
 
 .custom-list-group {
-  padding: 10px;
+padding: 10px;
 }
 
-.list-item {
-  background-color: #fff;
-  border: none;
-  border-radius: 5px;
-  margin-bottom: 5px;
-  padding: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-  text-decoration: none; /* Remove default Link underline */
-  color: #000; /* Set the default color */
-}
-
-.list-item:hover {
-  background-color: #007bff;
-  color: #fff;
-}
-
-* Add unique colors for each icon */
-.stock-header .icon {
-  color: #fff; /* Set color for the Stock icon */
-}
-
-.health-header .icon {
-  color: #fff; /* Set color for the Health icon */
-}
-
-.financial-header .icon {
-  color: #fff; /* Set color for the Financial icon */
-}
-
-
-/* PigStock.css */
-
-.pig-report-bg-image {
-  background-image: url('../public/images/AdobeStock_335138119.jpeg'); /* Replace with the path to your image */
-  background-size: cover;
-  background-position: center;
-  min-height: 100vh;
-  padding-top: 50px; /* Adjust padding as needed */
-}
-
-
-
-/* PIG EVENTS CARD CSS */
-/* Add these styles to your CSS file */
-.tracking-card {
-  background-color: black;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 20px;
-  height: 100%;
-  transition: transform 0.3s ease-in-out;
-}
-
-.tracking-card:hover {
-  transform: scale(1.05);
-}
-
-.vaccination-card {
-  background-color: black;
-  border-color: #78a596;
-}
-
-.sick-pig-card {
-  background-color: black;
-  border-color: #e06666;
-}
-
-feeding-card {
-  background-color: black;
-  border-color: #78a596;
-}
-
-.feed-purchase-card {
-  background-color: black;
-  border-color: #a9c6b6;
-}
-
-.medication-purchase-card {
-  background-color: black;
-  border-color: #e06666;
-}
-
-.treat-pig-card {
-  background-color: black;
-  border-color: #93aeb5;
-}
-
-.sell-pigs-card {
-  background-color: black;
-  border-color: #c4c7cb;
-}
 
 
 
@@ -639,179 +530,273 @@ feeding-card {
 
 
 .welcome-content {
-  position: relative;
-  overflow: hidden;
-  height: 100vh; /* Ensure the welcome content takes the full height of the viewport */
+position: relative;
+overflow: hidden;
+height: 100vh; /* Ensure the welcome content takes the full height of the viewport */
 }
 
 .welcome-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-}
-
-@keyframes animatedBackground {
-  0% {
-    background-position: 0% 0%;
-  }
-  50% {
-    background-position: 100% 100%;
-  }
-  100% {
-    background-position: 0% 0%;
-  }
-}
-
-.welcome-background::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(-45deg, #00bcd4, #ff4081, #4caf50, #ffeb3b);
-  background-size: 400% 400%;
-  animation: animatedBackground 15s ease infinite;
-}
-
-/* Add this to your existing CSS or create a new CSS file */
-
-/* Add this to your existing CSS or create a new CSS file */
-
-.custom-logo {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-}
-
-.logo {
-  width: 40px; /* Adjust the size of your logo */
-  height: auto;
-  margin-right: 10px; /* Adjust the spacing between the logo and text */
-  border-radius: 8px; /* Add border-radius to the logo */
-  transition: transform 0.3s ease; /* Add transition for smooth hover effect */
-  animation-duration: 1s;
-  animation-name: fadeInLeft;
-}
-
-.brand-text {
-  animation-duration: 1s;
-  animation-name: fadeInRight;
-}
-
-.custom-logo:hover .logo {
-  transform: scale(2); /* Enlarge the logo on hover */
-}
-
-@keyframes fadeInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes fadeInRight {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: -1;
+background-image: url('/hf.jpeg'); /* Replace 'path/to/your/image.jpg' with the actual path to your image */
+background-size: cover; /* Adjusts the size of the background image to cover the entire element */
+background-position: center; /* Centers the background image */
 }
 
 
-.header-container {
-  position: relative;
+
+/* BEFORE EXPENSE REPORT CSS */
+.report-container {
+margin: 20px;
 }
 
-.header-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: -1;
+.report-heading {
+text-align: center;
+margin-bottom: 20px;
 }
 
-.navbar {
-  background-color: rgba(255, 255, 255, 0.8); /* Adjust the transparency here */
+.table th,
+.table td {
+text-align: center;
 }
 
-.custom-logo {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
+.summary-container {
+margin-top: 20px;
 }
 
-.logo {
-  width: 40px; /* Adjust the size of your logo */
-  height: auto;
-  margin-right: 10px; /* Adjust the spacing between the logo and text */
-  animation-duration: 1s;
-  animation-name: fadeInLeft;
-  border-radius: 10px; /* Add border radius to the logo */
-  transition: transform 0.3s ease-in-out;
+.modal-dialog {
+max-width: 500px;
 }
 
-.brand-text {
-  animation-duration: 1s;
-  animation-name: fadeInRight;
+.edit-icon {
+color: #007bff;
+cursor: pointer;
+margin-right: 10px;
 }
 
-.custom-logo:hover .logo {
-  transform: scale(1.2); /* Enlarge the logo on hover */
-}
-
-@keyframes fadeInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes fadeInRight {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+.delete-icon {
+color: #dc3545;
+cursor: pointer;
 }
 
 
-/* SETTINGS */
-/* Settings.css */
+/* VEGES */
 
-.settings-container {
-  background-color: #f4f4f4;
-  padding: 20px;
+.veges-homepage {
+padding-bottom: 60px; /* Adjust as needed to accommodate the footer */
+}
+
+.veges-header {
+background-color: #333;
+color: white;
+text-align: center;
+padding: 0px 0;
+}
+
+.veges-header h1 {
+margin-bottom: 0;
+}
+
+/* Default styles */
+.veges-footer {
+position: fixed;
+bottom: 0;
+width: 100%;
+background-color: rgba(0, 0, 0, 0.1);
+padding: 0;
+}
+
+.veges-footer p {
+color: black;
+cursor: pointer;
+margin: 0;
+}
+
+.veges-footer p:hover {
+text-decoration: underline;
+}
+
+.footer-icon {
+font-size: 24px;
+margin-right: 10px;
+color: white;
+}
+
+.footer-link {
+display: flex;
+align-items: center;
+}
+
+.footer-content {
+display: flex;
+align-items: center;
+}
+
+.footer-content p {
+margin-left: 5px;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+.footer-content p {
+  display: none;
+}
+}
+
+
+
+
+
+
+
+.veges-card {
+display: flex;
+flex-direction: column;
+border-radius: 10px; /* Rounded corners */
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Add smooth transitions */
+}
+
+/* Adjust border color and shadow on hover */
+.veges-card:hover {
+box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+transform: translateY(-5px); /* Lift the card slightly on hover */
+}
+
+/* Add some space between cards */
+.veges-card + .veges-card {
+margin-top: 30px;
+}
+
+/* Custom CSS for card images */
+.veges-card .card-img-top {
+border-top-left-radius: 10px; /* Round the top left corner of the image */
+border-top-right-radius: 10px; /* Round the top right corner of the image */
+height: 200px; /* Set a fixed height for the image */
+object-fit: cover; /* Maintain aspect ratio while covering the entire space */
+}
+
+/* Custom CSS for card titles */
+.veges-card .card-title {
+text-align: center; /* Center align the title */
+margin-bottom: 0; /* Remove default margin */
+padding: 10px; /* Add some padding */
+}
+
+/* Custom CSS for card bodies */
+.veges-card .card-body {
+flex: 1; /* Take up remaining space */
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+/* Adjust link color and underline */
+.veges-card .card-body .card-title a {
+color: inherit; /* Inherit text color */
+text-decoration: none; /* Remove underline */
+}
+
+/* Adjust link color on hover */
+.veges-card .card-body .card-title a:hover {
+color: #007bff; /* Change to your desired hover color */
+}
+
+
+/* CABBAGE */
+/* CabbageFarmManager.css */
+
+.container-fluid {
+padding-top: 20px;
 }
 
 .sidebar {
-  height: 100vh;
+background-color: #f5f5f5;
+padding: 20px;
+border-right: 1px solid #ddd;
 }
 
-.custom-card {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease-in-out;
+.sidebar h2 {
+margin-bottom: 20px;
 }
 
-.custom-card:hover {
-  transform: scale(1.05);
+.list-group {
+list-style: none;
+padding-left: 0;
 }
 
-/* Add more custom styles as needed */
+.list-group-item {
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+
+.list-group-item:hover {
+background-color: #e9ecef;
+}
+
+.list-group-item.active {
+background-color: #007bff;
+color: #fff;
+}
+
+.list-group-item.active:hover {
+background-color: #0056b3;
+}
+
+.list-group-item.active .list-group {
+display: block;
+}
+
+.sub-list {
+display: none;
+list-style: none;
+padding-left: 20px;
+}
+
+.sub-list-item {
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+
+.sub-list-item:hover {
+background-color: #e9ecef;
+}
+
+.sub-list-item.active {
+background-color: #007bff;
+color: #fff;
+}
+
+.sub-list-item.active:hover {
+background-color: #0056b3;
+}
+
+
+/* AllActiveEggBatches.css */
+
+.deep-blue {
+  background-color: #3498db; /* Deep blue */
+  color: white; /* Text color */
+}
+
+.deep-yellow {
+  background-color: #f39c12; /* Deep yellow */
+  color: black; /* Text color */
+}
+
+.deep-green {
+  background-color: #2ecc71; /* Deep green */
+  color: white; /* Text color */
+}
+
+.deep-red {
+  background-color: #e74c3c; /* Deep red */
+  color: white; /* Text color */
+}
+
+
+

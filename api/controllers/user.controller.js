@@ -1,109 +1,95 @@
+import bcryptjs from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 import User from '../models/user.model.js';
-import { errorHandler } from '../utils/error.js';
+import { errorHandler } from '../utils/errorHandler.js';
 
-export const updateProfile = async (req, res, next) => {
-  const userId = req.params.id;
-  const { userName, email } = req.body;
-
-  try {
-    // Authentication check
-    if (req.user.id !== userId) {
-      return next(errorHandler(401, 'You can only update your own account!'));
-    }
-
-    // Check if the user exists
-    const user = await User.findById(userId);
-    if (!user) {
-      return next(errorHandler(404, 'User not found!'));
-    }
-    // Update userName and email fields
-    user.userName = userName;
-    user.email = email;
-
-    // Save the updated user
-    await user.save();
-
-    // Respond with the updated user (excluding sensitive information)
-    const { password: userPassword, ...rest } = user._doc;
-    res.status(200).json(rest); // Changed variable name to 'rest'
-
-  } catch (error) {
-    next(error);
-  }
-};
-
-export const getAllUsers = async (req, res, next) => {
-  try {
-    // Check if the authenticated user is an admin
-    if (req.user.role !== 'admin') {
-      return next(errorHandler(403, 'Forbidden'));
-    }
-
-    // Retrieve all users from the database
-    const users = await User.find();
-
-    // Return the list of users in the response
-    res.status(200).json(users);
-  } catch (error) {
-    next(error);
-  }
-};
-
-
-
-export const updateUserDetails = async (req, res, next) => {
-  const userId = req.params.id;
+export const signup = async (req, res, next) => {
   const {
     name,
-    userName,
     email,
+    password,
+    userName,
     telephoneNumber,
     ghanaCardNumber,
-    bank,
-    bankAccountNumber,
-    bankBranch,
-    nextOfKinName,
-    nextOfKinContact,
-    nextOfKinGhanaCardNumber,
     witnessName,
     witnessContact,
+    role,
+    category,
   } = req.body;
 
+  const hashedPassword = bcryptjs.hashSync(password, 10);
+
   try {
-    // Check if the authenticated user is an admin
-    if (req.user.role !== 'admin') {
-      return next(errorHandler(403, 'Forbidden: Admin access required'));
-    }
+    const newUser = new User({
+      name,
+      email,
+      userName,
+      password: hashedPassword,
+      telephoneNumber,
+      ghanaCardNumber,
+      witnessName,
+      witnessContact,
+      role,
+      category,
+    });
 
-    // Check if the user exists
-    const user = await User.findById(userId);
-    if (!user) {
-      return next(errorHandler(404, 'User not found!'));
-    }
-
-    // Update user details
-    user.name = name;
-    user.userName = userName;
-    user.email = email;
-    user.telephoneNumber = telephoneNumber;
-    user.ghanaCardNumber = ghanaCardNumber;
-    user.bank = bank;
-    user.bankAccountNumber = bankAccountNumber;
-    user.bankBranch = bankBranch;
-    user.nextOfKinName = nextOfKinName;
-    user.nextOfKinContact = nextOfKinContact;
-    user.nextOfKinGhanaCardNumber = nextOfKinGhanaCardNumber;
-    user.witnessName = witnessName;
-    user.witnessContact = witnessContact;
-
-    // Save the updated user details
-    await user.save();
-
-    // Respond with the updated user (excluding sensitive information)
-    const { password, ...updatedUser } = user._doc;
-    res.status(200).json(updatedUser);
-
+    await newUser.save();
+    // Simplified JSON response
+    res.status(201).json({ success: true, message: 'User created successfully!' });
   } catch (error) {
+    console.error('Error creating user:', error);
     next(error);
   }
 };
+
+
+export const signin = async (req, res, next) => {
+    const { userNameOrEmail, password } = req.body;
+    try {
+      // Find user by userName or email
+      const validUser = await User.findOne({
+        $or: [{ userName: userNameOrEmail }, { email: userNameOrEmail }],
+      });
+  
+      if (!validUser) return next(errorHandler(404, 'User not found!'));
+  
+      const validPassword = bcryptjs.compareSync(password, validUser.password);
+      if (!validPassword) return next(errorHandler(401, 'Wrong credentials!'));
+  
+      // Include userName and category in the token payload
+      const tokenPayload = {
+        id: validUser._id,
+        userName: validUser.userName,
+        email: validUser.email,
+        role: validUser.role,
+        category: validUser.category, // Include category in the token payload
+      };
+  
+      // Sign the token with the updated payload
+      const token = jwt.sign(tokenPayload, process.env.JWT_SECRET, { expiresIn: '1h' });
+  
+      // Set the token as a cookie and include userName and category in the response
+      res
+        .cookie('access_token', token, { httpOnly: true })
+        .status(200)
+        .json({
+          id: validUser._id,
+          userName: validUser.userName,
+          email: validUser.email,
+          role: validUser.role,
+          category: validUser.category, // Include category in the response
+        });
+    } catch (error) {
+      next(error);
+    }
+  };
+  
+  // auth.controller.js
+  export const signout = (req, res) => {
+    // Clear the token cookie to sign the user out
+    res.clearCookie('access_token', { httpOnly: true });
+    
+    // Send a response indicating successful sign out
+    res.status(200).json({ success: true, message: 'User signed out successfully!' });
+  };
+  

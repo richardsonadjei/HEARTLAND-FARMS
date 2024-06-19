@@ -29,32 +29,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  bank: {
-    type: String,
-    required: true
-  },
-  bankAccountNumber: {
-    type: String,
-    required: true
-  },
-  bankBranch: {
-    type: String,
-    required: true
-  },
-  nextOfKinName: {
-      type: String,
-      required: true
-    },
-  nextOfKinContact: {
-      type: String,
-      required: true
-    },
-  nextOfKinGhanaCardNumber: {
-      type: String,
-      required: true
-    },
-
-
+  
   witnessName: {
       type: String,
       required: true

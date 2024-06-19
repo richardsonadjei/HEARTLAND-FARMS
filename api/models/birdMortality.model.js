@@ -1,34 +1,37 @@
+// Importing mongoose library
 import mongoose from 'mongoose';
 
-const birdMortalitySchema = new mongoose.Schema(
-  {
-    batchNumber: {
-      type: String,
-      required: true,
-    },
-    date: {
-      type: Date,
-      default: Date.now,
-    },
-    quantity: {
-      type: Number,
-      required: true,
-    },
-    cause: {
-      type: String,
-      required: true,
-    },
-    recordedBy: {
-      type: String,
-      required: true,
-    },
-    // Add any additional fields related to mortality information
+// Define the schema for bird mortality
+const birdMortalitySchema = new mongoose.Schema({
+  type: {
+    type: String,
+    required: true,
   },
-  {
-    timestamps: true,
-  }
-);
+  batchNumber: {
+    type: String,
+  },
+  mortalityDate: {
+    type: Date,
+    required: true
+  },
+  causeOfDeath: {
+    type: String,
+    required: true
+  },
+  batchDetails: [
+    {
+      gender: {
+        type: String,
+        enum: ['male', 'female'],
+        required: true,
+      },
+      quantity: { type: Number },
+    },
+  ],
+  notes: String,
+});
 
+// Create a model for bird mortality
 const BirdMortality = mongoose.model('BirdMortality', birdMortalitySchema);
 
 export default BirdMortality;
