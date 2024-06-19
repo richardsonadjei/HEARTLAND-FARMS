@@ -75,22 +75,35 @@ const AllBeforeExpenses = () => {
 
   const handleDelete = async (expenseId) => {
     try {
+      // Prompt the user for confirmation
+      const confirmed = window.confirm('Are you sure you want to delete this expense?');
+  
+      if (!confirmed) {
+        // If user cancels deletion, return early
+        return;
+      }
+  
+      // Optimistically update the local state
+      const updatedExpenses = expenses.filter((expense) => expense._id !== expenseId);
+      setExpenses(updatedExpenses);
+  
       const response = await fetch(`/api/delete-before-start-expense/${expenseId}`, {
         method: 'DELETE',
       });
-
+  
       if (!response.ok) {
         throw new Error('Error deleting expense');
       }
-
-      // Remove the deleted expense from the local state
-      const updatedExpenses = expenses.filter((expense) => expense._id !== expenseId);
-      setExpenses(updatedExpenses);
+  
+      // Optionally provide user feedback on successful deletion
+      alert('Expense deleted successfully!');
     } catch (error) {
       console.error(error);
       // Handle error deleting expense
+      // Optionally revert local state to previous state on error
     }
   };
+  
   return (
     <div>
       <div className="text-center mb-4">
