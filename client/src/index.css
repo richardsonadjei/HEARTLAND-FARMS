@@ -945,3 +945,8 @@ background-color: #0056b3;
 /* No changes to media query necessary for the hamburger menu to appear on all screen sizes */
 
 
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}

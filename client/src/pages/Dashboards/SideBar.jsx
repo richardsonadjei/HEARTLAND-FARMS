@@ -21,7 +21,7 @@ const CustomSidebar = ({ setSelectedDashboard }) => {
           <Offcanvas.Title>Menu</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <Nav defaultActiveKey="/cash-crop-dashboard" className="flex-column custom-nav-links">
+          <Nav defaultActiveKey="/birds-farm-dashboard" className="flex-column custom-nav-links">
             <Nav.Link as={Link} to="/cash-crop-dashboard" onClick={() => { setSelectedDashboard('CashCrop'); handleClose(); }} className="custom-nav-link">
               <i className="fas fa-leaf"></i> Cash Crops
             </Nav.Link>

@@ -141,11 +141,13 @@ import { createBird, deleteBird, getBirdById, getBirds, updateBird,createBirdBat
     getBatchByBatchNumber,
     getPoultryUnsortedEggsCollectedToday,
     getPoultrySortedEggsCollectedToday,
-    getBirdsSummaryByLocation,
     getAllEggsStock,
     getBirdSalesSummary,
     getTotalExpensesByCategory,
-    getBirdsByAgeCategory,
+    getBirdsByAgeCategoryByType,
+    getBirdsSummaryByLocationAndType,
+    getEggsStockByType,
+
     
     
    } from '../controllers/bird.controller.js';
@@ -484,10 +486,13 @@ birdRouter.delete('/bird-relocations/:id', deleteBirdRelocation); // Delete a bi
 
 // DASHBOARD
 
-birdRouter.get('/birds-summary', getBirdsSummaryByLocation);
+
+birdRouter.get('/birds-summary-by-location/:type', getBirdsSummaryByLocationAndType);
 birdRouter.get('/eggs-stock', getAllEggsStock);
+birdRouter.get('/eggs-stock/:type', getEggsStockByType);
 birdRouter.get('/bird-sales-summary', getBirdSalesSummary);
 birdRouter.get('/all-expenses-by-category', getTotalExpensesByCategory);
-birdRouter.get('/birds-age-categories', getBirdsByAgeCategory);
+
+birdRouter.get('/birds-by-age-category/:birdType', getBirdsByAgeCategoryByType);
 
 export default birdRouter;

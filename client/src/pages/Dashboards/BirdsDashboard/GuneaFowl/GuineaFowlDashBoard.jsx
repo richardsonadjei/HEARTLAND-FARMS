@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Row, Col, Button } from 'react-bootstrap';
-import UnsortedEggsCard from './BirdsDashboard/UnsortedEggsCardCollectedCard';
-import SortedEggsCard from './BirdsDashboard/SortedEggsCollectedCard';
-import BirdsSummaryChart from './BirdsDashboard/BirdSummaryReport';
-import EggsStockTable from './BirdsDashboard/EggsStock';
-import CustomSidebar from './SideBar';
-import BirdAgeCategoriesTable from './BirdsDashboard/BirdAgeCategories';
-import { Link } from 'react-router-dom';
 
-const BirdsFarmDashboard = () => {
+
+
+
+import { Link } from 'react-router-dom';
+import CustomSidebar from '../../SideBar';
+import BirdTypeUnsortedEggsCard from './BirdTypeUnsortedEggsCardCollectedCard';
+import BirdAgeCategoriesTable from './BirdAgeCategories';
+import BirdsSummaryChart from './BirdSummaryReport';
+import EggsStockTable from './EggsStock';
+
+
+const GuineaFowlDashboard = () => {
   const [currentDate, setCurrentDate] = useState('');
   const [selectedDashboard, setSelectedDashboard] = useState('BirdsFarm');
 
@@ -50,11 +54,11 @@ const BirdsFarmDashboard = () => {
       </Row>
       <Row className="mt-3">
         <Col md={4}>
-          <UnsortedEggsCard />
+          <BirdTypeUnsortedEggsCard />
         </Col>
-        <Col md={8}>
+        {/* <Col md={8}>
           <SortedEggsCard currentDate={currentDate} />
-        </Col>
+        </Col> */}
       </Row>
       <Row className="mt-3">
         <Col md={6}>
@@ -76,4 +80,4 @@ const BirdsFarmDashboard = () => {
   );
 };
 
-export default BirdsFarmDashboard;
+export default GuineaFowlDashboard;

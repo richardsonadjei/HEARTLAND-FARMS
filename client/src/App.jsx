@@ -75,6 +75,9 @@ import BirdsFarmDashboard from './pages/Dashboards/BirdsDashBoards';
 import AnimalFarmDashboard from './pages/Dashboards/FarmAnimalsDashBoard';
 import CashCropDashboard from './pages/Dashboards/CashCropDashBoard';
 import VegetablesDashboard from './pages/Dashboards/VegetablesDashBoard';
+import GuineaFowlDashboard from './pages/Dashboards/BirdsDashboard/GuneaFowl/GuineaFowlDashBoard';
+import TurkeyDashboard from './pages/Dashboards/BirdsDashboard/Turkey/TurkeyDashBoard';
+import DuckDashboard from './pages/Dashboards/BirdsDashboard/Duck/DuckDashBoard';
 
 
 
@@ -184,6 +187,11 @@ export default function App() {
 <Route path='/animal-farm-dashboard' element={<AnimalFarmDashboard/>} />
 <Route path='/cash-crop-dashboard' element={<CashCropDashboard/>} />
 <Route path='/vegetables-dashboard' element={<VegetablesDashboard/>} />
+
+
+<Route path='/guinea-fowl-dashboard' element={<GuineaFowlDashboard/>} />
+<Route path='/turkey-dashboard' element={<TurkeyDashboard/>} />
+<Route path='/duck-dashboard' element={<DuckDashboard/>} />
 
 
 {/* EXTRAS */}

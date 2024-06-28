@@ -25,7 +25,7 @@ const NewBirdBreed = () => {
       }
       setSuccess(true);
       setTimeout(() => {
-        window.location.href = '/bird-extras';
+        window.location.reload();
       }, 1000); // Redirect after 1 second
     } catch (error) {
       setError(error.message);

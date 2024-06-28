@@ -2940,12 +2940,16 @@ export const deleteBirdRelocation = async (req, res) => {
 // DASHBOARD ROUTES
 
 
-export const getBirdsSummaryByLocation = async (req, res) => {
+
+
+
+export const getBirdsSummaryByLocationAndType = async (req, res) => {
+  const { type } = req.params; // Extract type from route parameters
+
   try {
     const results = await BirdBatches.aggregate([
-      {
-        $unwind: "$batchDetails"
-      },
+      { $match: { type } }, // Match the specified type
+      { $unwind: "$batchDetails" },
       {
         $group: {
           _id: {
@@ -3030,6 +3034,8 @@ export const getBirdsSummaryByLocation = async (req, res) => {
 };
 
 
+
+
 export const getAllEggsStock = async (req, res) => {
   try {
     // Fetch all sorted eggs stock
@@ -3046,6 +3052,29 @@ export const getAllEggsStock = async (req, res) => {
   } catch (error) {
     // Handle error
     console.error('Error fetching eggs stock:', error);
+    res.status(500).json({ error: 'Failed to fetch eggs stock' });
+  }
+};
+
+
+export const getEggsStockByType = async (req, res) => {
+  const { type } = req.params; // Get the type from the route parameter
+
+  try {
+    // Fetch sorted eggs stock by type
+    const sortedStocks = await BirdSortedEggsStock.find({ type });
+
+    // Fetch unsorted eggs stock by type
+    const unsortedStocks = await BirdUnsortedEggStock.find({ type });
+
+    // Return both sorted and unsorted stocks as JSON response
+    res.status(200).json({
+      sortedEggsStock: sortedStocks,
+      unsortedEggsStock: unsortedStocks,
+    });
+  } catch (error) {
+    // Handle error
+    console.error(`Error fetching eggs stock for type ${type}:`, error);
     res.status(500).json({ error: 'Failed to fetch eggs stock' });
   }
 };
@@ -3124,11 +3153,16 @@ export const getTotalExpensesByCategory = async (req, res) => {
 
 
 
-const getBirdsByAgeCategory = async (req, res) => {
-  try {
-    const batches = await BirdBatches.find({ isActive: true });
 
-    const ageCategories = {
+
+
+const getBirdsByAgeCategoryByType = async (req, res) => {
+  const { birdType } = req.params; // Assuming the bird type is passed as a route parameter
+
+  try {
+    const batches = await BirdBatches.find({ isActive: true, type: birdType });
+
+    const birdCategories = {
       'Day-old Chick': { types: {}, totalQuantity: 0 },
       'Chick': { types: {}, totalQuantity: 0 },
       'Cockerel': { types: {}, totalQuantity: 0 },
@@ -3140,26 +3174,26 @@ const getBirdsByAgeCategory = async (req, res) => {
     };
 
     batches.forEach(batch => {
-      const { ageCategory, type, breed, totalQuantity } = batch;
+      const { ageCategory, breed, totalQuantity } = batch;
 
-      if (ageCategories[ageCategory]) {
-        if (!ageCategories[ageCategory].types[type]) {
-          ageCategories[ageCategory].types[type] = { breeds: {}, totalQuantity: 0 };
+      if (birdCategories[ageCategory]) {
+        if (!birdCategories[ageCategory].types[birdType]) {
+          birdCategories[ageCategory].types[birdType] = { breeds: {}, totalQuantity: 0 };
         }
-        if (!ageCategories[ageCategory].types[type].breeds[breed]) {
-          ageCategories[ageCategory].types[type].breeds[breed] = 0;
+        if (!birdCategories[ageCategory].types[birdType].breeds[breed]) {
+          birdCategories[ageCategory].types[birdType].breeds[breed] = 0;
         }
-        ageCategories[ageCategory].types[type].breeds[breed] += totalQuantity;
-        ageCategories[ageCategory].types[type].totalQuantity += totalQuantity;
-        ageCategories[ageCategory].totalQuantity += totalQuantity;
+        birdCategories[ageCategory].types[birdType].breeds[breed] += totalQuantity;
+        birdCategories[ageCategory].types[birdType].totalQuantity += totalQuantity;
+        birdCategories[ageCategory].totalQuantity += totalQuantity;
       }
     });
 
-    res.json(ageCategories);
+    res.json(birdCategories);
   } catch (error) {
-    console.error('Error fetching bird batches:', error);
+    console.error(`Error fetching ${birdType} bird batches:`, error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 
-export { getBirdsByAgeCategory };
+export { getBirdsByAgeCategoryByType };
