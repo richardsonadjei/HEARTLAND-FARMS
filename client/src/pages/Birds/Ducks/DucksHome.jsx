@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import BirdsFooter from '../BirdsFooter';
 import AllBirdAdditionsReport from './reports/BirdAdditionsReport';
 import VaccinationChart from './reports/VaccinationChart';
@@ -14,10 +15,6 @@ import BirdSortedEggsStockReport from './reports/SortedEggsStockReport';
 import BirdUnsortedEggsStockReport from './reports/UnsortedEggsReport';
 import BirdTypeDailyEggsCollected from './reports/BirdTypeDailyEggsCollected';
 import BirdExpenseReport from './reports/ExpenseReport';
-
-
-
-
 
 const farmItems = [
   {
@@ -38,7 +35,6 @@ const farmItems = [
       { id: 31, title: 'Daily Eggs Collected' },
       { id: 32, title: 'Sorted Egg Stock' },
       { id: 33, title: 'Unsorted Egg Stock' },
-      
     ],
   },
   {
@@ -48,9 +44,6 @@ const farmItems = [
       { id: 21, title: 'All Expenses' },
       { id: 22, title: 'All Expenses Within A Period' },
       { id: 23, title: 'All Expenses For A Particular Batch' },
-     
-
-     
     ],
   },
   {
@@ -59,7 +52,6 @@ const farmItems = [
     subItems: [
       { id: 51, title: 'All Sales Report' },
       { id: 52, title: 'Batch Sales Report' },
-     
     ],
   },
   {
@@ -67,17 +59,14 @@ const farmItems = [
     title: 'Profit-Loss',
     subItems: [
       { id: 34, title: 'View Poultry Profit/Loss' },
-     
     ],
   },
   {
     id: 6,
     title: 'View Misc Records',
     subItems: [
-      { id: 34, title: 'All Vaccines' },
-      { id: 34, title: 'Vaccination Cycle Chart' },
-   
-     
+      { id: 35, title: 'All Vaccines' },
+      { id: 36, title: 'Vaccination Cycle Chart' },
     ],
   },
 ];
@@ -86,13 +75,13 @@ function DuckHome() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedSubItem, setSelectedSubItem] = useState(null);
   const [selectedAction, setSelectedAction] = useState(null);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const currentUser = useSelector((state) => state.user.currentUser);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
-
 
   const handleItemClick = (item) => {
     setSelectedItem(item);
@@ -109,13 +98,18 @@ function DuckHome() {
     setSelectedAction(action);
   };
 
+  // Filter farmItems based on the user's role
+  const farmItemsFiltered = currentUser && currentUser.role === 'employee'
+    ? farmItems.filter(item => ![3, 4, 5].includes(item.id)) // Hide items with ids 3, 4, and 5
+    : farmItems;
+
   return (
     <div className="container-fluid">
       <div className="row">
         <div className="col-md-3 sidebar">
           <h2>Duck Farm Record Book</h2>
           <ul className="list-group">
-            {farmItems.map((item) => (
+            {farmItemsFiltered.map((item) => (
               <li
                 key={item.id}
                 className={`list-group-item ${selectedItem && selectedItem.id === item.id ? 'active' : ''}`}
@@ -146,111 +140,137 @@ function DuckHome() {
           {/* Render details based on selected main item and sub-item */}
           {selectedItem && (
             <div>
-             
-             
               {/* Render additional details here */}
               {selectedSubItem && selectedSubItem.id === 11 && (
                 <div>
                   <button
-                    className="btn btn-primary me-2 mr-2" // Add Bootstrap classes for primary button and margin
-                    onClick={() => handleActionClick('allGoats')}
+                    className="btn btn-primary me-2 mr-2"
+                    onClick={() => handleActionClick('allDucks')}
                   >
-                    All Birds
+                    All Ducks
                   </button>
-                  {/* <button
-                    className="btn btn-secondary me-2 mr-2" // Add Bootstrap classes for secondary button
-                    onClick={() => handleActionClick('allNursery')}
-                  >
-                    All Nursery Records
-                  </button> */}
-                  {/* Render components based on selected action */}
-                  {selectedAction === 'allGoats' && (
+                  {selectedAction === 'allDucks' && (
                     <div>
-                      {/* Render Batch Nursery Record component */}
                       <AllBirdBatches/>
                     </div>
                   )}
-                  {selectedAction === 'allNursery' && (
-                    <div>
-                      {/* Render All Nursery Records component */}
-                      <AllCabbageNursingRecords/>
-                    </div>
-                  )}
-
-                  
                 </div>
               )}
 
-{selectedSubItem && selectedSubItem.id === 13 && <AllBirdAdditionsReport/>}
- {/* {selectedSubItem && selectedSubItem.id === 14 && <AllVaccinationsReport/>} */}
-
-{selectedSubItem && selectedSubItem.id === 15 && <BirdMortalityReport/>}
-{selectedSubItem && selectedSubItem.id === 32 && <BirdSortedEggsStockReport/>}
-{selectedSubItem && selectedSubItem.id === 33 && <BirdUnsortedEggsStockReport/>}  
-{selectedSubItem && selectedSubItem.id === 21 && <BirdExpenseReport/>}  
-{selectedSubItem && selectedSubItem.id === 22 && <PeriodExpenseReport/>}  
-{selectedSubItem && selectedSubItem.id === 51 && <BirdSaleReport/>}  
-{selectedSubItem && selectedSubItem.id === 52 && <BirdBatchSalesReport/>}  
-{selectedSubItem && selectedSubItem.id === 31 && <BirdTypeDailyEggsCollected/>}  
-{selectedSubItem && selectedSubItem.id === 23 && <BirdBatchExpenseReport/>}  
-
-{selectedSubItem && selectedSubItem.id === 14 && (
+              {selectedSubItem && selectedSubItem.id === 31 && (
                 <div>
                   <button
-                    className="btn btn-primary me-2 mt-2" // Add Bootstrap classes for primary button and margin
+                    className="btn btn-primary me-2 mr-2"
+                    onClick={() => handleActionClick('dailyEggs')}
+                  >
+                    Daily Eggs Collected
+                  </button>
+                  {selectedAction === 'dailyEggs' && (
+                    <div>
+                      <BirdTypeDailyEggsCollected/>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {selectedSubItem && selectedSubItem.id === 32 && (
+                <div>
+                  <button
+                    className="btn btn-primary me-2 mr-2"
+                    onClick={() => handleActionClick('sortedEggStock')}
+                  >
+                    Sorted Egg Stock
+                  </button>
+                  {selectedAction === 'sortedEggStock' && (
+                    <div>
+                      <BirdSortedEggsStockReport/>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {selectedSubItem && selectedSubItem.id === 33 && (
+                <div>
+                  <button
+                    className="btn btn-primary me-2 mr-2"
+                    onClick={() => handleActionClick('unsortedEggStock')}
+                  >
+                    Unsorted Egg Stock
+                  </button>
+                  {selectedAction === 'unsortedEggStock' && (
+                    <div>
+                      <BirdUnsortedEggsStockReport/>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {selectedSubItem && selectedSubItem.id === 13 && <AllBirdAdditionsReport/>}
+              {selectedSubItem && selectedSubItem.id === 14 && <BirdMortalityReport/>}
+              {selectedSubItem && selectedSubItem.id === 15 && <BirdBatchExpenseReport/>}
+              {selectedSubItem && selectedSubItem.id === 21 && <BirdExpenseReport/>}
+              {selectedSubItem && selectedSubItem.id === 22 && <PeriodExpenseReport/>}
+              {selectedSubItem && selectedSubItem.id === 51 && <BirdSaleReport/>}
+              {selectedSubItem && selectedSubItem.id === 52 && <BirdBatchSalesReport/>}
+              {selectedSubItem && selectedSubItem.id === 14 && (
+                <div>
+                  <button
+                    className="btn btn-primary me-2 mt-2"
                     onClick={() => handleActionClick('vaccinationChart')}
                   >
                     Complete Vaccination Chart
                   </button>
                   <button
-                    className="btn btn-primary me-2 mt-2" // Add Bootstrap classes for primary button and margin
+                    className="btn btn-primary me-2 mt-2"
                     onClick={() => handleActionClick('vaccination-records')}
                   >
                     Batch Vaccination Records
                   </button>
                   <button
-                    className="btn btn-secondary mt-2 mr-2 me-2" // Add Bootstrap classes for secondary button
+                    className="btn btn-secondary mt-2 mr-2"
                     onClick={() => handleActionClick('deworming')}
                   >
-                   Deworming Records
+                    Deworming Records
                   </button>
                   <button
-                    className="btn btn-primary me-2 mt-2 mr-2" // Add Bootstrap classes for primary button and margin
+                    className="btn btn-primary me-2 mt-2"
                     onClick={() => handleActionClick('allBirdVaccinationRecord')}
                   >
-                    All Birds Vacinnation Records
+                    All Birds Vaccination Records
                   </button>
                   {/* Render components based on selected action */}
                   {selectedAction === 'vaccinationChart' && (
                     <div>
-                      {/* Render Batch Nursery Record component */}
                       <VaccinationChart/>
                     </div>
                   )}
                   {selectedAction === 'vaccination-records' && (
-                    <div>
-                      {/* Render All Nursery Records component */}
-                      <BirdBatchVaccinationRecord/>
-                    </div>
-                  )}
-                 
-                  {selectedAction === 'allBirdVaccinationRecord' && (
-                    <div>
-                      {/* Render All Nursery Records component */}
-                      <BirdVaccinationReport/>
-                    </div>
-                  )}
-
-                  
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-      </div>
-      <BirdsFooter toggleModal={toggleModal} />
+<div>
+<BirdBatchVaccinationRecord/>
+</div>
+)}
+{selectedAction === 'deworming' && (
+<div>
+{/* Render deworming records component /}
+{/ Replace with appropriate component */}
+</div>
+)}
+{selectedAction === 'allBirdVaccinationRecord' && (
+<div>
+<BirdVaccinationReport/>
+</div>
+)}
+</div>
+)}
+          {/* Add additional conditions for other sub-items and their corresponding actions */}
+          
+          </div>
+      )}
     </div>
-  );
+  </div>
+  <BirdsFooter toggleModal={toggleModal} />
+</div>
+);
 }
 
 export default DuckHome;

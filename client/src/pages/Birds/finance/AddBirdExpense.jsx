@@ -34,7 +34,7 @@ const AddBirdExpense = () => {
 
   useEffect(() => {
     if (formData.type && formData.type !== 'All-Birds' && formData.category !== 'Breeding Stock') {
-      fetchBatchNumberOptions();
+      fetchBatchNumberOptions(formData.type);
     }
   }, [formData.type]);
 
@@ -68,14 +68,15 @@ const AddBirdExpense = () => {
     }
   };
 
-  const fetchBatchNumberOptions = async () => {
+  const fetchBatchNumberOptions = async (selectedType) => {
     try {
       const response = await fetch('/api/all-bird-batches');
       if (!response.ok) {
         throw new Error('Failed to fetch batch numbers');
       }
       const batches = await response.json();
-      const options = batches.map((batch) => ({ value: batch.batchNumber, label: batch.batchNumber }));
+      const filteredBatches = batches.filter(batch => batch.type === selectedType);
+      const options = filteredBatches.map((batch) => ({ value: batch.batchNumber, label: batch.batchNumber }));
       setBatchNumberOptions(options);
     } catch (error) {
       console.error(error.message);
@@ -98,7 +99,12 @@ const AddBirdExpense = () => {
   };
 
   const handleInputChange = (selectedOption, field) => {
-    setFormData({ ...formData, [field]: selectedOption.value });
+    if (field === 'type' && selectedOption.value === 'All-Birds') {
+      // Clear batchNumber when type is 'All-Birds'
+      setFormData({ ...formData, [field]: selectedOption.value, batchNumber: '' });
+    } else {
+      setFormData({ ...formData, [field]: selectedOption.value });
+    }
   };
 
   const handleInputChangeText = (e, field) => {
@@ -111,7 +117,6 @@ const AddBirdExpense = () => {
     );
     setFormData({ ...formData, batchDetails: updatedBatchDetails });
   };
-  
 
   const addBirdDetail = () => {
     setFormData({
@@ -143,7 +148,7 @@ const AddBirdExpense = () => {
       setTimeout(() => {
         setErrorMessage('');
         window.location.reload();
-      }, 100000);
+      }, 10000);
     }
   };
 
@@ -260,19 +265,18 @@ const AddBirdExpense = () => {
                     </Input>
                   </Col>
                   <Col md={3}>
-  <Input
-    type="select"
-    value={bird.healthStatus}
-    onChange={(e) => handleBatchDetailsChange(index, 'healthStatus', e.target.value)}
-    required
-  >
-    <option value="" disabled>Select Health Status</option>
-    <option value="Healthy">Healthy</option>
-    <option value="Sick">Sick</option>
-    <option value="Recovered">Recovered</option>
-  </Input>
-</Col>
-
+                    <Input
+                      type="select"
+                      value={bird.healthStatus}
+                      onChange={(e) => handleBatchDetailsChange(index, 'healthStatus', e.target.value)}
+                      required
+                    >
+                      <option value="" disabled>Select Health Status</option>
+                      <option value="Healthy">Healthy</option>
+                      <option value="Sick">Sick</option>
+                      <option value="Recovered">Recovered</option>
+                    </Input>
+                  </Col>
                   <Col md={3}>
                     <Input
                       type="number"

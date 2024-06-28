@@ -139,6 +139,14 @@ import { createBird, deleteBird, getBirdById, getBirds, updateBird,createBirdBat
     deleteBirdRelocation,
     relocateBirds,
     getBatchByBatchNumber,
+    getPoultryUnsortedEggsCollectedToday,
+    getPoultrySortedEggsCollectedToday,
+    getBirdsSummaryByLocation,
+    getAllEggsStock,
+    getBirdSalesSummary,
+    getTotalExpensesByCategory,
+    getBirdsByAgeCategory,
+    
     
    } from '../controllers/bird.controller.js';
 
@@ -316,6 +324,9 @@ birdRouter.delete('/:id/remove', deleteBirdEggsCollected);
 birdRouter.get('/sorted-eggs-stock/:type', getSortedEggsStockByType);
 birdRouter.get('/unsorted-eggs-stock/:type', getUnsortedEggsStockByType);
 birdRouter.get('/eggs-collected-today/:type', getEggsCollectedTodayByType);
+birdRouter.get('/poultry-unsorted-eggs-collected-today', getPoultryUnsortedEggsCollectedToday);
+birdRouter.get('/poultry-sorted-eggs-collected-today', getPoultrySortedEggsCollectedToday);
+
 
 birdRouter.get('/bird-type-expenses/:type', getExpensesByType);
 birdRouter.get('/expenses-type-expense-by-period/:type', getExpensesByTypeAndPeriod);
@@ -471,8 +482,12 @@ birdRouter.get('/bird-relocations/:id', getBirdRelocationById); // Get a single 
 birdRouter.put('/bird-relocations/:id', updateBirdRelocation); // Update a bird relocation record by ID
 birdRouter.delete('/bird-relocations/:id', deleteBirdRelocation); // Delete a bird relocation record by ID
 
+// DASHBOARD
 
-
-
+birdRouter.get('/birds-summary', getBirdsSummaryByLocation);
+birdRouter.get('/eggs-stock', getAllEggsStock);
+birdRouter.get('/bird-sales-summary', getBirdSalesSummary);
+birdRouter.get('/all-expenses-by-category', getTotalExpensesByCategory);
+birdRouter.get('/birds-age-categories', getBirdsByAgeCategory);
 
 export default birdRouter;

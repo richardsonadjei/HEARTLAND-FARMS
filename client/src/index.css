@@ -799,4 +799,149 @@ background-color: #0056b3;
 }
 
 
+/* src/components/CustomSidebar.css */
+
+.custom-sidebar {
+  background-color: #3c763d;
+  color: white;
+  height: 100vh;
+  padding: 20px;
+  position: fixed;
+  width: 250px;
+}
+
+.custom-sidebar-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.custom-profile-img {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+
+.custom-nav-links {
+  margin-top: 20px;
+}
+
+.custom-nav-link {
+  color: white;
+  font-size: 18px;
+  margin: 10px 0;
+  text-decoration: none;
+}
+
+.custom-nav-link:hover {
+  background-color: #285228;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.custom-manage-farms {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.custom-add-farm-btn {
+  background-color: #4cae4c;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.custom-add-farm-btn:hover {
+  background-color: #398439;
+}
+
+/* src/components/CustomSidebar.css */
+.custom-sidebar {
+  background-color: #3c763d;
+  color: white;
+  height: 100vh;
+  padding: 20px;
+  position: fixed;
+  width: 250px;
+}
+
+.custom-sidebar-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.custom-profile-img {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+
+.custom-nav-links {
+  margin-top: 20px;
+}
+
+.custom-nav-link {
+  color: white;
+  font-size: 18px;
+  margin: 10px 0;
+  text-decoration: none;
+}
+
+.custom-nav-link:hover {
+  background-color: #285228;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.custom-manage-farms {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.custom-add-farm-btn {
+  background-color: #4cae4c;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.custom-add-farm-btn:hover {
+  background-color: #398439;
+}
+
+.custom-sidebar {
+  background-color: #3c763d;
+  color: white;
+  height: 100vh;
+  padding: 20px;
+  position: fixed;
+  width: 250px;
+}
+
+.custom-nav-links {
+  margin-top: 20px;
+}
+
+.custom-nav-link {
+  color: white;
+  font-size: 18px;
+  margin: 10px 0;
+  text-decoration: none;
+}
+
+.custom-nav-link:hover {
+  background-color: #285228;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.custom-offcanvas .custom-nav-link {
+  color: black;
+  margin: 10px 0;
+  font-size: 18px;
+}
+/* 
+/* No changes to media query necessary for the hamburger menu to appear on all screen sizes */
+
 

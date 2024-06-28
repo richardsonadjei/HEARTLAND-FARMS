@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import AllGoatsReport from './reports/AllGoatsReport';
 import AnimalsFooter from '../AnimalsFooter';
-
 import AllVaccinationsReport from './reports/AllVaccinationsReport';
 import AllMedicalTreatmentRecords from './reports/AllMedicalTreatmentReports';
 import AnimalWeightReport from './reports/WeightReport';
@@ -12,8 +12,7 @@ import AllAnimalExpenseByTypeReport from './reports/AnimalExpenseByType';
 import ExpensesByTypeAndIdentityNumber from './reports/AnimalExpenseReportByTypeAndId';
 import AllAnimalSalesByTypeReport from './reports/AnimalSalesReport';
 
-
-const farmItems = [
+const allFarmItems = [
   {
     id: 1,
     title: 'Click To View Goat Farm Records',
@@ -23,7 +22,7 @@ const farmItems = [
       { id: 13, title: 'Vaccination Records' },
       { id: 14, title: 'Medical Treatment Records' },
       { id: 15, title: 'Growth Rate/Weight Records' },
-      { id: 16, title: 'Mortality  Records' },
+      { id: 16, title: 'Mortality Records' },
       { id: 17, title: 'All Goat Records' },
     ],
   },
@@ -32,8 +31,6 @@ const farmItems = [
     title: 'Expenses',
     subItems: [
       { id: 21, title: 'View Expenses' },
-
-     
     ],
   },
   {
@@ -41,23 +38,21 @@ const farmItems = [
     title: 'Income',
     subItems: [
       { id: 31, title: 'View Goat Sales' },
-     
     ],
   },
-  
 ];
 
 function GoatsHome() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedSubItem, setSelectedSubItem] = useState(null);
   const [selectedAction, setSelectedAction] = useState(null);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const currentUser = useSelector((state) => state.user.currentUser);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
-
 
   const handleItemClick = (item) => {
     setSelectedItem(item);
@@ -73,6 +68,9 @@ function GoatsHome() {
   const handleActionClick = (action) => {
     setSelectedAction(action);
   };
+
+  // Filter farmItems based on the user's role
+  const farmItems = currentUser && currentUser.role === 'employee' ? allFarmItems.filter(item => item.id === 1) : allFarmItems;
 
   return (
     <div className="container-fluid">
@@ -111,111 +109,70 @@ function GoatsHome() {
           {/* Render details based on selected main item and sub-item */}
           {selectedItem && (
             <div>
-             
-             
               {/* Render additional details here */}
               {selectedSubItem && selectedSubItem.id === 11 && (
                 <div>
                   <button
-                    className="btn btn-primary me-2 mr-2" // Add Bootstrap classes for primary button and margin
+                    className="btn btn-primary me-2 mr-2"
                     onClick={() => handleActionClick('allGoats')}
                   >
                     All Goats
                   </button>
-                  {/* <button
-                    className="btn btn-secondary me-2 mr-2" // Add Bootstrap classes for secondary button
-                    onClick={() => handleActionClick('allNursery')}
-                  >
-                    All Nursery Records
-                  </button> */}
-                  {/* Render components based on selected action */}
                   {selectedAction === 'allGoats' && (
                     <div>
-                      {/* Render Batch Nursery Record component */}
                       <AllGoatsReport/>
                     </div>
                   )}
-                  {selectedAction === 'allNursery' && (
-                    <div>
-                      {/* Render All Nursery Records component */}
-                      <AllCabbageNursingRecords/>
-                    </div>
-                  )}
-
-                  
                 </div>
               )}
 
-{selectedSubItem && selectedSubItem.id === 31 && (
+              {selectedSubItem && selectedSubItem.id === 31 && (
                 <div>
                   <button
-                    className="btn btn-primary me-2 mr-2" // Add Bootstrap classes for primary button and margin
+                    className="btn btn-primary me-2 mr-2"
                     onClick={() => handleActionClick('allSalesByType')}
                   >
                     All Sales By Type
                   </button>
-                  {/* <button
-                    className="btn btn-secondary me-2 mr-2" // Add Bootstrap classes for secondary button
-                    onClick={() => handleActionClick('allNursery')}
-                  >
-                    All Nursery Records
-                  </button> */}
-                  {/* Render components based on selected action */}
                   {selectedAction === 'allSalesByType' && (
                     <div>
-                      {/* Render Batch Nursery Record component */}
                       <AllAnimalSalesByTypeReport/>
                     </div>
                   )}
-                  {selectedAction === 'allNursery' && (
-                    <div>
-                      {/* Render All Nursery Records component */}
-                      <AllCabbageNursingRecords/>
-                    </div>
-                  )}
-
-                  
                 </div>
               )}
 
+              {selectedSubItem && selectedSubItem.id === 12 && <AllAnimalBirths/>}
+              {selectedSubItem && selectedSubItem.id === 13 && <AllVaccinationsReport/>}
+              {selectedSubItem && selectedSubItem.id === 14 && <AllMedicalTreatmentRecords/>}
+              {selectedSubItem && selectedSubItem.id === 15 && <AnimalWeightReport/>}
+              {selectedSubItem && selectedSubItem.id === 16 && <MortalityReport/>}
+              {selectedSubItem && selectedSubItem.id === 17 && <AllAnimalReport/>}
 
-{selectedSubItem && selectedSubItem.id === 12 && <AllAnimalBirths/>}
-{selectedSubItem && selectedSubItem.id === 13 && <AllVaccinationsReport/>}
-
-{selectedSubItem && selectedSubItem.id === 14 && <AllMedicalTreatmentRecords/>}
-{selectedSubItem && selectedSubItem.id === 15 && <AnimalWeightReport/>}
-{selectedSubItem && selectedSubItem.id === 16 && <MortalityReport/>}
-{selectedSubItem && selectedSubItem.id === 17 && <AllAnimalReport/>}
-
-{selectedSubItem && selectedSubItem.id === 21 && (
+              {selectedSubItem && selectedSubItem.id === 21 && (
                 <div>
                   <button
-                    className="btn btn-primary me-2 mt-2" // Add Bootstrap classes for primary button and margin
+                    className="btn btn-primary me-2 mt-2"
                     onClick={() => handleActionClick('batchExpense')}
                   >
                     Expense Record By Animal Id Number
                   </button>
                   <button
-                    className="btn btn-secondary mt-2 mr-2" // Add Bootstrap classes for secondary button
+                    className="btn btn-secondary mt-2 mr-2"
                     onClick={() => handleActionClick('allExpense')}
                   >
                     All Expense Records
                   </button>
-                  {/* Render components based on selected action */}
                   {selectedAction === 'batchExpense' && (
                     <div>
-                      {/* Render Batch Nursery Record component */}
                       <ExpensesByTypeAndIdentityNumber />
                     </div>
                   )}
                   {selectedAction === 'allExpense' && (
                     <div>
-                      {/* Render All Nursery Records component */}
                       <AllAnimalExpenseByTypeReport/>
                     </div>
                   )}
-
-                  
                 </div>
               )}
             </div>

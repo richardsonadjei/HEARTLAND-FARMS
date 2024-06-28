@@ -14,6 +14,7 @@ import SpringOnionsBatchExpense from './reports/SpringOnionsBatchExpenseReport';
 import SpringOnionBatchIncome from './reports/SpringOnionsBatchIncomeReport';
 import SpringOnionsProfitLossReport from './reports/SpringOnionBatchProfitAndLossReport';
 import SpringOnionsBatchOtherActivitiesRecords from './reports/SpringOnionsBatchOtherActivitiesRecords';
+import { useSelector } from 'react-redux';
 
 
 
@@ -86,13 +87,18 @@ function SpringOnionFarmManager() {
     setSelectedAction(action);
   };
 
+  const currentUser = useSelector((state) => state.user.currentUser);
+  // Filter farmItems based on the user's role
+const farmItemsFiltered = currentUser && currentUser.role === 'employee' ? farmItems.filter(item => item.id === 1) : farmItems;
+
+
   return (
     <div className="container-fluid">
       <div className="row">
         <div className="col-md-3 sidebar">
           <h2>Spring Onion Farm Book</h2>
           <ul className="list-group">
-            {farmItems.map((item) => (
+          {farmItemsFiltered.map((item) => (
               <li
                 key={item.id}
                 className={`list-group-item ${selectedItem && selectedItem.id === item.id ? 'active' : ''}`}

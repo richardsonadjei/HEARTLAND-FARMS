@@ -63,7 +63,18 @@ import TurkeyHome from './pages/Birds/Turkey/TurkeyHome';
 import DuckHome from './pages/Birds/Ducks/DucksHome';
 import GuineaFowlHome from './pages/Birds/GuineaFowl/GuineaFowlHome';
 import HumanResourceManagement from './components/Human Resource/HRHome';
+import UpdateUser from './pages/UpdateUser';
+import Dashboard from './pages/MainDashBoard';
 
+import AccountMonitoringDashboard from './pages/Dashboards/AccountMonitoringDashboard';
+import AddFarmExpense from './pages/Dashboards/Finance/AddFarmExpense';
+import AddPartnerContribution from './pages/Dashboards/Finance/AddPartnersContribution';
+import RecordSalesIncome from './pages/Dashboards/Finance/AddSalesIncome';
+import FinancialReports from './pages/Dashboards/Finance/reports/FinancialReportsHome';
+import BirdsFarmDashboard from './pages/Dashboards/BirdsDashBoards';
+import AnimalFarmDashboard from './pages/Dashboards/FarmAnimalsDashBoard';
+import CashCropDashboard from './pages/Dashboards/CashCropDashBoard';
+import VegetablesDashboard from './pages/Dashboards/VegetablesDashBoard';
 
 
 
@@ -81,11 +92,12 @@ export default function App() {
         
         <Route path='/sign-in' element={<SignIn/>} />
         <Route path='/sign-up' element={<SignUp/>} />
-        <Route path='/sign-out' element={<SignOut />} />
+        
         <Route element={<PrivateRoute/>}>
           <Route path='/' element={<Home/>} />
           <Route path='/profile' element={<Profile/>} />
-
+          <Route path='/user-update' element={<UpdateUser/>} />
+          <Route path='/sign-out' element={<SignOut />} />
 
       
 
@@ -161,6 +173,18 @@ export default function App() {
 <Route path='/guinea-fowl-home' element={<GuineaFowlHome/>} />
 
 <Route path='/hr' element={<HumanResourceManagement/>} />
+<Route path='/dashboard' element={<Dashboard/>} />
+
+<Route path='/accounts' element={<AccountMonitoringDashboard/>} />
+<Route path='/add-farm-expense' element={<AddFarmExpense/>} />
+<Route path='/add-partners-contribution' element={<AddPartnerContribution/>} />
+<Route path='/add-sales' element={<RecordSalesIncome/>} />
+<Route path='/financial-reports' element={<FinancialReports/>} />
+<Route path='/birds-farm-dashboard' element={<BirdsFarmDashboard/>} />
+<Route path='/animal-farm-dashboard' element={<AnimalFarmDashboard/>} />
+<Route path='/cash-crop-dashboard' element={<CashCropDashboard/>} />
+<Route path='/vegetables-dashboard' element={<VegetablesDashboard/>} />
+
 
 {/* EXTRAS */}
 {/* <Route path='/active-seasons' element={<AllSeasonsReport/>} />

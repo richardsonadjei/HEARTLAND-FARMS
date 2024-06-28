@@ -10,42 +10,50 @@ export default function Header() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentDateTime(new Date());
-    }, 60000); 
+    }, 60000); // Update currentDateTime every minute
 
     return () => clearInterval(intervalId); // Cleanup on component unmount
   }, []);
 
-  const renderBeforeStartDropdown = () => (
-    <NavDropdown title="Startup Costs" id="startup-costs-dropdown" className="text-white font-weight-bold">
-      <NavDropdown.Item as={Link} to="/before-expense">
-        Add Startup Expense
-      </NavDropdown.Item>
-      <NavDropdown.Item as={Link} to="/all-before-expense">
-        View Startup Expenses
-      </NavDropdown.Item>
-    </NavDropdown>
-  );
+  // Function to check if user has both "admin" and "finance" roles
+  const hasAdminAndFinanceRoles = () => {
+    return currentUser && currentUser.role.includes('admin') && currentUser.role.includes('finance');
+  };
 
-  const renderHumanResourceDropdown = () => (
-    <NavDropdown title="Human Resource" id="human-resource-dropdown" className="text-white font-weight-bold">
-      <NavDropdown.Item as={Link} to="/hr">
-        HR Home
-      </NavDropdown.Item>
-      {/* <NavDropdown.Item as={Link} to="/departments">
-        Exployees
-      </NavDropdown.Item>
-      <NavDropdown.Item as={Link} to="/departments">
-        PayRoll Management
-      </NavDropdown.Item> */}
-      {/* Add more HR related links as needed */}
-    </NavDropdown>
-  );
+  // Function to render Human Resource dropdown based on user roles
+  const renderHumanResourceDropdown = () => {
+    if (currentUser && (currentUser.role.includes('admin') || currentUser.role.includes('finance') || currentUser.role.includes('human-resource') || hasAdminAndFinanceRoles())) {
+      return (
+        <NavDropdown title="Human Resource" id="human-resource-dropdown" className="text-white font-weight-bold">
+          <NavDropdown.Item as={Link} to="/hr">
+            HR Home
+          </NavDropdown.Item>
+          <NavDropdown.Item as={Link} to="/sign-up">
+            New Employee
+          </NavDropdown.Item>
+          {/* Add more HR related links as needed */}
+        </NavDropdown>
+      );
+    }
+    return null; // Render nothing if the user is not admin, finance, human-resource, or has both admin and finance
+  };
 
+  // Function to render authentication links based on user authentication state and role
   const renderAuthLinks = () => (
     <>
       {currentUser ? (
         <>
-          <Nav.Link as={Link} to="/profile" className="text-white font-weight-bold">
+          {!currentUser.role.includes('employee') && (
+            <>
+              <Nav.Link as={Link} to="/dashboard" className="text-white font-weight-bold">
+                Farms Dashboard
+              </Nav.Link>
+              <Nav.Link as={Link} to="/accounts" className="text-white font-weight-bold">
+                Accounts
+              </Nav.Link>
+            </>
+          )}
+          <Nav.Link as={Link} to="/user-update" className="text-white font-weight-bold">
             <span>{currentUser.userName}</span>
           </Nav.Link>
           <Nav.Link as={Link} to="/sign-out" className="text-white font-weight-bold">
@@ -65,7 +73,7 @@ export default function Header() {
       <Container>
         <Link to="/" className="logo-container">
           <Navbar.Brand className="logo d-flex align-items-center">
-            <span className="logo-text">Heartland Farms</span>
+            <span className="logo-text">Adjei's Farms</span>
           </Navbar.Brand>
         </Link>
 
@@ -86,9 +94,8 @@ export default function Header() {
             <Nav.Link as={Link} to="/" className="text-white font-weight-bold">
               Home
             </Nav.Link>
-            {renderBeforeStartDropdown()}
             {renderHumanResourceDropdown()} {/* Render Human Resource dropdown */}
-            {renderAuthLinks()}
+            {renderAuthLinks()} {/* Render authentication links */}
           </Nav>
         </Navbar.Collapse>
       </Container>

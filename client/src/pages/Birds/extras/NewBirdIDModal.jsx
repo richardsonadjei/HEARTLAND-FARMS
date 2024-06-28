@@ -2,52 +2,61 @@ import React, { useState, useEffect } from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button, FormGroup, Label, Input } from 'reactstrap';
 import Select from 'react-select';
 import { useSelector } from 'react-redux';
+import { BsPlusCircle, BsFillTrashFill } from 'react-icons/bs';
 
-const NewBirdIDModal = ({ isOpen, toggleModal, createBatch }) => {
+const NewBirdBatchModal = ({ isOpen, toggleModal, createBatch }) => {
   const { currentUser } = useSelector((state) => state.user);
+
   const [batchData, setBatchData] = useState({
     type: '',
-    specie: '',
     breed: '',
-    identityTag: '',
     birthDate: '',
-    gender: '',
+    batchDetails: [],
     farmHouseLocation: '',
-    total: 1,
     additionalDetails: '',
     recordedBy: currentUser ? currentUser.userName : '',
-    date: '', // Added for expense details
-    amount: '', // Added for expense details
   });
-  const [identityTagOptions] = useState([
-    { value: 'Red', label: 'Red' },
-    { value: 'Blue', label: 'Blue' },
-    { value: 'White', label: 'White' },
-    { value: 'Orange', label: 'Orange' },
-    { value: 'Green', label: 'Green' },
-    { value: 'Yellow', label: 'Yellow' }
-  ]);
+
+  const [typeOptions, setTypeOptions] = useState([]);
+  const [farmHouseLocationOptions, setFarmHouseLocationOptions] = useState([]);
   const [genderOptions] = useState([
     { value: 'male', label: 'Male' },
     { value: 'female', label: 'Female' }
   ]);
+  const [healthStatusOptions] = useState([
+    { value: 'Healthy', label: 'Healthy' },
+    { value: 'Sick', label: 'Sick' },
+    { value: 'Recovered', label: 'Recovered' }
+  ]);
 
   useEffect(() => {
-    fetchAnimalTypes();
+    fetchBirdTypes();
+    fetchFarmHouseLocations();
   }, []);
 
-  const fetchAnimalTypes = async () => {
+  const fetchBirdTypes = async () => {
     try {
-      const response = await fetch('/api/all-animal-types');
+      const response = await fetch('/api/all-birds-types');
       if (!response.ok) {
-        throw new Error('Failed to fetch animal types');
+        throw new Error('Failed to fetch bird types');
       }
-      const animalTypes = await response.json();
-      const options = animalTypes.map((animal) => ({ value: animal.name, label: animal.name }));
-      setBatchData((prevBatchData) => ({
-        ...prevBatchData,
-        typeOptions: options
-      }));
+      const birdTypes = await response.json();
+      const options = birdTypes.map((type) => ({ value: type.name , label: type.name }));
+      setTypeOptions(options);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
+  const fetchFarmHouseLocations = async () => {
+    try {
+      const response = await fetch('/api/all-bird-farm-sections');
+      if (!response.ok) {
+        throw new Error('Failed to fetch farm sections');
+      }
+      const sections = await response.json();
+      const options = sections.map((section) => ({ value: section.sectionName, label: section.sectionName }));
+      setFarmHouseLocationOptions(options);
     } catch (error) {
       console.error(error.message);
     }
@@ -62,9 +71,27 @@ const NewBirdIDModal = ({ isOpen, toggleModal, createBatch }) => {
     setBatchData({ ...batchData, [name]: selectedOption.value });
   };
 
+  const handleBatchDetailChange = (index, name, value) => {
+    const newBatchDetails = [...batchData.batchDetails];
+    newBatchDetails[index] = { ...newBatchDetails[index], [name]: value };
+    setBatchData({ ...batchData, batchDetails: newBatchDetails });
+  };
+
+  const handleAddBatchDetail = () => {
+    setBatchData({
+      ...batchData,
+      batchDetails: [...batchData.batchDetails, { gender: '', healthStatus: '', quantity: 0 }]
+    });
+  };
+
+  const handleRemoveBatchDetail = (index) => {
+    const newBatchDetails = batchData.batchDetails.filter((_, i) => i !== index);
+    setBatchData({ ...batchData, batchDetails: newBatchDetails });
+  };
+
   const handleCreateBatch = async () => {
     try {
-      const response = await fetch('/api/create-animal-id', {
+      const response = await fetch('/api/birdBatches', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -72,26 +99,21 @@ const NewBirdIDModal = ({ isOpen, toggleModal, createBatch }) => {
         body: JSON.stringify(batchData),
       });
       if (!response.ok) {
-        throw new Error('Failed to create animal batch');
+        throw new Error('Failed to create bird batch');
       }
       // Clear form data and close the modal
       setBatchData({
         type: '',
-        specie: '',
         breed: '',
-        identityTag: '',
         birthDate: '',
-        gender: '',
+        batchDetails: [],
         farmHouseLocation: '',
-        total: 1,
         additionalDetails: '',
         recordedBy: currentUser ? currentUser.userName : '',
-        date: '', // Clear expense details
-        amount: '', // Clear expense details
       });
       toggleModal();
       // Alert user upon successful creation
-      window.alert('Animal batch created successfully');
+      window.alert('Bird batch created successfully');
     } catch (error) {
       console.error(error.message);
     }
@@ -99,90 +121,104 @@ const NewBirdIDModal = ({ isOpen, toggleModal, createBatch }) => {
 
   return (
     <Modal isOpen={isOpen} toggle={toggleModal}>
-      <ModalHeader toggle={toggleModal}>Create New Animal ID</ModalHeader>
+      <ModalHeader toggle={toggleModal}>Create New Bird Batch</ModalHeader>
       <ModalBody>
         <FormGroup>
           <Label for="type">Type</Label>
           <Select
             id="type"
-            options={batchData.typeOptions}
+            options={typeOptions}
             onChange={(selectedOption) => handleSelectChange(selectedOption, 'type')}
-            value={{ value: batchData.type, label: batchData.type }}
+            value={typeOptions.find(option => option.value === batchData.type)}
             isSearchable
             placeholder="Select Type"
             required
           />
         </FormGroup>
         <FormGroup>
-          <Label for="specie">Specie</Label>
-          <Input type="text" id="specie" name="specie" value={batchData.specie} onChange={handleInputChange} required />
-        </FormGroup>
-        <FormGroup>
           <Label for="breed">Breed</Label>
-          <Input type="text" id="breed" name="breed" value={batchData.breed} onChange={handleInputChange} />
-        </FormGroup>
-        <FormGroup>
-          <Label for="identityTag">Identity Tag</Label>
-          <Select
-            id="identityTag"
-            options={identityTagOptions}
-            onChange={(selectedOption) => handleSelectChange(selectedOption, 'identityTag')}
-            value={{ value: batchData.identityTag, label: batchData.identityTag }}
-            isSearchable
-            placeholder="Select Identity Tag"
-            required
-          />
+          <Input type="text" id="breed" name="breed" value={batchData.breed} onChange={handleInputChange} required />
         </FormGroup>
         <FormGroup>
           <Label for="birthDate">Birth Date</Label>
-          <Input type="date" id="birthDate" name="birthDate" value={batchData.birthDate} onChange={handleInputChange} />
+          <Input type="date" id="birthDate" name="birthDate" value={batchData.birthDate} onChange={handleInputChange} required />
         </FormGroup>
+        {batchData.batchDetails.map((detail, index) => (
+          <div key={index} className="batch-detail">
+            <FormGroup>
+              <Label for={`gender-${index}`}>Gender</Label>
+              <Select
+                id={`gender-${index}`}
+                options={genderOptions}
+                onChange={(selectedOption) => handleBatchDetailChange(index, 'gender', selectedOption.value)}
+                value={genderOptions.find(option => option.value === detail.gender)}
+                isSearchable
+                placeholder="Select Gender"
+                required
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for={`healthStatus-${index}`}>Health Status</Label>
+              <Select
+                id={`healthStatus-${index}`}
+                options={healthStatusOptions}
+                onChange={(selectedOption) => handleBatchDetailChange(index, 'healthStatus', selectedOption.value)}
+                value={healthStatusOptions.find(option => option.value === detail.healthStatus)}
+                isSearchable
+                placeholder="Select Health Status"
+                required
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for={`quantity-${index}`}>Quantity</Label>
+              <Input
+                type="number"
+                id={`quantity-${index}`}
+                name="quantity"
+                value={detail.quantity}
+                onChange={(e) => handleBatchDetailChange(index, 'quantity', e.target.value)}
+                required
+              />
+            </FormGroup>
+            {index !== 0 && (
+              <BsFillTrashFill
+                color="red"
+                size={20}
+                onClick={() => handleRemoveBatchDetail(index)}
+                style={{ cursor: 'pointer', marginLeft: '5px' }}
+              />
+            )}
+          </div>
+        ))}
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <BsPlusCircle
+            color="blue"
+            size={20}
+            onClick={handleAddBatchDetail}
+            style={{ cursor: 'pointer', marginRight: '5px' }}
+          />
+          <span style={{ fontSize: '16px', cursor: 'pointer' }}>Add Batch Detail</span>
+        </div>
         <FormGroup>
-          <Label for="gender">Gender</Label>
+          <Label for="farmHouseLocation">Farm House Location</Label>
           <Select
-            id="gender"
-            options={genderOptions}
-            onChange={(selectedOption) => handleSelectChange(selectedOption, 'gender')}
-            value={{ value: batchData.gender, label: batchData.gender }}
+            id="farmHouseLocation"
+            options={farmHouseLocationOptions}
+            onChange={(selectedOption) => handleSelectChange(selectedOption, 'farmHouseLocation')}
+            value={farmHouseLocationOptions.find(option => option.value === batchData.farmHouseLocation)}
             isSearchable
-            placeholder="Select Gender"
+            placeholder="Select Farm House Location"
             required
           />
         </FormGroup>
         <FormGroup>
-          <Label for="farmHouseLocation">Farm House Location</Label>
-          <Input type="text" id="farmHouseLocation" name="farmHouseLocation" value={batchData.farmHouseLocation} onChange={handleInputChange} />
-        </FormGroup>
-        <FormGroup>
           <Label for="additionalDetails">Additional Details</Label>
-          <Input type="textarea"
-            id="additionalDetails"
-            name="additionalDetails"
-            value={batchData.additionalDetails}
-            onChange={handleInputChange}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="date">Expense Date</Label>
-          <Input type="date" id="date" name="date" value={batchData.date} onChange={handleInputChange} />
-        </FormGroup>
-        <FormGroup>
-          <Label for="amount">Amount</Label>
-          <Input type="number" id="amount" name="amount" value={batchData.amount} onChange={handleInputChange} />
+          <Input type="textarea" id="additionalDetails" name="additionalDetails" value={batchData.additionalDetails} onChange={handleInputChange} />
         </FormGroup>
         <FormGroup>
           <Label for="recordedBy">Recorded By</Label>
-          <Input
-            type="text"
-            id="recordedBy"
-            name="recordedBy"
-            value={batchData.recordedBy}
-            onChange={handleInputChange}
-            readOnly
-          />
+          <Input type="text" id="recordedBy" name="recordedBy" value={batchData.recordedBy} onChange={handleInputChange} readOnly />
         </FormGroup>
-        {/* Additional fields for expense details */}
-        
       </ModalBody>
       <ModalFooter>
         <Button color="primary" onClick={handleCreateBatch}>Create</Button>
@@ -192,4 +228,4 @@ const NewBirdIDModal = ({ isOpen, toggleModal, createBatch }) => {
   );
 };
 
-export default NewBirdIDModal;
+export default NewBirdBatchModal;

@@ -17,6 +17,7 @@ import GreenPepperAllFarmActivitiesReport from './Reports/AllGreenPepperFarmActi
 import GreenPepperBatchExpense from './Reports/GreenPepperBatchExpenseReport';
 import GreenPepperBatchIncome from './Reports/GreenPepperSalesReport';
 import GreenPepperProfitLossReport from './Reports/GreenPepperProfitAndLossReport';
+import { useSelector } from 'react-redux';
 
 
 
@@ -75,6 +76,7 @@ function GreenPepperFarmManager() {
     setIsModalOpen(!isModalOpen);
   };
 
+  const currentUser = useSelector((state) => state.user.currentUser);
   const handleItemClick = (item) => {
     setSelectedItem(item);
     setSelectedSubItem(null); // Reset selected sub-item when main item is clicked
@@ -90,13 +92,16 @@ function GreenPepperFarmManager() {
     setSelectedAction(action);
   };
 
+// Filter farmItems based on the user's role
+const farmItemsFiltered = currentUser && currentUser.role === 'employee' ? farmItems.filter(item => item.id === 1) : farmItems;
+
   return (
     <div className="container-fluid">
       <div className="row">
         <div className="col-md-3 sidebar">
           <h2>Green Pepper Farm Book</h2>
           <ul className="list-group">
-            {farmItems.map((item) => (
+          {farmItemsFiltered.map((item) => (
               <li
                 key={item.id}
                 className={`list-group-item ${selectedItem && selectedItem.id === item.id ? 'active' : ''}`}

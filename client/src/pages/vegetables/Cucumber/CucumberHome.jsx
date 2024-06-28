@@ -8,6 +8,7 @@ import BatchPestAndWeedControl from './Reports/BatchPestAndWeedControlReport';
 import BatchOtherActivitiesRecords from './Reports/BatchOtherActivitiesReport';
 import BatchHarvestingRecords from './Reports/BatchHarvestReport';
 import AllBatchActivitiesReport from './Reports/AllBatchFarmActivitiesReport';
+import { useSelector } from 'react-redux';
 
 const farmItems = [
   {
@@ -62,6 +63,7 @@ function CucumberFarmManager() {
     setIsModalOpen(!isModalOpen);
   };
 
+  const currentUser = useSelector((state) => state.user.currentUser);
 
   const handleItemClick = (item) => {
     setSelectedItem(item);
@@ -77,6 +79,9 @@ function CucumberFarmManager() {
   const handleActionClick = (action) => {
     setSelectedAction(action);
   };
+// Filter farmItems based on the user's role
+const farmItemsFiltered = currentUser && currentUser.role === 'employee' ? farmItems.filter(item => item.id === 1) : farmItems;
+
 
   return (
     <div className="container-fluid">
@@ -84,7 +89,7 @@ function CucumberFarmManager() {
         <div className="col-md-3 sidebar">
           <h2>Cucumber Farm Book</h2>
           <ul className="list-group">
-            {farmItems.map((item) => (
+          {farmItemsFiltered.map((item) => (
               <li
                 key={item.id}
                 className={`list-group-item ${selectedItem && selectedItem.id === item.id ? 'active' : ''}`}

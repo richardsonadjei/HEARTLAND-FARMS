@@ -9,10 +9,6 @@ import PlantainBatchFertilizerApplicationRecord from './reports/PlantainBatchFer
 import PlantainBatchHarvestRecord from './reports/PlantainBatchHarvestRecord';
 import PlantainAllFarmActivitiesReport from './reports/AllPlantainFarmActivitiesReport';
 
-
-
-
-
 const farmItems = [
   {
     id: 1,
@@ -25,34 +21,7 @@ const farmItems = [
       { id: 15, title: 'Pest And Diseases Control' },
       { id: 16, title: 'Fertilizer And Manure Application' },
       { id: 17, title: 'Harvest Records' },
-      { id: 18, title: 'Post-Harvest Management' },
       { id: 19, title: 'All Farm Activities' },
-    ],
-  },
-  {
-    id: 2,
-    title: 'Expenses',
-    subItems: [
-      { id: 21, title: 'View Expenses ' },
-
-     
-    ],
-  },
-  {
-    id: 3,
-    title: 'Income',
-    subItems: [
-      { id: 31, title: 'Income' },
-     
-    ],
-  },
-  {
-    id: 4,
-    title: 'Profit-Loss',
-    subItems: [
-      { id: 34, title: 'Batch Profit/Loss' },
-      { id: 35, title: 'Seasonal Profit Loss' },
-     
     ],
   },
 ];
@@ -61,7 +30,6 @@ function PlantainFarmManager() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedSubItem, setSelectedSubItem] = useState(null);
   const [selectedAction, setSelectedAction] = useState(null);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleModal = () => {
@@ -84,9 +52,9 @@ function PlantainFarmManager() {
   };
 
   return (
-    <div className="container-fluid ">
+    <div className="container-fluid">
       <div className="row">
-        <div className="col-md-3 sidebar ">
+        <div className="col-md-3 sidebar">
           <h2>Plantain Farm Book</h2>
           <ul className="list-group">
             {farmItems.map((item) => (
@@ -121,347 +89,222 @@ function PlantainFarmManager() {
           {selectedItem && (
             <div>
               <h2>{selectedItem.title}</h2>
-             
+
               {/* Render additional details here */}
               {selectedSubItem && selectedSubItem.id === 11 && (
                 <div>
                   <button
-                    className="btn btn-primary me-2 mr-2" // Add Bootstrap classes for primary button and margin
+                    className="btn btn-primary me-2 mr-2"
                     onClick={() => handleActionClick('batchLandPreparation')}
                   >
                     Batch Land Preparation Record
                   </button>
                   <button
-                    className="btn btn-secondary me-2 mr-2" // Add Bootstrap classes for secondary button
+                    className="btn btn-secondary me-2 mr-2"
                     onClick={() => handleActionClick('allLandPreparation')}
                   >
                     All Land Preparation Records
                   </button>
-                  {/* Render components based on selected action */}
                   {selectedAction === 'batchLandPreparation' && (
                     <div>
-                      {/* Render Batch Nursery Record component */}
                       <PlantainBatchLandPreparationRecord />
                     </div>
                   )}
-                  {selectedAction === 'aallLandPreparation' && (
+                  {selectedAction === 'allLandPreparation' && (
                     <div>
-                      {/* Render All Nursery Records component */}
-                      <AllSpringOnionsNursingRecords/>
+                      <PlantainAllFarmActivitiesReport />
                     </div>
                   )}
-
-                  
                 </div>
               )}
 
-{selectedSubItem && selectedSubItem.id === 12 && (
+              {selectedSubItem && selectedSubItem.id === 12 && (
                 <div>
                   <button
-                    className="btn btn-primary me-2 mr-2" // Add Bootstrap classes for primary button and margin
+                    className="btn btn-primary me-2 mr-2"
                     onClick={() => handleActionClick('batchPlanting')}
                   >
                     Batch Planting Record
                   </button>
                   <button
-                    className="btn btn-secondary me-2 mr-2" // Add Bootstrap classes for secondary button
+                    className="btn btn-secondary me-2 mr-2"
                     onClick={() => handleActionClick('allPlanting')}
                   >
                     All Planting Records
                   </button>
-                  {/* Render components based on selected action */}
                   {selectedAction === 'batchPlanting' && (
                     <div>
-                      {/* Render Batch Nursery Record component */}
-                      <PlantainBatchPlantingRecord/>
+                      <PlantainBatchPlantingRecord />
                     </div>
                   )}
                   {selectedAction === 'allPlanting' && (
                     <div>
-                      {/* Render All Nursery Records component */}
-                      <AllSpringOnionsTransplantingReport/>
+                      <PlantainAllFarmActivitiesReport />
                     </div>
                   )}
-
-                  
                 </div>
               )}
-{selectedSubItem && selectedSubItem.id === 13 && (
+
+              {selectedSubItem && selectedSubItem.id === 13 && (
                 <div>
                   <button
-                    className="btn btn-primary me-2 mt-2" // Add Bootstrap classes for primary button and margin
+                    className="btn btn-primary me-2 mt-2"
                     onClick={() => handleActionClick('batchManualWeeding')}
                   >
                     Batch Manual Weeding Report
                   </button>
                   <button
-                    className="btn btn-secondary me-2 mt-2" // Add Bootstrap classes for secondary button
+                    className="btn btn-secondary me-2 mt-2"
                     onClick={() => handleActionClick('allManualWeeding')}
                   >
-                    All Direct Planting Record
+                    All Manual Weeding Records
                   </button>
-                  {/* Render components based on selected action */}
                   {selectedAction === 'batchManualWeeding' && (
                     <div>
-                      {/* Render Batch Nursery Record component */}
-                      <PlantainBatchManualWeedingReport/>
+                      <PlantainBatchManualWeedingReport />
                     </div>
                   )}
                   {selectedAction === 'allManualWeeding' && (
                     <div>
-                      {/* Render All Nursery Records component */}
-                      <AllSpringOnionsDirectPlantingReport/>
+                      <PlantainAllFarmActivitiesReport />
                     </div>
                   )}
-
-                  
                 </div>
               )}
 
-{selectedSubItem && selectedSubItem.id === 14 && (
+              {selectedSubItem && selectedSubItem.id === 14 && (
                 <div>
                   <button
-                    className="btn btn-primary me-2 mt-2" // Add Bootstrap classes for primary button and margin
-                    onClick={() => handleActionClick('batchWeedidideApplication')}
+                    className="btn btn-primary me-2 mt-2"
+                    onClick={() => handleActionClick('batchWeedicideApplication')}
                   >
                     Batch Weedicide Application Record
                   </button>
                   <button
-                    className="btn btn-secondary me-2 mt-2" // Add Bootstrap classes for secondary button
+                    className="btn btn-secondary me-2 mt-2"
                     onClick={() => handleActionClick('allWeedicideApplication')}
                   >
-                    All Weedicide Applicaion Records
+                    All Weedicide Application Records
                   </button>
-                  {/* Render components based on selected action */}
-                  {selectedAction === 'batchWeedidideApplication' && (
+                  {selectedAction === 'batchWeedicideApplication' && (
                     <div>
-                      {/* Render Batch Nursery Record component */}
-                      <PlantainBatchWeedicideApplicationRecord/>
+                      <PlantainBatchWeedicideApplicationRecord />
                     </div>
                   )}
-                  {selectedAction === 'allFertilizerApplication' && (
+                  {selectedAction === 'allWeedicideApplication' && (
                     <div>
-                      {/* Render All Nursery Records component */}
-                      <AllSpringOnionsFertilizerApplicationRecord/>
+                      <PlantainAllFarmActivitiesReport />
                     </div>
                   )}
-
-                  
                 </div>
               )}
 
-
-{selectedSubItem && selectedSubItem.id === 15 && (
+              {selectedSubItem && selectedSubItem.id === 15 && (
                 <div>
                   <button
-                    className="btn btn-primary me-2 mt-2" // Add Bootstrap classes for primary button and margin
+                    className="btn btn-primary me-2 mt-2"
                     onClick={() => handleActionClick('batchPestAndDiseaseControl')}
                   >
                     Batch Pest And Disease Control Record
                   </button>
                   <button
-                    className="btn btn-secondary me-2 mt-2" // Add Bootstrap classes for secondary button
+                    className="btn btn-secondary me-2 mt-2"
                     onClick={() => handleActionClick('allPestAndDiseaseControl')}
                   >
-                    All Pest And Weed Disease Records
+                    All Pest And Disease Control Records
                   </button>
-                  {/* Render components based on selected action */}
                   {selectedAction === 'batchPestAndDiseaseControl' && (
                     <div>
-                      {/* Render Batch Nursery Record component */}
-                      <PlantainBatchPestAndDiseaseControlRecord/>
+                      <PlantainBatchPestAndDiseaseControlRecord />
                     </div>
                   )}
-                  {selectedAction === 'allPestAndWeedControl' && (
+                  {selectedAction === 'allPestAndDiseaseControl' && (
                     <div>
-                      {/* Render All Nursery Records component */}
-                      <AllSpringOnionsPestAndWeedControlReport/>
+                      <PlantainAllFarmActivitiesReport />
                     </div>
                   )}
-
-                  
                 </div>
               )}
 
-
-{selectedSubItem && selectedSubItem.id === 16 && (
+              {selectedSubItem && selectedSubItem.id === 16 && (
                 <div>
                   <button
-                    className="btn btn-primary me-2 mt-2" // Add Bootstrap classes for primary button and margin
+                    className="btn btn-primary me-2 mt-2"
                     onClick={() => handleActionClick('batchFertilizerApplication')}
                   >
-                    Batch Fertilizer Applicaion
+                    Batch Fertilizer Application
                   </button>
                   <button
-                    className="btn btn-secondary me-2 mt-2" // Add Bootstrap classes for secondary button
+                    className="btn btn-secondary me-2 mt-2"
                     onClick={() => handleActionClick('allFertilizerApplicationReport')}
                   >
-                    All Spring Onions Other Activities Records
+                    All Fertilizer Application Records
                   </button>
-                  {/* Render components based on selected action */}
                   {selectedAction === 'batchFertilizerApplication' && (
                     <div>
-                      {/* Render Batch Nursery Record component */}
-                      <PlantainBatchFertilizerApplicationRecord/>
+                      <PlantainBatchFertilizerApplicationRecord />
                     </div>
                   )}
                   {selectedAction === 'allFertilizerApplicationReport' && (
                     <div>
-                      {/* Render All Nursery Records component */}
-                      <AllGreenPepperPestAndWeedControlReport/>
+                      <PlantainAllFarmActivitiesReport />
                     </div>
                   )}
-
-                  
                 </div>
               )}
 
-{selectedSubItem && selectedSubItem.id === 17 && (
+              {selectedSubItem && selectedSubItem.id === 17 && (
                 <div>
                   <button
-                    className="btn btn-primary me-2 mt-2" // Add Bootstrap classes for primary button and margin
+                    className="btn btn-primary me-2 mt-2"
                     onClick={() => handleActionClick('batchHarvestRecords')}
                   >
                     Batch Harvest Records
                   </button>
                   <button
-                    className="btn btn-secondary me-2 mt-2" // Add Bootstrap classes for secondary button
+                    className="btn btn-secondary me-2 mt-2"
                     onClick={() => handleActionClick('allHarvestRecords')}
                   >
-                    All Spring Onions Other Activities Records
+                    All Harvest Records
                   </button>
-                  {/* Render components based on selected action */}
                   {selectedAction === 'batchHarvestRecords' && (
                     <div>
-                      {/* Render Batch Nursery Record component */}
-                      <PlantainBatchHarvestRecord/>
+                      <PlantainBatchHarvestRecord />
                     </div>
                   )}
-                  {selectedAction === 'allFertilizerApplicationReport' && (
+                  {selectedAction === 'allHarvestRecords' && (
                     <div>
-                      {/* Render All Nursery Records component */}
-                      <AllGreenPepperPestAndWeedControlReport/>
+                      <PlantainAllFarmActivitiesReport />
                     </div>
                   )}
-
-                  
                 </div>
               )}
 
-{selectedSubItem && selectedSubItem.id === 19 && (
+              {selectedSubItem && selectedSubItem.id === 19 && (
                 <div>
                   <button
-                    className="btn btn-primary me-2 mt-2" // Add Bootstrap classes for primary button and margin
-                    onClick={() => handleActionClick('allFarmActivies')}
+                    className="btn btn-primary me-2 mt-2"
+                    onClick={() => handleActionClick('allFarmActivities')}
                   >
                     All Plantain Farm Activities Record
                   </button>
-                  
-                  {/* Render components based on selected action */}
-                  {selectedAction === 'allFarmActivies' && (
+                  {selectedAction === 'allFarmActivities' && (
                     <div>
-                      {/* Render Batch Nursery Record component */}
-                      <PlantainAllFarmActivitiesReport/>
+                      <PlantainAllFarmActivitiesReport />
                     </div>
                   )}
-                  
-
-                  
-                </div>
-              )}
-
-{selectedSubItem && selectedSubItem.id === 21 && (
-                <div>
-                  <button
-                    className="btn btn-primary me-2 mt-2" // Add Bootstrap classes for primary button and margin
-                    onClick={() => handleActionClick('batchExpense')}
-                  >
-                    Batch Expense Record
-                  </button>
-                  <button
-                    className="btn btn-secondary mt-2 mr-2" // Add Bootstrap classes for secondary button
-                    onClick={() => handleActionClick('allExpense')}
-                  >
-                    All Expense Records
-                  </button>
-                  {/* Render components based on selected action */}
-                  {selectedAction === 'batchExpense' && (
-                    <div>
-                      {/* Render Batch Nursery Record component */}
-                      <SpringOnionsBatchExpense />
-                    </div>
-                  )}
-                  {selectedAction === 'allExpense' && (
-                    <div>
-                      {/* Render All Nursery Records component */}
-                      <AllCabbageExpenses/>
-                    </div>
-                  )}
-
-                  
                 </div>
               )}
             </div>
           )}
 
-{selectedSubItem && selectedSubItem.id === 31 && (
-                <div>
-                  <button
-                    className="btn btn-primary me-2 mt-2" // Add Bootstrap classes for primary button and margin
-                    onClick={() => handleActionClick('batchIncome')}
-                  >
-                    Batch Income
-                  </button>
-                  <button
-                    className="btn btn-secondary me-2 mt-2" // Add Bootstrap classes for secondary button
-                    onClick={() => handleActionClick('batchIncome')}
-                  >
-                   Other Income
-                  </button>
-                  {/* Render components based on selected action */}
-                  {selectedAction === 'batchIncome' && (
-                    <div>
-                      {/* Render Batch Nursery Record component */}
-                      <SpringOnionBatchIncome/>
-                    </div>
-                  )}
-                  {selectedAction === 'oherIncome' && (
-                    <div>
-                      {/* Render All Nursery Records component */}
-                      <AllCabbageFertilizerApplicationRecord/>
-                    </div>
-                  )}
-
-                  
-                </div>
-              )}
-
-{selectedSubItem && selectedSubItem.id === 34 && (
-                <div>
-                  <button
-                    className="btn btn-primary me-2 mt-2" // Add Bootstrap classes for primary button and margin
-                    onClick={() => handleActionClick('batchProfitLoss')}
-                  >
-                    Batch Profit And Loss
-                  </button>
-                  
-                  {/* Render components based on selected action */}
-                  {selectedAction === 'batchProfitLoss' && (
-                    <div>
-                      {/* Render Batch Nursery Record component */}
-                      <SpringOnionsProfitLossReport/>
-                    </div>
-                  )}
-                  
-                  
-                </div>
-              )}
           {!selectedItem && <p>Select an item from the sidebar to view details.</p>}
         </div>
       </div>
-      <CashCropFooter  toggleModal={toggleModal} />
+      <CashCropFooter toggleModal={toggleModal} />
     </div>
   );
 }
 
 export default PlantainFarmManager;
+

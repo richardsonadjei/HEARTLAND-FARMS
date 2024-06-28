@@ -18,6 +18,7 @@ import CarrotBatchExpense from './reports/CarrotBatchExpenseReport';
 import AllCarrotExpenses from './reports/AllCarrotExpenseReport';
 import CarrotBatchIncome from './reports/CarrotSalesReport';
 import CarrotProfitLossReport from './reports/CarrotProfitAndLossReport';
+import { useSelector } from 'react-redux';
 
 
 
@@ -77,6 +78,9 @@ function CarrotHomeFarmManager() {
     setIsModalOpen(!isModalOpen);
   };
 
+  const currentUser = useSelector((state) => state.user.currentUser); // Fetch current user from Redux store
+
+
   const handleItemClick = (item) => {
     setSelectedItem(item);
     setSelectedSubItem(null); // Reset selected sub-item when main item is clicked
@@ -92,13 +96,16 @@ function CarrotHomeFarmManager() {
     setSelectedAction(action);
   };
 
+// Filter farmItems based on the user's role
+const farmItemsFiltered = currentUser && currentUser.role === 'employee' ? farmItems.filter(item => item.id === 1) : farmItems;
+
   return (
     <div className="container-fluid">
       <div className="row">
         <div className="col-md-3 sidebar">
           <h2>Carrot Farm Book</h2>
           <ul className="list-group">
-            {farmItems.map((item) => (
+          {farmItemsFiltered.map((item) => (
               <li
                 key={item.id}
                 className={`list-group-item ${selectedItem && selectedItem.id === item.id ? 'active' : ''}`}

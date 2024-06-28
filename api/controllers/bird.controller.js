@@ -1320,6 +1320,133 @@ export const getEggsCollectedTodayByType = async (req, res) => {
 
 
 
+export const getPoultryUnsortedEggsCollectedToday = async (req, res) => {
+  try {
+    // Get the current date
+    const today = new Date();
+    // Set the time to 00:00:00 to get the start of the day
+    today.setHours(0, 0, 0, 0);
+
+    // Get the next day's date and set the time to 00:00:00
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    // Get the type from the request parameters or set to default 'Poultry'
+    const type = req.params.type || 'Poultry';
+
+    // Query the database for records of the specific type between today and tomorrow
+    const eggsCollectedTodayByType = await BirdEggsCollected.find({
+      type: type,
+      date: {
+        $gte: today,
+        $lt: tomorrow,
+      },
+    });
+
+    // Calculate total crates and loose for category 'Unsorted'
+    let totalCrates = 0;
+    let totalLoose = 0;
+
+    eggsCollectedTodayByType.forEach(egg => {
+      if (egg.category.toLowerCase() === 'unsorted') {
+        totalCrates += egg.crates || 0;
+        totalLoose += egg.loose || 0;
+      }
+    });
+
+    // If total loose exceeds 30, convert excess to crates
+    if (totalLoose > 30) {
+      const excessLoose = totalLoose - 30;
+      const cratesFromExcess = Math.ceil(excessLoose / 30);
+      totalCrates += cratesFromExcess;
+      totalLoose -= cratesFromExcess * 30; // Reduce loose by the amount converted to crates
+    }
+
+    // Prepare the response
+    const response = {
+      totalCrates: totalCrates,
+      totalLoose: totalLoose,
+    };
+
+    // Send the response
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(500).json({ error: 'An error occurred while fetching the records' });
+  }
+};
+
+
+export const getPoultrySortedEggsCollectedToday = async (req, res) => {
+  try {
+    // Get the current date
+    const today = new Date();
+    // Set the time to 00:00:00 to get the start of the day
+    today.setHours(0, 0, 0, 0);
+
+    // Get the next day's date and set the time to 00:00:00
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    // Get the type from the request parameters or set to default 'Poultry'
+    const type = req.params.type || 'Poultry';
+
+    // Query the database for records of the specific type between today and tomorrow
+    const eggsCollectedTodayByType = await BirdEggsCollected.find({
+      type: type,
+      date: {
+        $gte: today,
+        $lt: tomorrow,
+      },
+    });
+
+    // Initialize an object to store totals by size
+    const sizeTotals = {};
+
+    // Calculate total crates and loose for each size category
+    eggsCollectedTodayByType.forEach(egg => {
+      if (egg.category.toLowerCase() === 'sorted') {
+        const size = egg.size.toLowerCase(); // Normalize size to lowercase
+
+        // Initialize size totals if not already present
+        if (!sizeTotals[size]) {
+          sizeTotals[size] = {
+            totalCrates: 0,
+            totalLoose: 0,
+          };
+        }
+
+        // Add crates and loose eggs to respective totals for this size
+        sizeTotals[size].totalCrates += egg.crates || 0;
+        sizeTotals[size].totalLoose += egg.loose || 0;
+
+        // If total loose for this size exceeds 30, convert excess to crates
+        if (sizeTotals[size].totalLoose > 30) {
+          const excessLoose = sizeTotals[size].totalLoose - 30;
+          const cratesFromExcess = Math.ceil(excessLoose / 30);
+          sizeTotals[size].totalCrates += cratesFromExcess;
+          sizeTotals[size].totalLoose -= cratesFromExcess * 30;
+        }
+      }
+    });
+
+    // Prepare the response as an array of objects, each representing a size category
+    const response = Object.keys(sizeTotals).map(size => ({
+      size: size,
+      totalCrates: sizeTotals[size].totalCrates,
+      totalLoose: sizeTotals[size].totalLoose,
+    }));
+
+    // Send the response
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(500).json({ error: 'An error occurred while fetching the records' });
+  }
+};
+
+
+
+
+
 // Get all bird eggs collected records
 export const getBirdEggsCollected = async (req, res) => {
   try {
@@ -2809,3 +2936,230 @@ export const deleteBirdRelocation = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// DASHBOARD ROUTES
+
+
+export const getBirdsSummaryByLocation = async (req, res) => {
+  try {
+    const results = await BirdBatches.aggregate([
+      {
+        $unwind: "$batchDetails"
+      },
+      {
+        $group: {
+          _id: {
+            farmHouseLocation: "$farmHouseLocation",
+            type: "$type",
+            gender: "$batchDetails.gender"
+          },
+          totalQuantity: { $sum: "$batchDetails.quantity" }
+        }
+      },
+      {
+        $group: {
+          _id: {
+            farmHouseLocation: "$_id.farmHouseLocation",
+            type: "$_id.type"
+          },
+          genders: {
+            $push: {
+              gender: "$_id.gender",
+              totalQuantity: "$totalQuantity"
+            }
+          }
+        }
+      },
+      {
+        $group: {
+          _id: "$_id.farmHouseLocation",
+          types: {
+            $push: {
+              type: "$_id.type",
+              genders: "$genders"
+            }
+          }
+        }
+      },
+      {
+        $project: {
+          farmHouseLocation: "$_id",
+          types: {
+            $map: {
+              input: "$types",
+              as: "typeInfo",
+              in: {
+                type: "$$typeInfo.type",
+                totalMales: {
+                  $reduce: {
+                    input: "$$typeInfo.genders",
+                    initialValue: 0,
+                    in: {
+                      $cond: [
+                        { $eq: ["$$this.gender", "male"] },
+                        { $add: ["$$value", "$$this.totalQuantity"] },
+                        "$$value"
+                      ]
+                    }
+                  }
+                },
+                totalFemales: {
+                  $reduce: {
+                    input: "$$typeInfo.genders",
+                    initialValue: 0,
+                    in: {
+                      $cond: [
+                        { $eq: ["$$this.gender", "female"] },
+                        { $add: ["$$value", "$$this.totalQuantity"] },
+                        "$$value"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]);
+
+    res.status(200).json(results);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching birds summary', error });
+  }
+};
+
+
+export const getAllEggsStock = async (req, res) => {
+  try {
+    // Fetch all sorted eggs stock
+    const sortedStocks = await BirdSortedEggsStock.find();
+
+    // Fetch all unsorted eggs stock
+    const unsortedStocks = await BirdUnsortedEggStock.find();
+
+    // Return both sorted and unsorted stocks as JSON response
+    res.status(200).json({
+      sortedEggsStock: sortedStocks,
+      unsortedEggsStock: unsortedStocks,
+    });
+  } catch (error) {
+    // Handle error
+    console.error('Error fetching eggs stock:', error);
+    res.status(500).json({ error: 'Failed to fetch eggs stock' });
+  }
+};
+
+
+
+// Controller to fetch all bird sales and return the total number of birds sold and total amount for each type
+export const getBirdSalesSummary = async (req, res) => {
+  try {
+    const birdSales = await BirdSale.find();
+
+    const birdTypeSummary = birdSales.reduce((acc, sale) => {
+      const birdTypeKey = sale.type;
+
+      if (!acc[birdTypeKey]) {
+        acc[birdTypeKey] = {
+          totalMaleBirds: 0,
+          totalFemaleBirds: 0,
+          totalAmount: 0
+        };
+      }
+
+      sale.batchDetails.forEach(batch => {
+        if (batch.gender === 'male') {
+          acc[birdTypeKey].totalMaleBirds += batch.quantity;
+        } else if (batch.gender === 'female') {
+          acc[birdTypeKey].totalFemaleBirds += batch.quantity;
+        }
+      });
+
+      acc[birdTypeKey].totalAmount += sale.totalAmount;
+
+      return acc;
+    }, {});
+
+    res.status(200).json(birdTypeSummary);
+  } catch (error) {
+    console.error('Error fetching bird sales:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+
+
+
+
+// Controller to fetch and return total expenses summarized by category
+export const getTotalExpensesByCategory = async (req, res) => {
+  try {
+    // Aggregate pipeline to calculate total expenses summarized by category
+    const pipeline = [
+      { 
+        $group: { 
+          _id: '$category', // Group by category
+          total: { $sum: '$amount' } // Calculate total expenses for each category
+        } 
+      }
+    ];
+
+    const result = await BirdFarmExpense.aggregate(pipeline);
+
+    if (result.length > 0) {
+      // If results are found, return the totals for each category
+      res.json({ totalExpensesByCategory: result });
+    } else {
+      // If no results found (empty array), return 404 Not Found
+      res.status(404).json({ message: 'No expenses found' });
+    }
+  } catch (error) {
+    // Handle errors
+    console.error('Error fetching total expenses by category:', error);
+    res.status(500).json({ message: 'Failed to fetch total expenses by category', error: error.message });
+  }
+};
+
+
+
+
+const getBirdsByAgeCategory = async (req, res) => {
+  try {
+    const batches = await BirdBatches.find({ isActive: true });
+
+    const ageCategories = {
+      'Day-old Chick': { types: {}, totalQuantity: 0 },
+      'Chick': { types: {}, totalQuantity: 0 },
+      'Cockerel': { types: {}, totalQuantity: 0 },
+      'Pullet': { types: {}, totalQuantity: 0 },
+      'Cock': { types: {}, totalQuantity: 0 },
+      'Hen': { types: {}, totalQuantity: 0 },
+      'Old Cock': { types: {}, totalQuantity: 0 },
+      'Old Hen': { types: {}, totalQuantity: 0 },
+    };
+
+    batches.forEach(batch => {
+      const { ageCategory, type, breed, totalQuantity } = batch;
+
+      if (ageCategories[ageCategory]) {
+        if (!ageCategories[ageCategory].types[type]) {
+          ageCategories[ageCategory].types[type] = { breeds: {}, totalQuantity: 0 };
+        }
+        if (!ageCategories[ageCategory].types[type].breeds[breed]) {
+          ageCategories[ageCategory].types[type].breeds[breed] = 0;
+        }
+        ageCategories[ageCategory].types[type].breeds[breed] += totalQuantity;
+        ageCategories[ageCategory].types[type].totalQuantity += totalQuantity;
+        ageCategories[ageCategory].totalQuantity += totalQuantity;
+      }
+    });
+
+    res.json(ageCategories);
+  } catch (error) {
+    console.error('Error fetching bird batches:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+export { getBirdsByAgeCategory };

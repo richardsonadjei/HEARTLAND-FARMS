@@ -4,7 +4,7 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 const Home = () => {
   const { currentUser } = useSelector((state) => state.user);
-  const userCategory = currentUser ? currentUser.category : '';
+  const userCategories = currentUser && currentUser.categories ? currentUser.categories : [];
 
   const appItems = [
     { category: ['crop', 'all'], href: '/cash-cropsHome-page', iconSrc: '/cashcrops.jpg', description: 'Cash Crops Home Page' },
@@ -28,8 +28,9 @@ const Home = () => {
               <div className="container-fluid">
                 <div className="row">
                   {appItems.map((app, index) => (
-                    <div key={index} className="col-lg-2 col-md-2 col-sm-2 col-2 mx-2">
-                      {(app.category.includes(userCategory) || app.category.includes('all')) && (
+                    // Check if user's categories include 'all' or if there's an overlap between user's categories and app's categories
+                    (userCategories.includes('all') || app.category.some(cat => userCategories.includes(cat))) && (
+                      <div key={index} className="col-lg-2 col-md-2 col-sm-2 col-2 mx-2">
                         <OverlayTrigger
                           placement="top"
                           overlay={<Tooltip id={`tooltip-${index}`}>{app.description}</Tooltip>}
@@ -40,8 +41,8 @@ const Home = () => {
                             </div>
                           </a>
                         </OverlayTrigger>
-                      )}
-                    </div>
+                      </div>
+                    )
                   ))}
                 </div>
               </div>

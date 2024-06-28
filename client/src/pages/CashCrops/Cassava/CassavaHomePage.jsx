@@ -9,8 +9,8 @@ import CassavaBatchFertilizerApplicationRecord from './reports/CassavaBatchFerti
 import CassavaBatchHarvestRecord from './reports/CassavaBatchHarvestReport';
 import CassavaAllFarmActivitiesReport from './reports/AllCassavaFarmActivitiesReport';
 
-
-
+// Import useSelector from react-redux to fetch current user
+import { useSelector } from 'react-redux';
 
 const farmItems = [
   {
@@ -33,8 +33,6 @@ const farmItems = [
     title: 'Expenses',
     subItems: [
       { id: 21, title: 'View Expenses ' },
-
-     
     ],
   },
   {
@@ -42,7 +40,6 @@ const farmItems = [
     title: 'Income',
     subItems: [
       { id: 31, title: 'Income' },
-     
     ],
   },
   {
@@ -51,7 +48,6 @@ const farmItems = [
     subItems: [
       { id: 34, title: 'Batch Profit/Loss' },
       { id: 35, title: 'Seasonal Profit Loss' },
-     
     ],
   },
 ];
@@ -66,6 +62,8 @@ function CassavaFarmManager() {
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
+
+  const currentUser = useSelector((state) => state.user.currentUser); // Fetch current user from Redux store
 
   const handleItemClick = (item) => {
     setSelectedItem(item);
@@ -82,13 +80,16 @@ function CassavaFarmManager() {
     setSelectedAction(action);
   };
 
+  // Filter farmItems based on the user's role
+  const farmItemsFiltered = currentUser && currentUser.role === 'employee' ? farmItems.filter(item => item.id === 1) : farmItems;
+
   return (
     <div className="container-fluid ">
       <div className="row">
         <div className="col-md-3 sidebar ">
           <h2>Cassava Farm Book</h2>
           <ul className="list-group">
-            {farmItems.map((item) => (
+            {farmItemsFiltered.map((item) => (
               <li
                 key={item.id}
                 className={`list-group-item ${selectedItem && selectedItem.id === item.id ? 'active' : ''}`}
@@ -119,8 +120,6 @@ function CassavaFarmManager() {
           {/* Render details based on selected main item and sub-item */}
           {selectedItem && (
             <div>
-             
-             
               {/* Render additional details here */}
               {selectedSubItem && selectedSubItem.id === 11 && (
                 <div>
@@ -143,18 +142,16 @@ function CassavaFarmManager() {
                       <CassavaBatchLandPreparationRecord />
                     </div>
                   )}
-                  {selectedAction === 'aallLandPreparation' && (
+                  {selectedAction === 'allLandPreparation' && (
                     <div>
                       {/* Render All Nursery Records component */}
                       <AllSpringOnionsNursingRecords/>
                     </div>
                   )}
-
-                  
                 </div>
               )}
 
-{selectedSubItem && selectedSubItem.id === 12 && (
+              {selectedSubItem && selectedSubItem.id === 12 && (
                 <div>
                   <button
                     className="btn btn-primary me-2 mr-2" // Add Bootstrap classes for primary button and margin
@@ -181,11 +178,10 @@ function CassavaFarmManager() {
                       <AllSpringOnionsTransplantingReport/>
                     </div>
                   )}
-
-                  
                 </div>
               )}
-{selectedSubItem && selectedSubItem.id === 13 && (
+
+              {selectedSubItem && selectedSubItem.id === 13 && (
                 <div>
                   <button
                     className="btn btn-primary me-2 mt-2" // Add Bootstrap classes for primary button and margin
@@ -212,12 +208,10 @@ function CassavaFarmManager() {
                       <AllSpringOnionsDirectPlantingReport/>
                     </div>
                   )}
-
-                  
                 </div>
               )}
 
-{selectedSubItem && selectedSubItem.id === 14 && (
+              {selectedSubItem && selectedSubItem.id === 14 && (
                 <div>
                   <button
                     className="btn btn-primary me-2 mt-2" // Add Bootstrap classes for primary button and margin
@@ -244,16 +238,12 @@ function CassavaFarmManager() {
                       <AllSpringOnionsFertilizerApplicationRecord/>
                     </div>
                   )}
-
-                  
                 </div>
               )}
 
-
-{selectedSubItem && selectedSubItem.id === 15 && (
+              {selectedSubItem && selectedSubItem.id === 15 && (
                 <div>
-                  <button
-                    className="btn btn-primary me-2 mt-2" // Add Bootstrap classes for primary button and margin
+                  <button                   className="btn btn-primary me-2 mt-2" // Add Bootstrap classes for primary button and margin
                     onClick={() => handleActionClick('batchPestAndDiseaseControl')}
                   >
                     Batch Pest And Disease Control Record
@@ -262,7 +252,7 @@ function CassavaFarmManager() {
                     className="btn btn-secondary me-2 mt-2" // Add Bootstrap classes for secondary button
                     onClick={() => handleActionClick('allPestAndDiseaseControl')}
                   >
-                    All Pest And Weed Disease Records
+                    All Cassava Pest And Disease Control Record
                   </button>
                   {/* Render components based on selected action */}
                   {selectedAction === 'batchPestAndDiseaseControl' && (
@@ -271,31 +261,28 @@ function CassavaFarmManager() {
                       <CassavaBatchPestAndDiseaseControlRecord/>
                     </div>
                   )}
-                  {selectedAction === 'allPestAndWeedControl' && (
+                  {selectedAction === 'allPestAndDiseaseControl' && (
                     <div>
                       {/* Render All Nursery Records component */}
-                      <AllSpringOnionsPestAndWeedControlReport/>
+                      <AllSpringOnionsDirectPestAndDiseaseControlReport/>
                     </div>
                   )}
-
-                  
                 </div>
               )}
 
-
-{selectedSubItem && selectedSubItem.id === 16 && (
+              {selectedSubItem && selectedSubItem.id === 16 && (
                 <div>
                   <button
                     className="btn btn-primary me-2 mt-2" // Add Bootstrap classes for primary button and margin
                     onClick={() => handleActionClick('batchFertilizerApplication')}
                   >
-                    Batch Fertilizer Applicaion
+                    Batch Fertilizer And Manure Application Record
                   </button>
                   <button
                     className="btn btn-secondary me-2 mt-2" // Add Bootstrap classes for secondary button
-                    onClick={() => handleActionClick('allFertilizerApplicationReport')}
+                    onClick={() => handleActionClick('allFertilizerApplication')}
                   >
-                    All Spring Onions Other Activities Records
+                    All Cassava Fertilizer And Manure Application Record
                   </button>
                   {/* Render components based on selected action */}
                   {selectedAction === 'batchFertilizerApplication' && (
@@ -304,163 +291,101 @@ function CassavaFarmManager() {
                       <CassavaBatchFertilizerApplicationRecord/>
                     </div>
                   )}
-                  {selectedAction === 'allFertilizerApplicationReport' && (
+                  {selectedAction === 'allFertilizerApplication' && (
                     <div>
                       {/* Render All Nursery Records component */}
-                      <AllGreenPepperPestAndWeedControlReport/>
+                      <AllSpringOnionsFertilizerApplicationRecord/>
                     </div>
                   )}
-
-                  
                 </div>
               )}
 
-{selectedSubItem && selectedSubItem.id === 17 && (
+              {selectedSubItem && selectedSubItem.id === 17 && (
                 <div>
                   <button
                     className="btn btn-primary me-2 mt-2" // Add Bootstrap classes for primary button and margin
-                    onClick={() => handleActionClick('batchHarvestRecords')}
+                    onClick={() => handleActionClick('batchHarvestRecord')}
                   >
-                    Batch Harvest Records
+                    Batch Harvest Record
                   </button>
                   <button
                     className="btn btn-secondary me-2 mt-2" // Add Bootstrap classes for secondary button
-                    onClick={() => handleActionClick('allHarvestRecords')}
+                    onClick={() => handleActionClick('allHarvestRecord')}
                   >
-                    All Spring Onions Other Activities Records
+                    All Cassava Harvest Record
                   </button>
                   {/* Render components based on selected action */}
-                  {selectedAction === 'batchHarvestRecords' && (
+                  {selectedAction === 'batchHarvestRecord' && (
                     <div>
                       {/* Render Batch Nursery Record component */}
                       <CassavaBatchHarvestRecord/>
                     </div>
                   )}
-                  {selectedAction === 'allFertilizerApplicationReport' && (
+                  {selectedAction === 'allHarvestRecord' && (
                     <div>
                       {/* Render All Nursery Records component */}
-                      <AllGreenPepperPestAndWeedControlReport/>
+                      <AllSpringOnionsHarvestReport/>
                     </div>
                   )}
-
-                  
                 </div>
               )}
 
-{selectedSubItem && selectedSubItem.id === 19 && (
+              {selectedSubItem && selectedSubItem.id === 18 && (
                 <div>
                   <button
                     className="btn btn-primary me-2 mt-2" // Add Bootstrap classes for primary button and margin
-                    onClick={() => handleActionClick('allFarmActivies')}
+                    onClick={() => handleActionClick('batchPostHarvestManagement')}
+                  >
+                    Batch Post Harvest Management
+                  </button>
+                  <button
+                    className="btn btn-secondary me-2 mt-2" // Add Bootstrap classes for secondary button
+                    onClick={() => handleActionClick('allPostHarvestManagement')}
+                  >
+                    All Cassava Post Harvest Management Record
+                  </button>
+                  {/* Render components based on selected action */}
+                  {selectedAction === 'batchPostHarvestManagement' && (
+                    <div>
+                      {/* Render Batch Nursery Record component */}
+                      <CassavaBatchPostHarvestManagementRecord/>
+                    </div>
+                  )}
+                  {selectedAction === 'allPostHarvestManagement' && (
+                    <div>
+                      {/* Render All Nursery Records component */}
+                      <AllSpringOnionsPostHarvestManagementRecord/>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {selectedSubItem && selectedSubItem.id === 19 && (
+                <div>
+                  <button
+                    className="btn btn-primary me-2 mt-2" // Add Bootstrap classes for primary button and margin
+                    onClick={() => handleActionClick('allFarmActivities')}
                   >
                     All Cassava Farm Activities Record
                   </button>
-                  
                   {/* Render components based on selected action */}
-                  {selectedAction === 'allFarmActivies' && (
+                  {selectedAction === 'allFarmActivities' && (
                     <div>
-                      {/* Render Batch Nursery Record component */}
+                      {/* Render All Nursery Records component */}
                       <CassavaAllFarmActivitiesReport/>
                     </div>
                   )}
-                  
-
-                  
-                </div>
-              )}
-
-{selectedSubItem && selectedSubItem.id === 21 && (
-                <div>
-                  <button
-                    className="btn btn-primary me-2 mt-2" // Add Bootstrap classes for primary button and margin
-                    onClick={() => handleActionClick('batchExpense')}
-                  >
-                    Batch Expense Record
-                  </button>
-                  <button
-                    className="btn btn-secondary mt-2 mr-2" // Add Bootstrap classes for secondary button
-                    onClick={() => handleActionClick('allExpense')}
-                  >
-                    All Expense Records
-                  </button>
-                  {/* Render components based on selected action */}
-                  {selectedAction === 'batchExpense' && (
-                    <div>
-                      {/* Render Batch Nursery Record component */}
-                      <SpringOnionsBatchExpense />
-                    </div>
-                  )}
-                  {selectedAction === 'allExpense' && (
-                    <div>
-                      {/* Render All Nursery Records component */}
-                      <AllCabbageExpenses/>
-                    </div>
-                  )}
-
-                  
                 </div>
               )}
             </div>
           )}
-
-{selectedSubItem && selectedSubItem.id === 31 && (
-                <div>
-                  <button
-                    className="btn btn-primary me-2 mt-2" // Add Bootstrap classes for primary button and margin
-                    onClick={() => handleActionClick('batchIncome')}
-                  >
-                    Batch Income
-                  </button>
-                  <button
-                    className="btn btn-secondary me-2 mt-2" // Add Bootstrap classes for secondary button
-                    onClick={() => handleActionClick('batchIncome')}
-                  >
-                   Other Income
-                  </button>
-                  {/* Render components based on selected action */}
-                  {selectedAction === 'batchIncome' && (
-                    <div>
-                      {/* Render Batch Nursery Record component */}
-                      <SpringOnionBatchIncome/>
-                    </div>
-                  )}
-                  {selectedAction === 'oherIncome' && (
-                    <div>
-                      {/* Render All Nursery Records component */}
-                      <AllCabbageFertilizerApplicationRecord/>
-                    </div>
-                  )}
-
-                  
-                </div>
-              )}
-
-{selectedSubItem && selectedSubItem.id === 34 && (
-                <div>
-                  <button
-                    className="btn btn-primary me-2 mt-2" // Add Bootstrap classes for primary button and margin
-                    onClick={() => handleActionClick('batchProfitLoss')}
-                  >
-                    Batch Profit And Loss
-                  </button>
-                  
-                  {/* Render components based on selected action */}
-                  {selectedAction === 'batchProfitLoss' && (
-                    <div>
-                      {/* Render Batch Nursery Record component */}
-                      <SpringOnionsProfitLossReport/>
-                    </div>
-                  )}
-                  
-                  
-                </div>
-              )}
-          {!selectedItem && <p>Select an item from the sidebar to view details.</p>}
         </div>
       </div>
-      <CashCropFooter  toggleModal={toggleModal} />
+      <CashCropFooter />
     </div>
   );
 }
 
 export default CassavaFarmManager;
+
+                   

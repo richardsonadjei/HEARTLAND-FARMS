@@ -49,6 +49,8 @@ const SignIn = () => {
   return (
     <div className="container mt-5">
       <h2 className="mb-4">Sign In</h2>
+      {/* Error message */}
+      {error && <div className="text-danger mt-3">{error}</div>}
       <form onSubmit={handleSubmit}>
         {/* UserName or Email */}
         <div className="mb-3">
@@ -86,14 +88,7 @@ const SignIn = () => {
         <button type="submit" className="btn btn-primary" disabled={loading}>
           {loading ? 'Signing In...' : 'Sign In'}
         </button>
-
-        {/* Error message */}
-        {error && <div className="text-danger mt-3">{error}</div>}
-
-        {/* Paragraph with SignUp link */}
-        <p className="mt-3">
-          Don't have an account? <Link to="/sign-up">Sign Up</Link>
-        </p>
+        
       </form>
     </div>
   );

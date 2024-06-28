@@ -10,6 +10,9 @@ import FinanceCategories from './extras/AllFinanceCategories';
 import RecordOtherPayments from './finance/OtherPayments';
 import ViewOtherPayments from './reports/AllOtherPaymentReport';
 import OtherPaymentsForEmployee from './reports/EmployeeOtherPayments';
+import AllUsers from './reports/AllUsers';
+import RegisterPartner from './extras/NewPartner';
+import AllPartners from './extras/AllPartners';
 
 
 const hrmActivities = [
@@ -18,7 +21,8 @@ const hrmActivities = [
     title: 'Employee Management',
     subItems: [
       { id: 11, title: 'Add New Employee' },
-      { id: 14, title: 'View Employee Details' },
+      { id: 14, title: 'View All Employee' },
+      { id: 15, title: 'All User-Account Holders' },
      
     ],
   },
@@ -63,6 +67,8 @@ const hrmActivities = [
     title: 'Extras',
     subItems: [
       { id: 71, title: 'New Finance Category' },
+      { id: 83, title: 'Register New Partner' },
+      { id: 84, title: 'View All Partners' },
       { id: 72, title: 'All Finance Categories' },
       
     ],
@@ -127,6 +133,7 @@ function HumanResourceManagement() {
           {/* Render details based on selected main item, sub-item, and action */}
           {selectedSubItem && selectedSubItem.id === 11 && <RegisterEmployee />}
           {selectedSubItem && selectedSubItem.id === 14 && <AllEmployeesReport />}
+          {selectedSubItem && selectedSubItem.id === 15 && <AllUsers />}
           {selectedSubItem && selectedSubItem.id === 61 && <DepartmentRegistration />}
           {selectedSubItem && selectedSubItem.id === 62 && <PositionRegistration />}
           {selectedSubItem && selectedSubItem.id === 71 && <FinanceCategoryRegistration />}
@@ -134,6 +141,8 @@ function HumanResourceManagement() {
           {selectedSubItem && selectedSubItem.id === 32 && <AllPayrollsReport />}
           {selectedSubItem && selectedSubItem.id === 72 && <FinanceCategories />}
           {selectedSubItem && selectedSubItem.id === 33 && <RecordOtherPayments />}
+          {selectedSubItem && selectedSubItem.id === 83 && <RegisterPartner />}
+          {selectedSubItem && selectedSubItem.id === 84 && <AllPartners />}
           {selectedSubItem && selectedSubItem.id === 34 && (
   <div>
     <button

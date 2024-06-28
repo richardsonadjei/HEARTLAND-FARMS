@@ -9,6 +9,7 @@ import BatchOtherActivitiesRecords from './Reports/BatchOtherActivitiesReport';
 import BatchHarvestingRecords from './Reports/BatchHarvestReport';
 import AllBatchActivitiesReport from './Reports/AllBatchFarmActivitiesReport';
 import BatchExpense from '../Okro/Reports/BatchExpenseReport';
+import { useSelector } from 'react-redux';
 
 const farmItems = [
   {
@@ -79,13 +80,18 @@ function PepperFarmManager() {
     setSelectedAction(action);
   };
 
+  const currentUser = useSelector((state) => state.user.currentUser);
+  // Filter farmItems based on the user's role
+const farmItemsFiltered = currentUser && currentUser.role === 'employee' ? farmItems.filter(item => item.id === 1) : farmItems;
+
+
   return (
     <div className="container-fluid">
       <div className="row">
         <div className="col-md-3 sidebar">
           <h2>Pepper Farm Book</h2>
           <ul className="list-group">
-            {farmItems.map((item) => (
+          {farmItemsFiltered.map((item) => (
               <li
                 key={item.id}
                 className={`list-group-item ${selectedItem && selectedItem.id === item.id ? 'active' : ''}`}

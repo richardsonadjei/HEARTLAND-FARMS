@@ -11,13 +11,11 @@ import PeriodExpenseReport from './reports/PeriodExpenseReport';
 import PoultryBirdSaleReport from './reports/PoultrySalesReport';
 import PoultryBatchSalesReport from './reports/PoultryBatchSalesReport';
 import PoultryBatchVaccinationRecord from './reports/PoultryBatchVaccinationReport';
-
 import PoultryBatchExpenseReport from './reports/PoultryBatchExpenseReport';
 import BirdTypeDailyEggsCollected from './reports/BirdTypeDailyEggsCollected';
 
-
-
-
+// Import useSelector from react-redux to fetch current user
+import { useSelector } from 'react-redux';
 
 const farmItems = [
   {
@@ -38,7 +36,6 @@ const farmItems = [
       { id: 31, title: 'Daily Eggs Collected' },
       { id: 32, title: 'Sorted Egg Stock' },
       { id: 33, title: 'Unsorted Egg Stock' },
-      
     ],
   },
   {
@@ -48,9 +45,6 @@ const farmItems = [
       { id: 21, title: 'All Expenses' },
       { id: 22, title: 'All Expenses Within A Period' },
       { id: 23, title: 'All Expenses For A Particular Batch' },
-     
-
-     
     ],
   },
   {
@@ -59,7 +53,6 @@ const farmItems = [
     subItems: [
       { id: 51, title: 'All Sales Report' },
       { id: 52, title: 'Batch Sales Report' },
-     
     ],
   },
   {
@@ -67,7 +60,6 @@ const farmItems = [
     title: 'Profit-Loss',
     subItems: [
       { id: 34, title: 'View Poultry Profit/Loss' },
-     
     ],
   },
   {
@@ -76,8 +68,6 @@ const farmItems = [
     subItems: [
       { id: 34, title: 'All Vaccines' },
       { id: 34, title: 'Vaccination Cycle Chart' },
-   
-     
     ],
   },
 ];
@@ -86,13 +76,13 @@ function PoultryHome() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedSubItem, setSelectedSubItem] = useState(null);
   const [selectedAction, setSelectedAction] = useState(null);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const currentUser = useSelector((state) => state.user.currentUser); // Fetch current user from Redux store
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
-
 
   const handleItemClick = (item) => {
     setSelectedItem(item);
@@ -109,13 +99,16 @@ function PoultryHome() {
     setSelectedAction(action);
   };
 
+  // Filter farmItems based on the user's role
+  const farmItemsFiltered = currentUser && currentUser.role === 'employee' ? farmItems.filter(item => item.id === 1) : farmItems;
+
   return (
     <div className="container-fluid">
       <div className="row">
         <div className="col-md-3 sidebar">
           <h2>Poultry Farm Record Book</h2>
           <ul className="list-group">
-            {farmItems.map((item) => (
+            {farmItemsFiltered.map((item) => (
               <li
                 key={item.id}
                 className={`list-group-item ${selectedItem && selectedItem.id === item.id ? 'active' : ''}`}
@@ -146,96 +139,73 @@ function PoultryHome() {
           {/* Render details based on selected main item and sub-item */}
           {selectedItem && (
             <div>
-             
-             
               {/* Render additional details here */}
               {selectedSubItem && selectedSubItem.id === 11 && (
                 <div>
                   <button
-                    className="btn btn-primary me-2 mr-2" // Add Bootstrap classes for primary button and margin
-                    onClick={() => handleActionClick('allGoats')}
+                    className="btn btn-primary me-2 mr-2"
+                    onClick={() => handleActionClick('allPoultry')}
                   >
                     All Poultry
                   </button>
-                  {/* <button
-                    className="btn btn-secondary me-2 mr-2" // Add Bootstrap classes for secondary button
-                    onClick={() => handleActionClick('allNursery')}
-                  >
-                    All Nursery Records
-                  </button> */}
-                  {/* Render components based on selected action */}
-                  {selectedAction === 'allGoats' && (
+                  {selectedAction === 'allPoultry' && (
                     <div>
-                      {/* Render Batch Nursery Record component */}
-                      <AllPoultryBatches/>
+                      <AllPoultryBatches />
                     </div>
                   )}
-                  {selectedAction === 'allNursery' && (
-                    <div>
-                      {/* Render All Nursery Records component */}
-                      <AllCabbageNursingRecords/>
-                    </div>
-                  )}
-
-                  
                 </div>
               )}
 
-{selectedSubItem && selectedSubItem.id === 13 && <AllBirdAdditionsReport/>}
- {/* {selectedSubItem && selectedSubItem.id === 14 && <AllVaccinationsReport/>} */}
+              {selectedSubItem && selectedSubItem.id === 13 && <AllBirdAdditionsReport />}
+              {selectedSubItem && selectedSubItem.id === 14 && <MedicalTreatmentRecords />}
+              {selectedSubItem && selectedSubItem.id === 15 && <PoultryMortalityReport />}
+              {selectedSubItem && selectedSubItem.id === 16 && <AllPoultryReport />}
 
-{selectedSubItem && selectedSubItem.id === 15 && <PoultryMortalityReport/>}
-{selectedSubItem && selectedSubItem.id === 32 && <PoultrySortedEggsStockReport/>}
-{selectedSubItem && selectedSubItem.id === 17 && <MortalityReport/>}
-{selectedSubItem && selectedSubItem.id === 33 && <PoultryUnsortedEggsStockReport/>}  
-{selectedSubItem && selectedSubItem.id === 21 && <PoultryExpenseReport/>}  
-{selectedSubItem && selectedSubItem.id === 22 && <PeriodExpenseReport/>}  
-{selectedSubItem && selectedSubItem.id === 51 && <PoultryBirdSaleReport/>}  
-{selectedSubItem && selectedSubItem.id === 52 && <PoultryBatchSalesReport/>}  
-{selectedSubItem && selectedSubItem.id === 31 && <BirdTypeDailyEggsCollected/>}  
-{selectedSubItem && selectedSubItem.id === 23 && <PoultryBatchExpenseReport/>}  
+              {selectedSubItem && selectedSubItem.id === 31 && <DailyEggsCollected />}
+              {selectedSubItem && selectedSubItem.id === 32 && <SortedEggStock />}
+              {selectedSubItem && selectedSubItem.id === 33 && <UnsortedEggStock />}
 
-{selectedSubItem && selectedSubItem.id === 14 && (
+              {selectedSubItem && selectedSubItem.id === 21 && <PoultryExpenseReport />}
+              {selectedSubItem && selectedSubItem.id === 22 && <PeriodExpenseReport />}
+              {selectedSubItem && selectedSubItem.id === 51 && <PoultryBirdSaleReport />}
+              {selectedSubItem && selectedSubItem.id === 52 && <PoultryBatchSalesReport />}
+
+              {selectedSubItem && selectedSubItem.id === 34 && (
                 <div>
                   <button
-                    className="btn btn-primary me-2 mt-2" // Add Bootstrap classes for primary button and margin
+                    className="btn btn-primary me-2 mt-2"
                     onClick={() => handleActionClick('vaccinationChart')}
                   >
                     Complete Vaccination Chart
                   </button>
                   <button
-                    className="btn btn-primary me-2 mt-2" // Add Bootstrap classes for primary button and margin
+                    className="btn btn-primary me-2 mt-2"
                     onClick={() => handleActionClick('vaccination-records')}
                   >
                     Batch Vaccination Records
                   </button>
                   <button
-                    className="btn btn-secondary mt-2 mr-2 me-2" // Add Bootstrap classes for secondary button
+                    className="btn btn-secondary mt-2 mr-2"
                     onClick={() => handleActionClick('deworming')}
                   >
-                   Deworming Records
+                    Deworming Records
                   </button>
                   <button
-                    className="btn btn-primary me-2 mt-2 mr-2" // Add Bootstrap classes for primary button and margin
+                    className="btn btn-primary me-2 mt-2 mr-2"
                     onClick={() => handleActionClick('otherMedicalRecords')}
                   >
                     Other Medical Records
                   </button>
-                  {/* Render components based on selected action */}
                   {selectedAction === 'vaccinationChart' && (
                     <div>
-                      {/* Render Batch Nursery Record component */}
-                      <VaccinationChart/>
+                      <VaccinationChart />
                     </div>
                   )}
                   {selectedAction === 'vaccination-records' && (
                     <div>
-                      {/* Render All Nursery Records component */}
-                      <PoultryBatchVaccinationRecord/>
+                      <PoultryBatchVaccinationRecord />
                     </div>
                   )}
-
-                  
                 </div>
               )}
             </div>
