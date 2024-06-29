@@ -9,7 +9,7 @@ const SignUp = () => {
     password: '',
     userName: '',
     phoneNumber: '',
-    role: 'employee',
+    role: [],
     category: [],
     dateOfBirth: '',
     department: null,
@@ -68,6 +68,13 @@ const SignUp = () => {
     const selectedValue = selectedOption ? selectedOption.value : null;
     // Update formData with the selected value
     setFormData({ ...formData, [name]: selectedValue });
+  };
+
+  const handleMultiSelectChange = (selectedOptions, { name }) => {
+    // Extract values from selectedOptions
+    const selectedValues = selectedOptions.map(option => option.value);
+    // Update formData with the selected values
+    setFormData({ ...formData, [name]: selectedValues });
   };
 
   const handleSubmit = async (e) => {
@@ -199,19 +206,20 @@ const SignUp = () => {
             <label htmlFor="role" className="form-label">
               Role
             </label>
-            <select
-              className="form-select"
+            <Select
+              options={[
+                { value: 'employee', label: 'Employee' },
+                { value: 'manager', label: 'Manager' },
+                { value: 'admin', label: 'Admin' },
+                { value: 'finance', label: 'Finance' },
+                { value: 'human-resource', label: 'Human Resource' },
+              ]}
               id="role"
               name="role"
-              value={formData.role}
-              onChange={handleChange}
-              required
-            >
-              <option value="employee">Employee</option>
-              <option value="manager">Manager</option>
-              <option value="admin">Admin</option>
-              <option value="finance">Finance</option>
-            </select>
+              value={formData.role.map(role => ({ value: role, label: role }))}
+              onChange={(selectedOptions) => handleMultiSelectChange(selectedOptions, { name: 'role' })}
+              isMulti
+            />
           </div>
           <div className="col-md-6">
             <label htmlFor="category" className="form-label">
@@ -227,7 +235,7 @@ const SignUp = () => {
               id="category"
               name="category"
               value={formData.category.map(cat => ({ value: cat, label: cat }))}
-              onChange={(selectedOptions) => setFormData({ ...formData, category: selectedOptions.map(option => option.value) })}
+              onChange={(selectedOptions) => handleMultiSelectChange(selectedOptions, { name: 'category' })}
               isMulti
             />
           </div>
@@ -318,3 +326,4 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
