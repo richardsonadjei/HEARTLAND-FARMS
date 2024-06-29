@@ -11,7 +11,7 @@ const Home = () => {
     { category: ['crop'], href: '/vegesHome-page', iconSrc: '/veges.jpg', description: 'Vegetables Home Page' },
     { category: ['animal'], href: '/animals-home-page', iconSrc: '/animals.jpg', description: 'Animals Home Page' },
     { category: ['birds'], href: '/birds-home', iconSrc: '/birds.jpg', description: 'Birds Home Page' },
-    { category: ['hatchery'], href: '/hatchery-home-page', iconSrc: '/hatchery.jpg', description: 'Hatchery Home Page' },
+    { category: ['hatchery'], href: '/hatchery-home', iconSrc: '/hatcheryEggs.png', description: 'Hatchery Home Page' },
     // Add more app items as needed
   ];
 
