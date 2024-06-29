@@ -7,10 +7,11 @@ const Home = () => {
   const userCategories = currentUser && currentUser.categories ? currentUser.categories : [];
 
   const appItems = [
-    { category: ['crop', 'all'], href: '/cash-cropsHome-page', iconSrc: '/cashcrops.jpg', description: 'Cash Crops Home Page' },
-    { category: ['crop', 'all'], href: '/vegesHome-page', iconSrc: '/veges.jpg', description: 'Vegetables Home Page' },
-    { category: ['animal', 'all'], href: '/animals-home-page', iconSrc: '/animals.jpg', description: 'Animals Home Page' },
-    { category: ['birds', 'all'], href: '/birds-home', iconSrc: '/birds.jpg', description: 'Birds Home Page' },
+    { category: ['crop'], href: '/cash-cropsHome-page', iconSrc: '/cashcrops.jpg', description: 'Cash Crops Home Page' },
+    { category: ['crop'], href: '/vegesHome-page', iconSrc: '/veges.jpg', description: 'Vegetables Home Page' },
+    { category: ['animal'], href: '/animals-home-page', iconSrc: '/animals.jpg', description: 'Animals Home Page' },
+    { category: ['birds'], href: '/birds-home', iconSrc: '/birds.jpg', description: 'Birds Home Page' },
+    { category: ['hatchery'], href: '/hatchery-home-page', iconSrc: '/hatchery.jpg', description: 'Hatchery Home Page' },
     // Add more app items as needed
   ];
 
@@ -28,8 +29,8 @@ const Home = () => {
               <div className="container-fluid">
                 <div className="row">
                   {appItems.map((app, index) => (
-                    // Check if user's categories include 'all' or if there's an overlap between user's categories and app's categories
-                    (userCategories.includes('all') || app.category.some(cat => userCategories.includes(cat))) && (
+                    // Check if there's an overlap between user's categories and the app's categories
+                    app.category.some(cat => userCategories.includes(cat)) && (
                       <div key={index} className="col-lg-2 col-md-2 col-sm-2 col-2 mx-2">
                         <OverlayTrigger
                           placement="top"

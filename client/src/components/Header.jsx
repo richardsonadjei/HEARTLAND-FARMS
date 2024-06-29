@@ -3,6 +3,7 @@ import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
+
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
@@ -73,7 +74,7 @@ export default function Header() {
       <Container>
         <Link to="/" className="logo-container">
           <Navbar.Brand className="logo d-flex align-items-center">
-            <span className="logo-text">Adjei's Farms</span>
+            <span className="logo-text">Heartland Farms</span>
           </Navbar.Brand>
         </Link>
 
@@ -88,7 +89,7 @@ export default function Header() {
           </div>
         </div>
 
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle aria-controls="basic-navbar-nav" className="custom-navbar-toggler" />
         <Navbar.Collapse id="basic-navbar-nav" className="menu-items justify-content-end">
           <Nav>
             <Nav.Link as={Link} to="/" className="text-white font-weight-bold">

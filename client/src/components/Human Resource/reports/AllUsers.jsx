@@ -157,8 +157,8 @@ const AllUsers = () => {
                 />
                 {currentUser.role === 'admin' && (
                   <RiDeleteBin6Line
-                    size={20}
-                    style={{ cursor: 'pointer' }}
+                    size={24}
+                    style={{ cursor: 'pointer', color: 'red' }}
                     onClick={() => {
                       setSelectedUser(user);
                       toggleDeleteModal();

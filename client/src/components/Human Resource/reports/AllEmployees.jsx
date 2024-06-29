@@ -194,166 +194,167 @@ const AllEmployeesReport = () => {
         </table>
       </div>
 
-      {/* Edit Modal */}
-      <Modal isOpen={editModal} toggle={toggleEditModal}>
-        <ModalHeader toggle={toggleEditModal}>Edit Employee</ModalHeader>
-        {selectedEmployee && (
-          <form>
-            <div className="form-group">
-              <label htmlFor="editFirstName">First Name</label>
-              <input
-                type="text"
-                className="form-control"
-                id="editFirstName"
-                value={selectedEmployee.firstName}
-                onChange={(e) =>
-                  setSelectedEmployee({ ...selectedEmployee, firstName: e.target.value })
-                }
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="editLastName">Last Name</label>
-              <input
-                type="text"
-                className="form-control"
-                id="editLastName"
-                value={selectedEmployee.lastName}
-                onChange={(e) =>
-                  setSelectedEmployee({ ...selectedEmployee, lastName: e.target.value })
-                }
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="editEmail">Email</label>
-              <input
-                type="email"
-                className="form-control"
-                id="editEmail"
-                value={selectedEmployee.email}
-                disabled
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="editPhoneNumber">Phone Number</label>
-              <input
-                type="text"
-                className="form-control"
-                id="editPhoneNumber"
-                value={selectedEmployee.phoneNumber}
-                onChange={(e) =>
-                  setSelectedEmployee({ ...selectedEmployee, phoneNumber: e.target.value })
-                }
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="editDateOfBirth">Date of Birth</label>
-              <input
-                type="text"
-                className="form-control"
-                id="editDateOfBirth"
-                value={formatDate(selectedEmployee.dateOfBirth)}
-                disabled
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="editDepartment">Department</label>
-              <select
-                className="form-control"
-                id="editDepartment"
-                value={selectedEmployee.department}
-                onChange={(e) =>
-                  setSelectedEmployee({ ...selectedEmployee, department: e.target.value })
-                }
-              >
-                {departments.map((dept) => (
-                  <option key={dept._id} value={dept.name}>
-                    {dept.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="form-group">
-              <label htmlFor="editPosition">Position</label>
-              <select
-                className="form-control"
-                id="editPosition"
-                value={selectedEmployee.position}
-                onChange={(e) =>
-                  setSelectedEmployee({ ...selectedEmployee, position: e.target.value })
-                }
-              >
-                {positions.map((pos) => (
-                  <option key={pos._.id} value={pos.title}>
-                  {pos.title}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="form-group">
-            <label htmlFor="editHireDate">Hire Date</label>
-            <input
-              type="text"
-              className="form-control"
-              id="editHireDate"
-              value={formatDate(selectedEmployee.hireDate)}
-              disabled
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="editSalary">Salary</label>
-            <input
-              type="text"
-              className="form-control"
-              id="editSalary"
-              value={selectedEmployee.salary}
-              onChange={(e) =>
-                setSelectedEmployee({ ...selectedEmployee, salary: e.target.value })
-              }
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="editIsActive">Active</label>
-            <select
-              className="form-control"
-              id="editIsActive"
-              value={selectedEmployee.isActive}
-              onChange={(e) =>
-                setSelectedEmployee({ ...selectedEmployee, isActive: e.target.value === 'true' })
-              }
-            >
-              <option value="true">Yes</option>
-              <option value="false">No</option>
-            </select>
-          </div>
-          <div className="form-group">
-            <label>Duration of Employment</label>
-            <input
-              type="text"
-              className="form-control"
-              value={formatDurationOfEmployment(selectedEmployee.durationOfEmployment)}
-              disabled
-            />
-          </div>
-          <div className="form-group">
-            <label>Employee ID</label>
-            <input
-              type="text"
-              className="form-control"
-              value={selectedEmployee.employeeId}
-              disabled
-            />
-          </div>
-        </form>
-      )}
-      <ModalFooter>
-        <Button color="primary" onClick={handleSaveChanges}>
-          Save Changes
-        </Button>
-        <Button color="secondary" onClick={toggleEditModal}>
-          Cancel
-        </Button>
-      </ModalFooter>
-    </Modal>
+     {/* Edit Modal */}
+<Modal isOpen={editModal} toggle={toggleEditModal}>
+  <ModalHeader toggle={toggleEditModal}>Edit Employee</ModalHeader>
+  {selectedEmployee && (
+    <form>
+      <div className="form-group">
+        <label htmlFor="editFirstName">First Name</label>
+        <input
+          type="text"
+          className="form-control"
+          id="editFirstName"
+          value={selectedEmployee.firstName}
+          onChange={(e) =>
+            setSelectedEmployee({ ...selectedEmployee, firstName: e.target.value })
+          }
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="editLastName">Last Name</label>
+        <input
+          type="text"
+          className="form-control"
+          id="editLastName"
+          value={selectedEmployee.lastName}
+          onChange={(e) =>
+            setSelectedEmployee({ ...selectedEmployee, lastName: e.target.value })
+          }
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="editEmail">Email</label>
+        <input
+          type="email"
+          className="form-control"
+          id="editEmail"
+          value={selectedEmployee.email}
+          disabled
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="editPhoneNumber">Phone Number</label>
+        <input
+          type="text"
+          className="form-control"
+          id="editPhoneNumber"
+          value={selectedEmployee.phoneNumber}
+          onChange={(e) =>
+            setSelectedEmployee({ ...selectedEmployee, phoneNumber: e.target.value })
+          }
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="editDateOfBirth">Date of Birth</label>
+        <input
+          type="text"
+          className="form-control"
+          id="editDateOfBirth"
+          value={formatDate(selectedEmployee.dateOfBirth)}
+          disabled
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="editDepartment">Department</label>
+        <select
+          className="form-control"
+          id="editDepartment"
+          value={selectedEmployee.department}
+          onChange={(e) =>
+            setSelectedEmployee({ ...selectedEmployee, department: e.target.value })
+          }
+        >
+          {departments.map((dept) => (
+            <option key={dept._id} value={dept.name}>
+              {dept.name}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="form-group">
+        <label htmlFor="editPosition">Position</label>
+        <select
+          className="form-control"
+          id="editPosition"
+          value={selectedEmployee.position}
+          onChange={(e) =>
+            setSelectedEmployee({ ...selectedEmployee, position: e.target.value })
+          }
+        >
+          {positions.map((pos) => (
+            <option key={pos._id} value={pos.title}>
+              {pos.title}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="form-group">
+        <label htmlFor="editHireDate">Hire Date</label>
+        <input
+          type="text"
+          className="form-control"
+          id="editHireDate"
+          value={formatDate(selectedEmployee.hireDate)}
+          disabled
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="editSalary">Salary</label>
+        <input
+          type="text"
+          className="form-control"
+          id="editSalary"
+          value={selectedEmployee.salary}
+          onChange={(e) =>
+            setSelectedEmployee({ ...selectedEmployee, salary: e.target.value })
+          }
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="editIsActive">Active</label>
+        <select
+          className="form-control"
+          id="editIsActive"
+          value={selectedEmployee.isActive}
+          onChange={(e) =>
+            setSelectedEmployee({ ...selectedEmployee, isActive: e.target.value === 'true' })
+          }
+        >
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+      </div>
+      <div className="form-group">
+        <label>Duration of Employment</label>
+        <input
+          type="text"
+          className="form-control"
+          value={formatDurationOfEmployment(selectedEmployee.durationOfEmployment)}
+          disabled
+        />
+      </div>
+      <div className="form-group">
+        <label>Employee ID</label>
+        <input
+          type="text"
+          className="form-control"
+          value={selectedEmployee.employeeId}
+          disabled
+        />
+      </div>
+    </form>
+  )}
+  <ModalFooter>
+    <Button color="primary" onClick={handleSaveChanges}>
+      Save Changes
+    </Button>
+    <Button color="secondary" onClick={toggleEditModal}>
+      Cancel
+    </Button>
+  </ModalFooter>
+</Modal>
+
 
     {/* Delete Modal */}
     <Modal isOpen={deleteModal} toggle={toggleDeleteModal}>
